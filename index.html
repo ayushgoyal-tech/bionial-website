@@ -215,7 +215,7 @@
         }
         .hero::before {
             content: ''; position: absolute; inset: 0;
-            background: url('https://images.unsplash.com/photo-1585435557343-3b092031a831?w=1920&q=80') center/cover;
+            background: url('https://images.unsplash.com/photo-1631549916768-4f5a4a11beac?w=1920&q=80') center/cover;
             opacity: 0.12; mix-blend-mode: luminosity;
         }
         .hero::after {
@@ -840,7 +840,7 @@
         <div class="container">
             <div class="about-grid animate-on-scroll">
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&q=80" alt="Pharmaceutical manufacturing facility">
+                    <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80" alt="Pharmaceutical manufacturing facility">
                     <div class="about-image-overlay">
                         <strong>JLPL Industrial Area</strong>
                         <span>Sector 82, Mohali, Punjab</span>
@@ -946,35 +946,35 @@
             <div class="products-grid">
                 <div class="product-card animate-on-scroll">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=200&q=80" alt="Capsules">
+                        <img src="https://images.unsplash.com/photo-1550572017-4fcdbb59cc32?w=200&q=80" alt="Capsules">
                     </div>
                     <h3>Capsules</h3>
                     <p>Hard gel & soft gel</p>
                 </div>
                 <div class="product-card animate-on-scroll">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1550572017-edd951b55104?w=200&q=80" alt="Tablets">
+                        <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=200&q=80" alt="Tablets">
                     </div>
                     <h3>Tablets</h3>
                     <p>Coated & uncoated</p>
                 </div>
                 <div class="product-card animate-on-scroll">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=200&q=80" alt="Syrups">
+                        <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=200&q=80" alt="Syrups">
                     </div>
                     <h3>Syrups & Liquids</h3>
                     <p>Oral suspensions</p>
                 </div>
                 <div class="product-card animate-on-scroll">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=200&q=80" alt="Powders">
+                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=200&q=80" alt="Powders">
                     </div>
                     <h3>Powders</h3>
                     <p>Protein & supplement</p>
                 </div>
                 <div class="product-card animate-on-scroll">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1576072446584-2429755e3964?w=200&q=80" alt="Sachets">
+                        <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=200&q=80" alt="Sachets">
                     </div>
                     <h3>Sachets</h3>
                     <p>Granules & effervescent</p>
@@ -1078,7 +1078,7 @@
                     </div>
                 </div>
                 <div class="capacity-image">
-                    <img src="https://images.unsplash.com/photo-1563213126-a4273aed2016?w=800&q=80" alt="Manufacturing facility interior">
+                    <img src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=800&q=80" alt="Manufacturing facility interior">
                 </div>
             </div>
         </div>
@@ -1198,7 +1198,7 @@
                         </div>
                         <div class="contact-detail-text">
                             <strong>Email</strong>
-                            <span>bioniallifesciences@gmail.com</span>
+                            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ccaea5a3a2a5ada0a0a5aaa9bfafa5a9a2afa9bf8caba1ada5a0e2afa3a1">[email&#160;protected]</a></span>
                         </div>
                     </div>
                     <div class="contact-detail">
@@ -1279,7 +1279,7 @@
                     <h4>Contact</h4>
                     <ul class="footer-links">
                         <li><a href="tel:+919996610619">+91 99966 10619</a></li>
-                        <li><a href="mailto:bioniallifesciences@gmail.com">bioniallifesciences@gmail.com</a></li>
+                        <li><a href="/cdn-cgi/l/email-protection#096b60666760686565606f6c7a6a606c676a6c7a496e64686065276a6664"><span class="__cf_email__" data-cfemail="096b60666760686565606f6c7a6a606c676a6c7a496e64686065276a6664">[email&#160;protected]</span></a></li>
                         <li><a href="#contact">Request a Quote</a></li>
                     </ul>
                 </div>
@@ -1304,7 +1304,7 @@
     </a>
 
     <!-- ===== SCRIPTS ===== -->
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Initialize Lucide icons
         lucide.createIcons();
 
@@ -1346,16 +1346,4 @@
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offset = 80;
-                    const top = target.getBoundingClientRect().top + window.scrollY - offset;
-                    window.scrollTo({ top, behavior: 'smooth' });
-                }
-            });
-        });
-    </script>
-
-</body>
-</html>
+                e.preventDefa
