@@ -204,7 +204,16 @@
         }
         .mobile-toggle span {
             display: block; width: 24px; height: 2px; background: var(--white);
-            margin: 5px 0; transition: all 0.3s ease;
+            margin: 5px 0; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mobile-toggle.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .mobile-toggle.open span:nth-child(2) {
+            opacity: 0; transform: scaleX(0);
+        }
+        .mobile-toggle.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
         }
 
         /* ===== HERO ===== */
@@ -215,7 +224,7 @@
         }
         .hero::before {
             content: ''; position: absolute; inset: 0;
-            background: url('https://images.unsplash.com/photo-1631549916768-4f5a4a11beac?w=1920&q=80') center/cover;
+            background: url('images/hero-bg.jpg') center/cover;
             opacity: 0.12; mix-blend-mode: luminosity;
         }
         .hero::after {
@@ -668,6 +677,85 @@
             border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5);
         }
 
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            padding: 100px 0;
+            background: var(--navy);
+            position: relative; overflow: hidden;
+        }
+        .testimonials::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(13,148,136,0.08) 0%, transparent 60%);
+        }
+        .testimonials .section-label { color: var(--teal-light); }
+        .testimonials .section-label::before { background: var(--teal-light); }
+        .testimonials .section-title { color: var(--white); }
+        .testimonials-header { text-align: center; margin-bottom: 64px; position: relative; z-index: 1; }
+        .testimonials-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 28px; position: relative; z-index: 1;
+        }
+        .testimonial-card {
+            padding: 40px 32px; border-radius: var(--radius-lg);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            display: flex; flex-direction: column; gap: 20px;
+        }
+        .testimonial-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(13,148,136,0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 48px rgba(0,0,0,0.3);
+        }
+        .testimonial-stars {
+            display: flex; gap: 4px;
+        }
+        .testimonial-stars svg {
+            width: 18px; height: 18px;
+            fill: var(--gold); stroke: none;
+        }
+        .testimonial-quote {
+            font-size: 1rem; line-height: 1.75;
+            color: rgba(255,255,255,0.8);
+            font-style: italic;
+            flex: 1;
+        }
+        .testimonial-quote::before {
+            content: '\201C';
+            font-family: var(--font-display);
+            font-size: 3rem; line-height: 0.6;
+            color: var(--teal); display: block;
+            margin-bottom: 12px;
+        }
+        .testimonial-author {
+            display: flex; align-items: center; gap: 14px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .testimonial-avatar {
+            width: 46px; height: 46px; min-width: 46px;
+            border-radius: 50%; background: var(--teal);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-display); font-size: 1.1rem;
+            font-weight: 700; color: var(--white);
+        }
+        .testimonial-author-name {
+            font-weight: 600; font-size: 0.95rem; color: var(--white);
+        }
+        .testimonial-author-title {
+            font-size: 0.8rem; color: rgba(255,255,255,0.5);
+            margin-top: 2px;
+        }
+
+        @media (max-width: 1024px) {
+            .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .testimonials-grid { grid-template-columns: 1fr; }
+        }
+
         /* ===== FLOATING WHATSAPP ===== */
         .whatsapp-float {
             position: fixed; bottom: 24px; right: 24px; z-index: 999;
@@ -689,13 +777,26 @@
             .process-step::after { display: none; }
         }
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .mobile-toggle { display: block; }
-            .nav-links.active {
+            .nav-links {
                 display: flex; flex-direction: column;
                 position: absolute; top: 100%; left: 0; right: 0;
-                background: var(--navy); padding: 24px;
+                background: rgba(11,29,58,0.98);
+                backdrop-filter: blur(20px);
+                padding: 0 24px;
                 border-top: 1px solid rgba(255,255,255,0.1);
+                max-height: 0; overflow: hidden;
+                transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                            padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                            opacity 0.3s ease;
+                opacity: 0;
+                pointer-events: none;
+            }
+            .mobile-toggle { display: block; }
+            .nav-links.active {
+                max-height: 400px;
+                padding: 20px 24px 28px;
+                opacity: 1;
+                pointer-events: auto;
             }
             .hero { min-height: auto; padding: 140px 0 100px; }
             .hero h1 { font-size: 2.2rem; }
@@ -740,6 +841,7 @@
                     <li><a href="#products">Products</a></li>
                     <li><a href="#process">Process</a></li>
                     <li><a href="#infrastructure">Infrastructure</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#contact" class="nav-cta">Request a Quote</a></li>
                 </ul>
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
@@ -840,7 +942,7 @@
         <div class="container">
             <div class="about-grid animate-on-scroll">
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80" alt="Pharmaceutical manufacturing facility">
+                    <img src="images/about.jpg" alt="Pharmaceutical manufacturing facility">
                     <div class="about-image-overlay">
                         <strong>JLPL Industrial Area</strong>
                         <span>Sector 82, Mohali, Punjab</span>
@@ -946,35 +1048,35 @@
             <div class="products-grid">
                 <div class="product-card animate-on-scroll">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1550572017-4fcdbb59cc32?w=200&q=80" alt="Capsules">
+                        <img src="images/product-capsules.jpg" alt="Capsules">
                     </div>
                     <h3>Capsules</h3>
                     <p>Hard gel & soft gel</p>
                 </div>
                 <div class="product-card animate-on-scroll">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=200&q=80" alt="Tablets">
+                        <img src="images/product-tablets.jpg" alt="Tablets">
                     </div>
                     <h3>Tablets</h3>
                     <p>Coated & uncoated</p>
                 </div>
                 <div class="product-card animate-on-scroll">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=200&q=80" alt="Syrups">
+                        <img src="images/product-syrups.jpg" alt="Syrups">
                     </div>
                     <h3>Syrups & Liquids</h3>
                     <p>Oral suspensions</p>
                 </div>
                 <div class="product-card animate-on-scroll">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=200&q=80" alt="Powders">
+                        <img src="images/product-powders.jpg" alt="Powders">
                     </div>
                     <h3>Powders</h3>
                     <p>Protein & supplement</p>
                 </div>
                 <div class="product-card animate-on-scroll">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=200&q=80" alt="Sachets">
+                        <img src="images/product-sachets.jpg" alt="Sachets">
                     </div>
                     <h3>Sachets</h3>
                     <p>Granules & effervescent</p>
@@ -1042,15 +1144,15 @@
                     <p class="section-subtitle">Our Mohali facility is equipped with modern pharmaceutical-grade machinery, climate-controlled production zones, and a dedicated in-house quality control laboratory.</p>
                     <div class="capacity-stats">
                         <div class="capacity-stat">
-                            <div class="capacity-stat-num">50L+</div>
+                            <div class="capacity-stat-num">80K</div>
                             <div class="capacity-stat-label">Capsules / Day</div>
                         </div>
                         <div class="capacity-stat">
-                            <div class="capacity-stat-num">1L+</div>
+                            <div class="capacity-stat-num">1.5L</div>
                             <div class="capacity-stat-label">Tablets / Day</div>
                         </div>
                         <div class="capacity-stat">
-                            <div class="capacity-stat-num">5K+</div>
+                            <div class="capacity-stat-num">8K</div>
                             <div class="capacity-stat-label">Syrup Bottles / Day</div>
                         </div>
                         <div class="capacity-stat">
@@ -1078,7 +1180,7 @@
                     </div>
                 </div>
                 <div class="capacity-image">
-                    <img src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=800&q=80" alt="Manufacturing facility interior">
+                    <img src="images/infrastructure.jpg" alt="Manufacturing facility interior">
                 </div>
             </div>
         </div>
@@ -1122,6 +1224,69 @@
                     <div class="why-card-num">06</div>
                     <h3>Regulatory Expertise</h3>
                     <p>Navigate India's complex nutraceutical regulations with confidence. FSSAI licensing, AYUSH compliance, Schedule M adherence, export documentation — our team handles it all.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="testimonials-header animate-on-scroll">
+                <div class="section-label">Client Stories</div>
+                <h2 class="section-title">Trusted by Brands Across India</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="testimonial-quote">Bionial helped us launch our first capsule SKU within 28 days — start to finish. The team was transparent about pricing, proactive about regulatory requirements, and the product quality exceeded what we expected at our MOQ. They've genuinely become a long-term partner for us.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">R</div>
+                        <div>
+                            <div class="testimonial-author-name">Rohit Malhotra</div>
+                            <div class="testimonial-author-title">Founder, NutriPure India</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="testimonial-quote">We were scaling our syrup range and needed a manufacturer who could handle both FSSAI compliance and custom flavour development. Bionial delivered on both fronts without any back-and-forth delays. The batch tracking system gave us full visibility — something our previous manufacturer never offered.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">P</div>
+                        <div>
+                            <div class="testimonial-author-name">Priya Sharma</div>
+                            <div class="testimonial-author-title">Head of Procurement, VitaFlux Brands</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <p class="testimonial-quote">As a D2C brand just entering the wellness space, we were worried about minimum quantities. Bionial's startup-friendly MOQs made it possible for us to test two formulations before committing to large runs. Their in-house design team even helped us finalize label artwork. Couldn't have asked for a better first manufacturing partner.</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">A</div>
+                        <div>
+                            <div class="testimonial-author-name">Arjun Khanna</div>
+                            <div class="testimonial-author-title">Co-founder, Verdant Wellness</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1319,12 +1484,14 @@
         const navLinks = document.getElementById('navLinks');
         mobileToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            mobileToggle.classList.toggle('open');
         });
 
         // Close mobile menu on link click
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
+                mobileToggle.classList.remove('open');
             });
         });
 
