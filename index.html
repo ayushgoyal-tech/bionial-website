@@ -31,6 +31,8 @@
             --teal-dark: #0A7A70;
             --gold: #C9A84C;
             --gold-light: #E0C76A;
+            --green: #9CCC4B;
+            --green-dark: #82AA38;
             --cream: #FAF8F2;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
@@ -177,6 +179,9 @@
             font-weight: 600; color: var(--white);
         }
         .nav-logo-text span { color: var(--teal-light); }
+        .nav-logo-img {
+            height: 44px; width: auto; object-fit: contain; display: block;
+        }
         .nav-links {
             display: flex; align-items: center; gap: 32px; list-style: none;
         }
@@ -791,6 +796,10 @@
             font-weight: 500;
         }
 
+        /* ===== GREEN SECTION LABEL VARIANT ===== */
+        .section-label-green { color: var(--green); }
+        .section-label-green::before { background: var(--green); }
+
         /* ===== HEALTH CATEGORIES ===== */
         .categories {
             padding: 100px 0; background: var(--cream);
@@ -807,13 +816,13 @@
             transition: all 0.3s ease;
         }
         .category-card:hover {
-            border-color: var(--teal); box-shadow: var(--shadow-md);
+            border-color: var(--green); box-shadow: var(--shadow-md);
             transform: translateY(-2px);
         }
         .category-icon {
             width: 44px; height: 44px; min-width: 44px; border-radius: 10px;
-            background: rgba(13,148,136,0.1); display: flex;
-            align-items: center; justify-content: center; color: var(--teal);
+            background: rgba(156,204,75,0.12); display: flex;
+            align-items: center; justify-content: center; color: var(--green-dark);
         }
         .category-name {
             font-weight: 600; font-size: 0.92rem; color: var(--navy);
@@ -937,8 +946,7 @@
         <div class="container">
             <div class="nav-inner">
                 <a href="#" class="nav-logo">
-                    <div class="nav-logo-icon">B</div>
-                    <div class="nav-logo-text">Bionial <span>Lifesciences</span></div>
+                    <img src="images/logo-white.png" alt="Bionial Lifesciences" class="nav-logo-img">
                 </a>
                 <ul class="nav-links" id="navLinks">
                     <li><a href="#about">About</a></li>
@@ -964,7 +972,7 @@
             <div class="hero-content">
                 <div class="hero-badge">
                     <div class="hero-badge-dot"></div>
-                    WHO-GMP Certified Facility • Mohali, Punjab
+                    CDMO · WHO-GMP Certified · Mohali, Punjab
                 </div>
                 <h1>Precision Nutraceutical<br>Manufacturing. <em>Built for<br>Brands That Scale.</em></h1>
                 <p class="hero-sub">Full-range contract manufacturing — capsules, tablets, syrups, powders & sachets — with startup-friendly MOQs, transparent pricing, and a 30-day delivery commitment from Mohali, India.</p>
@@ -1047,15 +1055,15 @@
         <div class="container">
             <div class="metrics-grid">
                 <div class="metric-item animate-on-scroll">
-                    <div class="metric-num">100<span style="color:var(--teal)">+</span></div>
+                    <div class="metric-num">100<span style="color:var(--green)">+</span></div>
                     <div class="metric-label">Brands Partnered</div>
                 </div>
                 <div class="metric-item animate-on-scroll">
-                    <div class="metric-num">200<span style="color:var(--teal)">+</span></div>
+                    <div class="metric-num">200<span style="color:var(--green)">+</span></div>
                     <div class="metric-label">Ready Formulations</div>
                 </div>
                 <div class="metric-item animate-on-scroll">
-                    <div class="metric-num">30<span style="color:var(--teal);font-size:1.6rem">-Day</span></div>
+                    <div class="metric-num">30<span style="color:var(--green);font-size:1.6rem">-Day</span></div>
                     <div class="metric-label">Delivery Guarantee</div>
                 </div>
                 <div class="metric-item animate-on-scroll">
@@ -1078,9 +1086,9 @@
                     </div>
                 </div>
                 <div class="about-text">
-                    <div class="section-label">About Bionial</div>
+                    <div class="section-label section-label-green">About Bionial</div>
                     <h2 class="section-title">Built for Brands<br>That Mean Business</h2>
-                    <p>Bionial Lifesciences is a full-range nutraceutical contract manufacturer based in Mohali, Punjab — at the heart of North India's pharma manufacturing corridor. Our state-of-the-art facility in the JLPL Industrial Area is equipped to handle everything from R&D formulation to large-scale batch production and dispatch.</p>
+                    <p>Bionial Lifesciences is a nutraceutical Contract Development and Manufacturing Organization (CDMO) based in Mohali, Punjab — at the heart of North India's pharma manufacturing corridor. Our state-of-the-art facility in the JLPL Industrial Area is equipped to handle everything from R&D formulation to large-scale batch production and dispatch.</p>
                     <p>Whether you're a D2C startup launching your first SKU or an established brand scaling your product line, we offer the manufacturing flexibility, regulatory expertise, and quality assurance infrastructure to bring your vision to life.</p>
                     <div class="about-highlights">
                         <div class="about-highlight">
@@ -1129,7 +1137,7 @@
     <section class="services" id="services">
         <div class="container">
             <div class="services-header animate-on-scroll">
-                <div class="section-label">What We Offer</div>
+                <div class="section-label section-label-green">What We Offer</div>
                 <h2 class="section-title">End-to-End Manufacturing Services</h2>
                 <p class="section-subtitle">From initial formulation to final dispatch — a single partner for your entire nutraceutical manufacturing journey.</p>
             </div>
@@ -1170,7 +1178,7 @@
     <section class="products" id="products">
         <div class="container">
             <div class="products-header animate-on-scroll">
-                <div class="section-label">Product Range</div>
+                <div class="section-label section-label-green">Product Range</div>
                 <h2 class="section-title">Full-Range Dosage Forms</h2>
                 <p class="section-subtitle">Manufacturing expertise across every major nutraceutical dosage format — all under one roof.</p>
             </div>
@@ -1189,7 +1197,7 @@
                     </div>
                     <h3>Tablets</h3>
                     <p>Coated & uncoated</p>
-                    <p style="font-size:0.72rem;color:var(--teal);margin-top:4px;font-weight:500;">Film-coated · Enteric · Extended-release · Chewable</p>
+                    <p style="font-size:0.72rem;color:var(--teal);margin-top:4px;font-weight:500;">Film-coated · Enteric · Extended-release · Effervescent · Sublingual</p>
                 </div>
                 <div class="product-card animate-on-scroll">
                     <div class="product-image">
@@ -1197,7 +1205,7 @@
                     </div>
                     <h3>Syrups & Liquids</h3>
                     <p>Oral suspensions</p>
-                    <p style="font-size:0.72rem;color:var(--teal);margin-top:4px;font-weight:500;">Sugar-free · Tonic · Suspension · Pediatric</p>
+                    <p style="font-size:0.72rem;color:var(--teal);margin-top:4px;font-weight:500;">Sugar-free · Suspension · RTD Shots · Pediatric</p>
                 </div>
                 <div class="product-card animate-on-scroll">
                     <div class="product-image">
@@ -1223,7 +1231,7 @@
     <section class="categories" id="categories">
         <div class="container">
             <div class="categories-header animate-on-scroll">
-                <div class="section-label">What We Formulate</div>
+                <div class="section-label section-label-green">What We Formulate</div>
                 <h2 class="section-title">Health Segments We Cover</h2>
                 <p class="section-subtitle">From immunity boosters to sports nutrition — our formulation library spans every major wellness category.</p>
             </div>
@@ -1342,7 +1350,7 @@
         <div class="container">
             <div class="capacity-grid animate-on-scroll">
                 <div>
-                    <div class="section-label">Infrastructure</div>
+                    <div class="section-label section-label-green">Infrastructure</div>
                     <h2 class="section-title">State-of-the-Art Manufacturing Facility</h2>
                     <p class="section-subtitle">Our Mohali facility is equipped with modern pharmaceutical-grade machinery, climate-controlled production zones, and a dedicated in-house quality control laboratory.</p>
                     <div class="capacity-stats">
@@ -1393,7 +1401,7 @@
     <section class="why" id="why">
         <div class="container">
             <div class="why-header animate-on-scroll">
-                <div class="section-label">Why Choose Us</div>
+                <div class="section-label section-label-green">Why Choose Us</div>
                 <h2 class="section-title">The Bionial Advantage</h2>
                 <p class="section-subtitle">What sets us apart from every other contract manufacturer in North India.</p>
             </div>
@@ -1566,7 +1574,7 @@
         <div class="container">
             <div class="contact-grid">
                 <div>
-                    <div class="section-label">Get Started</div>
+                    <div class="section-label section-label-green">Get Started</div>
                     <h2 class="section-title">Request a Quote</h2>
                     <p class="section-subtitle" style="margin-bottom: 32px;">Tell us about your product and we'll get back to you within 24 hours with a detailed manufacturing proposal.</p>
                     <div class="contact-form">
@@ -1604,6 +1612,7 @@
                                     <option value="syrups">Syrups & Oral Liquids</option>
                                     <option value="powders">Powders & Protein Supplements</option>
                                     <option value="sachets">Sachets & Granules</option>
+                                    <option value="effervescent">Effervescent Tablets / Sachets</option>
                                     <option value="multiple">Multiple Products</option>
                                     <option value="not-sure">Not Sure — Need Guidance</option>
                                 </select>
@@ -1689,8 +1698,7 @@
             <div class="footer-grid">
                 <div>
                     <a href="#" class="nav-logo" style="margin-bottom:8px;">
-                        <div class="nav-logo-icon">B</div>
-                        <div class="nav-logo-text">Bionial <span>Lifesciences</span></div>
+                        <img src="images/logo-white.png" alt="Bionial Lifesciences" class="nav-logo-img">
                     </a>
                     <p class="footer-brand-desc">Precision nutraceutical contract manufacturing in Mohali, Punjab. Built for brands that scale — capsules, tablets, syrups, powders and sachets with startup-friendly MOQs and transparent pricing.</p>
                 </div>
