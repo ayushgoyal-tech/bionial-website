@@ -1,1626 +1,1166 @@
 #!/usr/bin/env python3
 """
 build_index.py — Generates the complete Bionial Lifesciences index.html
-Ground-up rebuild: single self-contained file with inline CSS + JS.
+v2.0: Light/colorful hero, 86 formulations, 15 health segments, all sections.
 """
-import json
+import json, sys
+sys.stdout.reconfigure(encoding='utf-8')
+
+LOGO = 'LogoAsset 1.png'
 
 FORMULATIONS = [
-    # ─── TABLETS (20) ───────────────────────────────────────────────────────
-    {"name":"Multivitamin & Multimineral Tablets","category":"tablets","health":["general-wellness"],"composition":"Vitamins A, B-Complex, C, D3, E + Zinc, Iron, Calcium"},
-    {"name":"Calcium Citrate + Vitamin D3 + Zinc Tablets","category":"tablets","health":["bone-joint","womens-health"],"composition":"Calcium Citrate 500mg, D3 400IU, Zinc 8mg"},
-    {"name":"Iron + Folic Acid + Vitamin C Tablets","category":"tablets","health":["womens-health"],"composition":"Ferrous Ascorbate 100mg, Folic Acid 1.5mg, Vit C 50mg"},
-    {"name":"Vitamin C + Zinc Chewable Tablets","category":"tablets","health":["immunity"],"composition":"Ascorbic Acid 500mg, Zinc Sulphate 10mg"},
-    {"name":"Biotin 10,000 mcg Tablets","category":"tablets","health":["skin-hair"],"composition":"D-Biotin 10,000mcg in tablet base"},
-    {"name":"Methylcobalamin + ALA + Folic Acid Tablets","category":"tablets","health":["brain-cognitive"],"composition":"Methyl B12 1500mcg, Alpha Lipoic Acid 100mg, Folic Acid 1.5mg"},
-    {"name":"Omega-3 (Flaxseed Extract) + Vitamin E Tablets","category":"tablets","health":["heart-cardio"],"composition":"Flaxseed Oil Ext 500mg, Vit E 25mg"},
-    {"name":"L-Arginine + Proanthocyanidin Tablets","category":"tablets","health":["heart-cardio","mens-health"],"composition":"L-Arginine HCl 500mg, Grape Seed Proanthocyanidin 75mg"},
-    {"name":"Ashwagandha 500mg Tablets","category":"tablets","health":["general-wellness","mens-health"],"composition":"Ashwagandha Root Extract 500mg (2.5% Withanolides)"},
-    {"name":"Garcinia Cambogia + Green Coffee Extract Tablets","category":"tablets","health":["weight-management"],"composition":"Garcinia 60% HCA 500mg, Green Coffee 45% CGA 200mg"},
-    {"name":"Glucosamine + Chondroitin + MSM Tablets","category":"tablets","health":["bone-joint"],"composition":"Glucosamine Sulphate 500mg, Chondroitin 400mg, MSM 250mg"},
-    {"name":"Coenzyme Q10 100mg + Omega-3 Tablets","category":"tablets","health":["heart-cardio"],"composition":"CoQ10 100mg, Omega-3 (EPA+DHA) 300mg"},
-    {"name":"Curcumin 95% + Piperine Tablets","category":"tablets","health":["immunity","bone-joint"],"composition":"Curcumin Extract 500mg (95%), Piperine 5mg"},
-    {"name":"Melatonin 5mg Sublingual Tablets","category":"tablets","health":["brain-cognitive"],"composition":"Melatonin 5mg in fast-dissolve sublingual base"},
-    {"name":"Vitamin D3 60,000 IU Chewable Tablets","category":"tablets","health":["immunity","bone-joint"],"composition":"Cholecalciferol 60,000 IU (weekly/monthly dose)"},
-    {"name":"Probiotics 50 Billion CFU + Prebiotics Tablets","category":"tablets","health":["digestion-gut"],"composition":"8-Strain Probiotic Blend 50B CFU, FOS 200mg"},
-    {"name":"Liver Detox (Milk Thistle + NAC + Dandelion) Tablets","category":"tablets","health":["liver-health"],"composition":"Milk Thistle 80% 200mg, NAC 300mg, Dandelion 150mg"},
-    {"name":"Collagen Peptides + Vitamin C + Hyaluronic Acid Tablets","category":"tablets","health":["skin-hair"],"composition":"Marine Collagen Peptides 500mg, Vit C 40mg, HA 25mg"},
-    {"name":"Berberine 500mg + Chromium Tablets","category":"tablets","health":["diabetes-management","weight-management"],"composition":"Berberine HCl 500mg, Chromium Picolinate 200mcg"},
-    {"name":"Shilajit 500mg + Safed Musli Tablets","category":"tablets","health":["mens-health","general-wellness"],"composition":"Purified Shilajit 500mg, Safed Musli Ext 250mg"},
-    # ─── CAPSULES (20) ──────────────────────────────────────────────────────
-    {"name":"Omega-3 Fish Oil 1000mg (EPA 360 + DHA 240) Softgels","category":"capsules","health":["heart-cardio"],"composition":"Fish Oil 1000mg (EPA 360mg + DHA 240mg)"},
-    {"name":"Evening Primrose Oil 1000mg Softgels","category":"capsules","health":["womens-health","skin-hair"],"composition":"Evening Primrose Oil 1000mg (GLA 90mg)"},
-    {"name":"Flaxseed Oil 1000mg Veg Softgels","category":"capsules","health":["heart-cardio"],"composition":"Cold-Pressed Flaxseed Oil 1000mg (ALA 530mg)"},
-    {"name":"Vitamin E 400 IU Softgels","category":"capsules","health":["skin-hair","general-wellness"],"composition":"Natural Mixed Tocopherols 400 IU"},
-    {"name":"CoQ10 100mg + Omega-3 Softgels","category":"capsules","health":["heart-cardio"],"composition":"Ubiquinone CoQ10 100mg, Omega-3 300mg"},
-    {"name":"CLA 1000mg Softgels","category":"capsules","health":["weight-management","sports-nutrition"],"composition":"Conjugated Linoleic Acid 1000mg (80% CLA content)"},
-    {"name":"Cod Liver Oil Softgels","category":"capsules","health":["bone-joint","general-wellness"],"composition":"Cod Liver Oil 1000mg (Vit A 850IU, Vit D 85IU, EPA+DHA 160mg)"},
-    {"name":"Multivitamin + Multimineral Softgels","category":"capsules","health":["general-wellness"],"composition":"Complete Vitamin & Mineral blend in softgel base"},
-    {"name":"Ashwagandha Extract 500mg Veg Capsules","category":"capsules","health":["general-wellness","mens-health"],"composition":"KSM-66 Ashwagandha 500mg (5% Withanolides)"},
-    {"name":"Probiotics 30 Billion CFU (8-Strain) Veg Capsules","category":"capsules","health":["digestion-gut"],"composition":"L. acidophilus, B. longum + 6 strains, 30B CFU, FOS 100mg"},
-    {"name":"Moringa Oleifera 500mg Veg Capsules","category":"capsules","health":["general-wellness"],"composition":"Moringa Leaf Powder 500mg (standardised extract)"},
-    {"name":"Turmeric Curcumin + Piperine Veg Capsules","category":"capsules","health":["immunity","bone-joint"],"composition":"Turmeric Extract 500mg (95% Curcumin), Piperine 5mg"},
-    {"name":"Green Tea Extract + Garcinia Veg Capsules","category":"capsules","health":["weight-management"],"composition":"EGCG Green Tea 400mg, Garcinia 60% HCA 200mg"},
-    {"name":"Fenugreek Seed Extract 500mg Veg Capsules","category":"capsules","health":["womens-health","diabetes-management"],"composition":"Fenugreek 500mg (50% Saponins)"},
-    {"name":"Saw Palmetto + Lycopene Veg Capsules","category":"capsules","health":["mens-health"],"composition":"Saw Palmetto Berry Ext 320mg, Lycopene 6mg"},
-    {"name":"Grape Seed Extract 250mg Veg Capsules","category":"capsules","health":["skin-hair","heart-cardio"],"composition":"Grape Seed OPC Extract 250mg (95% Proanthocyanidins)"},
-    {"name":"Tribulus Terrestris 1000mg Veg Capsules","category":"capsules","health":["mens-health","sports-nutrition"],"composition":"Tribulus Ext 1000mg (40% Saponins)"},
-    {"name":"Cranberry Extract 400mg Veg Capsules","category":"capsules","health":["general-wellness"],"composition":"Cranberry Concentrate 400mg (36mg PACs)"},
-    {"name":"Neem + Tulsi + Karela Veg Capsules","category":"capsules","health":["immunity","diabetes-management"],"composition":"Neem 200mg, Tulsi 200mg, Bitter Melon 100mg"},
-    {"name":"Sea Buckthorn Oil Softgels","category":"capsules","health":["skin-hair","womens-health"],"composition":"Sea Buckthorn Seed + Berry Oil 500mg (Omega-7 rich)"},
-    # ─── SYRUPS (15) ────────────────────────────────────────────────────────
-    {"name":"Multivitamin + Multimineral Syrup","category":"syrups","health":["general-wellness","kids-pediatric"],"composition":"Complete vitamin & mineral liquid suspension"},
-    {"name":"Iron + Folic Acid Syrup (Ferrous Ascorbate)","category":"syrups","health":["womens-health"],"composition":"Ferrous Ascorbate 30mg, Folic Acid 500mcg per 5ml"},
-    {"name":"Calcium + Vitamin D3 Suspension","category":"syrups","health":["bone-joint","kids-pediatric"],"composition":"Calcium Carbonate 500mg, Cholecalciferol 200IU per 5ml"},
-    {"name":"Appetizer Syrup (Ayurvedic)","category":"syrups","health":["digestion-gut","kids-pediatric"],"composition":"Ajwain, Saunf, Pudina, Jeera extracts"},
-    {"name":"Liver Tonic Syrup","category":"syrups","health":["liver-health"],"composition":"Kutki, Bhumi Amla, Chicory, Arjuna in syrup base"},
-    {"name":"Cough Syrup (Honey-based Ayurvedic)","category":"syrups","health":["immunity"],"composition":"Tulsi, Ginger, Honey, Mulethi, Pippali blend"},
-    {"name":"Digestive Enzyme Syrup","category":"syrups","health":["digestion-gut"],"composition":"Pepsin, Fungal Diastase, Papain in flavoured base"},
-    {"name":"Protein Liquid (Collagen + B-Complex)","category":"syrups","health":["skin-hair","general-wellness"],"composition":"Marine Collagen 5g, B-Complex per 30ml serving"},
-    {"name":"Vitamin C + Zinc Oral Solution","category":"syrups","health":["immunity"],"composition":"Ascorbic Acid 500mg, Zinc Sulphate 20mg per 15ml"},
-    {"name":"Immunity Booster Syrup (Giloy + Tulsi + Amla)","category":"syrups","health":["immunity"],"composition":"Giloy Extract, Tulsi Extract, Amla Extract in honey base"},
-    {"name":"Brain Tonic Syrup (Brahmi + Shankhpushpi)","category":"syrups","health":["brain-cognitive","kids-pediatric"],"composition":"Brahmi Extract, Shankhpushpi, Ashwagandha blend"},
-    {"name":"Noni Juice 500ml","category":"syrups","health":["general-wellness","immunity"],"composition":"Morinda citrifolia (Noni) 500ml, no added sugar"},
-    {"name":"Aloe Vera Juice (with Pulp) 500ml","category":"syrups","health":["digestion-gut","skin-hair"],"composition":"Aloe barbadensis leaf gel + pulp, 500ml"},
-    {"name":"Amla Juice 500ml","category":"syrups","health":["immunity","skin-hair"],"composition":"Indian Gooseberry fresh juice, 500mg Vit C per 30ml"},
-    {"name":"Karela Jamun Juice 500ml","category":"syrups","health":["diabetes-management"],"composition":"Bitter Melon + Jamun Seed blend, 500ml"},
-    # ─── POWDERS (10) ────────────────────────────────────────────────────────
-    {"name":"Whey Protein Concentrate 80%","category":"powders","health":["sports-nutrition"],"composition":"Whey Protein 24g, BCAA 5.4g per 30g serving"},
-    {"name":"Pea Protein Isolate","category":"powders","health":["sports-nutrition","general-wellness"],"composition":"Pea Protein Isolate 25g per 30g serving"},
-    {"name":"Mass Gainer Powder","category":"powders","health":["sports-nutrition"],"composition":"Carbs 60g, Protein 15g, Fats 2g per 100g serving"},
-    {"name":"BCAA 2:1:1 Powder","category":"powders","health":["sports-nutrition"],"composition":"Leucine 2.5g, Isoleucine 1.25g, Valine 1.25g per serving"},
-    {"name":"Pre-Workout Blend (Caffeine + Beta-Alanine + Citrulline)","category":"powders","health":["sports-nutrition"],"composition":"Caffeine 200mg, Beta-Alanine 3.2g, Citrulline 6g"},
-    {"name":"Women's Health Protein Blend","category":"powders","health":["womens-health","sports-nutrition"],"composition":"Whey 15g, Soy 5g, Iron, Folic Acid, Biotin per serving"},
-    {"name":"Joint Support Powder (Collagen + Glucosamine)","category":"powders","health":["bone-joint"],"composition":"Collagen Peptides 10g, Glucosamine 1.5g, Vit C 40mg"},
-    {"name":"Immunity Blend (Elderberry + Vitamin C + Zinc)","category":"powders","health":["immunity"],"composition":"Elderberry 500mg, Vit C 500mg, Zinc 10mg, Echinacea 200mg"},
-    {"name":"Plant-Based Superfood Powder","category":"powders","health":["general-wellness"],"composition":"Spirulina, Chlorella, Wheatgrass, Amla, 20+ superfoods"},
-    {"name":"Weight Management Meal Replacement Powder","category":"powders","health":["weight-management"],"composition":"Protein 20g, Fibre 5g, MCT Oil 3g, Low-Glycaemic Carbs"},
-    # ─── SACHETS (10) ────────────────────────────────────────────────────────
-    {"name":"ORS (Oral Rehydration Salts) Sachets","category":"sachets","health":["general-wellness"],"composition":"NaCl, KCl, Sodium Citrate, Glucose per WHO formula"},
-    {"name":"Vitamin C 1000mg Effervescent Sachets","category":"sachets","health":["immunity"],"composition":"Ascorbic Acid 1000mg, Zinc 10mg, effervescent base"},
-    {"name":"Electrolyte Replenishment Sachets","category":"sachets","health":["sports-nutrition"],"composition":"Na, K, Mg, Cl with Vitamin B complex"},
-    {"name":"Collagen Peptides Sachets (10g)","category":"sachets","health":["skin-hair","bone-joint"],"composition":"Hydrolysed Marine Collagen Peptides 10g, Hyaluronic Acid"},
-    {"name":"Probiotic Stick-Pack Sachets","category":"sachets","health":["digestion-gut"],"composition":"Bacillus coagulans 2B CFU + Prebiotic FOS per sachet"},
-    {"name":"Multivitamin Effervescent Sachets","category":"sachets","health":["general-wellness"],"composition":"12 Vitamins + 6 Minerals in effervescent fruit-flavour base"},
-    {"name":"Turmeric Latte Blend Sachets","category":"sachets","health":["immunity","bone-joint"],"composition":"Turmeric 500mg, Black Pepper, Ginger, Coconut Milk Powder"},
-    {"name":"Joint Support Sachet (Glucosamine + Collagen + Boswellia)","category":"sachets","health":["bone-joint"],"composition":"Glucosamine 1.5g, Collagen 5g, Boswellia 200mg"},
-    {"name":"L-Glutamine + Electrolyte Recovery Sachet","category":"sachets","health":["sports-nutrition"],"composition":"L-Glutamine 5g, Electrolyte blend, Coconut Water Powder"},
-    {"name":"Ashwagandha + Saffron Stress Relief Sachet","category":"sachets","health":["brain-cognitive","general-wellness"],"composition":"KSM-66 Ashwagandha 300mg, Saffron Extract 14mg"},
-    # ─── GUMMIES (10) ────────────────────────────────────────────────────────
-    {"name":"Multivitamin Gummies (Adults)","category":"gummies","health":["general-wellness"],"composition":"13 Vitamins + 6 Minerals, natural fruit flavour"},
-    {"name":"Vitamin C + Zinc Immunity Gummies","category":"gummies","health":["immunity"],"composition":"Ascorbic Acid 250mg, Zinc 5mg per 2 gummies"},
-    {"name":"Biotin 5000mcg Gummies","category":"gummies","health":["skin-hair"],"composition":"D-Biotin 5000mcg, Amla Extract 50mg per 2 gummies"},
-    {"name":"Vitamin D3 + K2 Gummies","category":"gummies","health":["bone-joint","immunity"],"composition":"D3 1000IU + K2 (MK-7) 45mcg per 2 gummies"},
-    {"name":"Melatonin 5mg Sleep Gummies","category":"gummies","health":["brain-cognitive"],"composition":"Melatonin 5mg, L-Theanine 100mg, Chamomile 50mg"},
-    {"name":"Probiotic + Prebiotic Gummies","category":"gummies","health":["digestion-gut","kids-pediatric"],"composition":"Bacillus coagulans 1B CFU, Inulin 500mg per 2 gummies"},
-    {"name":"Apple Cider Vinegar Gummies","category":"gummies","health":["weight-management","digestion-gut"],"composition":"ACV 500mg (5% Acetic Acid), Beet Root, Pomegranate"},
-    {"name":"Kids' Multivitamin Gummies","category":"gummies","health":["kids-pediatric","general-wellness"],"composition":"Age-appropriate vitamins A, C, D, B-complex + Zinc, Iron"},
-    {"name":"Omega-3 DHA Gummies for Kids","category":"gummies","health":["kids-pediatric","brain-cognitive"],"composition":"Algal DHA 100mg, Vit D 200IU per 2 gummies"},
-    {"name":"Collagen + Vitamin C Beauty Gummies","category":"gummies","health":["skin-hair"],"composition":"Collagen Peptides 2.5g, Vit C 60mg, Biotin 1000mcg"},
-    # ─── AYURVEDIC (20) ──────────────────────────────────────────────────────
-    {"name":"Ashwagandha Churna 100g","category":"ayurvedic","health":["general-wellness","mens-health"],"composition":"Withania somnifera root powder 100g"},
-    {"name":"Triphala Churna 100g","category":"ayurvedic","health":["digestion-gut","general-wellness"],"composition":"Amalaki, Bibhitaki, Haritaki — equal parts"},
-    {"name":"Trikatu Churna 100g","category":"ayurvedic","health":["digestion-gut","weight-management"],"composition":"Shunti, Maricha, Pippali — equal parts"},
-    {"name":"Shatavari Capsules 500mg","category":"ayurvedic","health":["womens-health"],"composition":"Asparagus racemosus root extract 500mg"},
-    {"name":"Brahmi Capsules 500mg","category":"ayurvedic","health":["brain-cognitive"],"composition":"Bacopa monnieri Ext 500mg (20% Bacosides)"},
-    {"name":"Guduchi (Giloy) Tablets 500mg","category":"ayurvedic","health":["immunity"],"composition":"Tinospora cordifolia stem extract 500mg"},
-    {"name":"Arjuna Tablets 500mg","category":"ayurvedic","health":["heart-cardio"],"composition":"Terminalia arjuna bark extract 500mg"},
-    {"name":"Chandraprabha Vati","category":"ayurvedic","health":["mens-health","general-wellness"],"composition":"37-herb classical formulation per API"},
-    {"name":"Arogyavardhini Vati","category":"ayurvedic","health":["liver-health","digestion-gut"],"composition":"Classical liver & metabolic tonic per API"},
-    {"name":"Kanchanar Guggulu","category":"ayurvedic","health":["general-wellness"],"composition":"Kanchanar, Guggulu, Triphala, Trikatu, Varuna"},
-    {"name":"Yograj Guggulu","category":"ayurvedic","health":["bone-joint"],"composition":"Guggulu + 28 herbs per classical formulation"},
-    {"name":"Dashmool Kwath (Decoction)","category":"ayurvedic","health":["general-wellness","womens-health"],"composition":"10 classical root herbs decoction concentrate"},
-    {"name":"Chyawanprash 500g","category":"ayurvedic","health":["immunity","general-wellness"],"composition":"Amla + 40 herbs in honey-ghee base, per API"},
-    {"name":"Kumaryasava 450ml","category":"ayurvedic","health":["womens-health","digestion-gut"],"composition":"Fermented Aloe vera preparation, 5–7% self-generated alcohol"},
-    {"name":"Draksharishta 450ml","category":"ayurvedic","health":["general-wellness","heart-cardio"],"composition":"Fermented grape-based tonic with 40 herbs"},
-    {"name":"Abhayarishta 450ml","category":"ayurvedic","health":["digestion-gut"],"composition":"Fermented Haritaki-based digestive preparation"},
-    {"name":"Mahasudarshan Churna","category":"ayurvedic","health":["immunity"],"composition":"50-herb classical formulation for fever & immunity"},
-    {"name":"Punarnava Mandoor","category":"ayurvedic","health":["liver-health","general-wellness"],"composition":"Iron-herb preparation with Punarnava & Trikatu"},
-    {"name":"Sitopaladi Churna","category":"ayurvedic","health":["immunity"],"composition":"Sitopala, Vanshlochan, Pippali, Ela, Twak"},
-    {"name":"Lavanbhaskar Churna","category":"ayurvedic","health":["digestion-gut"],"composition":"11-salt mineral herbal digestive blend per API"},
+    # BONE & JOINT (8)
+    {"code":"BL-BJ-01","name":"Calcium Citrate + D3 + K2 Tablets","cat":"bone-joint","form":"Tablets","health":["bone-joint","general-wellness"]},
+    {"code":"BL-BJ-02","name":"Glucosamine + Chondroitin + MSM Capsules","cat":"bone-joint","form":"Capsules","health":["bone-joint","sports-fitness"]},
+    {"code":"BL-BJ-03","name":"Collagen Peptides + Hyaluronic Acid Tablets","cat":"bone-joint","form":"Tablets","health":["bone-joint","skin-beauty"]},
+    {"code":"BL-BJ-04","name":"Calcium Carbonate + Magnesium + Zinc Tablets","cat":"bone-joint","form":"Tablets","health":["bone-joint"]},
+    {"code":"BL-BJ-05","name":"Omega-3 + Calcium + D3 Softgels","cat":"bone-joint","form":"Softgels","health":["bone-joint","heart-metabolic"]},
+    {"code":"BL-BJ-06","name":"Boron + Silica + Strontium Capsules","cat":"bone-joint","form":"Capsules","health":["bone-joint"]},
+    {"code":"BL-BJ-07","name":"Curcumin + Boswellia + Ginger Extract Capsules","cat":"bone-joint","form":"Capsules","health":["bone-joint","immunity"]},
+    {"code":"BL-BJ-08","name":"Vitamin D3 5000 IU Softgels","cat":"bone-joint","form":"Softgels","health":["bone-joint","immunity","general-wellness"]},
+
+    # VITAMINS & MINERALS (10)
+    {"code":"BL-VM-01","name":"Multivitamin + Multimineral Tablets","cat":"vitamins","form":"Tablets","health":["general-wellness","immunity"]},
+    {"code":"BL-VM-02","name":"Vitamin C 1000 mg Effervescent Tablets","cat":"vitamins","form":"Tablets","health":["immunity","general-wellness"]},
+    {"code":"BL-VM-03","name":"B-Complex + Folic Acid Capsules","cat":"vitamins","form":"Capsules","health":["nerve-brain","general-wellness"]},
+    {"code":"BL-VM-04","name":"Zinc + Selenium + Copper Tablets","cat":"vitamins","form":"Tablets","health":["immunity","general-wellness"]},
+    {"code":"BL-VM-05","name":"Iron + Folic Acid + B12 Tablets","cat":"vitamins","form":"Tablets","health":["womens-health","general-wellness"]},
+    {"code":"BL-VM-06","name":"Magnesium Glycinate Capsules","cat":"vitamins","form":"Capsules","health":["nerve-brain","sports-fitness"]},
+    {"code":"BL-VM-07","name":"Vitamin E 400 IU Softgels","cat":"vitamins","form":"Softgels","health":["skin-beauty","general-wellness"]},
+    {"code":"BL-VM-08","name":"Biotin 10000 mcg Tablets","cat":"vitamins","form":"Tablets","health":["skin-beauty","general-wellness"]},
+    {"code":"BL-VM-09","name":"Coenzyme Q10 100 mg Softgels","cat":"vitamins","form":"Softgels","health":["heart-metabolic","general-wellness"]},
+    {"code":"BL-VM-10","name":"Lycopene + Astaxanthin Softgels","cat":"vitamins","form":"Softgels","health":["skin-beauty","immunity"]},
+
+    # EYE HEALTH / OPHTHALMIC (6)
+    {"code":"BL-EH-01","name":"Lutein 20mg + Zeaxanthin + Bilberry Softgels","cat":"ophthalmic","form":"Softgels","health":["eye-health"]},
+    {"code":"BL-EH-02","name":"Vitamin A + Beta-Carotene Eye Capsules","cat":"ophthalmic","form":"Capsules","health":["eye-health"]},
+    {"code":"BL-EH-03","name":"Omega-3 DHA + Lutein Eye Softgels","cat":"ophthalmic","form":"Softgels","health":["eye-health","heart-metabolic"]},
+    {"code":"BL-EH-04","name":"AREDS2 Formula Tablets","cat":"ophthalmic","form":"Tablets","health":["eye-health"]},
+    {"code":"BL-EH-05","name":"Astaxanthin 4mg Softgels","cat":"ophthalmic","form":"Softgels","health":["eye-health","skin-beauty"]},
+    {"code":"BL-EH-06","name":"Eyebright + Bilberry Extract Capsules","cat":"ophthalmic","form":"Capsules","health":["eye-health"]},
+
+    # WOMEN'S HEALTH (8)
+    {"code":"BL-WH-01","name":"Prenatal Multivitamin + DHA Softgels","cat":"womens-health","form":"Softgels","health":["womens-health"]},
+    {"code":"BL-WH-02","name":"Shatavari + Lodhra + Ashoka Capsules","cat":"womens-health","form":"Capsules","health":["womens-health"]},
+    {"code":"BL-WH-03","name":"Evening Primrose Oil 1000 mg Softgels","cat":"womens-health","form":"Softgels","health":["womens-health","skin-beauty"]},
+    {"code":"BL-WH-04","name":"PCOS Support — Myo-Inositol + D-Chiro Sachets","cat":"womens-health","form":"Powder","health":["womens-health","metabolic"]},
+    {"code":"BL-WH-05","name":"Menopause Relief — Black Cohosh + Dong Quai Capsules","cat":"womens-health","form":"Capsules","health":["womens-health"]},
+    {"code":"BL-WH-06","name":"Iron + Folic Acid + B12 + C Tablets","cat":"womens-health","form":"Tablets","health":["womens-health","general-wellness"]},
+    {"code":"BL-WH-07","name":"Calcium + D3 + Magnesium Tablets (Women's)","cat":"womens-health","form":"Tablets","health":["womens-health","bone-joint"]},
+    {"code":"BL-WH-08","name":"Biotin + Keratin + Silica Hair Capsules","cat":"womens-health","form":"Capsules","health":["womens-health","skin-beauty"]},
+
+    # LIVER & DIGESTIVE (8)
+    {"code":"BL-LD-01","name":"Liv-52 Type — Silymarin + Artichoke Tablets","cat":"liver-digestive","form":"Tablets","health":["liver-digestive"]},
+    {"code":"BL-LD-02","name":"Probiotics 30 Billion CFU Multi-strain Capsules","cat":"liver-digestive","form":"Capsules","health":["liver-digestive","immunity"]},
+    {"code":"BL-LD-03","name":"Digestive Enzyme Complex Capsules","cat":"liver-digestive","form":"Capsules","health":["liver-digestive"]},
+    {"code":"BL-LD-04","name":"Prebiotic + Probiotic + Postbiotic Sachets","cat":"liver-digestive","form":"Powder","health":["liver-digestive"]},
+    {"code":"BL-LD-05","name":"Milk Thistle 80% Silymarin Capsules","cat":"liver-digestive","form":"Capsules","health":["liver-digestive"]},
+    {"code":"BL-LD-06","name":"Triphala + Senna Laxative Tablets","cat":"liver-digestive","form":"Tablets","health":["liver-digestive"]},
+    {"code":"BL-LD-07","name":"Glutamine + Zinc + Probiotics Gut Health Sachets","cat":"liver-digestive","form":"Powder","health":["liver-digestive","sports-fitness"]},
+    {"code":"BL-LD-08","name":"Apple Cider Vinegar 500 mg Capsules","cat":"liver-digestive","form":"Capsules","health":["liver-digestive","metabolic"]},
+
+    # NERVE & BRAIN (8)
+    {"code":"BL-NB-01","name":"Brahmi + Lion's Mane + Bacopa Capsules","cat":"nerve-brain","form":"Capsules","health":["nerve-brain"]},
+    {"code":"BL-NB-02","name":"Omega-3 DHA 1000 mg Softgels","cat":"nerve-brain","form":"Softgels","health":["nerve-brain","heart-metabolic"]},
+    {"code":"BL-NB-03","name":"Melatonin 5 mg Sleep Tablets","cat":"nerve-brain","form":"Tablets","health":["nerve-brain"]},
+    {"code":"BL-NB-04","name":"L-Theanine + Ashwagandha + GABA Capsules","cat":"nerve-brain","form":"Capsules","health":["nerve-brain"]},
+    {"code":"BL-NB-05","name":"Ginkgo Biloba + Phosphatidylserine Tablets","cat":"nerve-brain","form":"Tablets","health":["nerve-brain"]},
+    {"code":"BL-NB-06","name":"5-HTP + Saffron + B6 Mood Capsules","cat":"nerve-brain","form":"Capsules","health":["nerve-brain"]},
+    {"code":"BL-NB-07","name":"Alpha GPC + Huperzine A Nootropic Capsules","cat":"nerve-brain","form":"Capsules","health":["nerve-brain"]},
+    {"code":"BL-NB-08","name":"Magnesium L-Threonate Sleep + Cognitive Capsules","cat":"nerve-brain","form":"Capsules","health":["nerve-brain"]},
+
+    # HEART & METABOLIC (8)
+    {"code":"BL-HM-01","name":"Omega-3 Concentrate 60% EPA/DHA Softgels","cat":"heart-metabolic","form":"Softgels","health":["heart-metabolic"]},
+    {"code":"BL-HM-02","name":"Red Yeast Rice + CoQ10 Capsules","cat":"heart-metabolic","form":"Capsules","health":["heart-metabolic"]},
+    {"code":"BL-HM-03","name":"Berberine 500 mg Capsules","cat":"heart-metabolic","form":"Capsules","health":["heart-metabolic","metabolic"]},
+    {"code":"BL-HM-04","name":"Chromium Picolinate + Gymnema + Bitter Melon Tablets","cat":"heart-metabolic","form":"Tablets","health":["heart-metabolic","metabolic"]},
+    {"code":"BL-HM-05","name":"Garlic 1000 mg Odourless Softgels","cat":"heart-metabolic","form":"Softgels","health":["heart-metabolic","immunity"]},
+    {"code":"BL-HM-06","name":"Nattokinase + Serrapeptase Capsules","cat":"heart-metabolic","form":"Capsules","health":["heart-metabolic"]},
+    {"code":"BL-HM-07","name":"Plant Sterols + Policosanol Tablets","cat":"heart-metabolic","form":"Tablets","health":["heart-metabolic"]},
+    {"code":"BL-HM-08","name":"Resveratrol + Pterostilbene Capsules","cat":"heart-metabolic","form":"Capsules","health":["heart-metabolic","general-wellness"]},
+
+    # SPORTS & IMMUNITY (10)
+    {"code":"BL-SI-01","name":"Whey Protein Isolate + Digestive Enzyme Sachets","cat":"sports-immunity","form":"Powder","health":["sports-fitness"]},
+    {"code":"BL-SI-02","name":"Creatine Monohydrate 3g Sachets","cat":"sports-immunity","form":"Powder","health":["sports-fitness"]},
+    {"code":"BL-SI-03","name":"BCAA 2:1:1 + Electrolyte Sachets","cat":"sports-immunity","form":"Powder","health":["sports-fitness"]},
+    {"code":"BL-SI-04","name":"Pre-workout Complex — Citrulline + Beta-Alanine + Caffeine Sachets","cat":"sports-immunity","form":"Powder","health":["sports-fitness"]},
+    {"code":"BL-SI-05","name":"Vitamin C + Zinc + Elderberry Immunity Tablets","cat":"sports-immunity","form":"Tablets","health":["immunity"]},
+    {"code":"BL-SI-06","name":"Ashwagandha KSM-66 600 mg Capsules","cat":"sports-immunity","form":"Capsules","health":["sports-fitness","nerve-brain","immunity"]},
+    {"code":"BL-SI-07","name":"Glutamine 5g Powder Sachets","cat":"sports-immunity","form":"Powder","health":["sports-fitness","liver-digestive"]},
+    {"code":"BL-SI-08","name":"Turkesterone + Fadogia Agrestis Capsules","cat":"sports-immunity","form":"Capsules","health":["sports-fitness"]},
+    {"code":"BL-SI-09","name":"Multivitamin for Athletes Tablets","cat":"sports-immunity","form":"Tablets","health":["sports-fitness","general-wellness"]},
+    {"code":"BL-SI-10","name":"Beta-Glucan 1,3/1,6 Immunity Capsules","cat":"sports-immunity","form":"Capsules","health":["immunity"]},
+
+    # SYRUPS & LIQUIDS (9)
+    {"code":"BL-SL-01","name":"Iron + Folic Acid + B12 Syrup","cat":"syrups-liquids","form":"Syrup","health":["womens-health","general-wellness"]},
+    {"code":"BL-SL-02","name":"Calcium + Magnesium + Zinc + D3 Syrup","cat":"syrups-liquids","form":"Syrup","health":["bone-joint","general-wellness"]},
+    {"code":"BL-SL-03","name":"Multivitamin Kids Syrup (Sugar-Free)","cat":"syrups-liquids","form":"Syrup","health":["general-wellness","immunity"]},
+    {"code":"BL-SL-04","name":"Amla + Aloe Vera + Wheatgrass Juice","cat":"syrups-liquids","form":"Juice","health":["liver-digestive","immunity"]},
+    {"code":"BL-SL-05","name":"Ashwagandha + Shilajit Tonic Syrup","cat":"syrups-liquids","form":"Syrup","health":["sports-fitness","nerve-brain"]},
+    {"code":"BL-SL-06","name":"Giloy + Tulsi + Neem Immunity Syrup","cat":"syrups-liquids","form":"Syrup","health":["immunity"]},
+    {"code":"BL-SL-07","name":"Haemoglobin + Iron + Protein Liquid Tonic","cat":"syrups-liquids","form":"Syrup","health":["womens-health","general-wellness"]},
+    {"code":"BL-SL-08","name":"Cough + Cold Herbal Syrup","cat":"syrups-liquids","form":"Syrup","health":["immunity"]},
+    {"code":"BL-SL-09","name":"Appetite Stimulant + Digestive Syrup","cat":"syrups-liquids","form":"Syrup","health":["liver-digestive"]},
+
+    # AYURVEDIC (9)
+    {"code":"BL-AY-01","name":"Ashwagandha Churna (KSM-66 Standardised)","cat":"ayurvedic","form":"Powder","health":["nerve-brain","sports-fitness","immunity"]},
+    {"code":"BL-AY-02","name":"Triphala Churna — Digestive & Detox","cat":"ayurvedic","form":"Powder","health":["liver-digestive"]},
+    {"code":"BL-AY-03","name":"Chyawanprash — Classical Immunity Formula","cat":"ayurvedic","form":"Semi-Solid","health":["immunity","general-wellness"]},
+    {"code":"BL-AY-04","name":"Mahasudarshan Ghanvati Tablets","cat":"ayurvedic","form":"Tablets","health":["immunity"]},
+    {"code":"BL-AY-05","name":"Chandraprabha Vati Tablets","cat":"ayurvedic","form":"Tablets","health":["metabolic","liver-digestive"]},
+    {"code":"BL-AY-06","name":"Arjunarishta — Cardiac Tonic","cat":"ayurvedic","form":"Syrup","health":["heart-metabolic"]},
+    {"code":"BL-AY-07","name":"Drakshasava — General Tonic","cat":"ayurvedic","form":"Syrup","health":["general-wellness"]},
+    {"code":"BL-AY-08","name":"Brahmi + Shankhpushpi Syrup — Brain Tonic","cat":"ayurvedic","form":"Syrup","health":["nerve-brain"]},
+    {"code":"BL-AY-09","name":"Shatavari Granules — Women's Wellness","cat":"ayurvedic","form":"Powder","health":["womens-health"]},
 ]
 
-HEALTH_SEGMENTS = [
-    {"id":"general-wellness","label":"General Wellness","color":"#00A99D"},
-    {"id":"immunity","label":"Immunity","color":"#00A651"},
-    {"id":"womens-health","label":"Women's Health","color":"#E91E8C"},
-    {"id":"mens-health","label":"Men's Health","color":"#003D7A"},
-    {"id":"bone-joint","label":"Bone & Joint","color":"#795548"},
-    {"id":"heart-cardio","label":"Heart & Cardio","color":"#E53935"},
-    {"id":"digestion-gut","label":"Digestion & Gut","color":"#F7A800"},
-    {"id":"brain-cognitive","label":"Brain & Cognitive","color":"#7B1FA2"},
-    {"id":"weight-management","label":"Weight Management","color":"#FF6D00"},
-    {"id":"sports-nutrition","label":"Sports Nutrition","color":"#1565C0"},
-    {"id":"skin-hair","label":"Skin, Hair & Nails","color":"#AD1457"},
-    {"id":"diabetes-management","label":"Diabetes Management","color":"#2E7D32"},
-    {"id":"liver-health","label":"Liver Health","color":"#6D4C41"},
-    {"id":"kids-pediatric","label":"Kids & Pediatric","color":"#00ACC1"},
+CATS = [
+    ("all","All Formulations"),
+    ("bone-joint","Bone & Joint"),
+    ("vitamins","Vitamins & Minerals"),
+    ("ophthalmic","Eye Health"),
+    ("womens-health","Women's Health"),
+    ("liver-digestive","Liver & Digestive"),
+    ("nerve-brain","Nerve & Brain"),
+    ("heart-metabolic","Heart & Metabolic"),
+    ("sports-immunity","Sports & Immunity"),
+    ("syrups-liquids","Syrups & Liquids"),
+    ("ayurvedic","Ayurvedic"),
+]
+
+HEALTH_SEGS = [
+    ("general-wellness","General Wellness","activity"),
+    ("immunity","Immunity","shield"),
+    ("bone-joint","Bone & Joint","bone"),
+    ("nerve-brain","Brain & Nerve","brain"),
+    ("heart-metabolic","Heart & Metabolic","heart-pulse"),
+    ("sports-fitness","Sports & Fitness","dumbbell"),
+    ("womens-health","Women's Health","flower-2"),
+    ("liver-digestive","Liver & Digestive","droplets"),
+    ("eye-health","Eye Health","eye"),
+    ("skin-beauty","Skin & Beauty","sparkles"),
+    ("immunity","Immunity & Defence","shield-check"),
+    ("metabolic","Metabolic & Weight","scale"),
+    ("mens-health","Men's Health","user"),
+    ("seniors","Senior Wellness","users"),
+    ("kids","Child Nutrition","baby"),
 ]
 
 PRODUCT_TABS = [
-    {
-        "id":"capsules","label":"Capsules",
-        "icon":"pill",
-        "img":"images/product-capsules.jpg",
-        "desc":"HPMC, gelatin and softgel capsules for supplements, herbals and pharmaceuticals. From 1,000 units MOQ.",
-        "tags":["Hard Gel (HPMC)","Gelatin Softgel","Veg Softgel","Enteric Coated","SR/ER Capsules","Size 0 to 4"],
-        "link":"capsules.html"
-    },
-    {
-        "id":"tablets","label":"Tablets",
-        "icon":"circle",
-        "img":"images/product-tablets.jpg",
-        "desc":"Plain, film-coated, chewable, effervescent and sublingual tablets. Bi-layer and sustained-release options available.",
-        "tags":["Film-Coated","Chewable","Effervescent","Sublingual","Bi-Layer","Extended Release"],
-        "link":"tablets.html"
-    },
-    {
-        "id":"syrups","label":"Syrups & Liquids",
-        "icon":"flask-conical",
-        "img":"images/product-syrups.jpg",
-        "desc":"Syrups, suspensions, tonics, juices and oral solutions. Sugar-free and honey-based variants available.",
-        "tags":["Syrups","Suspensions","Oral Solutions","Tonics","Fruit Juices","Sugar-Free"],
-        "link":"syrups.html"
-    },
-    {
-        "id":"powders","label":"Powders",
-        "icon":"zap",
-        "img":"images/product-powders.jpg",
-        "desc":"Sports nutrition, protein blends, meal replacements and health powders in bulk and sachet packs.",
-        "tags":["Protein Powders","Mass Gainers","Pre/Post Workout","Meal Replacements","Herbal Blends","Superfood Mixes"],
-        "link":"powders.html"
-    },
-    {
-        "id":"sachets","label":"Sachets",
-        "icon":"package",
-        "img":"images/product-sachets.jpg",
-        "desc":"Stick-packs and sachets for on-the-go nutrition — effervescent, powder, and single-serve liquid formats.",
-        "tags":["Effervescent Sachets","Stick Packs","ORS Sachets","Powder Sachets","Unit Dose Liquids"],
-        "link":"sachets.html"
-    },
-    {
-        "id":"gummies","label":"Gummies",
-        "icon":"candy",
-        "img":"images/product-gummies.jpg",
-        "desc":"Gelatin and pectin-based gummy vitamins for adults and children. Custom flavours and shapes available.",
-        "tags":["Pectin (Veg)","Gelatin","Bear / Cylinder Shape","Custom Flavours","Sugar-Free Option","Kids & Adult SKUs"],
-        "link":"gummies.html"
-    },
-    {
-        "id":"ayurvedic","label":"Ayurvedic",
-        "icon":"leaf",
-        "img":"images/product-ayurveda.jpg",
-        "desc":"Classical and proprietary Ayurvedic formulations — churna, vati, asava, arishta and herbal extracts under AYUSH GMP.",
-        "tags":["Churna","Vati / Tablets","Asava & Arishta","Kwath / Kadha","Avaleha","Herbal Capsules"],
-        "link":"ayurveda.html"
-    },
+    {"id":"capsules","label":"Capsules","img":"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&auto=format","desc":"HPMC & gelatin hard-shell capsules for powders, granules, pellets. Size 00–4 available. Ideal for herbal, nutraceutical and pharmaceutical applications.","features":["HPMC (Veg) & Gelatin options","Size 00 to 4","Delayed-release coatings","80,000+ caps/day capacity"]},
+    {"id":"softgels","label":"Softgels","img":"https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&auto=format","desc":"Seamless soft-gelatin capsules for oil-based actives, omega-3, vitamins and herbal extracts. Excellent bioavailability and patient compliance.","features":["Oval, oblong, round shapes","Plant-based gelatin option","Enteric coat available","DHA/EPA, CoQ10 ready"]},
+    {"id":"tablets","label":"Tablets","img":"https://images.unsplash.com/photo-1585435557343-3b092031a831?w=600&auto=format","desc":"Film-coated, sugar-coated, effervescent and SR/ER tablets. High-compression presses with in-line weight checking ensure batch uniformity.","features":["Film / Sugar / Enteric coat","Effervescent tablets","SR / ER / MR technology","500 mg to 2,000 mg range"]},
+    {"id":"syrups","label":"Syrups","img":"https://images.unsplash.com/photo-1624454002302-36b824d7bd0a?w=600&auto=format","desc":"Liquid oral dosage forms — syrups, suspensions, tonics and herbal juices. Sugar-free formulations available. Aseptic filling with 30 ml–500 ml bottles.","features":["Sugar-free variants","Herbal & classical syrups","30 ml to 500 ml packs","PET & glass bottles"]},
+    {"id":"powders","label":"Powders","img":"https://images.unsplash.com/photo-1564071174699-aef9db97c0c6?w=600&auto=format","desc":"Protein blends, sports nutrition, instant-dissolve sachets, and bulk nutraceutical powders. Spray-dried for superior solubility.","features":["Whey & plant protein","Spray-dried for solubility","Bulk and sachet packs","Custom flavouring"]},
+    {"id":"sachets","label":"Sachets","img":"https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&auto=format","desc":"Single-dose sachets for convenience and compliance — effervescent granules, powders, and pre-mixed beverages. Child-resistant and tamper-evident options.","features":["1g to 20g per sachet","Effervescent granules","4-side seal & 3-side seal","Child-resistant options"]},
+    {"id":"ayurvedic","label":"Ayurvedic","img":"https://images.unsplash.com/photo-1611095973763-414019e72400?w=600&auto=format","desc":"AYUSH GMP compliant classical and patent Ayurvedic formulations — Churna, Kwath, Asava-Arishta, Avaleha and Ghanvati. Schedule E(1) herbs handled.","features":["AYUSH GMP licensed","Classical & patent formulas","Churna, Kwath, Vati, Arishta","Herbal extract standardisation"]},
 ]
+
+PROCESS_STEPS = [
+    ("Day 1","Enquiry & NDA","Share your concept — formulation idea, target market, label claims. We sign NDA and review."),
+    ("Day 2-3","Formulation Proposal","Our R&D team proposes ready-stock or custom formula with costing and regulatory notes."),
+    ("Day 4-7","Sample Development","Lab prepares bench sample. You receive courier sample with CoA and spec sheet."),
+    ("Day 8-12","Sample Approval","Client tests sample, requests tweaks. Repeat until approved. Typically 1–2 rounds."),
+    ("Day 13-20","Pilot Batch","First commercial batch at 20% scale. Stability and QC checks completed."),
+    ("Day 21-30","Full Production & Dispatch","Full batch manufactured, QC released, packaged and dispatched with batch documents."),
+]
+
+FAQ_ITEMS = [
+    ("What is your minimum order quantity (MOQ)?","Our MOQ starts at 1,000 units per SKU — ideal for D2C startups launching new products. We offer startup-friendly pricing with transparent cost breakdown."),
+    ("Do you provide custom formulation services?","Yes. Our in-house R&D team can develop custom formulations from scratch or modify existing ones. We work with international ingredient databases and handle patent review."),
+    ("What certifications does Bionial hold?","We hold WHO-GMP, FSSAI, ISO 9001:2015, GMP Schedule M, HALAL, and AYUSH GMP certifications. All certifications are available on request during due diligence."),
+    ("What is the typical lead time from order to dispatch?","For ready formulations, 21–30 business days from PO. Custom formulations: 45–60 days including R&D and stability testing. Rush options available for select SKUs."),
+    ("Can you handle labelling, packaging and regulatory filings?","Yes — end-to-end. We offer private labelling, regulatory support (FSSAI, AYUSH licensing), artwork review, and can coordinate third-party lab testing for export."),
+    ("Do you export? What markets do you serve?","We currently serve India, GCC (UAE, Saudi Arabia, Kuwait), UK and select EU markets. We can prepare documentation for DUNS, CE, and country-specific registrations on request."),
+]
+
+SERVICES = [
+    ("flask-conical","Contract Manufacturing","Full-scale batch manufacturing under WHO-GMP with batch records, CoA and regulatory documentation."),
+    ("tag","Private Labelling","We handle everything from artwork to finished goods — your brand, our facility."),
+    ("beaker","Custom Formulation","R&D-led development from concept to commercial formula. Typically 10–21 days for bench samples."),
+    ("file-check","Regulatory Support","FSSAI, AYUSH, WHO-GMP documentation, export dossiers and product registration assistance."),
+]
+
+WHY_ITEMS = [
+    ("01","Startup-Friendly MOQs","1,000 units minimum — no warehouse risk for new launches."),
+    ("02","30-Day Delivery","From confirmed PO to dispatch in 30 business days for ready formulations."),
+    ("03","In-House R&D","Dedicated formulation scientists and stability chamber for fast iteration."),
+    ("04","Full Traceability","Every batch has CoA, MSDS, and GMP batch records. Audit-ready."),
+    ("05","200+ Ready Formulations","Proven, market-tested formulas across 10 product categories."),
+    ("06","End-to-End Service","From concept and formulation through manufacturing, labelling and dispatch."),
+]
+
+INFRA_STATS = [
+    ("10,000","sq ft Facility"),
+    ("200+","Ready Formulations"),
+    ("5+","Dosage Forms"),
+    ("30","Day Avg Lead Time"),
+]
+
+CERTS = ["WHO-GMP","FSSAI","ISO 9001:2015","GMP Schedule M","HALAL","AYUSH GMP","MSME Registered","Make in India"]
 
 CSS = """
-    /* ============================================================
-       BIONIAL LIFESCIENCES — STYLES
-       Capsoft-inspired pharmaceutical blue palette
-    ============================================================ */
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', 'DM Sans', sans-serif; color: #2C2C2C; background: #fff; line-height: 1.6; }
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
 
-    :root {
-        --primary:       #003D7A;
-        --primary-dark:  #002B57;
-        --primary-light: #0054A6;
-        --accent:        #00A99D;
-        --accent-dark:   #008C82;
-        --accent-light:  #00C9BB;
-        --gold:          #F7A800;
-        --gold-light:    #FFC107;
-        --gold-dark:     #E09600;
-        --bg-primary:    #FFFFFF;
-        --bg-alt:        #F8F9FA;
-        --bg-blue:       #EBF5FB;
-        --text-primary:  #2C2C2C;
-        --text-secondary:#666666;
-        --text-muted:    #999999;
-        --dark:          #0D1B2A;
-        --dark-lighter:  #1A2B3F;
-        --border:        #E8E8E8;
-        --shadow:        rgba(0,61,122,0.08);
-        --whatsapp:      #25D366;
-        --radius-sm:     6px;
-        --radius-md:     12px;
-        --radius-lg:     20px;
-        --font:          'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
+/* ===== VARIABLES ===== */
+:root {
+    --primary: #003D7A;
+    --primary-dark: #002B57;
+    --primary-light: #0054A6;
+    --accent: #00A99D;
+    --accent-dark: #007A73;
+    --accent-light: #17BDB3;
+    --gold: #F7A800;
+    --bg: #FFFFFF;
+    --bg-alt: #F8F9FA;
+    --bg-blue: #EFF8FF;
+    --text: #2C2C2C;
+    --text-sec: #555555;
+    --text-muted: #888888;
+    --border: #E5E7EB;
+    --shadow: rgba(0,61,122,0.08);
+    --radius: 12px;
+    --whatsapp: #25D366;
+}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font); font-size: 16px; color: var(--text-primary); background: var(--bg-primary); line-height: 1.6; }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    ul { list-style: none; }
-    button { font-family: var(--font); cursor: pointer; border: none; }
+/* ===== TYPOGRAPHY ===== */
+.section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.section-title { font-size: clamp(1.6rem,3vw,2.3rem); font-weight: 800; color: var(--primary); line-height: 1.25; margin-bottom: 16px; }
+.section-sub { font-size: 1rem; color: var(--text-sec); max-width: 560px; line-height: 1.7; }
+.section-header { text-align: center; margin-bottom: 48px; }
+.section-header .section-sub { margin: 0 auto; }
+section { padding: 80px 0; }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    .section { padding: 80px 0; }
-    .section-alt { background: var(--bg-alt); }
-    .section-dark { background: var(--dark); }
+/* ===== CONTAINER ===== */
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-    .section-label {
-        display: inline-block; font-size: 0.75rem; font-weight: 700;
-        letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);
-        margin-bottom: 12px;
-    }
-    .section-title {
-        font-size: 2rem; font-weight: 700; color: var(--primary); line-height: 1.2;
-        margin-bottom: 16px;
-    }
-    .section-subtitle { font-size: 1rem; color: var(--text-secondary); max-width: 560px; }
+/* ===== NAV ===== */
+.nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 12px 0;
+    transition: background 0.35s, box-shadow 0.35s, padding 0.35s;
+}
+.nav.scrolled {
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    padding: 8px 0;
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.nav-logo { display: flex; align-items: center; }
+.nav-logo-img { height: 64px; width: auto; display: block; }
+.nav-links { display: flex; align-items: center; gap: 8px; }
+.nav-links a { font-size: 0.88rem; font-weight: 600; color: var(--primary); padding: 8px 14px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
+.nav-links a:hover { color: var(--accent); background: rgba(0,169,157,0.06); }
+.nav-cta { background: var(--accent) !important; color: #fff !important; border-radius: 8px !important; padding: 10px 20px !important; }
+.nav-cta:hover { background: var(--accent-dark) !important; }
+.mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.mobile-toggle span { display: block; width: 24px; height: 2px; background: var(--primary); border-radius: 2px; transition: all 0.3s; }
+.mobile-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.mobile-toggle.open span:nth-child(2) { opacity: 0; }
+.mobile-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
-    /* ── BUTTONS ── */
-    .btn {
-        display: inline-flex; align-items: center; gap: 8px;
-        padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 0.92rem;
-        transition: all 0.25s ease; cursor: pointer; text-decoration: none;
-    }
-    .btn-primary { background: var(--accent); color: white; }
-    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,169,157,0.35); }
-    .btn-outline { border: 2px solid rgba(255,255,255,0.6); color: white; }
-    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
-    .btn-outline-dark { border: 2px solid var(--primary); color: var(--primary); }
-    .btn-outline-dark:hover { background: var(--primary); color: white; }
+/* ===== HERO ===== */
+.hero {
+    min-height: 100vh;
+    padding-top: 80px;
+    background: linear-gradient(135deg, #EFF8FF 0%, #FFFFFF 45%, #EFFDF9 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+.hero::before {
+    content: '';
+    position: absolute; width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,169,157,0.10) 0%, transparent 65%);
+    top: -150px; right: -120px; pointer-events: none; z-index: 0;
+}
+.hero::after {
+    content: '';
+    position: absolute; width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,61,122,0.07) 0%, transparent 65%);
+    bottom: -100px; left: -80px; pointer-events: none; z-index: 0;
+}
+.hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    align-items: center; position: relative; z-index: 1; padding: 60px 0 100px;
+}
+.hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.9); border: 1.5px solid var(--accent);
+    border-radius: 50px; padding: 6px 16px; margin-bottom: 24px;
+    font-size: 0.78rem; font-weight: 700; color: var(--primary); letter-spacing: 0.05em;
+}
+.hero-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.hero-title { font-size: clamp(2rem,4vw,3rem); font-weight: 900; color: var(--primary); line-height: 1.15; margin-bottom: 16px; }
+.hero-title span { color: var(--accent); }
+.hero-sub { font-size: 1.1rem; font-weight: 600; color: var(--accent); margin-bottom: 16px; }
+.hero-desc { font-size: 1rem; color: var(--text-sec); max-width: 480px; line-height: 1.7; margin-bottom: 32px; }
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; border: none; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,61,122,0.25); }
+.btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+.btn-outline:hover { background: var(--primary); color: #fff; }
+.btn-accent { background: var(--accent); color: #fff; }
+.btn-accent:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,169,157,0.3); }
+.hero-img-wrap { position: relative; border-radius: 20px; overflow: hidden; }
+.hero-img-wrap img { width: 100%; height: 460px; object-fit: cover; border-radius: 20px; display: block; }
+.hero-float-badge {
+    position: absolute; bottom: 24px; left: 24px; right: 24px;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-radius: 12px; padding: 14px 18px;
+    display: flex; gap: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+.hero-float-item { display: flex; flex-direction: column; align-items: center; }
+.hero-float-val { font-size: 1.1rem; font-weight: 800; color: var(--primary); }
+.hero-float-lbl { font-size: 0.68rem; color: var(--text-muted); text-align: center; }
 
-    /* ── NAV ── */
-    .nav {
-        position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-        padding: 16px 0;
-        background: transparent;
-        transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
-    }
-    .nav.scrolled {
-        background: rgba(255,255,255,0.97);
-        backdrop-filter: blur(16px);
-        box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-        padding: 10px 0;
-    }
-    .nav-inner {
-        display: flex; align-items: center; justify-content: space-between;
-    }
-    .logo-pill {
-        border-radius: 8px; padding: 5px 10px;
-        display: inline-flex; align-items: center;
-    }
-    .logo-pill img { height: 54px; width: auto; display: block; }
-    .nav-links {
-        display: flex; align-items: center; gap: 32px;
-    }
-    .nav-links a {
-        font-size: 0.88rem; font-weight: 500; color: rgba(255,255,255,0.85);
-        transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
-    .nav.scrolled .nav-links a { color: var(--text-primary); }
-    .nav.scrolled .nav-links a:hover { color: var(--accent); }
-    .nav-cta {
-        padding: 9px 22px; background: var(--accent); color: white !important;
-        border-radius: 50px; font-size: 0.85rem; font-weight: 600;
-        transition: all 0.2s;
-    }
-    .nav-cta:hover { background: var(--accent-dark) !important; transform: translateY(-1px); }
-    .hamburger {
-        display: none; flex-direction: column; gap: 5px; cursor: pointer;
-        padding: 4px; background: none; border: none;
-    }
-    .hamburger span { display: block; width: 24px; height: 2px; background: white; border-radius: 2px; transition: all 0.3s; }
-    .nav.scrolled .hamburger span { background: var(--dark); }
-    .mobile-menu {
-        display: none; position: absolute; top: 100%; left: 0; right: 0;
-        background: white; box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-        padding: 16px 24px 24px; flex-direction: column; gap: 0;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-        padding: 12px 0; font-size: 0.95rem; font-weight: 500; color: var(--text-primary);
-        border-bottom: 1px solid var(--border);
-    }
-    .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu .nav-cta { margin-top: 16px; text-align: center; color: white !important; }
+/* Hero stats row */
+.hero-stats {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.95); border-top: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+}
+.hero-stats-inner { display: flex; }
+.hero-stat { flex: 1; padding: 20px 0; text-align: center; border-right: 1px solid var(--border); }
+.hero-stat:last-child { border-right: none; }
+.stat-val { font-size: 1.6rem; font-weight: 900; color: var(--primary); display: block; }
+.stat-lbl { font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 2px; }
 
-    /* ── HERO ── */
-    .hero {
-        min-height: 100vh; position: relative;
-        background: linear-gradient(135deg, #0D1B2A 0%, #003D7A 55%, #005B7F 100%);
-        display: flex; align-items: center; padding-top: 80px;
-        overflow: hidden;
-    }
-    .hero-bg-img {
-        position: absolute; inset: 0;
-        background-image: url('https://images.unsplash.com/photo-1631549916768-4f5a4a11beac?w=1920&q=80');
-        background-size: cover; background-position: center;
-        opacity: 0.07;
-    }
-    .hero-content { position: relative; z-index: 1; max-width: 740px; padding: 60px 0; }
-    .hero-badge {
-        display: inline-flex; align-items: center; gap: 8px;
-        background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-        border-radius: 50px; padding: 6px 16px; font-size: 0.8rem; font-weight: 600;
-        color: rgba(255,255,255,0.9); letter-spacing: 0.03em; margin-bottom: 24px;
-    }
-    .hero-badge i { width: 14px; height: 14px; color: var(--gold); }
-    .hero h1 {
-        font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; color: white;
-        line-height: 1.1; margin-bottom: 8px;
-    }
-    .hero-subline {
-        font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: var(--accent);
-        margin-bottom: 20px;
-    }
-    .hero-desc { font-size: 1.05rem; color: rgba(255,255,255,0.75); max-width: 580px; margin-bottom: 36px; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-stats {
-        display: grid; grid-template-columns: repeat(4,1fr);
-        border-top: 1px solid rgba(255,255,255,0.12);
-        margin-top: 60px; padding-top: 32px; gap: 0;
-    }
-    .hero-stat { padding-right: 24px; border-right: 1px solid rgba(255,255,255,0.12); }
-    .hero-stat:last-child { border-right: none; }
-    .hero-stat-num {
-        font-size: 2.2rem; font-weight: 800; color: white; line-height: 1;
-        font-variant-numeric: tabular-nums;
-    }
-    .hero-stat-num .accent { color: var(--accent); }
-    .hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-top: 4px; font-weight: 500; }
+/* ===== CERT STRIP ===== */
+.cert-strip { background: var(--primary-dark); padding: 10px 0; overflow: hidden; }
+.cert-track { display: inline-flex; gap: 40px; animation: certScroll 25s linear infinite; white-space: nowrap; }
+.cert-track:hover { animation-play-state: paused; }
+.cert-badge { color: rgba(255,255,255,0.82); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 4px 14px; white-space: nowrap; }
+@keyframes certScroll { from { transform: translateX(0); } to { transform: translateX(-33.333%); } }
 
-    /* ── TRUST STRIP ── */
-    .trust-strip { background: white; border-bottom: 1px solid var(--border); padding: 28px 0; }
-    .trust-strip-inner {
-        display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
-        justify-content: center;
-    }
-    .trust-badge {
-        display: flex; align-items: center; gap: 10px;
-        background: var(--bg-alt); border: 1px solid var(--border);
-        border-radius: 50px; padding: 8px 18px;
-        transition: box-shadow 0.2s;
-    }
-    .trust-badge:hover { box-shadow: 0 4px 12px var(--shadow); }
-    .trust-badge-icon {
-        width: 30px; height: 30px; border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 0.65rem; font-weight: 800; color: white; flex-shrink: 0;
-    }
-    .trust-badge-icon.green  { background: #00A651; }
-    .trust-badge-icon.blue   { background: #1565C0; }
-    .trust-badge-icon.orange { background: #E65100; }
-    .trust-badge-icon.purple { background: #6A1B9A; }
-    .trust-badge-icon.teal   { background: var(--accent); }
-    .trust-badge-icon.gold   { background: var(--gold-dark); }
-    .trust-badge-label { font-size: 0.78rem; font-weight: 700; color: var(--primary); }
-    .trust-badge-sub   { font-size: 0.68rem; color: var(--text-muted); line-height: 1.2; }
+/* ===== ABOUT ===== */
+.about { background: var(--bg); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.about-img-wrap { position: relative; border-radius: 20px; overflow: hidden; }
+.about-img-wrap img { width: 100%; height: 440px; object-fit: cover; border-radius: 20px; display: block; }
+.about-loc-card { position: absolute; bottom: 24px; left: 24px; background: rgba(255,255,255,0.93); backdrop-filter: blur(12px); border-radius: 12px; padding: 14px 18px; box-shadow: 0 8px 28px rgba(0,0,0,0.12); }
+.about-loc-card p { font-size: 0.82rem; color: var(--text-sec); margin-top: 4px; }
+.about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+.about-hl { display: flex; align-items: flex-start; gap: 12px; background: var(--bg-alt); border-radius: 12px; padding: 16px; }
+.about-hl-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(0,169,157,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent); }
+.about-hl-icon svg { width: 20px; height: 20px; }
+.about-hl-title { font-weight: 700; font-size: 0.88rem; color: var(--primary); }
+.about-hl-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
 
-    /* ── ABOUT ── */
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-    .about-img-wrap { position: relative; }
-    .about-img-wrap img { border-radius: var(--radius-lg); width: 100%; aspect-ratio: 4/3; object-fit: cover; }
-    .about-loc-card {
-        position: absolute; bottom: -20px; left: 20px;
-        background: white; border-radius: var(--radius-md); padding: 14px 18px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-        display: flex; align-items: center; gap: 10px;
-    }
-    .about-loc-card i { color: var(--accent); width: 18px; height: 18px; }
-    .about-loc-text { font-size: 0.8rem; font-weight: 600; color: var(--primary); line-height: 1.3; }
-    .about-text { padding-bottom: 16px; }
-    .about-desc { color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px; }
-    .about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
-    .highlight-card {
-        background: var(--bg-alt); border: 1px solid var(--border);
-        border-radius: var(--radius-md); padding: 18px;
-        display: flex; align-items: flex-start; gap: 12px;
-        transition: all 0.25s;
-    }
-    .highlight-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px var(--shadow); }
-    .highlight-icon {
-        width: 38px; height: 38px; border-radius: var(--radius-sm);
-        background: rgba(0,169,157,0.1); display: flex; align-items: center;
-        justify-content: center; flex-shrink: 0;
-    }
-    .highlight-icon i { width: 18px; height: 18px; color: var(--accent); }
-    .highlight-text h4 { font-size: 0.85rem; font-weight: 700; color: var(--primary); }
-    .highlight-text p  { font-size: 0.78rem; color: var(--text-secondary); margin-top: 2px; }
+/* ===== SERVICES ===== */
+.services { background: var(--bg-alt); }
+.services-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+.service-card { background: var(--bg); border-radius: 16px; padding: 32px 24px; border: 1.5px solid var(--border); transition: all 0.25s; }
+.service-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 40px var(--shadow); }
+.service-icon { width: 52px; height: 52px; border-radius: 14px; background: rgba(0,169,157,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--accent); }
+.service-icon svg { width: 24px; height: 24px; }
+.service-card h3 { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+.service-card p { font-size: 0.88rem; color: var(--text-sec); line-height: 1.6; }
 
-    /* ── SERVICES ── */
-    .services-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; margin-top: 48px; }
-    .service-card {
-        background: white; border: 1px solid var(--border); border-radius: var(--radius-md);
-        padding: 28px 24px; position: relative; overflow: hidden;
-        transition: all 0.25s ease;
-    }
-    .service-card::before {
-        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-        background: var(--accent); transform: scaleX(0); transform-origin: left;
-        transition: transform 0.3s ease;
-    }
-    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px var(--shadow); }
-    .service-card:hover::before { transform: scaleX(1); }
-    .service-icon { width: 48px; height: 48px; border-radius: var(--radius-sm); background: rgba(0,61,122,0.06); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
-    .service-icon i { width: 22px; height: 22px; color: var(--primary); }
-    .service-card h3 { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
-    .service-card p  { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+/* ===== PRODUCT TABS ===== */
+.product-range { background: var(--bg); }
+.tab-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; border-bottom: 2px solid var(--border); padding-bottom: 0; }
+.tab-btn { background: none; border: none; cursor: pointer; padding: 12px 20px; font-size: 0.88rem; font-weight: 600; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+.tab-btn:hover { color: var(--primary); }
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+.product-panel { display: none; }
+.product-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.product-panel img { width: 100%; height: 340px; object-fit: cover; border-radius: 16px; display: block; }
+.product-panel h3 { font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-bottom: 12px; }
+.product-panel p { color: var(--text-sec); line-height: 1.7; margin-bottom: 20px; }
+.product-features { display: flex; flex-wrap: wrap; gap: 8px; }
+.product-feature { display: flex; align-items: center; gap: 6px; background: rgba(0,169,157,0.08); color: var(--accent-dark); border-radius: 6px; padding: 6px 12px; font-size: 0.82rem; font-weight: 600; }
+.product-feature::before { content: '✓'; font-weight: 900; }
 
-    /* ── PRODUCT TABS ── */
-    .product-tab-nav {
-        display: flex; gap: 0; border-bottom: 2px solid var(--border);
-        margin-bottom: 40px; overflow-x: auto;
-        scrollbar-width: none;
-    }
-    .product-tab-nav::-webkit-scrollbar { display: none; }
-    .product-tab-btn {
-        padding: 14px 22px; font-size: 0.88rem; font-weight: 600;
-        color: var(--text-secondary); background: none; border: none;
-        border-bottom: 2px solid transparent; margin-bottom: -2px;
-        cursor: pointer; white-space: nowrap; transition: all 0.2s;
-        display: flex; align-items: center; gap: 8px;
-    }
-    .product-tab-btn i { width: 15px; height: 15px; }
-    .product-tab-btn:hover { color: var(--primary); }
-    .product-tab-btn.active { color: var(--primary); border-bottom-color: var(--accent); }
-    .product-panel { display: none; }
-    .product-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-    .product-panel-img { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3; }
-    .product-panel-img img { width: 100%; height: 100%; object-fit: cover; }
-    .product-panel-content h3 { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
-    .product-panel-content p  { color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px; }
-    .product-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .product-tag {
-        font-size: 0.76rem; font-weight: 600; color: var(--primary);
-        background: var(--bg-blue); border-radius: 50px; padding: 4px 14px;
-        border: 1px solid rgba(0,61,122,0.12);
-    }
-    .product-panel-link {
-        display: inline-flex; align-items: center; gap: 6px;
-        font-size: 0.88rem; font-weight: 600; color: var(--accent);
-        transition: gap 0.2s;
-    }
-    .product-panel-link:hover { gap: 10px; }
+/* ===== FORMULATIONS ===== */
+.formulations { background: var(--bg-alt); }
+.cat-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+.cat-btn { background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-sec); cursor: pointer; transition: all 0.2s; }
+.cat-btn:hover { border-color: var(--accent); color: var(--accent); }
+.cat-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+#form-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 24px; }
+.form-card { background: var(--bg); border-radius: 12px; padding: 18px; border: 1.5px solid var(--border); transition: all 0.2s; }
+.form-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px var(--shadow); }
+.form-code { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.08em; margin-bottom: 6px; }
+.form-name { font-size: 0.88rem; font-weight: 700; color: var(--primary); line-height: 1.4; margin-bottom: 10px; }
+.form-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 3px 9px; border-radius: 4px; }
+.form-tag.Tablets { background: #EBF5FF; color: #1a56db; }
+.form-tag.Capsules { background: #EFFDF9; color: #007A73; }
+.form-tag.Softgels { background: #F5F0FF; color: #6b21a8; }
+.form-tag.Syrup { background: #FFF8E1; color: #b45309; }
+.form-tag.Powder { background: #FFF1E6; color: #c2410c; }
+.form-tag.Juice { background: #FFF1F1; color: #b91c1c; }
+.form-tag.Semi-Solid { background: #E8FFF3; color: #166534; }
+.form-tag.Suspension { background: #F1F5F9; color: #475569; }
+.form-view-all { text-align: center; }
+.form-view-all button { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 10px; padding: 12px 32px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
+.form-view-all button:hover { background: var(--primary); color: #fff; }
 
-    /* ── FORMULATIONS ── */
-    .form-filter-nav {
-        display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px;
-    }
-    .form-filter-btn {
-        padding: 7px 18px; border-radius: 50px; font-size: 0.82rem; font-weight: 600;
-        cursor: pointer; transition: all 0.2s; background: var(--bg-alt);
-        border: 1px solid var(--border); color: var(--text-secondary);
-    }
-    .form-filter-btn.active, .form-filter-btn:hover {
-        background: var(--primary); color: white; border-color: var(--primary);
-    }
-    .form-filter-btn .form-count { opacity: 0.7; font-size: 0.72rem; margin-left: 4px; }
-    .formulations-grid {
-        display: grid; grid-template-columns: repeat(3,1fr); gap: 12px;
-        min-height: 200px;
-    }
-    .form-card {
-        background: white; border: 1px solid var(--border); border-radius: var(--radius-md);
-        padding: 14px 16px; display: flex; justify-content: space-between;
-        align-items: flex-start; gap: 10px;
-        transition: all 0.2s ease;
-    }
-    .form-card:hover { border-color: var(--accent); box-shadow: 0 3px 12px var(--shadow); }
-    .form-card-body { flex: 1; min-width: 0; }
-    .form-card-name { font-size: 0.85rem; font-weight: 600; color: var(--primary); line-height: 1.3; margin-bottom: 4px; }
-    .form-card-comp { font-size: 0.72rem; color: var(--text-muted); line-height: 1.4; }
-    .form-tag {
-        font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
-        letter-spacing: 0.05em; padding: 3px 10px; border-radius: 50px;
-        white-space: nowrap; flex-shrink: 0;
-    }
-    .form-tag.tablets   { background: rgba(0,61,122,0.1);   color: #003D7A; }
-    .form-tag.capsules  { background: rgba(0,169,157,0.1); color: #008C82; }
-    .form-tag.syrups    { background: rgba(247,168,0,0.12); color: #B37A00; }
-    .form-tag.powders   { background: rgba(30,100,200,0.1); color: #1565C0; }
-    .form-tag.sachets   { background: rgba(130,50,200,0.1); color: #6A1B9A; }
-    .form-tag.gummies   { background: rgba(233,30,140,0.1); color: #B0004C; }
-    .form-tag.ayurvedic { background: rgba(0,166,81,0.1);   color: #1B5E20; }
-    .form-viewall-wrap  { text-align: center; margin-top: 28px; }
-    .form-viewall-btn {
-        display: inline-flex; align-items: center; gap: 6px;
-        padding: 10px 28px; border-radius: 50px; background: var(--bg-alt);
-        border: 1px solid var(--border); font-size: 0.85rem; font-weight: 600;
-        color: var(--primary); cursor: pointer; transition: all 0.2s;
-    }
-    .form-viewall-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+/* ===== HEALTH SEGMENTS ===== */
+.health-segs { background: var(--bg); }
+.health-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.health-pill { display: flex; align-items: center; gap: 8px; background: var(--bg-alt); border: 1.5px solid var(--border); border-radius: 50px; padding: 10px 20px; cursor: pointer; font-size: 0.85rem; font-weight: 600; color: var(--text-sec); transition: all 0.2s; }
+.health-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,169,157,0.06); }
+.health-pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.health-pill svg { width: 16px; height: 16px; }
 
-    /* ── HEALTH SEGMENTS ── */
-    .health-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
-    .health-pill {
-        display: flex; align-items: center; gap: 8px;
-        padding: 8px 18px; border-radius: 50px; cursor: pointer;
-        border: 1.5px solid var(--border); background: white;
-        font-size: 0.82rem; font-weight: 600; color: var(--text-secondary);
-        transition: all 0.2s;
-    }
-    .health-pill-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .health-pill.active, .health-pill:hover {
-        border-color: transparent; color: white; transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
+/* ===== PROCESS ===== */
+.process { background: var(--primary-dark); }
+.process .section-label { color: var(--accent-light); }
+.process .section-title { color: #fff; }
+.process .section-sub { color: rgba(255,255,255,0.65); }
+.process-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.process-step { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 28px 24px; }
+.process-step-num { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 900; font-size: 0.85rem; margin-bottom: 16px; }
+.process-step-day { font-size: 0.7rem; font-weight: 700; color: var(--accent-light); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+.process-step h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+.process-step p { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
 
-    /* ── PROCESS ── */
-    .process-steps {
-        display: grid; grid-template-columns: repeat(6,1fr); gap: 0;
-        position: relative; margin-top: 48px;
-    }
-    .process-step { text-align: center; padding: 0 12px; position: relative; }
-    .process-step::after {
-        content: ''; position: absolute; top: 23px; left: 50%; right: -50%;
-        height: 2px; background: rgba(255,255,255,0.15);
-        border-top: 2px dashed rgba(255,255,255,0.2);
-    }
-    .process-step:last-child::after { display: none; }
-    .process-num {
-        width: 48px; height: 48px; border-radius: 50%;
-        background: var(--accent); color: white; font-weight: 700; font-size: 1.1rem;
-        display: flex; align-items: center; justify-content: center;
-        margin: 0 auto 16px; position: relative; z-index: 1;
-    }
-    .process-day {
-        display: inline-block; font-size: 0.68rem; font-weight: 700;
-        color: var(--accent); background: rgba(0,169,157,0.15);
-        border-radius: 50px; padding: 2px 10px; margin-bottom: 10px;
-        letter-spacing: 0.04em; text-transform: uppercase;
-    }
-    .process-title { font-size: 0.88rem; font-weight: 700; color: white; margin-bottom: 8px; line-height: 1.3; }
-    .process-desc  { font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+/* ===== INFRASTRUCTURE ===== */
+.infra { background: var(--bg); }
+.infra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.infra-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+.infra-stat { background: var(--bg-alt); border-radius: 14px; padding: 24px; text-align: center; border: 1.5px solid var(--border); }
+.infra-stat-val { font-size: 2rem; font-weight: 900; color: var(--primary); display: block; }
+.infra-stat-lbl { font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 4px; }
+.infra-checklist { display: flex; flex-direction: column; gap: 12px; }
+.infra-check { display: flex; align-items: flex-start; gap: 12px; font-size: 0.9rem; color: var(--text-sec); }
+.infra-check-icon { color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+.infra-img { width: 100%; height: 400px; object-fit: cover; border-radius: 20px; display: block; }
 
-    /* ── INFRASTRUCTURE ── */
-    .infra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-    .infra-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
-    .infra-stat-card {
-        background: var(--bg-alt); border: 1px solid var(--border);
-        border-radius: var(--radius-md); padding: 18px;
-    }
-    .infra-stat-num { font-size: 1.6rem; font-weight: 800; color: var(--primary); }
-    .infra-stat-unit { font-size: 0.8rem; color: var(--accent); font-weight: 700; }
-    .infra-stat-label { font-size: 0.78rem; color: var(--text-secondary); margin-top: 4px; }
-    .infra-features { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
-    .infra-feature {
-        display: flex; align-items: center; gap: 10px;
-        font-size: 0.85rem; color: var(--text-secondary);
-    }
-    .infra-feature i { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
-    .infra-img { border-radius: var(--radius-lg); overflow: hidden; }
-    .infra-img img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+/* ===== WHY BIONIAL ===== */
+.why { background: var(--bg-alt); }
+.why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.why-card { background: var(--bg); border-radius: 16px; padding: 32px 24px; border: 1.5px solid var(--border); position: relative; overflow: hidden; }
+.why-card::before { content: attr(data-num); position: absolute; top: -10px; right: 16px; font-size: 4rem; font-weight: 900; color: rgba(0,61,122,0.04); line-height: 1; }
+.why-card h3 { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+.why-card p { font-size: 0.88rem; color: var(--text-sec); line-height: 1.6; }
 
-    /* ── WHY BIONIAL ── */
-    .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 48px; }
-    .why-card {
-        background: white; border: 1px solid var(--border); border-radius: var(--radius-md);
-        padding: 28px 24px; transition: all 0.25s;
-    }
-    .why-card:hover { box-shadow: 0 8px 32px var(--shadow); transform: translateY(-2px); }
-    .why-num { font-size: 3rem; font-weight: 800; color: var(--border); line-height: 1; margin-bottom: 12px; }
-    .why-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-    .why-card p  { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
+/* ===== FAQ ===== */
+.faq { background: var(--bg); }
+.faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item { border: 1.5px solid var(--border); border-radius: 12px; overflow: hidden; }
+.faq-q { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px; cursor: pointer; font-weight: 700; font-size: 0.95rem; color: var(--primary); background: var(--bg); }
+.faq-q svg { flex-shrink: 0; width: 20px; height: 20px; transition: transform 0.3s; }
+.faq-item.open .faq-q svg { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: var(--bg-alt); }
+.faq-item.open .faq-a { max-height: 200px; }
+.faq-a p { padding: 16px 22px; font-size: 0.9rem; color: var(--text-sec); line-height: 1.7; }
 
-    /* ── FAQ ── */
-    .faq-list { display: flex; flex-direction: column; gap: 0; margin-top: 40px; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
-    .faq-item { border-bottom: 1px solid var(--border); }
-    .faq-item:last-child { border-bottom: none; }
-    .faq-question {
-        width: 100%; display: flex; justify-content: space-between; align-items: center;
-        padding: 20px 24px; background: white; font-size: 0.95rem; font-weight: 600;
-        color: var(--primary); cursor: pointer; text-align: left; gap: 16px;
-        transition: background 0.2s;
-    }
-    .faq-question:hover { background: var(--bg-alt); }
-    .faq-question.open { background: var(--bg-alt); }
-    .faq-icon { width: 20px; height: 20px; flex-shrink: 0; color: var(--accent); transition: transform 0.3s; }
-    .faq-question.open .faq-icon { transform: rotate(45deg); }
-    .faq-answer {
-        max-height: 0; overflow: hidden;
-        transition: max-height 0.35s ease, padding 0.35s ease;
-        padding: 0 24px; background: var(--bg-alt);
-        font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7;
-    }
-    .faq-answer.open { max-height: 200px; padding: 16px 24px 20px; }
+/* ===== CONTACT ===== */
+.contact { background: var(--bg-alt); }
+.contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; }
+.contact-form { background: var(--bg); border-radius: 20px; padding: 40px; box-shadow: 0 4px 24px var(--shadow); }
+.contact-form h3 { font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 24px; }
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; font-size: 0.82rem; font-weight: 700; color: var(--text-sec); margin-bottom: 6px; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--bg-alt); border: 1.5px solid var(--border); border-radius: 10px; padding: 12px 16px; font-size: 0.9rem; color: var(--text); outline: none; transition: border-color 0.2s; font-family: inherit; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-submit { width: 100%; background: var(--accent); color: #fff; border: none; border-radius: 10px; padding: 14px; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+.form-submit:hover { background: var(--accent-dark); }
+.contact-info h3 { font-size: 1.2rem; font-weight: 800; color: var(--primary); margin-bottom: 24px; }
+.contact-item { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+.contact-item-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(0,169,157,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent); }
+.contact-item-icon svg { width: 20px; height: 20px; }
+.contact-item-title { font-weight: 700; font-size: 0.88rem; color: var(--primary); }
+.contact-item-val { font-size: 0.88rem; color: var(--text-sec); margin-top: 2px; }
+.map-wrap { margin-top: 28px; border-radius: 16px; overflow: hidden; }
+.map-wrap iframe { width: 100%; height: 200px; border: none; display: block; }
 
-    /* ── CONTACT ── */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-    .contact-form-wrap {
-        background: var(--bg-alt); border-radius: var(--radius-lg); padding: 36px;
-    }
-    .contact-form-wrap h3 { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 24px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-    .form-group label { font-size: 0.8rem; font-weight: 600; color: var(--primary); }
-    .form-group input, .form-group select, .form-group textarea {
-        border: 1.5px solid var(--border); border-radius: var(--radius-sm);
-        padding: 10px 14px; font-family: var(--font); font-size: 0.88rem;
-        color: var(--text-primary); background: white;
-        transition: border-color 0.2s; outline: none;
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-        border-color: var(--accent);
-    }
-    .form-group textarea { resize: vertical; min-height: 100px; }
-    .form-submit {
-        width: 100%; padding: 13px; background: var(--accent); color: white;
-        border-radius: 50px; font-weight: 700; font-size: 0.95rem; cursor: pointer;
-        border: none; font-family: var(--font); transition: all 0.2s;
-        display: flex; align-items: center; justify-content: center; gap: 8px;
-    }
-    .form-submit:hover { background: var(--accent-dark); }
-    .contact-info h3 { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 24px; }
-    .contact-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 22px; }
-    .contact-item-icon {
-        width: 42px; height: 42px; border-radius: var(--radius-sm);
-        background: rgba(0,169,157,0.1); display: flex; align-items: center;
-        justify-content: center; flex-shrink: 0;
-    }
-    .contact-item-icon i { width: 18px; height: 18px; color: var(--accent); }
-    .contact-item-label { font-size: 0.73rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
-    .contact-item-value { font-size: 0.92rem; color: var(--text-primary); font-weight: 500; line-height: 1.5; }
-    .contact-item-value a { color: var(--accent); }
-    .contact-hours { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px 20px; margin-top: 24px; }
-    .contact-hours h4 { font-size: 0.82rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-    .contact-hours p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; }
+/* ===== FOOTER ===== */
+.footer { background: var(--primary-dark); color: rgba(255,255,255,0.75); padding: 60px 0 0; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+.footer-brand-desc { font-size: 0.85rem; line-height: 1.7; margin-top: 16px; color: rgba(255,255,255,0.55); }
+.footer h4 { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.45); margin-bottom: 16px; }
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 0.88rem; color: rgba(255,255,255,0.65); transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent-light); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.footer-bottom span { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+.footer-certs { display: flex; gap: 8px; flex-wrap: wrap; }
+.footer-cert { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; padding: 4px 10px; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; color: rgba(255,255,255,0.5); }
 
-    /* ── FOOTER ── */
-    .footer { background: var(--dark); padding: 64px 0 0; }
-    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; }
-    .footer-logo-pill {
-        display: inline-flex; align-items: center; margin-bottom: 16px;
-    }
-    .footer-logo-pill img { height: 54px; filter: brightness(0) invert(1); }
-    .footer-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
-    .footer-col h4 { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 18px; }
-    .footer-links li + li { margin-top: 10px; }
-    .footer-links a { font-size: 0.85rem; color: rgba(255,255,255,0.55); transition: color 0.2s; }
-    .footer-links a:hover { color: var(--accent); }
-    .footer-social { display: flex; gap: 12px; margin-top: 20px; }
-    .footer-social a {
-        width: 36px; height: 36px; border-radius: 50%;
-        background: rgba(255,255,255,0.08); display: flex; align-items: center;
-        justify-content: center; transition: background 0.2s;
-    }
-    .footer-social a:hover { background: var(--accent); }
-    .footer-social i { width: 16px; height: 16px; color: rgba(255,255,255,0.7); }
-    .footer-bottom {
-        border-top: 1px solid rgba(255,255,255,0.06);
-        padding: 20px 0; display: flex; align-items: center;
-        justify-content: space-between; flex-wrap: wrap; gap: 16px;
-    }
-    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
-    .footer-certs { display: flex; gap: 10px; flex-wrap: wrap; }
-    .footer-cert {
-        font-size: 0.65rem; font-weight: 700; color: rgba(255,255,255,0.4);
-        background: rgba(255,255,255,0.05); border-radius: 50px;
-        padding: 3px 12px; border: 1px solid rgba(255,255,255,0.08);
-    }
+/* ===== FLOATING ELEMENTS ===== */
+.whatsapp-fab { position: fixed; bottom: 24px; right: 24px; z-index: 990; width: 56px; height: 56px; border-radius: 50%; background: var(--whatsapp); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.2s; }
+.whatsapp-fab:hover { transform: scale(1.08); }
+.whatsapp-fab svg { width: 28px; height: 28px; color: #fff; }
+.mobile-cta-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 995; background: var(--bg); border-top: 1px solid var(--border); }
+.mcb-inner { display: grid; grid-template-columns: repeat(4,1fr); }
+.mcb-item { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px; font-size: 0.65rem; font-weight: 700; color: var(--text-sec); text-decoration: none; gap: 4px; border-right: 1px solid var(--border); transition: color 0.2s; }
+.mcb-item:last-child { border-right: none; }
+.mcb-item svg { width: 20px; height: 20px; }
+.mcb-item.mcb-quote { background: var(--accent); color: #fff; }
+.mcb-item.mcb-wa { color: var(--whatsapp); }
 
-    /* ── WHATSAPP FAB ── */
-    .wa-fab {
-        position: fixed; bottom: 88px; right: 24px; z-index: 997;
-        width: 56px; height: 56px; border-radius: 50%;
-        background: var(--whatsapp); display: flex; align-items: center; justify-content: center;
-        box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .wa-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
-    .wa-fab i { width: 26px; height: 26px; color: white; }
+/* ===== ANIMATIONS ===== */
+.animate-on-scroll { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── FLOATING CTA BAR (mobile) ── */
-    .floating-cta { display: none; }
-    @media (max-width: 768px) {
-        .floating-cta {
-            display: flex; position: fixed; bottom: 0; left: 0; right: 0;
-            z-index: 998; border-top: 1px solid rgba(0,0,0,0.1);
-        }
-        body { padding-bottom: 54px; }
-        .wa-fab { bottom: 70px; }
-    }
-    .fcta-phone, .fcta-whatsapp, .fcta-email {
-        flex: 1; display: flex; align-items: center; justify-content: center;
-        gap: 6px; padding: 13px 6px; font-size: 0.8rem; font-weight: 600;
-        color: white; text-decoration: none; transition: filter 0.2s;
-    }
-    .fcta-phone:hover, .fcta-whatsapp:hover, .fcta-email:hover { filter: brightness(0.9); }
-    .fcta-phone     { background: var(--primary); }
-    .fcta-whatsapp  { background: var(--whatsapp); }
-    .fcta-email     { background: var(--accent-dark); }
-    .fcta-phone i, .fcta-whatsapp i, .fcta-email i { width: 16px; height: 16px; }
-
-    /* ── ANIMATE ON SCROLL ── */
-    .aos { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
-    .aos.visible { opacity: 1; transform: none; }
-    .aos-delay-1 { transition-delay: 0.1s; }
-    .aos-delay-2 { transition-delay: 0.2s; }
-    .aos-delay-3 { transition-delay: 0.3s; }
-    .aos-delay-4 { transition-delay: 0.4s; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-        .services-grid { grid-template-columns: repeat(2,1fr); }
-        .footer-grid   { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 768px) {
-        .section { padding: 56px 0; }
-        .section-title { font-size: 1.6rem; }
-        .hero h1 { font-size: 2rem; }
-        .hero-stats { grid-template-columns: repeat(2,1fr); gap: 20px; }
-        .hero-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; }
-        .hero-stat:nth-child(3), .hero-stat:last-child { border-bottom: none; }
-        .about-grid, .infra-grid, .contact-grid { grid-template-columns: 1fr; }
-        .about-img-wrap { display: none; }
-        .product-panel.active { grid-template-columns: 1fr; }
-        .formulations-grid { grid-template-columns: 1fr 1fr; }
-        .process-steps { grid-template-columns: 1fr 1fr; gap: 24px; }
-        .process-step::after { display: none; }
-        .why-grid { grid-template-columns: 1fr 1fr; }
-        .nav-links { display: none; }
-        .hamburger { display: flex; }
-    }
-    @media (max-width: 480px) {
-        .services-grid, .formulations-grid, .why-grid { grid-template-columns: 1fr; }
-        .form-row { grid-template-columns: 1fr; }
-        .footer-grid { grid-template-columns: 1fr; }
-        .process-steps { grid-template-columns: 1fr; }
-        .hero-stats { grid-template-columns: 1fr 1fr; }
-    }
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2,1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+    .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.98); flex-direction: column; align-items: center; justify-content: center; gap: 20px; z-index: 999; }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 1.1rem; }
+    .mobile-toggle { display: flex; z-index: 1000; }
+    .hero-grid { grid-template-columns: 1fr; padding: 40px 0 80px; }
+    .hero-img-wrap { display: none; }
+    .hero-stats-inner { flex-wrap: wrap; }
+    .hero-stat { min-width: 50%; border-bottom: 1px solid var(--border); }
+    .about-grid, .infra-grid, .contact-grid, .product-panel.active { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    #form-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .whatsapp-fab { display: none; }
+    .mobile-cta-bar { display: block; }
+    body { padding-bottom: 64px; }
+}
+@media (max-width: 480px) {
+    .why-grid { grid-template-columns: 1fr; }
+    #form-grid { grid-template-columns: 1fr; }
+    .hero-ctas { flex-direction: column; }
+    .hero-ctas .btn { width: 100%; justify-content: center; }
+}
 """
 
-def build_product_tab_html(tabs):
-    btns = ""
+def cert_strip_html():
+    badges = CERTS * 3
+    items = "".join(f'<span class="cert-badge">{c}</span>' for c in badges)
+    return f'<div class="cert-strip"><div class="cert-track">{items}</div></div>'
+
+def about_html():
+    return '''
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap animate-on-scroll">
+        <img src="https://images.unsplash.com/photo-1563213126-a4273aed2016?w=800&auto=format" alt="Bionial Lifesciences Facility">
+        <div class="about-loc-card">
+          <strong style="color:var(--primary);font-size:0.9rem;">Mohali, Punjab, India</strong>
+          <p>Plot 459, Sector-82, JLPL Industrial Area</p>
+        </div>
+      </div>
+      <div class="animate-on-scroll">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">Precision Manufacturing for Growing Brands</h2>
+        <p class="section-sub">Bionial Lifesciences is a WHO-GMP certified nutraceutical and Ayurvedic contract manufacturer based in Mohali, Punjab. We partner with D2C brands, pharmacies, wellness startups, and established players to bring products to market — fast, compliantly, and affordably.</p>
+        <div class="about-highlights">
+          <div class="about-hl">
+            <div class="about-hl-icon"><i data-lucide="award"></i></div>
+            <div><div class="about-hl-title">WHO-GMP Certified</div><div class="about-hl-sub">International quality standards</div></div>
+          </div>
+          <div class="about-hl">
+            <div class="about-hl-icon"><i data-lucide="package"></i></div>
+            <div><div class="about-hl-title">Low MOQ</div><div class="about-hl-sub">From 1,000 units per SKU</div></div>
+          </div>
+          <div class="about-hl">
+            <div class="about-hl-icon"><i data-lucide="flask-conical"></i></div>
+            <div><div class="about-hl-title">In-House R&D</div><div class="about-hl-sub">Custom formulation in 10 days</div></div>
+          </div>
+          <div class="about-hl">
+            <div class="about-hl-icon"><i data-lucide="truck"></i></div>
+            <div><div class="about-hl-title">30-Day Delivery</div><div class="about-hl-sub">From PO to dispatch</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>'''
+
+def services_html():
+    cards = ""
+    for icon, title, desc in SERVICES:
+        cards += f'''
+      <div class="service-card animate-on-scroll">
+        <div class="service-icon"><i data-lucide="{icon}"></i></div>
+        <h3>{title}</h3>
+        <p>{desc}</p>
+      </div>'''
+    return f'''
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">End-to-End Manufacturing Services</h2>
+      <p class="section-sub">From formulation to finished product — everything under one roof.</p>
+    </div>
+    <div class="services-grid">{cards}</div>
+  </div>
+</section>'''
+
+def product_tabs_html():
+    tab_btns = ""
     panels = ""
-    for i, tab in enumerate(tabs):
+    for i, t in enumerate(PRODUCT_TABS):
         active = "active" if i == 0 else ""
-        btns += f'<button class="product-tab-btn {active}" data-tab="{tab["id"]}"><i data-lucide="{tab["icon"]}"></i>{tab["label"]}</button>\n'
-        tags_html = "".join(f'<span class="product-tag">{t}</span>' for t in tab["tags"])
-        panels += f"""
-        <div class="product-panel {active}" id="panel-{tab["id"]}">
-            <div class="product-panel-img">
-                <img src="{tab["img"]}" alt="{tab["label"]}" loading="lazy">
-            </div>
-            <div class="product-panel-content">
-                <h3>{tab["label"]}</h3>
-                <p>{tab["desc"]}</p>
-                <div class="product-tags">{tags_html}</div>
-                <a href="{tab["link"]}" class="product-panel-link">View Formulations <i data-lucide="arrow-right"></i></a>
-            </div>
-        </div>"""
-    return btns, panels
+        tab_btns += f'<button class="tab-btn {active}" data-tab="{t["id"]}">{t["label"]}</button>'
+        feats = "".join(f'<span class="product-feature">{f}</span>' for f in t["features"])
+        panels += f'''
+      <div class="product-panel {active}" data-panel="{t["id"]}">
+        <img src="{t["img"]}" alt="{t["label"]}">
+        <div>
+          <h3>{t["label"]}</h3>
+          <p>{t["desc"]}</p>
+          <div class="product-features">{feats}</div>
+          <a href="#contact" class="btn btn-primary" style="margin-top:24px;display:inline-flex;">Get a Quote</a>
+        </div>
+      </div>'''
+    return f'''
+<section class="product-range" id="platform">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <div class="section-label">Dosage Forms</div>
+      <h2 class="section-title">5+ Dosage Forms. One Facility.</h2>
+      <p class="section-sub">Capsules, softgels, tablets, syrups, powders, sachets and Ayurvedic formulations — all under WHO-GMP conditions.</p>
+    </div>
+    <div class="tab-bar">{tab_btns}</div>
+    {panels}
+  </div>
+</section>'''
 
-def build_health_pills_html(segments):
-    html = ""
-    for seg in segments:
-        html += f'''<div class="health-pill" data-health="{seg["id"]}" style="--hc:{seg["color"]}">
-            <span class="health-pill-dot" style="background:{seg["color"]}"></span>{seg["label"]}
-        </div>\n'''
-    return html
+def formulations_html():
+    cat_btns = ""
+    for cid, clabel in CATS:
+        active = "active" if cid == "all" else ""
+        cat_btns += f'<button class="cat-btn {active}" data-cat="{cid}">{clabel}</button>'
+    return f'''
+<section class="formulations" id="catalogue">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <div class="section-label">Formulations Catalogue</div>
+      <h2 class="section-title">200+ Ready-to-Manufacture Formulations</h2>
+      <p class="section-sub">Filter by category or health segment. All formulations are market-tested with available CoA and spec sheets.</p>
+    </div>
+    <div class="cat-tabs">{cat_btns}</div>
+    <div id="form-grid"></div>
+    <div class="form-view-all"><button id="view-all-btn">View All Formulations</button></div>
+  </div>
+</section>'''
 
-def build_filter_tabs_html(cats):
-    html = f'<button class="form-filter-btn active" data-cat="all">All Formulations <span class="form-count">({len(FORMULATIONS)})</span></button>\n'
-    for cat in cats:
-        count = sum(1 for f in FORMULATIONS if f["category"] == cat["id"])
-        html += f'<button class="form-filter-btn" data-cat="{cat["id"]}">{cat["label"]} <span class="form-count">({count})</span></button>\n'
-    return html
+def health_segs_html():
+    pills = ""
+    seen = set()
+    for seg_id, label, icon in HEALTH_SEGS:
+        if seg_id in seen:
+            continue
+        seen.add(seg_id)
+        pills += f'<button class="health-pill" data-health="{seg_id}"><i data-lucide="{icon}"></i>{label}</button>'
+    return f'''
+<section class="health-segs" id="categories">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <div class="section-label">Health Segments</div>
+      <h2 class="section-title">15 Health & Wellness Segments</h2>
+      <p class="section-sub">Click any segment to filter the formulations catalogue by your target health focus.</p>
+    </div>
+    <div class="health-grid">{pills}</div>
+  </div>
+</section>'''
 
-CATS = [
-    {"id":"tablets",   "label":"Tablets"},
-    {"id":"capsules",  "label":"Capsules"},
-    {"id":"syrups",    "label":"Syrups"},
-    {"id":"powders",   "label":"Powders"},
-    {"id":"sachets",   "label":"Sachets"},
-    {"id":"gummies",   "label":"Gummies"},
-    {"id":"ayurvedic", "label":"Ayurvedic"},
-]
+def process_html():
+    steps = ""
+    for i, (day, title, desc) in enumerate(PROCESS_STEPS):
+        steps += f'''
+      <div class="process-step animate-on-scroll">
+        <div class="process-step-num">{i+1:02d}</div>
+        <div class="process-step-day">{day}</div>
+        <h3>{title}</h3>
+        <p>{desc}</p>
+      </div>'''
+    return f'''
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <div class="section-label">Our Process</div>
+      <h2 class="section-title">From Idea to Shelf in 30 Days</h2>
+      <p class="section-sub">A transparent, milestone-driven process so you always know where your order stands.</p>
+    </div>
+    <div class="process-steps">{steps}</div>
+  </div>
+</section>'''
 
-tab_btns, tab_panels = build_product_tab_html(PRODUCT_TABS)
-health_pills = build_health_pills_html(HEALTH_SEGMENTS)
-form_filter_tabs = build_filter_tabs_html(CATS)
-formulations_json = json.dumps(FORMULATIONS, ensure_ascii=False, indent=2)
-health_segments_json = json.dumps(HEALTH_SEGMENTS, ensure_ascii=False, indent=2)
+def infra_html():
+    stat_cards = ""
+    for val, lbl in INFRA_STATS:
+        stat_cards += f'<div class="infra-stat animate-on-scroll"><span class="infra-stat-val">{val}</span><span class="infra-stat-lbl">{lbl}</span></div>'
+    checks = [
+        "Dedicated encapsulation and tablet compression suites",
+        "In-house analytical and microbiological QC lab",
+        "Walk-in stability chambers for long-term studies",
+        "Temperature-controlled warehouse and dispatch bay",
+    ]
+    check_html = ""
+    for c in checks:
+        check_html += f'<div class="infra-check"><span class="infra-check-icon"><i data-lucide="check-circle-2"></i></span>{c}</div>'
+    return f'''
+<section class="infra" id="infrastructure">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <div class="section-label">Infrastructure</div>
+      <h2 class="section-title">10,000 sq ft GMP Facility</h2>
+    </div>
+    <div class="infra-grid">
+      <div>
+        <div class="infra-stats-grid">{stat_cards}</div>
+        <div class="infra-checklist">{check_html}</div>
+        <a href="#contact" class="btn btn-primary" style="margin-top:28px;display:inline-flex;">Request Site Tour</a>
+      </div>
+      <div>
+        <img class="infra-img animate-on-scroll" src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=700&auto=format" alt="Bionial Manufacturing Facility">
+      </div>
+    </div>
+  </div>
+</section>'''
 
-JS = f"""
-    const FORMULATIONS = {formulations_json};
-    const HEALTH_SEGMENTS = {health_segments_json};
+def why_html():
+    cards = ""
+    for item in WHY_ITEMS:
+        cards += f'''
+      <div class="why-card animate-on-scroll" data-num="{item[0]}">
+        <h3>{item[1]}</h3>
+        <p>{item[2]}</p>
+      </div>'''
+    return f'''
+<section class="why">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <div class="section-label">Why Bionial</div>
+      <h2 class="section-title">Built for Brands That Scale</h2>
+    </div>
+    <div class="why-grid">{cards}</div>
+  </div>
+</section>'''
 
-    // ── Nav scroll ──────────────────────────────────────────────
-    const nav = document.querySelector('.nav');
-    function updateNav() {{
-        nav.classList.toggle('scrolled', window.scrollY > 60);
-    }}
-    window.addEventListener('scroll', updateNav, {{passive:true}});
-    updateNav();
+def faq_html():
+    items = ""
+    for q, a in FAQ_ITEMS:
+        items += f'''
+    <div class="faq-item">
+      <div class="faq-q"><span>{q}</span><i data-lucide="chevron-down"></i></div>
+      <div class="faq-a"><p>{a}</p></div>
+    </div>'''
+    return f'''
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list">{items}</div>
+  </div>
+</section>'''
 
-    // ── Mobile menu ─────────────────────────────────────────────
-    const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+def contact_html():
+    return '''
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Request a Quote</h2>
+      <p class="section-sub">Tell us about your product concept and we\'ll respond within 24 hours.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-form animate-on-scroll">
+        <h3>Start Your Project</h3>
+        <form action="https://formspree.io/f/bioniallifesciences@gmail.com" method="POST">
+          <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="Full name" required></div>
+          <div class="form-group"><label>Company / Brand</label><input type="text" name="company" placeholder="Brand or company name"></div>
+          <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required></div>
+          <div class="form-group"><label>Product Category</label>
+            <select name="category">
+              <option value="">Select a category</option>
+              <option>Capsules</option><option>Softgels</option><option>Tablets</option>
+              <option>Syrups</option><option>Powders</option><option>Sachets</option><option>Ayurvedic</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Message</label><textarea name="message" placeholder="Describe your formulation idea, target market, or questions..."></textarea></div>
+          <button type="submit" class="form-submit">Send Enquiry</button>
+        </form>
+      </div>
+      <div class="animate-on-scroll">
+        <h3>Contact Details</h3>
+        <div class="contact-item">
+          <div class="contact-item-icon"><i data-lucide="phone"></i></div>
+          <div><div class="contact-item-title">Phone / WhatsApp</div><div class="contact-item-val"><a href="tel:+919996610619">+91 99966 10619</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><i data-lucide="mail"></i></div>
+          <div><div class="contact-item-title">Email</div><div class="contact-item-val"><a href="mailto:bioniallifesciences@gmail.com">bioniallifesciences@gmail.com</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon"><i data-lucide="map-pin"></i></div>
+          <div><div class="contact-item-title">Address</div><div class="contact-item-val">Plot 459, Sector-82, JLPL Industrial Area, Mohali, Punjab 140308</div></div>
+        </div>
+        <div class="map-wrap">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.5!2d76.73!3d30.71!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sBionial+Lifesciences!5e0!3m2!1sen!2sin!4v1" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>'''
 
-    // ── Smooth scroll ────────────────────────────────────────────
-    document.querySelectorAll('a[href^="#"]').forEach(a => {{
-        a.addEventListener('click', e => {{
-            const target = document.querySelector(a.getAttribute('href'));
-            if (target) {{
-                e.preventDefault();
-                const offset = 80;
-                window.scrollTo({{ top: target.offsetTop - offset, behavior:'smooth' }});
-                if (mobileMenu.classList.contains('open')) mobileMenu.classList.remove('open');
-            }}
-        }});
-    }});
+def footer_html(logo):
+    return f'''
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="{logo}" alt="Bionial Lifesciences" style="height:52px;filter:brightness(0) invert(1);margin-bottom:8px;">
+        <p class="footer-brand-desc">Precision nutraceutical contract manufacturing in Mohali, Punjab. Built for brands that scale — capsules, tablets, syrups, powders and sachets with startup-friendly MOQs and transparent pricing.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#platform">Dosage Forms</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#catalogue">Formulations</a></li>
+          <li><a href="#categories">Health Segments</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#infrastructure">Infrastructure</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="#services">Contract Manufacturing</a></li>
+          <li><a href="#services">Private Labelling</a></li>
+          <li><a href="#services">Custom Formulation</a></li>
+          <li><a href="#services">Regulatory Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li><a href="tel:+919996610619">+91 99966 10619</a></li>
+          <li><a href="mailto:bioniallifesciences@gmail.com">bioniallifesciences@gmail.com</a></li>
+          <li><a href="#contact">Request a Quote</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Bionial Lifesciences Pvt. Ltd. All rights reserved.</span>
+      <div class="footer-certs">
+        <span class="footer-cert">WHO-GMP</span>
+        <span class="footer-cert">FSSAI</span>
+        <span class="footer-cert">ISO 9001</span>
+        <span class="footer-cert">HALAL</span>
+        <span class="footer-cert">AYUSH GMP</span>
+      </div>
+    </div>
+  </div>
+</footer>'''
 
-    // ── Scroll animations ────────────────────────────────────────
-    const observer = new IntersectionObserver((entries) => {{
-        entries.forEach(e => {{ if(e.isIntersecting) e.target.classList.add('visible'); }});
-    }}, {{threshold: 0.1}});
-    document.querySelectorAll('.aos').forEach(el => observer.observe(el));
+def floating_html():
+    return '''
+<a href="https://wa.me/919996610619" class="whatsapp-fab" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <i data-lucide="message-circle"></i>
+</a>
+<div class="mobile-cta-bar">
+  <div class="mcb-inner">
+    <a href="tel:+919996610619" class="mcb-item"><i data-lucide="phone"></i>Call</a>
+    <a href="https://wa.me/919996610619" class="mcb-item mcb-wa" target="_blank" rel="noopener"><i data-lucide="message-circle"></i>WhatsApp</a>
+    <a href="mailto:bioniallifesciences@gmail.com" class="mcb-item"><i data-lucide="mail"></i>Email</a>
+    <a href="#contact" class="mcb-item mcb-quote"><i data-lucide="file-text"></i>Quote</a>
+  </div>
+</div>'''
 
-    // ── Animated counters ────────────────────────────────────────
-    function animateCounter(el, target, suffix) {{
-        const duration = 1800;
-        const start = performance.now();
-        function update(now) {{
-            const progress = Math.min((now - start) / duration, 1);
-            const ease = 1 - Math.pow(1 - progress, 3);
-            const val = Math.round(ease * target);
-            el.textContent = val + suffix;
-            if (progress < 1) requestAnimationFrame(update);
-        }}
-        requestAnimationFrame(update);
-    }}
-    const statsObserver = new IntersectionObserver((entries) => {{
-        entries.forEach(e => {{
-            if (e.isIntersecting && !e.target.dataset.counted) {{
-                e.target.dataset.counted = '1';
-                animateCounter(e.target, parseInt(e.target.dataset.target), e.target.dataset.suffix || '');
-            }}
-        }});
-    }}, {{threshold: 0.5}});
-    document.querySelectorAll('[data-target]').forEach(el => statsObserver.observe(el));
+# ─── JS ──────────────────────────────────────────────────────────────────────
+import json as _json
+FMLS_JSON = _json.dumps(FORMULATIONS, ensure_ascii=False)
 
-    // ── Product tabs ─────────────────────────────────────────────
-    document.querySelectorAll('.product-tab-btn').forEach(btn => {{
-        btn.addEventListener('click', () => {{
-            const tab = btn.dataset.tab;
-            document.querySelectorAll('.product-tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
-            btn.classList.add('active');
-            document.getElementById('panel-' + tab)?.classList.add('active');
-            lucide.createIcons();
-        }});
-    }});
+JS_TEMPLATE = """
+// Formulations data
+const FORMULATIONS = FMLS_JSON_PLACEHOLDER;
 
-    // ── Formulation filter ────────────────────────────────────────
-    let activeCat = 'all', activeHealth = null, showAll = false;
-    const PREVIEW_COUNT = 9;
+// ─── State ───────────────────────────────────────────────────────────────────
+let activeCat = 'all';
+let activeHealth = null;
+let showAll = false;
 
-    function getCatColor(cat) {{
-        return {{tablets:'tablets',capsules:'capsules',syrups:'syrups',powders:'powders',
-                 sachets:'sachets',gummies:'gummies',ayurvedic:'ayurvedic'}}[cat] || 'tablets';
-    }}
+// ─── Render formulations ─────────────────────────────────────────────────────
+function renderFormulations() {
+  const grid = document.getElementById('form-grid');
+  const btn = document.getElementById('view-all-btn');
+  if (!grid) return;
 
-    function renderFormulations() {{
-        const grid = document.getElementById('formulations-grid');
-        const viewAllWrap = document.getElementById('viewall-wrap');
-        let filtered = FORMULATIONS;
-        if (activeCat !== 'all') filtered = filtered.filter(f => f.category === activeCat);
-        if (activeHealth) filtered = filtered.filter(f => f.health.includes(activeHealth));
+  let filtered = FORMULATIONS;
+  if (activeCat !== 'all') filtered = filtered.filter(f => f.cat === activeCat);
+  if (activeHealth) filtered = filtered.filter(f => f.health && f.health.includes(activeHealth));
 
-        const display = showAll ? filtered : filtered.slice(0, PREVIEW_COUNT);
-        const remaining = filtered.length - display.length;
+  const visible = showAll ? filtered : filtered.slice(0, 8);
+  grid.innerHTML = visible.map(f => {
+    const tagCls = f.form ? f.form.replace(/[^a-zA-Z]/g,'') : '';
+    return '<div class="form-card">' +
+      '<div class="form-code">' + (f.code || '') + '</div>' +
+      '<div class="form-name">' + f.name + '</div>' +
+      '<span class="form-tag ' + tagCls + '">' + (f.form || '') + '</span>' +
+      '</div>';
+  }).join('');
 
-        grid.innerHTML = display.map(f => `
-            <div class="form-card">
-                <div class="form-card-body">
-                    <div class="form-card-name">${{f.name}}</div>
-                    <div class="form-card-comp">${{f.composition}}</div>
-                </div>
-                <span class="form-tag ${{getCatColor(f.category)}}">${{f.category}}</span>
-            </div>`).join('');
+  if (btn) {
+    if (filtered.length <= 8) {
+      btn.style.display = 'none';
+    } else {
+      btn.style.display = 'inline-block';
+      btn.textContent = showAll ? 'Show Less' : ('View All ' + filtered.length + ' Formulations');
+    }
+  }
+}
 
-        if (remaining > 0) {{
-            viewAllWrap.innerHTML = `<button class="form-viewall-btn" id="view-all-btn">
-                <i data-lucide="chevrons-down"></i> Show ${{remaining}} more formulations
-            </button>`;
-            document.getElementById('view-all-btn').addEventListener('click', () => {{
-                showAll = true; renderFormulations();
-            }});
-        }} else if (filtered.length > PREVIEW_COUNT) {{
-            viewAllWrap.innerHTML = `<button class="form-viewall-btn" id="view-less-btn">
-                <i data-lucide="chevrons-up"></i> Show less
-            </button>`;
-            document.getElementById('view-less-btn').addEventListener('click', () => {{
-                showAll = false; renderFormulations();
-            }});
-        }} else {{
-            viewAllWrap.innerHTML = '';
-        }}
-        lucide.createIcons();
-    }}
-
-    document.querySelectorAll('.form-filter-btn').forEach(btn => {{
-        btn.addEventListener('click', () => {{
-            document.querySelectorAll('.form-filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            activeCat = btn.dataset.cat;
-            showAll = false;
-            renderFormulations();
-        }});
-    }});
-
-    // ── Health segment pills ──────────────────────────────────────
-    document.querySelectorAll('.health-pill').forEach(pill => {{
-        pill.addEventListener('click', () => {{
-            const h = pill.dataset.health;
-            if (activeHealth === h) {{
-                activeHealth = null;
-                pill.classList.remove('active');
-            }} else {{
-                document.querySelectorAll('.health-pill').forEach(p => p.classList.remove('active'));
-                activeHealth = h;
-                pill.classList.add('active');
-                const hs = HEALTH_SEGMENTS.find(s => s.id === h);
-                if (hs) pill.style.background = hs.color;
-            }}
-            showAll = false;
-            // Scroll to formulations
-            document.getElementById('formulations').scrollIntoView({{behavior:'smooth', block:'start'}});
-            setTimeout(renderFormulations, 400);
-        }});
-    }});
-
-    // Style active health pill properly
-    document.querySelectorAll('.health-pill').forEach(pill => {{
-        pill.addEventListener('mouseenter', () => {{
-            if (!pill.classList.contains('active')) {{
-                const hs = HEALTH_SEGMENTS.find(s => s.id === pill.dataset.health);
-                if (hs) pill.style.background = hs.color;
-            }}
-        }});
-        pill.addEventListener('mouseleave', () => {{
-            if (!pill.classList.contains('active')) pill.style.background = '';
-        }});
-    }});
-
-    // ── FAQ accordion ─────────────────────────────────────────────
-    document.querySelectorAll('.faq-question').forEach(q => {{
-        q.addEventListener('click', () => {{
-            const isOpen = q.classList.contains('open');
-            document.querySelectorAll('.faq-question').forEach(qq => qq.classList.remove('open'));
-            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
-            if (!isOpen) {{
-                q.classList.add('open');
-                q.nextElementSibling.classList.add('open');
-            }}
-        }});
-    }});
-
-    // ── Initial render ────────────────────────────────────────────
+// ─── Category filter ─────────────────────────────────────────────────────────
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    activeCat = this.dataset.cat;
+    showAll = false;
     renderFormulations();
-    lucide.createIcons();
+  });
+});
+
+// ─── View All button ─────────────────────────────────────────────────────────
+const viewAllBtn = document.getElementById('view-all-btn');
+if (viewAllBtn) {
+  viewAllBtn.addEventListener('click', function() {
+    showAll = !showAll;
+    renderFormulations();
+  });
+}
+
+// ─── Health segment pills ────────────────────────────────────────────────────
+document.querySelectorAll('.health-pill').forEach(pill => {
+  pill.addEventListener('click', function() {
+    const h = this.dataset.health;
+    if (activeHealth === h) {
+      activeHealth = null;
+      document.querySelectorAll('.health-pill').forEach(p => p.classList.remove('active'));
+    } else {
+      activeHealth = h;
+      document.querySelectorAll('.health-pill').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+    }
+    showAll = false;
+    const cat = document.getElementById('catalogue');
+    if (cat) cat.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    renderFormulations();
+  });
+});
+
+// ─── Nav scroll ──────────────────────────────────────────────────────────────
+const nav = document.getElementById('nav');
+function handleScroll() {
+  if (nav) {
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }
+}
+window.addEventListener('scroll', handleScroll, { passive: true });
+
+// ─── Mobile menu ─────────────────────────────────────────────────────────────
+const mobileToggle = document.getElementById('mobileToggle');
+const navLinks = document.getElementById('navLinks');
+if (mobileToggle && navLinks) {
+  mobileToggle.addEventListener('click', function() {
+    this.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileToggle.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+}
+
+// ─── Product tabs ─────────────────────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+    const panel = document.querySelector('[data-panel="' + this.dataset.tab + '"]');
+    if (panel) panel.classList.add('active');
+  });
+});
+
+// ─── FAQ accordion ───────────────────────────────────────────────────────────
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', function() {
+    const item = this.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ─── Scroll animations ───────────────────────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+// ─── Smooth scroll ───────────────────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const y = target.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+
+// ─── Init ────────────────────────────────────────────────────────────────────
+renderFormulations();
+if (typeof lucide !== 'undefined') lucide.createIcons();
 """
 
-HTML = f"""<!DOCTYPE html>
+JS = JS_TEMPLATE.replace('FMLS_JSON_PLACEHOLDER', FMLS_JSON)
+
+# ─── JSON-LD Schemas ──────────────────────────────────────────────────────────
+JSONLD_LOCAL = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Bionial Lifesciences Pvt. Ltd.",
+    "description": "WHO-GMP certified nutraceutical and Ayurvedic contract manufacturer in Mohali, Punjab, India.",
+    "url": "https://bioniallifesciences.com",
+    "telephone": "+919996610619",
+    "email": "bioniallifesciences@gmail.com",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Plot 459, Sector-82, JLPL Industrial Area",
+        "addressLocality": "Mohali",
+        "addressRegion": "Punjab",
+        "postalCode": "140308",
+        "addressCountry": "IN"
+    }
+}
+
+JSONLD_FAQ = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+        for q, a in FAQ_ITEMS
+    ]
+}
+
+LD_LOCAL = _json.dumps(JSONLD_LOCAL, ensure_ascii=False)
+LD_FAQ = _json.dumps(JSONLD_FAQ, ensure_ascii=False)
+
+# ─── Assemble ─────────────────────────────────────────────────────────────────
+HEAD = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bionial Lifesciences | Nutraceutical Contract Manufacturing in Mohali, India</title>
-    <meta name="description" content="WHO-GMP certified nutraceutical & Ayurvedic contract manufacturer in Mohali, Punjab. 250+ ready formulations. Capsules, tablets, syrups, powders, sachets. 30-day delivery.">
-    <meta name="keywords" content="nutraceutical manufacturer India, contract manufacturing Mohali, third party manufacturing Punjab, capsule manufacturer, tablet manufacturer, private labeling nutraceuticals, FSSAI certified manufacturer, AYUSH GMP">
-    <link rel="canonical" href="https://bioniallifesciences.com">
-    <meta property="og:title" content="Bionial Lifesciences | Precision Nutraceutical Manufacturing">
-    <meta property="og:description" content="WHO-GMP certified nutraceutical & Ayurvedic contract manufacturer in Mohali. 250+ formulations. 30-day delivery.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://bioniallifesciences.com">
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <style>{CSS}</style>
-    <!-- Schema -->
-    <script type="application/ld+json">
-    {{
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Bionial Lifesciences",
-        "description": "WHO-GMP certified nutraceutical and Ayurvedic contract manufacturer in Mohali, Punjab.",
-        "address": {{
-            "@type": "PostalAddress",
-            "streetAddress": "Plot No. 459, Sector-82, JLPL Industrial Area",
-            "addressLocality": "Mohali", "addressRegion": "Punjab",
-            "postalCode": "140308", "addressCountry": "IN"
-        }},
-        "telephone": "+919996610619",
-        "email": "bioniallifesciences@gmail.com",
-        "url": "https://bioniallifesciences.com",
-        "openingHours": "Mo-Sa 09:00-18:00",
-        "hasMap": "https://maps.google.com/?q=JLPL+Sector+82+Mohali"
-    }}
-    </script>
-    <script type="application/ld+json">
-    {{
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {{"@type":"Question","name":"What is the minimum order quantity (MOQ)?","acceptedAnswer":{{"@type":"Answer","text":"Capsules: 10,000–20,000 units. Tablets: 10,000+. Syrups: 1,000–2,000 bottles. Powders: 50–100 kg. We offer flexible MOQs for startup brands."}}}},
-            {{"@type":"Question","name":"How long does manufacturing take?","acceptedAnswer":{{"@type":"Answer","text":"30 days from order confirmation to dispatch — including formulation, production, quality control, and packaging."}}}},
-            {{"@type":"Question","name":"What certifications does the facility hold?","acceptedAnswer":{{"@type":"Answer","text":"WHO-GMP, FSSAI Central License, ISO 9001:2015, GMP Schedule M, HALAL, and AYUSH GMP."}}}}
-        ]
-    }}
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bionial Lifesciences | Nutraceutical Contract Manufacturing in Mohali, India</title>
+<meta name="description" content="WHO-GMP certified nutraceutical and Ayurvedic contract manufacturer in Mohali, Punjab. 200+ ready formulations. 30-day delivery. Startup-friendly MOQs from 1,000 units.">
+<link rel="canonical" href="https://bioniallifesciences.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script type="application/ld+json">{LD_LOCAL}</script>
+<script type="application/ld+json">{LD_FAQ}</script>
+<style>
+{CSS}
+</style>
 </head>
-<body>
+<body>'''
 
-<!-- ══════════════════════════════════════════════════════════════
-     NAVIGATION
-══════════════════════════════════════════════════════════════ -->
+NAV = f'''
 <nav class="nav" id="nav">
-    <div class="container">
-        <div class="nav-inner">
-            <a href="#" class="logo-pill">
-                <img src="LogoAsset 1.png" alt="Bionial Lifesciences — Formulated Right">
-            </a>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#products">Products</a>
-                <a href="#formulations">Formulations</a>
-                <a href="#infrastructure">Infrastructure</a>
-                <a href="#contact" class="nav-cta">Request a Quote</a>
-            </div>
-            <button class="hamburger" aria-label="Menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-        <div class="mobile-menu">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#products">Products</a>
-            <a href="#formulations">Formulations</a>
-            <a href="#infrastructure">Infrastructure</a>
-            <a href="#contact">FAQ</a>
-            <a href="#contact" class="nav-cta">Request a Quote</a>
-        </div>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><img src="{LOGO}" alt="Bionial Lifesciences" class="nav-logo-img"></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#platform">R&amp;D</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#catalogue">Formulations</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#infrastructure">Infrastructure</a></li>
+        <li><a href="#contact" class="nav-cta">Request a Quote</a></li>
+      </ul>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-</nav>
+  </div>
+</nav>'''
 
-<!-- ══════════════════════════════════════════════════════════════
-     HERO
-══════════════════════════════════════════════════════════════ -->
+HERO = f'''
 <section class="hero" id="home">
-    <div class="hero-bg-img"></div>
-    <div class="container">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <i data-lucide="factory"></i>
-                WHO-GMP Certified Facility &nbsp;·&nbsp; Mohali, Punjab
-            </div>
-            <h1>Precision Nutraceutical Manufacturing.</h1>
-            <div class="hero-subline">Built for Brands That Scale.</div>
-            <p class="hero-desc">Full-range contract manufacturing — capsules, tablets, syrups, powders, sachets &amp; Ayurvedic products — with startup-friendly MOQs and 30-day delivery commitment.</p>
-            <div class="hero-actions">
-                <a href="#contact" class="btn btn-primary"><i data-lucide="send"></i> Request a Quote</a>
-                <a href="#formulations" class="btn btn-outline"><i data-lucide="book-open"></i> View Formulations</a>
-            </div>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <div class="hero-stat-num"><span data-target="7" data-suffix="+">7+</span></div>
-                    <div class="hero-stat-label">Dosage Forms</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-num"><span data-target="250" data-suffix="+">250+</span></div>
-                    <div class="hero-stat-label">Ready Formulations</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-num">30<span class="accent">-Day</span></div>
-                    <div class="hero-stat-label">Delivery Commitment</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-num">100<span class="accent">%</span></div>
-                    <div class="hero-stat-label">Quality Assured</div>
-                </div>
-            </div>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge"><span class="hero-badge-dot"></span>WHO-GMP Certified Facility — Mohali, India</div>
+        <h1 class="hero-title">Precision Nutraceutical<br><span>Manufacturing.</span></h1>
+        <p class="hero-sub">Built for Brands That Scale.</p>
+        <p class="hero-desc">Contract manufacturing for nutraceutical and Ayurvedic brands — capsules, tablets, syrups, powders, sachets. Low MOQ, fast turnaround, full compliance.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Request a Quote</a>
+          <a href="#catalogue" class="btn btn-outline">Browse Formulations</a>
         </div>
+      </div>
+      <div class="hero-img-wrap">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=700&auto=format" alt="Pharmaceutical Manufacturing">
+        <div class="hero-float-badge">
+          <div class="hero-float-item"><span class="hero-float-val">5+</span><span class="hero-float-lbl">Dosage Forms</span></div>
+          <div class="hero-float-item"><span class="hero-float-val">200+</span><span class="hero-float-lbl">Formulations</span></div>
+          <div class="hero-float-item"><span class="hero-float-val">30</span><span class="hero-float-lbl">Day Delivery</span></div>
+        </div>
+      </div>
     </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════
-     TRUST STRIP
-══════════════════════════════════════════════════════════════ -->
-<div class="trust-strip">
+  </div>
+  <div class="hero-stats">
     <div class="container">
-        <div class="trust-strip-inner">
-            <div class="trust-badge"><div class="trust-badge-icon green">GMP</div><div><div class="trust-badge-label">WHO-GMP</div><div class="trust-badge-sub">Certified Facility</div></div></div>
-            <div class="trust-badge"><div class="trust-badge-icon blue">FSS</div><div><div class="trust-badge-label">FSSAI</div><div class="trust-badge-sub">Central License</div></div></div>
-            <div class="trust-badge"><div class="trust-badge-icon orange">ISO</div><div><div class="trust-badge-label">ISO 9001:2015</div><div class="trust-badge-sub">Quality Management</div></div></div>
-            <div class="trust-badge"><div class="trust-badge-icon purple">GMP</div><div><div class="trust-badge-label">GMP Schedule M</div><div class="trust-badge-sub">Compliant Facility</div></div></div>
-            <div class="trust-badge"><div class="trust-badge-icon teal">HAL</div><div><div class="trust-badge-label">HALAL</div><div class="trust-badge-sub">Export Ready</div></div></div>
-            <div class="trust-badge"><div class="trust-badge-icon gold">AYU</div><div><div class="trust-badge-label">AYUSH GMP</div><div class="trust-badge-sub">Ayurvedic License</div></div></div>
-        </div>
+      <div class="hero-stats-inner">
+        <div class="hero-stat"><span class="stat-val" data-count="5">5+</span><span class="stat-lbl">Dosage Forms</span></div>
+        <div class="hero-stat"><span class="stat-val" data-count="200">200+</span><span class="stat-lbl">Ready Formulations</span></div>
+        <div class="hero-stat"><span class="stat-val">30-Day</span><span class="stat-lbl">Lead Time</span></div>
+        <div class="hero-stat"><span class="stat-val">100%</span><span class="stat-lbl">GMP Compliant</span></div>
+      </div>
     </div>
-</div>
+  </div>
+</section>'''
 
-<!-- ══════════════════════════════════════════════════════════════
-     ABOUT
-══════════════════════════════════════════════════════════════ -->
-<section class="section" id="about">
-    <div class="container">
-        <div class="about-grid">
-            <div class="about-img-wrap aos">
-                <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80" alt="Bionial laboratory" loading="lazy">
-                <div class="about-loc-card">
-                    <i data-lucide="map-pin"></i>
-                    <div class="about-loc-text">JLPL Industrial Area<br>Sector-82, Mohali</div>
-                </div>
-            </div>
-            <div class="about-text">
-                <div class="section-label aos">About Bionial</div>
-                <h2 class="section-title aos">Built for Brands That Mean Business</h2>
-                <p class="about-desc aos">Bionial Lifesciences is a WHO-GMP certified nutraceutical contract manufacturer based in JLPL Industrial Area, Sector-82, Mohali — at the heart of North India's pharmaceutical corridor. We partner with D2C startups, established health brands, and export-focused companies to manufacture full-range supplements and Ayurvedic products with precision.</p>
-                <p class="about-desc aos">Our 30-day delivery commitment, transparent pricing, and startup-friendly MOQs make premium manufacturing accessible to brands at every stage. From formulation to finished product — we handle it all.</p>
-                <div class="about-highlights">
-                    <div class="highlight-card aos aos-delay-1">
-                        <div class="highlight-icon"><i data-lucide="flask-conical"></i></div>
-                        <div class="highlight-text"><h4>R&amp;D Formulation</h4><p>In-house scientists for custom formulations</p></div>
-                    </div>
-                    <div class="highlight-card aos aos-delay-2">
-                        <div class="highlight-icon"><i data-lucide="shield-check"></i></div>
-                        <div class="highlight-text"><h4>Quality Assurance</h4><p>In-house QC lab with full batch testing</p></div>
-                    </div>
-                    <div class="highlight-card aos aos-delay-3">
-                        <div class="highlight-icon"><i data-lucide="package"></i></div>
-                        <div class="highlight-text"><h4>Packaging Design</h4><p>Label design, artwork, print-ready files</p></div>
-                    </div>
-                    <div class="highlight-card aos aos-delay-4">
-                        <div class="highlight-icon"><i data-lucide="file-check"></i></div>
-                        <div class="highlight-text"><h4>Regulatory Support</h4><p>FSSAI, AYUSH, Schedule M, export docs</p></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════
-     SERVICES
-══════════════════════════════════════════════════════════════ -->
-<section class="section section-alt" id="services">
-    <div class="container">
-        <div class="aos" style="text-align:center;max-width:600px;margin:0 auto 0;">
-            <div class="section-label">Our Services</div>
-            <h2 class="section-title">End-to-End Manufacturing Solutions</h2>
-            <p class="section-subtitle">From concept to finished product — we handle every step of your supplement manufacturing journey.</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card aos aos-delay-1">
-                <div class="service-icon"><i data-lucide="factory"></i></div>
-                <h3>Contract Manufacturing</h3>
-                <p>Full-range production — capsules, tablets, syrups, powders, sachets, gummies, and Ayurvedic products — with scalable batch sizes from startup MOQs.</p>
-            </div>
-            <div class="service-card aos aos-delay-2">
-                <div class="service-icon"><i data-lucide="tag"></i></div>
-                <h3>Private Labeling</h3>
-                <p>250+ ready-to-manufacture formulations. Choose from our library, customize it, add your brand identity, and go to market in record time.</p>
-            </div>
-            <div class="service-card aos aos-delay-3">
-                <div class="service-icon"><i data-lucide="beaker"></i></div>
-                <h3>Custom Formulation</h3>
-                <p>Our R&amp;D team develops unique formulations tailored to your target audience, health claim, and ingredient preferences — with full stability testing.</p>
-            </div>
-            <div class="service-card aos aos-delay-4">
-                <div class="service-icon"><i data-lucide="clipboard-check"></i></div>
-                <h3>Regulatory Support</h3>
-                <p>Complete regulatory assistance — FSSAI product approvals, AYUSH licensing, GMP Schedule M compliance, HALAL certification, and export documentation.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════
-     PRODUCT RANGE — TABBED
-══════════════════════════════════════════════════════════════ -->
-<section class="section" id="products">
-    <div class="container">
-        <div class="aos" style="margin-bottom:40px;">
-            <div class="section-label">Dosage Forms</div>
-            <h2 class="section-title">Full-Range Product Manufacturing</h2>
-            <p class="section-subtitle">Seven dosage forms, one manufacturing partner. Click a category to explore formats and specifications.</p>
-        </div>
-        <div class="product-tab-nav">
-{tab_btns}        </div>
-{tab_panels}    </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════
-     FORMULATIONS CATALOGUE
-══════════════════════════════════════════════════════════════ -->
-<section class="section section-alt" id="formulations">
-    <div class="container">
-        <div class="aos" style="margin-bottom:32px;">
-            <div class="section-label">Formulation Library</div>
-            <h2 class="section-title">250+ Ready-to-Manufacture Formulations</h2>
-            <p class="section-subtitle">Browse our complete formulation library across all dosage forms. Filter by category or therapeutic area.</p>
-        </div>
-        <div class="form-filter-nav">
-{form_filter_tabs}        </div>
-        <div class="formulations-grid" id="formulations-grid">
-            <!-- JS rendered -->
-        </div>
-        <div class="form-viewall-wrap" id="viewall-wrap"></div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════
-     HEALTH SEGMENTS
-══════════════════════════════════════════════════════════════ -->
-<section class="section" id="segments">
-    <div class="container">
-        <div class="aos">
-            <div class="section-label">Therapeutic Areas</div>
-            <h2 class="section-title">Formulations Across Every Health Category</h2>
-            <p class="section-subtitle">Click a health segment to filter formulations by therapeutic area.</p>
-        </div>
-        <div class="health-grid">
-{health_pills}        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════
-     PROCESS
-══════════════════════════════════════════════════════════════ -->
-<section class="section section-dark" id="process">
-    <div class="container">
-        <div class="aos" style="text-align:center;margin-bottom:0;">
-            <div class="section-label">How It Works</div>
-            <h2 class="section-title" style="color:white;">Your 30-Day Manufacturing Journey</h2>
-            <p class="section-subtitle" style="color:rgba(255,255,255,0.5);margin:0 auto;">From first inquiry to dispatch — a clear, transparent process with no surprises.</p>
-        </div>
-        <div class="process-steps">
-            <div class="process-step aos aos-delay-1">
-                <div class="process-num">1</div>
-                <div class="process-day">Day 1</div>
-                <div class="process-title">Inquiry &amp; Consultation</div>
-                <div class="process-desc">Share your product vision — we'll assess feasibility and suggest formulations</div>
-            </div>
-            <div class="process-step aos aos-delay-2">
-                <div class="process-num">2</div>
-                <div class="process-day">Day 2–7</div>
-                <div class="process-title">Formulation &amp; R&amp;D</div>
-                <div class="process-desc">Custom formulation development or selection from our ready library</div>
-            </div>
-            <div class="process-step aos aos-delay-3">
-                <div class="process-num">3</div>
-                <div class="process-day">Day 8–12</div>
-                <div class="process-title">Sampling &amp; Approval</div>
-                <div class="process-desc">Production samples dispatched for your sensory and quality review</div>
-            </div>
-            <div class="process-step aos aos-delay-4">
-                <div class="process-num">4</div>
-                <div class="process-day">Day 13–22</div>
-                <div class="process-title">Batch Production</div>
-                <div class="process-desc">Full-scale manufacturing in WHO-GMP facility under strict SOPs</div>
-            </div>
-            <div class="process-step aos aos-delay-4">
-                <div class="process-num">5</div>
-                <div class="process-day">Day 23–26</div>
-                <div class="process-title">Quality Testing</div>
-                <div class="process-desc">In-house QC testing — microbial, assay, dissolution — with Certificate of Analysis</div>
-            </div>
-            <div class="process-step aos aos-delay-4">
-                <div class="process-num">6</div>
-                <div class="process-day">Day 27–30</div>
-                <div class="process-title">Packaging &amp; Dispatch</div>
-                <div class="process-desc">Custom packaging, label printing, final QC and dispatch from Mohali</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════
-     INFRASTRUCTURE
-══════════════════════════════════════════════════════════════ -->
-<section class="section" id="infrastructure">
-    <div class="container">
-        <div class="infra-grid">
-            <div>
-                <div class="section-label aos">Infrastructure</div>
-                <h2 class="section-title aos">State-of-the-Art Manufacturing Facility</h2>
-                <p class="about-desc aos">Our WHO-GMP certified facility in JLPL Industrial Area, Sector-82, Mohali is equipped with modern encapsulation lines, tablet presses, liquid filling systems, and an in-house quality control laboratory — all under one roof.</p>
-                <div class="infra-stats">
-                    <div class="infra-stat-card aos aos-delay-1">
-                        <div class="infra-stat-num">50K<span class="infra-stat-unit">+</span></div>
-                        <div class="infra-stat-label">Capsules / Day</div>
-                    </div>
-                    <div class="infra-stat-card aos aos-delay-2">
-                        <div class="infra-stat-num">1L<span class="infra-stat-unit">+</span></div>
-                        <div class="infra-stat-label">Tablets / Day</div>
-                    </div>
-                    <div class="infra-stat-card aos aos-delay-3">
-                        <div class="infra-stat-num">5K<span class="infra-stat-unit">+</span></div>
-                        <div class="infra-stat-label">Syrup Bottles / Day</div>
-                    </div>
-                    <div class="infra-stat-card aos aos-delay-4">
-                        <div class="infra-stat-num">10K<span class="infra-stat-unit">+</span></div>
-                        <div class="infra-stat-label">Sachets / Day</div>
-                    </div>
-                </div>
-                <div class="infra-features">
-                    <div class="infra-feature aos"><i data-lucide="thermometer"></i>Climate-controlled production &amp; storage zones</div>
-                    <div class="infra-feature aos"><i data-lucide="microscope"></i>Dedicated in-house QC laboratory</div>
-                    <div class="infra-feature aos"><i data-lucide="settings"></i>Automated encapsulation &amp; tablet compression</div>
-                    <div class="infra-feature aos"><i data-lucide="database"></i>ERP-integrated batch tracking system</div>
-                </div>
-            </div>
-            <div class="infra-img aos">
-                <img src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=800&q=80" alt="Bionial manufacturing facility" loading="lazy">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════
-     WHY BIONIAL
-══════════════════════════════════════════════════════════════ -->
-<section class="section section-alt" id="why">
-    <div class="container">
-        <div class="aos" style="text-align:center;max-width:580px;margin:0 auto 0;">
-            <div class="section-label">Why Choose Us</div>
-            <h2 class="section-title">What Sets Bionial Apart</h2>
-        </div>
-        <div class="why-grid">
-            <div class="why-card aos aos-delay-1">
-                <div class="why-num">01</div>
-                <h3>Startup-Friendly MOQs</h3>
-                <p>Capsules from 10,000 units, syrups from 1,000 bottles — flexible minimums designed for D2C brands testing new SKUs.</p>
-            </div>
-            <div class="why-card aos aos-delay-2">
-                <div class="why-num">02</div>
-                <h3>30-Day Delivery Guarantee</h3>
-                <p>Confirmed order to dispatch in 30 days. No ambiguous timelines — just a clear, committed schedule you can plan around.</p>
-            </div>
-            <div class="why-card aos aos-delay-3">
-                <div class="why-num">03</div>
-                <h3>Full Packaging &amp; Design</h3>
-                <p>In-house design team handles label design, regulatory text, barcodes, and print-ready artwork — all included.</p>
-            </div>
-            <div class="why-card aos aos-delay-1">
-                <div class="why-num">04</div>
-                <h3>Transparent Pricing</h3>
-                <p>Detailed cost breakdowns shared upfront — no hidden charges. You know exactly what you're paying for before committing.</p>
-            </div>
-            <div class="why-card aos aos-delay-2">
-                <div class="why-num">05</div>
-                <h3>North India's Pharma Hub</h3>
-                <p>Located in JLPL Sector-82, Mohali — adjacent to the Baddi pharmaceutical corridor with excellent logistics connectivity.</p>
-            </div>
-            <div class="why-card aos aos-delay-3">
-                <div class="why-num">06</div>
-                <h3>Regulatory Expertise</h3>
-                <p>FSSAI, AYUSH, Schedule M, HALAL, and export documentation — our regulatory team ensures you're compliant from day one.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════
-     FAQ
-══════════════════════════════════════════════════════════════ -->
-<section class="section" id="faq">
-    <div class="container" style="max-width:800px;">
-        <div class="aos" style="text-align:center;">
-            <div class="section-label">FAQ</div>
-            <h2 class="section-title">Frequently Asked Questions</h2>
-        </div>
-        <div class="faq-list">
-            <div class="faq-item">
-                <button class="faq-question">What is the minimum order quantity (MOQ)? <i data-lucide="plus" class="faq-icon"></i></button>
-                <div class="faq-answer">Capsules and tablets: 10,000–20,000 units. Syrups and liquids: 1,000–2,000 bottles. Powders: 50–100 kg. Sachets: 5,000–10,000 units. We offer flexible MOQs for startup brands — contact us to discuss your specific requirements.</div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question">How long does manufacturing take? <i data-lucide="plus" class="faq-icon"></i></button>
-                <div class="faq-answer">30 days from order confirmation to dispatch. This includes formulation finalization, batch production, in-house quality testing, packaging, and labeling. For ready formulations, timelines can be shorter.</div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question">Can you develop custom formulations? <i data-lucide="plus" class="faq-icon"></i></button>
-                <div class="faq-answer">Yes. Our in-house R&D team develops unique formulations based on your target audience, health segment, and ingredient preferences. We handle stability testing, sensory evaluation, and regulatory clearance for new formulations.</div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question">What certifications does your facility hold? <i data-lucide="plus" class="faq-icon"></i></button>
-                <div class="faq-answer">Our Mohali facility is certified for: WHO-GMP, FSSAI Central License, ISO 9001:2015, GMP Schedule M (for pharmaceutical compliance), HALAL (for export markets), and AYUSH GMP (for Ayurvedic products).</div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question">Do you provide packaging and label design? <i data-lucide="plus" class="faq-icon"></i></button>
-                <div class="faq-answer">Yes. Our in-house design team handles complete packaging — label design, structural artwork, regulatory text, nutritional information, barcodes, and print-ready files compatible with any printer or packaging vendor.</div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question">Can you help with FSSAI and AYUSH licensing? <i data-lucide="plus" class="faq-icon"></i></button>
-                <div class="faq-answer">Absolutely. We provide complete regulatory support — FSSAI product approvals, AYUSH manufacturing license, Schedule M compliance documentation, HALAL certification, and export documentation for GCC, EU, and other markets.</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════
-     CONTACT / QUOTE
-══════════════════════════════════════════════════════════════ -->
-<section class="section section-alt" id="contact">
-    <div class="container">
-        <div class="aos" style="text-align:center;max-width:540px;margin:0 auto 48px;">
-            <div class="section-label">Get in Touch</div>
-            <h2 class="section-title">Request a Quote</h2>
-            <p class="section-subtitle">Tell us about your product requirements and we'll respond within 24 hours with a detailed quote.</p>
-        </div>
-        <div class="contact-grid">
-            <div class="contact-form-wrap aos">
-                <h3>Submit Your Inquiry</h3>
-                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Your Name *</label>
-                            <input type="text" id="name" name="name" placeholder="Rahul Sharma" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="company">Company Name</label>
-                            <input type="text" id="company" name="company" placeholder="Your Brand Pvt. Ltd.">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" placeholder="you@brand.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone / WhatsApp *</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="product_type">Product Type</label>
-                        <select id="product_type" name="product_type">
-                            <option value="">Select dosage form...</option>
-                            <option>Capsules</option>
-                            <option>Tablets</option>
-                            <option>Syrups &amp; Liquids</option>
-                            <option>Powders</option>
-                            <option>Sachets</option>
-                            <option>Gummies</option>
-                            <option>Ayurvedic Products</option>
-                            <option>Multiple Products</option>
-                            <option>Not Sure — Need Guidance</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Your Requirements</label>
-                        <textarea id="message" name="message" placeholder="Tell us about your product idea, target market, quantity requirements, etc."></textarea>
-                    </div>
-                    <button type="submit" class="form-submit">
-                        <i data-lucide="send" style="width:16px;height:16px;"></i> Submit Inquiry
-                    </button>
-                </form>
-            </div>
-            <div class="aos aos-delay-2">
-                <h3 class="contact-info-title" style="font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:24px;">Contact Us Directly</h3>
-                <div class="contact-item">
-                    <div class="contact-item-icon"><i data-lucide="phone"></i></div>
-                    <div>
-                        <div class="contact-item-label">Phone</div>
-                        <div class="contact-item-value"><a href="tel:+919996610619">+91 99966 10619</a></div>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-item-icon"><i data-lucide="mail"></i></div>
-                    <div>
-                        <div class="contact-item-label">Email</div>
-                        <div class="contact-item-value"><a href="mailto:bioniallifesciences@gmail.com">bioniallifesciences@gmail.com</a></div>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-item-icon"><i data-lucide="message-circle"></i></div>
-                    <div>
-                        <div class="contact-item-label">WhatsApp</div>
-                        <div class="contact-item-value"><a href="https://wa.me/919996610619?text=Hi%20Bionial%2C%20I%27m%20interested%20in%20contract%20manufacturing." target="_blank">Chat on WhatsApp</a></div>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-item-icon"><i data-lucide="map-pin"></i></div>
-                    <div>
-                        <div class="contact-item-label">Address</div>
-                        <div class="contact-item-value">Plot No. 459, Sector-82, JLPL Industrial Area,<br>Mohali, Punjab — 140308</div>
-                    </div>
-                </div>
-                <div class="contact-hours">
-                    <h4>Business Hours</h4>
-                    <p>Monday – Saturday: 9:00 AM – 6:00 PM<br>Sunday: Closed</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════════════════════════ -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div>
-                <div class="footer-logo-pill">
-                    <img src="LogoAsset 1.png" alt="Bionial Lifesciences">
-                </div>
-                <p class="footer-desc">Precision nutraceutical contract manufacturing in Mohali, Punjab. WHO-GMP certified. Built for brands that scale — capsules, tablets, syrups, powders, sachets, gummies &amp; Ayurvedic products.</p>
-                <div class="footer-social">
-                    <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-                    <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
-                    <a href="#" aria-label="YouTube"><i data-lucide="youtube"></i></a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul class="footer-links">
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#formulations">Formulations</a></li>
-                    <li><a href="#infrastructure">Infrastructure</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Services</h4>
-                <ul class="footer-links">
-                    <li><a href="#services">Contract Manufacturing</a></li>
-                    <li><a href="#services">Private Labeling</a></li>
-                    <li><a href="#services">Custom Formulation</a></li>
-                    <li><a href="#services">Regulatory Support</a></li>
-                    <li><a href="ayurveda.html">Ayurvedic Products</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contact</h4>
-                <ul class="footer-links">
-                    <li><a href="tel:+919996610619">+91 99966 10619</a></li>
-                    <li><a href="mailto:bioniallifesciences@gmail.com">bioniallifesciences@gmail.com</a></li>
-                    <li style="color:rgba(255,255,255,0.4);font-size:0.83rem;line-height:1.6;">Plot 459, Sector-82, JLPL,<br>Mohali, Punjab 140308</li>
-                    <li><a href="#contact" style="color:var(--accent);font-weight:600;">Request a Quote →</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="footer-copy">© 2026 Bionial Lifesciences. All rights reserved.</div>
-            <div class="footer-certs">
-                <span class="footer-cert">WHO-GMP</span>
-                <span class="footer-cert">FSSAI</span>
-                <span class="footer-cert">ISO 9001:2015</span>
-                <span class="footer-cert">HALAL</span>
-                <span class="footer-cert">AYUSH GMP</span>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!-- ══════════════════════════════════════════════════════════════
-     FLOATING ELEMENTS
-══════════════════════════════════════════════════════════════ -->
-<a href="https://wa.me/919996610619?text=Hi%20Bionial%20Lifesciences%2C%20I%27m%20interested%20in%20contract%20manufacturing." class="wa-fab" target="_blank" rel="noopener" aria-label="WhatsApp">
-    <i data-lucide="message-circle"></i>
-</a>
-
-<div class="floating-cta">
-    <a href="tel:+919996610619" class="fcta-phone"><i data-lucide="phone"></i> Call</a>
-    <a href="https://wa.me/919996610619" class="fcta-whatsapp" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> WhatsApp</a>
-    <a href="mailto:bioniallifesciences@gmail.com" class="fcta-email"><i data-lucide="mail"></i> Email</a>
-</div>
-
+FOOT = f'''
 <script>
 {JS}
 </script>
 </body>
-</html>"""
+</html>'''
 
-with open("index.html", "w", encoding="utf-8", newline="\n") as f:
+BODY = (NAV + HERO + cert_strip_html() + about_html() + services_html() +
+        product_tabs_html() + formulations_html() + health_segs_html() +
+        process_html() + infra_html() + why_html() + faq_html() +
+        contact_html() + footer_html(LOGO) + floating_html())
+
+HTML = HEAD + BODY + FOOT
+
+with open('index.html', 'w', encoding='utf-8') as f:
     f.write(HTML)
 
-print(f"Generated index.html ({len(HTML):,} chars, ~{len(HTML.splitlines()):,} lines)")
+print('[OK] index.html generated successfully')
+print(f'[OK] {len(FORMULATIONS)} formulations embedded')
+print(f'[OK] File size: {len(HTML):,} bytes')
