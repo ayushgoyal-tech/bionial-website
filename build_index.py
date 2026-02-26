@@ -112,6 +112,15 @@ FORMULATIONS = [
     {"code":"BL-AY-07","name":"Drakshasava — General Tonic","cat":"ayurvedic","form":"Syrup","health":["general-wellness"]},
     {"code":"BL-AY-08","name":"Brahmi + Shankhpushpi Syrup — Brain Tonic","cat":"ayurvedic","form":"Syrup","health":["nerve-brain"]},
     {"code":"BL-AY-09","name":"Shatavari Granules — Women's Wellness","cat":"ayurvedic","form":"Powder","health":["womens-health"]},
+
+    # LIPOSOMAL TECHNOLOGY (7)
+    {"code":"BL-LP-01","name":"Liposomal Iron — Ferric Pyrophosphate + Folic Acid + B12 + Vit C","cat":"liposomal","form":"Tablets","health":["womens-health","general-wellness"]},
+    {"code":"BL-LP-02","name":"Liposomal Calcium — Tribasic Calcium Phosphate + L-Lysine + Zinc + D3 + Selenium","cat":"liposomal","form":"Tablets","health":["bone-joint","general-wellness"]},
+    {"code":"BL-LP-03","name":"Liposomal Silymarin — Milk Thistle 80% + Dandelion + Eriocitrin + Extramel + Schisandra + Maxshield","cat":"liposomal","form":"Tablets","health":["liver-digestive"]},
+    {"code":"BL-LP-04","name":"Liposomal CoQ10 — CoQ10 100mg + Levo-Carnitine + Zinc + Lycopene + Astaxanthin","cat":"liposomal","form":"Tablets","health":["heart-metabolic","general-wellness"]},
+    {"code":"BL-LP-05","name":"Liposomal Glutathione — Reduced Glutathione (High Bioavailability)","cat":"liposomal","form":"Capsules","health":["skin-beauty","immunity","liver-digestive"]},
+    {"code":"BL-LP-06","name":"Liposomal Magnesium — Magnesium Citrate 200mg + L-Carnitine L-Tartrate + Vit E","cat":"liposomal","form":"Tablets","health":["nerve-brain","sports-fitness","bone-joint"]},
+    {"code":"BL-LP-07","name":"Liposomal Curcumin — Curcuma Longa Extract (Advanced Delivery System)","cat":"liposomal","form":"Capsules","health":["bone-joint","immunity","liver-digestive"]},
 ]
 
 CATS = [
@@ -126,6 +135,7 @@ CATS = [
     ("sports-immunity","Sports & Immunity"),
     ("syrups-liquids","Syrups & Liquids"),
     ("ayurvedic","Ayurvedic"),
+    ("liposomal","Liposomal Technology"),
 ]
 
 HEALTH_SEGS = [
@@ -147,13 +157,13 @@ HEALTH_SEGS = [
 ]
 
 PRODUCT_TABS = [
-    {"id":"capsules","label":"Capsules","img":"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&auto=format","desc":"HPMC & gelatin hard-shell capsules for powders, granules, pellets. Size 00–4 available. Ideal for herbal, nutraceutical and pharmaceutical applications.","features":["HPMC (Veg) & Gelatin options","Size 00 to 4","Delayed-release coatings","80,000+ caps/day capacity"]},
+    {"id":"capsules","label":"Capsules","img":"images/product-capsules.jpg","desc":"HPMC & gelatin hard-shell capsules for powders, granules, pellets. Size 00–4 available. Ideal for herbal, nutraceutical and pharmaceutical applications.","features":["HPMC (Veg) & Gelatin options","Size 00 to 4","Delayed-release coatings","80,000+ caps/day capacity"]},
     {"id":"softgels","label":"Softgels","img":"https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&auto=format","desc":"Seamless soft-gelatin capsules for oil-based actives, omega-3, vitamins and herbal extracts. Excellent bioavailability and patient compliance.","features":["Oval, oblong, round shapes","Plant-based gelatin option","Enteric coat available","DHA/EPA, CoQ10 ready"]},
-    {"id":"tablets","label":"Tablets","img":"https://images.unsplash.com/photo-1585435557343-3b092031a831?w=600&auto=format","desc":"Film-coated, sugar-coated, effervescent and SR/ER tablets. High-compression presses with in-line weight checking ensure batch uniformity.","features":["Film / Sugar / Enteric coat","Effervescent tablets","SR / ER / MR technology","500 mg to 2,000 mg range"]},
-    {"id":"syrups","label":"Syrups","img":"https://images.unsplash.com/photo-1624454002302-36b824d7bd0a?w=600&auto=format","desc":"Liquid oral dosage forms — syrups, suspensions, tonics and herbal juices. Sugar-free formulations available. Aseptic filling with 30 ml–500 ml bottles.","features":["Sugar-free variants","Herbal & classical syrups","30 ml to 500 ml packs","PET & glass bottles"]},
-    {"id":"powders","label":"Powders","img":"https://images.unsplash.com/photo-1564071174699-aef9db97c0c6?w=600&auto=format","desc":"Protein blends, sports nutrition, instant-dissolve sachets, and bulk nutraceutical powders. Spray-dried for superior solubility.","features":["Whey & plant protein","Spray-dried for solubility","Bulk and sachet packs","Custom flavouring"]},
-    {"id":"sachets","label":"Sachets","img":"https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&auto=format","desc":"Single-dose sachets for convenience and compliance — effervescent granules, powders, and pre-mixed beverages. Child-resistant and tamper-evident options.","features":["1g to 20g per sachet","Effervescent granules","4-side seal & 3-side seal","Child-resistant options"]},
-    {"id":"ayurvedic","label":"Ayurvedic","img":"https://images.unsplash.com/photo-1611095973763-414019e72400?w=600&auto=format","desc":"AYUSH GMP compliant classical and patent Ayurvedic formulations — Churna, Kwath, Asava-Arishta, Avaleha and Ghanvati. Schedule E(1) herbs handled.","features":["AYUSH GMP licensed","Classical & patent formulas","Churna, Kwath, Vati, Arishta","Herbal extract standardisation"]},
+    {"id":"tablets","label":"Tablets","img":"images/product-tablets.jpg","desc":"Film-coated, sugar-coated, effervescent and SR/ER tablets. High-compression presses with in-line weight checking ensure batch uniformity.","features":["Film / Sugar / Enteric coat","Effervescent tablets","SR / ER / MR technology","500 mg to 2,000 mg range"]},
+    {"id":"syrups","label":"Syrups","img":"images/product-syrups.jpg","desc":"Liquid oral dosage forms — syrups, suspensions, tonics and herbal juices. Sugar-free formulations available. Aseptic filling with 30 ml–500 ml bottles.","features":["Sugar-free variants","Herbal & classical syrups","30 ml to 500 ml packs","PET & glass bottles"]},
+    {"id":"powders","label":"Powders","img":"images/product-powders.jpg","desc":"Protein blends, sports nutrition, instant-dissolve sachets, and bulk nutraceutical powders. Spray-dried for superior solubility.","features":["Whey & plant protein","Spray-dried for solubility","Bulk and sachet packs","Custom flavouring"]},
+    {"id":"sachets","label":"Sachets","img":"images/product-sachets.jpg","desc":"Single-dose sachets for convenience and compliance — effervescent granules, powders, and pre-mixed beverages. Child-resistant and tamper-evident options.","features":["1g to 20g per sachet","Effervescent granules","4-side seal & 3-side seal","Child-resistant options"]},
+    {"id":"ayurvedic","label":"Ayurvedic","img":"images/product-ayurveda.jpg","desc":"AYUSH GMP compliant classical and patent Ayurvedic formulations — Churna, Kwath, Asava-Arishta, Avaleha and Ghanvati. Schedule E(1) herbs handled.","features":["AYUSH GMP licensed","Classical & patent formulas","Churna, Kwath, Vati, Arishta","Herbal extract standardisation"]},
 ]
 
 PROCESS_STEPS = [
@@ -254,7 +264,7 @@ section { padding: 80px 0; }
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .nav-logo { display: flex; align-items: center; }
-.nav-logo-img { height: 64px; width: auto; display: block; }
+.nav-logo-img { height: 80px; width: auto; display: block; }
 .nav-links { display: flex; align-items: center; gap: 8px; }
 .nav-links a { font-size: 0.88rem; font-weight: 600; color: var(--primary); padding: 8px 14px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
 .nav-links a:hover { color: var(--accent); background: rgba(0,169,157,0.06); }
@@ -401,7 +411,41 @@ section { padding: 80px 0; }
 .form-tag.Juice { background: #FFF1F1; color: #b91c1c; }
 .form-tag.Semi-Solid { background: #E8FFF3; color: #166534; }
 .form-tag.Suspension { background: #F1F5F9; color: #475569; }
+.form-tag.Liposomal { background: #FFF0FB; color: #9d174d; }
 .form-view-all { text-align: center; }
+
+/* ===== TRUST STRIP ===== */
+.trust-strip { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 28px 0; }
+.trust-strip-inner { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.trust-strip-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.trust-strip-logos { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.trust-logo-card { display: flex; align-items: center; gap: 10px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 10px 20px; }
+.trust-logo-dot { width: 10px; height: 10px; border-radius: 50%; }
+.trust-logo-text { font-size: 0.8rem; font-weight: 700; color: var(--text-sec); }
+
+/* ===== LIPOSOMAL SECTION ===== */
+.liposomal { background: linear-gradient(135deg, #001e3c 0%, var(--primary-dark) 60%, #003a2e 100%); position: relative; overflow: hidden; }
+.liposomal::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(0,169,157,0.12) 0%, transparent 65%); top: -100px; right: -100px; pointer-events: none; }
+.liposomal .section-label { color: var(--accent-light); }
+.liposomal .section-title { color: #fff; }
+.liposomal .section-sub { color: rgba(255,255,255,0.65); }
+.lipo-benefits { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; margin-bottom: 48px; }
+.lipo-benefit { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 24px 20px; text-align: center; }
+.lipo-benefit-icon { width: 52px; height: 52px; border-radius: 50%; background: rgba(0,169,157,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; color: var(--accent-light); }
+.lipo-benefit-icon svg { width: 24px; height: 24px; }
+.lipo-benefit h4 { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.lipo-benefit p { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+.lipo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 32px; }
+.lipo-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 20px; transition: background 0.2s; }
+.lipo-card:hover { background: rgba(255,255,255,0.11); }
+.lipo-card-code { font-size: 0.65rem; font-weight: 700; color: var(--accent-light); letter-spacing: 0.1em; margin-bottom: 6px; }
+.lipo-card-name { font-size: 0.88rem; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 8px; }
+.lipo-card-comp { font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.5; margin-bottom: 10px; }
+.lipo-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(0,169,157,0.18); border: 1px solid rgba(0,169,157,0.35); border-radius: 4px; padding: 3px 8px; font-size: 0.65rem; font-weight: 700; color: var(--accent-light); letter-spacing: 0.06em; }
+.lipo-cta { text-align: center; margin-top: 8px; }
+@media (max-width: 1024px) { .lipo-benefits { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .lipo-benefits { grid-template-columns: repeat(2,1fr); } .lipo-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .lipo-grid { grid-template-columns: 1fr; } }
 .form-view-all button { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 10px; padding: 12px 32px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
 .form-view-all button:hover { background: var(--primary); color: #fff; }
 
@@ -549,7 +593,7 @@ def about_html():
   <div class="container">
     <div class="about-grid">
       <div class="about-img-wrap animate-on-scroll">
-        <img src="https://images.unsplash.com/photo-1563213126-a4273aed2016?w=800&auto=format" alt="Bionial Lifesciences Facility">
+        <img src="images/about.jpg" alt="Bionial Lifesciences Facility">
         <div class="about-loc-card">
           <strong style="color:var(--primary);font-size:0.9rem;">Mohali, Punjab, India</strong>
           <p>Plot 459, Sector-82, JLPL Industrial Area</p>
@@ -721,7 +765,7 @@ def infra_html():
         <a href="#contact" class="btn btn-primary" style="margin-top:28px;display:inline-flex;">Request Site Tour</a>
       </div>
       <div>
-        <img class="infra-img animate-on-scroll" src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=700&auto=format" alt="Bionial Manufacturing Facility">
+        <img class="infra-img animate-on-scroll" src="images/infrastructure.jpg" alt="Bionial Manufacturing Facility">
       </div>
     </div>
   </div>
@@ -821,13 +865,14 @@ def footer_html(logo):
     <div class="footer-grid">
       <div>
         <img src="{logo}" alt="Bionial Lifesciences" style="height:52px;filter:brightness(0) invert(1);margin-bottom:8px;">
-        <p class="footer-brand-desc">Precision nutraceutical contract manufacturing in Mohali, Punjab. Built for brands that scale — capsules, tablets, syrups, powders and sachets with startup-friendly MOQs and transparent pricing.</p>
+        <p class="footer-brand-desc">From concept to capsule — precision nutraceutical contract manufacturing in Mohali, Punjab. Capsules, tablets, syrups, powders, sachets and Liposomal formulations with startup-friendly MOQs.</p>
       </div>
       <div>
         <h4>Quick Links</h4>
         <ul class="footer-links">
           <li><a href="#about">About Us</a></li>
           <li><a href="#platform">Dosage Forms</a></li>
+          <li><a href="#liposomal">Liposomal Technology</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#catalogue">Formulations</a></li>
           <li><a href="#categories">Health Segments</a></li>
@@ -866,6 +911,81 @@ def footer_html(logo):
     </div>
   </div>
 </footer>'''
+
+def trust_strip_html():
+    brands = [
+        ("#3B82F6","D2C Wellness Brand"),
+        ("#10B981","Health Supplement Co."),
+        ("#F59E0B","Pharmacy Chain"),
+        ("#8B5CF6","Nutraceutical Export"),
+        ("#EF4444","Ayurvedic Brand"),
+    ]
+    cards = "".join(
+        f'<div class="trust-logo-card"><span class="trust-logo-dot" style="background:{c};"></span><span class="trust-logo-text">{t}</span></div>'
+        for c, t in brands
+    )
+    return f'''
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-strip-inner">
+      <span class="trust-strip-label">Trusted by D2C brands, pharmacies, wellness companies &amp; exporters</span>
+      <div class="trust-strip-logos">{cards}</div>
+    </div>
+  </div>
+</div>'''
+
+LIPO_FORMULATIONS = [f for f in FORMULATIONS if f["cat"] == "liposomal"]
+
+LIPO_COMPOSITIONS = {
+    "BL-LP-01": "Liposomal Ferric Pyrophosphate Eq. to Elemental Iron 29mg · Folic Acid 200mcg · Vit B12 1.2mcg · Vit C 50mg",
+    "BL-LP-02": "Tribasic Calcium Phosphate Eq. to Elemental Calcium 500mg · L-Lysine 25mg · Zinc Oxide 10mg · D3 400IU · Selenium 40mcg",
+    "BL-LP-03": "Milk Thistle Extract (Liposomal, 80%) 80mg · Dandelion 50mg · Eriocitrin 25mg · Extramel 10mg · Vit E 10mg · Schisandra 250mg · Maxshield 300mg",
+    "BL-LP-04": "Liposomal CoQ10 100mg · Levo-Carnitine 340mg · Zinc 12mg · Lycopene 2.5mg · Astaxanthin 4mg",
+    "BL-LP-05": "Reduced L-Glutathione in phospholipid bilayer encapsulation — superior intracellular delivery",
+    "BL-LP-06": "Magnesium Citrate Eq. to Elemental Mg 200mg · L-Carnitine L-Tartrate 500mg · Vit E 10mg",
+    "BL-LP-07": "Curcuma Longa Extract in liposomal carrier — up to 29× greater bioavailability vs standard curcumin",
+}
+
+def liposomal_html():
+    benefits = [
+        ("trending-up","Better Bioavailability","Up to 10–29× greater absorption vs standard oral dosage forms."),
+        ("shield-check","Improved Absorption & Reduced GI Effects","Phospholipid membrane protects actives through the GI tract, reducing side effects."),
+        ("lock","Improved Stability","Active ingredient protected from enzymatic degradation in the body."),
+        ("zap","Enhanced Efficacy & Tolerance","Precise cellular delivery increases drug effectiveness and patient tolerance."),
+    ]
+    benefit_cards = ""
+    for icon, title, desc in benefits:
+        benefit_cards += f'''
+      <div class="lipo-benefit animate-on-scroll">
+        <div class="lipo-benefit-icon"><i data-lucide="{icon}"></i></div>
+        <h4>{title}</h4>
+        <p>{desc}</p>
+      </div>'''
+    formulation_cards = ""
+    for f in LIPO_FORMULATIONS:
+        comp = LIPO_COMPOSITIONS.get(f["code"], "")
+        formulation_cards += f'''
+      <div class="lipo-card animate-on-scroll">
+        <div class="lipo-card-code">{f["code"]}</div>
+        <div class="lipo-card-name">{f["name"]}</div>
+        <div class="lipo-card-comp">{comp}</div>
+        <span class="lipo-badge">LIPOSOMAL · {f["form"]}</span>
+      </div>'''
+    return f'''
+<section class="liposomal" id="liposomal">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <div class="section-label">Advanced Delivery System</div>
+      <h2 class="section-title">Liposomal Technology</h2>
+      <p class="section-sub">Liposomal encapsulation wraps active ingredients in a phospholipid bilayer — mimicking cell membranes to achieve superior absorption, stability, and tolerability versus conventional oral forms.</p>
+    </div>
+    <div class="lipo-benefits">{benefit_cards}</div>
+    <div class="lipo-grid">{formulation_cards}</div>
+    <div class="lipo-cta">
+      <a href="#contact" class="btn btn-accent">Enquire About Liposomal Formulations</a>
+    </div>
+  </div>
+</section>'''
 
 def floating_html():
     return '''
@@ -1094,8 +1214,8 @@ NAV = f'''
       <a href="#" class="nav-logo"><img src="{LOGO}" alt="Bionial Lifesciences" class="nav-logo-img"></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
-        <li><a href="#platform">R&amp;D</a></li>
-        <li><a href="#services">Services</a></li>
+        <li><a href="#platform">Dosage Forms</a></li>
+        <li><a href="#liposomal">Liposomal</a></li>
         <li><a href="#catalogue">Formulations</a></li>
         <li><a href="#process">Process</a></li>
         <li><a href="#infrastructure">Infrastructure</a></li>
@@ -1115,7 +1235,7 @@ HERO = f'''
       <div>
         <div class="hero-badge"><span class="hero-badge-dot"></span>WHO-GMP Certified Facility — Mohali, India</div>
         <h1 class="hero-title">Precision Nutraceutical<br><span>Manufacturing.</span></h1>
-        <p class="hero-sub">Built for Brands That Scale.</p>
+        <p class="hero-sub">From Concept to Capsule.</p>
         <p class="hero-desc">Contract manufacturing for nutraceutical and Ayurvedic brands — capsules, tablets, syrups, powders, sachets. Low MOQ, fast turnaround, full compliance.</p>
         <div class="hero-ctas">
           <a href="#contact" class="btn btn-primary">Request a Quote</a>
@@ -1123,7 +1243,7 @@ HERO = f'''
         </div>
       </div>
       <div class="hero-img-wrap">
-        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=700&auto=format" alt="Pharmaceutical Manufacturing">
+        <img src="images/hero-bg.jpg" alt="Pharmaceutical Manufacturing">
         <div class="hero-float-badge">
           <div class="hero-float-item"><span class="hero-float-val">5+</span><span class="hero-float-lbl">Dosage Forms</span></div>
           <div class="hero-float-item"><span class="hero-float-val">200+</span><span class="hero-float-lbl">Formulations</span></div>
@@ -1151,8 +1271,8 @@ FOOT = f'''
 </body>
 </html>'''
 
-BODY = (NAV + HERO + cert_strip_html() + about_html() + services_html() +
-        product_tabs_html() + formulations_html() + health_segs_html() +
+BODY = (NAV + HERO + cert_strip_html() + trust_strip_html() + about_html() + services_html() +
+        liposomal_html() + product_tabs_html() + formulations_html() + health_segs_html() +
         process_html() + infra_html() + why_html() + faq_html() +
         contact_html() + footer_html(LOGO) + floating_html())
 

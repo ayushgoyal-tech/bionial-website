@@ -68,7 +68,7 @@ section { padding: 80px 0; }
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .nav-logo { display: flex; align-items: center; }
-.nav-logo-img { height: 64px; width: auto; display: block; }
+.nav-logo-img { height: 80px; width: auto; display: block; }
 .nav-links { display: flex; align-items: center; gap: 8px; }
 .nav-links a { font-size: 0.88rem; font-weight: 600; color: var(--primary); padding: 8px 14px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
 .nav-links a:hover { color: var(--accent); background: rgba(0,169,157,0.06); }
@@ -215,7 +215,41 @@ section { padding: 80px 0; }
 .form-tag.Juice { background: #FFF1F1; color: #b91c1c; }
 .form-tag.Semi-Solid { background: #E8FFF3; color: #166534; }
 .form-tag.Suspension { background: #F1F5F9; color: #475569; }
+.form-tag.Liposomal { background: #FFF0FB; color: #9d174d; }
 .form-view-all { text-align: center; }
+
+/* ===== TRUST STRIP ===== */
+.trust-strip { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 28px 0; }
+.trust-strip-inner { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.trust-strip-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+.trust-strip-logos { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.trust-logo-card { display: flex; align-items: center; gap: 10px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 10px 20px; }
+.trust-logo-dot { width: 10px; height: 10px; border-radius: 50%; }
+.trust-logo-text { font-size: 0.8rem; font-weight: 700; color: var(--text-sec); }
+
+/* ===== LIPOSOMAL SECTION ===== */
+.liposomal { background: linear-gradient(135deg, #001e3c 0%, var(--primary-dark) 60%, #003a2e 100%); position: relative; overflow: hidden; }
+.liposomal::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(0,169,157,0.12) 0%, transparent 65%); top: -100px; right: -100px; pointer-events: none; }
+.liposomal .section-label { color: var(--accent-light); }
+.liposomal .section-title { color: #fff; }
+.liposomal .section-sub { color: rgba(255,255,255,0.65); }
+.lipo-benefits { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; margin-bottom: 48px; }
+.lipo-benefit { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 24px 20px; text-align: center; }
+.lipo-benefit-icon { width: 52px; height: 52px; border-radius: 50%; background: rgba(0,169,157,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; color: var(--accent-light); }
+.lipo-benefit-icon svg { width: 24px; height: 24px; }
+.lipo-benefit h4 { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.lipo-benefit p { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+.lipo-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 32px; }
+.lipo-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 20px; transition: background 0.2s; }
+.lipo-card:hover { background: rgba(255,255,255,0.11); }
+.lipo-card-code { font-size: 0.65rem; font-weight: 700; color: var(--accent-light); letter-spacing: 0.1em; margin-bottom: 6px; }
+.lipo-card-name { font-size: 0.88rem; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 8px; }
+.lipo-card-comp { font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.5; margin-bottom: 10px; }
+.lipo-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(0,169,157,0.18); border: 1px solid rgba(0,169,157,0.35); border-radius: 4px; padding: 3px 8px; font-size: 0.65rem; font-weight: 700; color: var(--accent-light); letter-spacing: 0.06em; }
+.lipo-cta { text-align: center; margin-top: 8px; }
+@media (max-width: 1024px) { .lipo-benefits { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) { .lipo-benefits { grid-template-columns: repeat(2,1fr); } .lipo-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .lipo-grid { grid-template-columns: 1fr; } }
 .form-view-all button { background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 10px; padding: 12px 32px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
 .form-view-all button:hover { background: var(--primary); color: #fff; }
 
@@ -360,8 +394,8 @@ section { padding: 80px 0; }
       <a href="#" class="nav-logo"><img src="LogoAsset 1.png" alt="Bionial Lifesciences" class="nav-logo-img"></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
-        <li><a href="#platform">R&amp;D</a></li>
-        <li><a href="#services">Services</a></li>
+        <li><a href="#platform">Dosage Forms</a></li>
+        <li><a href="#liposomal">Liposomal</a></li>
         <li><a href="#catalogue">Formulations</a></li>
         <li><a href="#process">Process</a></li>
         <li><a href="#infrastructure">Infrastructure</a></li>
@@ -379,7 +413,7 @@ section { padding: 80px 0; }
       <div>
         <div class="hero-badge"><span class="hero-badge-dot"></span>WHO-GMP Certified Facility — Mohali, India</div>
         <h1 class="hero-title">Precision Nutraceutical<br><span>Manufacturing.</span></h1>
-        <p class="hero-sub">Built for Brands That Scale.</p>
+        <p class="hero-sub">From Concept to Capsule.</p>
         <p class="hero-desc">Contract manufacturing for nutraceutical and Ayurvedic brands — capsules, tablets, syrups, powders, sachets. Low MOQ, fast turnaround, full compliance.</p>
         <div class="hero-ctas">
           <a href="#contact" class="btn btn-primary">Request a Quote</a>
@@ -387,7 +421,7 @@ section { padding: 80px 0; }
         </div>
       </div>
       <div class="hero-img-wrap">
-        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=700&auto=format" alt="Pharmaceutical Manufacturing">
+        <img src="images/hero-bg.jpg" alt="Pharmaceutical Manufacturing">
         <div class="hero-float-badge">
           <div class="hero-float-item"><span class="hero-float-val">5+</span><span class="hero-float-lbl">Dosage Forms</span></div>
           <div class="hero-float-item"><span class="hero-float-val">200+</span><span class="hero-float-lbl">Formulations</span></div>
@@ -407,11 +441,19 @@ section { padding: 80px 0; }
     </div>
   </div>
 </section><div class="cert-strip"><div class="cert-track"><span class="cert-badge">WHO-GMP</span><span class="cert-badge">FSSAI</span><span class="cert-badge">ISO 9001:2015</span><span class="cert-badge">GMP Schedule M</span><span class="cert-badge">HALAL</span><span class="cert-badge">AYUSH GMP</span><span class="cert-badge">MSME Registered</span><span class="cert-badge">Make in India</span><span class="cert-badge">WHO-GMP</span><span class="cert-badge">FSSAI</span><span class="cert-badge">ISO 9001:2015</span><span class="cert-badge">GMP Schedule M</span><span class="cert-badge">HALAL</span><span class="cert-badge">AYUSH GMP</span><span class="cert-badge">MSME Registered</span><span class="cert-badge">Make in India</span><span class="cert-badge">WHO-GMP</span><span class="cert-badge">FSSAI</span><span class="cert-badge">ISO 9001:2015</span><span class="cert-badge">GMP Schedule M</span><span class="cert-badge">HALAL</span><span class="cert-badge">AYUSH GMP</span><span class="cert-badge">MSME Registered</span><span class="cert-badge">Make in India</span></div></div>
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-strip-inner">
+      <span class="trust-strip-label">Trusted by D2C brands, pharmacies, wellness companies &amp; exporters</span>
+      <div class="trust-strip-logos"><div class="trust-logo-card"><span class="trust-logo-dot" style="background:#3B82F6;"></span><span class="trust-logo-text">D2C Wellness Brand</span></div><div class="trust-logo-card"><span class="trust-logo-dot" style="background:#10B981;"></span><span class="trust-logo-text">Health Supplement Co.</span></div><div class="trust-logo-card"><span class="trust-logo-dot" style="background:#F59E0B;"></span><span class="trust-logo-text">Pharmacy Chain</span></div><div class="trust-logo-card"><span class="trust-logo-dot" style="background:#8B5CF6;"></span><span class="trust-logo-text">Nutraceutical Export</span></div><div class="trust-logo-card"><span class="trust-logo-dot" style="background:#EF4444;"></span><span class="trust-logo-text">Ayurvedic Brand</span></div></div>
+    </div>
+  </div>
+</div>
 <section class="about" id="about">
   <div class="container">
     <div class="about-grid">
       <div class="about-img-wrap animate-on-scroll">
-        <img src="https://images.unsplash.com/photo-1563213126-a4273aed2016?w=800&auto=format" alt="Bionial Lifesciences Facility">
+        <img src="images/about.jpg" alt="Bionial Lifesciences Facility">
         <div class="about-loc-card">
           <strong style="color:var(--primary);font-size:0.9rem;">Mohali, Punjab, India</strong>
           <p>Plot 459, Sector-82, JLPL Industrial Area</p>
@@ -473,6 +515,82 @@ section { padding: 80px 0; }
       </div></div>
   </div>
 </section>
+<section class="liposomal" id="liposomal">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <div class="section-label">Advanced Delivery System</div>
+      <h2 class="section-title">Liposomal Technology</h2>
+      <p class="section-sub">Liposomal encapsulation wraps active ingredients in a phospholipid bilayer — mimicking cell membranes to achieve superior absorption, stability, and tolerability versus conventional oral forms.</p>
+    </div>
+    <div class="lipo-benefits">
+      <div class="lipo-benefit animate-on-scroll">
+        <div class="lipo-benefit-icon"><i data-lucide="trending-up"></i></div>
+        <h4>Better Bioavailability</h4>
+        <p>Up to 10–29× greater absorption vs standard oral dosage forms.</p>
+      </div>
+      <div class="lipo-benefit animate-on-scroll">
+        <div class="lipo-benefit-icon"><i data-lucide="shield-check"></i></div>
+        <h4>Improved Absorption & Reduced GI Effects</h4>
+        <p>Phospholipid membrane protects actives through the GI tract, reducing side effects.</p>
+      </div>
+      <div class="lipo-benefit animate-on-scroll">
+        <div class="lipo-benefit-icon"><i data-lucide="lock"></i></div>
+        <h4>Improved Stability</h4>
+        <p>Active ingredient protected from enzymatic degradation in the body.</p>
+      </div>
+      <div class="lipo-benefit animate-on-scroll">
+        <div class="lipo-benefit-icon"><i data-lucide="zap"></i></div>
+        <h4>Enhanced Efficacy & Tolerance</h4>
+        <p>Precise cellular delivery increases drug effectiveness and patient tolerance.</p>
+      </div></div>
+    <div class="lipo-grid">
+      <div class="lipo-card animate-on-scroll">
+        <div class="lipo-card-code">BL-LP-01</div>
+        <div class="lipo-card-name">Liposomal Iron — Ferric Pyrophosphate + Folic Acid + B12 + Vit C</div>
+        <div class="lipo-card-comp">Liposomal Ferric Pyrophosphate Eq. to Elemental Iron 29mg · Folic Acid 200mcg · Vit B12 1.2mcg · Vit C 50mg</div>
+        <span class="lipo-badge">LIPOSOMAL · Tablets</span>
+      </div>
+      <div class="lipo-card animate-on-scroll">
+        <div class="lipo-card-code">BL-LP-02</div>
+        <div class="lipo-card-name">Liposomal Calcium — Tribasic Calcium Phosphate + L-Lysine + Zinc + D3 + Selenium</div>
+        <div class="lipo-card-comp">Tribasic Calcium Phosphate Eq. to Elemental Calcium 500mg · L-Lysine 25mg · Zinc Oxide 10mg · D3 400IU · Selenium 40mcg</div>
+        <span class="lipo-badge">LIPOSOMAL · Tablets</span>
+      </div>
+      <div class="lipo-card animate-on-scroll">
+        <div class="lipo-card-code">BL-LP-03</div>
+        <div class="lipo-card-name">Liposomal Silymarin — Milk Thistle 80% + Dandelion + Eriocitrin + Extramel + Schisandra + Maxshield</div>
+        <div class="lipo-card-comp">Milk Thistle Extract (Liposomal, 80%) 80mg · Dandelion 50mg · Eriocitrin 25mg · Extramel 10mg · Vit E 10mg · Schisandra 250mg · Maxshield 300mg</div>
+        <span class="lipo-badge">LIPOSOMAL · Tablets</span>
+      </div>
+      <div class="lipo-card animate-on-scroll">
+        <div class="lipo-card-code">BL-LP-04</div>
+        <div class="lipo-card-name">Liposomal CoQ10 — CoQ10 100mg + Levo-Carnitine + Zinc + Lycopene + Astaxanthin</div>
+        <div class="lipo-card-comp">Liposomal CoQ10 100mg · Levo-Carnitine 340mg · Zinc 12mg · Lycopene 2.5mg · Astaxanthin 4mg</div>
+        <span class="lipo-badge">LIPOSOMAL · Tablets</span>
+      </div>
+      <div class="lipo-card animate-on-scroll">
+        <div class="lipo-card-code">BL-LP-05</div>
+        <div class="lipo-card-name">Liposomal Glutathione — Reduced Glutathione (High Bioavailability)</div>
+        <div class="lipo-card-comp">Reduced L-Glutathione in phospholipid bilayer encapsulation — superior intracellular delivery</div>
+        <span class="lipo-badge">LIPOSOMAL · Capsules</span>
+      </div>
+      <div class="lipo-card animate-on-scroll">
+        <div class="lipo-card-code">BL-LP-06</div>
+        <div class="lipo-card-name">Liposomal Magnesium — Magnesium Citrate 200mg + L-Carnitine L-Tartrate + Vit E</div>
+        <div class="lipo-card-comp">Magnesium Citrate Eq. to Elemental Mg 200mg · L-Carnitine L-Tartrate 500mg · Vit E 10mg</div>
+        <span class="lipo-badge">LIPOSOMAL · Tablets</span>
+      </div>
+      <div class="lipo-card animate-on-scroll">
+        <div class="lipo-card-code">BL-LP-07</div>
+        <div class="lipo-card-name">Liposomal Curcumin — Curcuma Longa Extract (Advanced Delivery System)</div>
+        <div class="lipo-card-comp">Curcuma Longa Extract in liposomal carrier — up to 29× greater bioavailability vs standard curcumin</div>
+        <span class="lipo-badge">LIPOSOMAL · Capsules</span>
+      </div></div>
+    <div class="lipo-cta">
+      <a href="#contact" class="btn btn-accent">Enquire About Liposomal Formulations</a>
+    </div>
+  </div>
+</section>
 <section class="product-range" id="platform">
   <div class="container">
     <div class="section-header animate-on-scroll">
@@ -483,7 +601,7 @@ section { padding: 80px 0; }
     <div class="tab-bar"><button class="tab-btn active" data-tab="capsules">Capsules</button><button class="tab-btn " data-tab="softgels">Softgels</button><button class="tab-btn " data-tab="tablets">Tablets</button><button class="tab-btn " data-tab="syrups">Syrups</button><button class="tab-btn " data-tab="powders">Powders</button><button class="tab-btn " data-tab="sachets">Sachets</button><button class="tab-btn " data-tab="ayurvedic">Ayurvedic</button></div>
     
       <div class="product-panel active" data-panel="capsules">
-        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&auto=format" alt="Capsules">
+        <img src="images/product-capsules.jpg" alt="Capsules">
         <div>
           <h3>Capsules</h3>
           <p>HPMC & gelatin hard-shell capsules for powders, granules, pellets. Size 00–4 available. Ideal for herbal, nutraceutical and pharmaceutical applications.</p>
@@ -501,7 +619,7 @@ section { padding: 80px 0; }
         </div>
       </div>
       <div class="product-panel " data-panel="tablets">
-        <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=600&auto=format" alt="Tablets">
+        <img src="images/product-tablets.jpg" alt="Tablets">
         <div>
           <h3>Tablets</h3>
           <p>Film-coated, sugar-coated, effervescent and SR/ER tablets. High-compression presses with in-line weight checking ensure batch uniformity.</p>
@@ -510,7 +628,7 @@ section { padding: 80px 0; }
         </div>
       </div>
       <div class="product-panel " data-panel="syrups">
-        <img src="https://images.unsplash.com/photo-1624454002302-36b824d7bd0a?w=600&auto=format" alt="Syrups">
+        <img src="images/product-syrups.jpg" alt="Syrups">
         <div>
           <h3>Syrups</h3>
           <p>Liquid oral dosage forms — syrups, suspensions, tonics and herbal juices. Sugar-free formulations available. Aseptic filling with 30 ml–500 ml bottles.</p>
@@ -519,7 +637,7 @@ section { padding: 80px 0; }
         </div>
       </div>
       <div class="product-panel " data-panel="powders">
-        <img src="https://images.unsplash.com/photo-1564071174699-aef9db97c0c6?w=600&auto=format" alt="Powders">
+        <img src="images/product-powders.jpg" alt="Powders">
         <div>
           <h3>Powders</h3>
           <p>Protein blends, sports nutrition, instant-dissolve sachets, and bulk nutraceutical powders. Spray-dried for superior solubility.</p>
@@ -528,7 +646,7 @@ section { padding: 80px 0; }
         </div>
       </div>
       <div class="product-panel " data-panel="sachets">
-        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&auto=format" alt="Sachets">
+        <img src="images/product-sachets.jpg" alt="Sachets">
         <div>
           <h3>Sachets</h3>
           <p>Single-dose sachets for convenience and compliance — effervescent granules, powders, and pre-mixed beverages. Child-resistant and tamper-evident options.</p>
@@ -537,7 +655,7 @@ section { padding: 80px 0; }
         </div>
       </div>
       <div class="product-panel " data-panel="ayurvedic">
-        <img src="https://images.unsplash.com/photo-1611095973763-414019e72400?w=600&auto=format" alt="Ayurvedic">
+        <img src="images/product-ayurveda.jpg" alt="Ayurvedic">
         <div>
           <h3>Ayurvedic</h3>
           <p>AYUSH GMP compliant classical and patent Ayurvedic formulations — Churna, Kwath, Asava-Arishta, Avaleha and Ghanvati. Schedule E(1) herbs handled.</p>
@@ -554,7 +672,7 @@ section { padding: 80px 0; }
       <h2 class="section-title">200+ Ready-to-Manufacture Formulations</h2>
       <p class="section-sub">Filter by category or health segment. All formulations are market-tested with available CoA and spec sheets.</p>
     </div>
-    <div class="cat-tabs"><button class="cat-btn active" data-cat="all">All Formulations</button><button class="cat-btn " data-cat="bone-joint">Bone & Joint</button><button class="cat-btn " data-cat="vitamins">Vitamins & Minerals</button><button class="cat-btn " data-cat="ophthalmic">Eye Health</button><button class="cat-btn " data-cat="womens-health">Women's Health</button><button class="cat-btn " data-cat="liver-digestive">Liver & Digestive</button><button class="cat-btn " data-cat="nerve-brain">Nerve & Brain</button><button class="cat-btn " data-cat="heart-metabolic">Heart & Metabolic</button><button class="cat-btn " data-cat="sports-immunity">Sports & Immunity</button><button class="cat-btn " data-cat="syrups-liquids">Syrups & Liquids</button><button class="cat-btn " data-cat="ayurvedic">Ayurvedic</button></div>
+    <div class="cat-tabs"><button class="cat-btn active" data-cat="all">All Formulations</button><button class="cat-btn " data-cat="bone-joint">Bone & Joint</button><button class="cat-btn " data-cat="vitamins">Vitamins & Minerals</button><button class="cat-btn " data-cat="ophthalmic">Eye Health</button><button class="cat-btn " data-cat="womens-health">Women's Health</button><button class="cat-btn " data-cat="liver-digestive">Liver & Digestive</button><button class="cat-btn " data-cat="nerve-brain">Nerve & Brain</button><button class="cat-btn " data-cat="heart-metabolic">Heart & Metabolic</button><button class="cat-btn " data-cat="sports-immunity">Sports & Immunity</button><button class="cat-btn " data-cat="syrups-liquids">Syrups & Liquids</button><button class="cat-btn " data-cat="ayurvedic">Ayurvedic</button><button class="cat-btn " data-cat="liposomal">Liposomal Technology</button></div>
     <div id="form-grid"></div>
     <div class="form-view-all"><button id="view-all-btn">View All Formulations</button></div>
   </div>
@@ -628,7 +746,7 @@ section { padding: 80px 0; }
         <a href="#contact" class="btn btn-primary" style="margin-top:28px;display:inline-flex;">Request Site Tour</a>
       </div>
       <div>
-        <img class="infra-img animate-on-scroll" src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=700&auto=format" alt="Bionial Manufacturing Facility">
+        <img class="infra-img animate-on-scroll" src="images/infrastructure.jpg" alt="Bionial Manufacturing Facility">
       </div>
     </div>
   </div>
@@ -750,13 +868,14 @@ section { padding: 80px 0; }
     <div class="footer-grid">
       <div>
         <img src="LogoAsset 1.png" alt="Bionial Lifesciences" style="height:52px;filter:brightness(0) invert(1);margin-bottom:8px;">
-        <p class="footer-brand-desc">Precision nutraceutical contract manufacturing in Mohali, Punjab. Built for brands that scale — capsules, tablets, syrups, powders and sachets with startup-friendly MOQs and transparent pricing.</p>
+        <p class="footer-brand-desc">From concept to capsule — precision nutraceutical contract manufacturing in Mohali, Punjab. Capsules, tablets, syrups, powders, sachets and Liposomal formulations with startup-friendly MOQs.</p>
       </div>
       <div>
         <h4>Quick Links</h4>
         <ul class="footer-links">
           <li><a href="#about">About Us</a></li>
           <li><a href="#platform">Dosage Forms</a></li>
+          <li><a href="#liposomal">Liposomal Technology</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#catalogue">Formulations</a></li>
           <li><a href="#categories">Health Segments</a></li>
@@ -809,7 +928,7 @@ section { padding: 80px 0; }
 <script>
 
 // Formulations data
-const FORMULATIONS = [{"code": "BL-BJ-01", "name": "Calcium Citrate + D3 + K2 Tablets", "cat": "bone-joint", "form": "Tablets", "health": ["bone-joint", "general-wellness"]}, {"code": "BL-BJ-02", "name": "Glucosamine + Chondroitin + MSM Capsules", "cat": "bone-joint", "form": "Capsules", "health": ["bone-joint", "sports-fitness"]}, {"code": "BL-BJ-03", "name": "Collagen Peptides + Hyaluronic Acid Tablets", "cat": "bone-joint", "form": "Tablets", "health": ["bone-joint", "skin-beauty"]}, {"code": "BL-BJ-04", "name": "Calcium Carbonate + Magnesium + Zinc Tablets", "cat": "bone-joint", "form": "Tablets", "health": ["bone-joint"]}, {"code": "BL-BJ-05", "name": "Omega-3 + Calcium + D3 Softgels", "cat": "bone-joint", "form": "Softgels", "health": ["bone-joint", "heart-metabolic"]}, {"code": "BL-BJ-06", "name": "Boron + Silica + Strontium Capsules", "cat": "bone-joint", "form": "Capsules", "health": ["bone-joint"]}, {"code": "BL-BJ-07", "name": "Curcumin + Boswellia + Ginger Extract Capsules", "cat": "bone-joint", "form": "Capsules", "health": ["bone-joint", "immunity"]}, {"code": "BL-BJ-08", "name": "Vitamin D3 5000 IU Softgels", "cat": "bone-joint", "form": "Softgels", "health": ["bone-joint", "immunity", "general-wellness"]}, {"code": "BL-VM-01", "name": "Multivitamin + Multimineral Tablets", "cat": "vitamins", "form": "Tablets", "health": ["general-wellness", "immunity"]}, {"code": "BL-VM-02", "name": "Vitamin C 1000 mg Effervescent Tablets", "cat": "vitamins", "form": "Tablets", "health": ["immunity", "general-wellness"]}, {"code": "BL-VM-03", "name": "B-Complex + Folic Acid Capsules", "cat": "vitamins", "form": "Capsules", "health": ["nerve-brain", "general-wellness"]}, {"code": "BL-VM-04", "name": "Zinc + Selenium + Copper Tablets", "cat": "vitamins", "form": "Tablets", "health": ["immunity", "general-wellness"]}, {"code": "BL-VM-05", "name": "Iron + Folic Acid + B12 Tablets", "cat": "vitamins", "form": "Tablets", "health": ["womens-health", "general-wellness"]}, {"code": "BL-VM-06", "name": "Magnesium Glycinate Capsules", "cat": "vitamins", "form": "Capsules", "health": ["nerve-brain", "sports-fitness"]}, {"code": "BL-VM-07", "name": "Vitamin E 400 IU Softgels", "cat": "vitamins", "form": "Softgels", "health": ["skin-beauty", "general-wellness"]}, {"code": "BL-VM-08", "name": "Biotin 10000 mcg Tablets", "cat": "vitamins", "form": "Tablets", "health": ["skin-beauty", "general-wellness"]}, {"code": "BL-VM-09", "name": "Coenzyme Q10 100 mg Softgels", "cat": "vitamins", "form": "Softgels", "health": ["heart-metabolic", "general-wellness"]}, {"code": "BL-VM-10", "name": "Lycopene + Astaxanthin Softgels", "cat": "vitamins", "form": "Softgels", "health": ["skin-beauty", "immunity"]}, {"code": "BL-EH-01", "name": "Lutein 20mg + Zeaxanthin + Bilberry Softgels", "cat": "ophthalmic", "form": "Softgels", "health": ["eye-health"]}, {"code": "BL-EH-02", "name": "Vitamin A + Beta-Carotene Eye Capsules", "cat": "ophthalmic", "form": "Capsules", "health": ["eye-health"]}, {"code": "BL-EH-03", "name": "Omega-3 DHA + Lutein Eye Softgels", "cat": "ophthalmic", "form": "Softgels", "health": ["eye-health", "heart-metabolic"]}, {"code": "BL-EH-04", "name": "AREDS2 Formula Tablets", "cat": "ophthalmic", "form": "Tablets", "health": ["eye-health"]}, {"code": "BL-EH-05", "name": "Astaxanthin 4mg Softgels", "cat": "ophthalmic", "form": "Softgels", "health": ["eye-health", "skin-beauty"]}, {"code": "BL-EH-06", "name": "Eyebright + Bilberry Extract Capsules", "cat": "ophthalmic", "form": "Capsules", "health": ["eye-health"]}, {"code": "BL-WH-01", "name": "Prenatal Multivitamin + DHA Softgels", "cat": "womens-health", "form": "Softgels", "health": ["womens-health"]}, {"code": "BL-WH-02", "name": "Shatavari + Lodhra + Ashoka Capsules", "cat": "womens-health", "form": "Capsules", "health": ["womens-health"]}, {"code": "BL-WH-03", "name": "Evening Primrose Oil 1000 mg Softgels", "cat": "womens-health", "form": "Softgels", "health": ["womens-health", "skin-beauty"]}, {"code": "BL-WH-04", "name": "PCOS Support — Myo-Inositol + D-Chiro Sachets", "cat": "womens-health", "form": "Powder", "health": ["womens-health", "metabolic"]}, {"code": "BL-WH-05", "name": "Menopause Relief — Black Cohosh + Dong Quai Capsules", "cat": "womens-health", "form": "Capsules", "health": ["womens-health"]}, {"code": "BL-WH-06", "name": "Iron + Folic Acid + B12 + C Tablets", "cat": "womens-health", "form": "Tablets", "health": ["womens-health", "general-wellness"]}, {"code": "BL-WH-07", "name": "Calcium + D3 + Magnesium Tablets (Women's)", "cat": "womens-health", "form": "Tablets", "health": ["womens-health", "bone-joint"]}, {"code": "BL-WH-08", "name": "Biotin + Keratin + Silica Hair Capsules", "cat": "womens-health", "form": "Capsules", "health": ["womens-health", "skin-beauty"]}, {"code": "BL-LD-01", "name": "Liv-52 Type — Silymarin + Artichoke Tablets", "cat": "liver-digestive", "form": "Tablets", "health": ["liver-digestive"]}, {"code": "BL-LD-02", "name": "Probiotics 30 Billion CFU Multi-strain Capsules", "cat": "liver-digestive", "form": "Capsules", "health": ["liver-digestive", "immunity"]}, {"code": "BL-LD-03", "name": "Digestive Enzyme Complex Capsules", "cat": "liver-digestive", "form": "Capsules", "health": ["liver-digestive"]}, {"code": "BL-LD-04", "name": "Prebiotic + Probiotic + Postbiotic Sachets", "cat": "liver-digestive", "form": "Powder", "health": ["liver-digestive"]}, {"code": "BL-LD-05", "name": "Milk Thistle 80% Silymarin Capsules", "cat": "liver-digestive", "form": "Capsules", "health": ["liver-digestive"]}, {"code": "BL-LD-06", "name": "Triphala + Senna Laxative Tablets", "cat": "liver-digestive", "form": "Tablets", "health": ["liver-digestive"]}, {"code": "BL-LD-07", "name": "Glutamine + Zinc + Probiotics Gut Health Sachets", "cat": "liver-digestive", "form": "Powder", "health": ["liver-digestive", "sports-fitness"]}, {"code": "BL-LD-08", "name": "Apple Cider Vinegar 500 mg Capsules", "cat": "liver-digestive", "form": "Capsules", "health": ["liver-digestive", "metabolic"]}, {"code": "BL-NB-01", "name": "Brahmi + Lion's Mane + Bacopa Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-NB-02", "name": "Omega-3 DHA 1000 mg Softgels", "cat": "nerve-brain", "form": "Softgels", "health": ["nerve-brain", "heart-metabolic"]}, {"code": "BL-NB-03", "name": "Melatonin 5 mg Sleep Tablets", "cat": "nerve-brain", "form": "Tablets", "health": ["nerve-brain"]}, {"code": "BL-NB-04", "name": "L-Theanine + Ashwagandha + GABA Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-NB-05", "name": "Ginkgo Biloba + Phosphatidylserine Tablets", "cat": "nerve-brain", "form": "Tablets", "health": ["nerve-brain"]}, {"code": "BL-NB-06", "name": "5-HTP + Saffron + B6 Mood Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-NB-07", "name": "Alpha GPC + Huperzine A Nootropic Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-NB-08", "name": "Magnesium L-Threonate Sleep + Cognitive Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-HM-01", "name": "Omega-3 Concentrate 60% EPA/DHA Softgels", "cat": "heart-metabolic", "form": "Softgels", "health": ["heart-metabolic"]}, {"code": "BL-HM-02", "name": "Red Yeast Rice + CoQ10 Capsules", "cat": "heart-metabolic", "form": "Capsules", "health": ["heart-metabolic"]}, {"code": "BL-HM-03", "name": "Berberine 500 mg Capsules", "cat": "heart-metabolic", "form": "Capsules", "health": ["heart-metabolic", "metabolic"]}, {"code": "BL-HM-04", "name": "Chromium Picolinate + Gymnema + Bitter Melon Tablets", "cat": "heart-metabolic", "form": "Tablets", "health": ["heart-metabolic", "metabolic"]}, {"code": "BL-HM-05", "name": "Garlic 1000 mg Odourless Softgels", "cat": "heart-metabolic", "form": "Softgels", "health": ["heart-metabolic", "immunity"]}, {"code": "BL-HM-06", "name": "Nattokinase + Serrapeptase Capsules", "cat": "heart-metabolic", "form": "Capsules", "health": ["heart-metabolic"]}, {"code": "BL-HM-07", "name": "Plant Sterols + Policosanol Tablets", "cat": "heart-metabolic", "form": "Tablets", "health": ["heart-metabolic"]}, {"code": "BL-HM-08", "name": "Resveratrol + Pterostilbene Capsules", "cat": "heart-metabolic", "form": "Capsules", "health": ["heart-metabolic", "general-wellness"]}, {"code": "BL-SI-01", "name": "Whey Protein Isolate + Digestive Enzyme Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness"]}, {"code": "BL-SI-02", "name": "Creatine Monohydrate 3g Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness"]}, {"code": "BL-SI-03", "name": "BCAA 2:1:1 + Electrolyte Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness"]}, {"code": "BL-SI-04", "name": "Pre-workout Complex — Citrulline + Beta-Alanine + Caffeine Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness"]}, {"code": "BL-SI-05", "name": "Vitamin C + Zinc + Elderberry Immunity Tablets", "cat": "sports-immunity", "form": "Tablets", "health": ["immunity"]}, {"code": "BL-SI-06", "name": "Ashwagandha KSM-66 600 mg Capsules", "cat": "sports-immunity", "form": "Capsules", "health": ["sports-fitness", "nerve-brain", "immunity"]}, {"code": "BL-SI-07", "name": "Glutamine 5g Powder Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness", "liver-digestive"]}, {"code": "BL-SI-08", "name": "Turkesterone + Fadogia Agrestis Capsules", "cat": "sports-immunity", "form": "Capsules", "health": ["sports-fitness"]}, {"code": "BL-SI-09", "name": "Multivitamin for Athletes Tablets", "cat": "sports-immunity", "form": "Tablets", "health": ["sports-fitness", "general-wellness"]}, {"code": "BL-SI-10", "name": "Beta-Glucan 1,3/1,6 Immunity Capsules", "cat": "sports-immunity", "form": "Capsules", "health": ["immunity"]}, {"code": "BL-SL-01", "name": "Iron + Folic Acid + B12 Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["womens-health", "general-wellness"]}, {"code": "BL-SL-02", "name": "Calcium + Magnesium + Zinc + D3 Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["bone-joint", "general-wellness"]}, {"code": "BL-SL-03", "name": "Multivitamin Kids Syrup (Sugar-Free)", "cat": "syrups-liquids", "form": "Syrup", "health": ["general-wellness", "immunity"]}, {"code": "BL-SL-04", "name": "Amla + Aloe Vera + Wheatgrass Juice", "cat": "syrups-liquids", "form": "Juice", "health": ["liver-digestive", "immunity"]}, {"code": "BL-SL-05", "name": "Ashwagandha + Shilajit Tonic Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["sports-fitness", "nerve-brain"]}, {"code": "BL-SL-06", "name": "Giloy + Tulsi + Neem Immunity Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["immunity"]}, {"code": "BL-SL-07", "name": "Haemoglobin + Iron + Protein Liquid Tonic", "cat": "syrups-liquids", "form": "Syrup", "health": ["womens-health", "general-wellness"]}, {"code": "BL-SL-08", "name": "Cough + Cold Herbal Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["immunity"]}, {"code": "BL-SL-09", "name": "Appetite Stimulant + Digestive Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["liver-digestive"]}, {"code": "BL-AY-01", "name": "Ashwagandha Churna (KSM-66 Standardised)", "cat": "ayurvedic", "form": "Powder", "health": ["nerve-brain", "sports-fitness", "immunity"]}, {"code": "BL-AY-02", "name": "Triphala Churna — Digestive & Detox", "cat": "ayurvedic", "form": "Powder", "health": ["liver-digestive"]}, {"code": "BL-AY-03", "name": "Chyawanprash — Classical Immunity Formula", "cat": "ayurvedic", "form": "Semi-Solid", "health": ["immunity", "general-wellness"]}, {"code": "BL-AY-04", "name": "Mahasudarshan Ghanvati Tablets", "cat": "ayurvedic", "form": "Tablets", "health": ["immunity"]}, {"code": "BL-AY-05", "name": "Chandraprabha Vati Tablets", "cat": "ayurvedic", "form": "Tablets", "health": ["metabolic", "liver-digestive"]}, {"code": "BL-AY-06", "name": "Arjunarishta — Cardiac Tonic", "cat": "ayurvedic", "form": "Syrup", "health": ["heart-metabolic"]}, {"code": "BL-AY-07", "name": "Drakshasava — General Tonic", "cat": "ayurvedic", "form": "Syrup", "health": ["general-wellness"]}, {"code": "BL-AY-08", "name": "Brahmi + Shankhpushpi Syrup — Brain Tonic", "cat": "ayurvedic", "form": "Syrup", "health": ["nerve-brain"]}, {"code": "BL-AY-09", "name": "Shatavari Granules — Women's Wellness", "cat": "ayurvedic", "form": "Powder", "health": ["womens-health"]}];
+const FORMULATIONS = [{"code": "BL-BJ-01", "name": "Calcium Citrate + D3 + K2 Tablets", "cat": "bone-joint", "form": "Tablets", "health": ["bone-joint", "general-wellness"]}, {"code": "BL-BJ-02", "name": "Glucosamine + Chondroitin + MSM Capsules", "cat": "bone-joint", "form": "Capsules", "health": ["bone-joint", "sports-fitness"]}, {"code": "BL-BJ-03", "name": "Collagen Peptides + Hyaluronic Acid Tablets", "cat": "bone-joint", "form": "Tablets", "health": ["bone-joint", "skin-beauty"]}, {"code": "BL-BJ-04", "name": "Calcium Carbonate + Magnesium + Zinc Tablets", "cat": "bone-joint", "form": "Tablets", "health": ["bone-joint"]}, {"code": "BL-BJ-05", "name": "Omega-3 + Calcium + D3 Softgels", "cat": "bone-joint", "form": "Softgels", "health": ["bone-joint", "heart-metabolic"]}, {"code": "BL-BJ-06", "name": "Boron + Silica + Strontium Capsules", "cat": "bone-joint", "form": "Capsules", "health": ["bone-joint"]}, {"code": "BL-BJ-07", "name": "Curcumin + Boswellia + Ginger Extract Capsules", "cat": "bone-joint", "form": "Capsules", "health": ["bone-joint", "immunity"]}, {"code": "BL-BJ-08", "name": "Vitamin D3 5000 IU Softgels", "cat": "bone-joint", "form": "Softgels", "health": ["bone-joint", "immunity", "general-wellness"]}, {"code": "BL-VM-01", "name": "Multivitamin + Multimineral Tablets", "cat": "vitamins", "form": "Tablets", "health": ["general-wellness", "immunity"]}, {"code": "BL-VM-02", "name": "Vitamin C 1000 mg Effervescent Tablets", "cat": "vitamins", "form": "Tablets", "health": ["immunity", "general-wellness"]}, {"code": "BL-VM-03", "name": "B-Complex + Folic Acid Capsules", "cat": "vitamins", "form": "Capsules", "health": ["nerve-brain", "general-wellness"]}, {"code": "BL-VM-04", "name": "Zinc + Selenium + Copper Tablets", "cat": "vitamins", "form": "Tablets", "health": ["immunity", "general-wellness"]}, {"code": "BL-VM-05", "name": "Iron + Folic Acid + B12 Tablets", "cat": "vitamins", "form": "Tablets", "health": ["womens-health", "general-wellness"]}, {"code": "BL-VM-06", "name": "Magnesium Glycinate Capsules", "cat": "vitamins", "form": "Capsules", "health": ["nerve-brain", "sports-fitness"]}, {"code": "BL-VM-07", "name": "Vitamin E 400 IU Softgels", "cat": "vitamins", "form": "Softgels", "health": ["skin-beauty", "general-wellness"]}, {"code": "BL-VM-08", "name": "Biotin 10000 mcg Tablets", "cat": "vitamins", "form": "Tablets", "health": ["skin-beauty", "general-wellness"]}, {"code": "BL-VM-09", "name": "Coenzyme Q10 100 mg Softgels", "cat": "vitamins", "form": "Softgels", "health": ["heart-metabolic", "general-wellness"]}, {"code": "BL-VM-10", "name": "Lycopene + Astaxanthin Softgels", "cat": "vitamins", "form": "Softgels", "health": ["skin-beauty", "immunity"]}, {"code": "BL-EH-01", "name": "Lutein 20mg + Zeaxanthin + Bilberry Softgels", "cat": "ophthalmic", "form": "Softgels", "health": ["eye-health"]}, {"code": "BL-EH-02", "name": "Vitamin A + Beta-Carotene Eye Capsules", "cat": "ophthalmic", "form": "Capsules", "health": ["eye-health"]}, {"code": "BL-EH-03", "name": "Omega-3 DHA + Lutein Eye Softgels", "cat": "ophthalmic", "form": "Softgels", "health": ["eye-health", "heart-metabolic"]}, {"code": "BL-EH-04", "name": "AREDS2 Formula Tablets", "cat": "ophthalmic", "form": "Tablets", "health": ["eye-health"]}, {"code": "BL-EH-05", "name": "Astaxanthin 4mg Softgels", "cat": "ophthalmic", "form": "Softgels", "health": ["eye-health", "skin-beauty"]}, {"code": "BL-EH-06", "name": "Eyebright + Bilberry Extract Capsules", "cat": "ophthalmic", "form": "Capsules", "health": ["eye-health"]}, {"code": "BL-WH-01", "name": "Prenatal Multivitamin + DHA Softgels", "cat": "womens-health", "form": "Softgels", "health": ["womens-health"]}, {"code": "BL-WH-02", "name": "Shatavari + Lodhra + Ashoka Capsules", "cat": "womens-health", "form": "Capsules", "health": ["womens-health"]}, {"code": "BL-WH-03", "name": "Evening Primrose Oil 1000 mg Softgels", "cat": "womens-health", "form": "Softgels", "health": ["womens-health", "skin-beauty"]}, {"code": "BL-WH-04", "name": "PCOS Support — Myo-Inositol + D-Chiro Sachets", "cat": "womens-health", "form": "Powder", "health": ["womens-health", "metabolic"]}, {"code": "BL-WH-05", "name": "Menopause Relief — Black Cohosh + Dong Quai Capsules", "cat": "womens-health", "form": "Capsules", "health": ["womens-health"]}, {"code": "BL-WH-06", "name": "Iron + Folic Acid + B12 + C Tablets", "cat": "womens-health", "form": "Tablets", "health": ["womens-health", "general-wellness"]}, {"code": "BL-WH-07", "name": "Calcium + D3 + Magnesium Tablets (Women's)", "cat": "womens-health", "form": "Tablets", "health": ["womens-health", "bone-joint"]}, {"code": "BL-WH-08", "name": "Biotin + Keratin + Silica Hair Capsules", "cat": "womens-health", "form": "Capsules", "health": ["womens-health", "skin-beauty"]}, {"code": "BL-LD-01", "name": "Liv-52 Type — Silymarin + Artichoke Tablets", "cat": "liver-digestive", "form": "Tablets", "health": ["liver-digestive"]}, {"code": "BL-LD-02", "name": "Probiotics 30 Billion CFU Multi-strain Capsules", "cat": "liver-digestive", "form": "Capsules", "health": ["liver-digestive", "immunity"]}, {"code": "BL-LD-03", "name": "Digestive Enzyme Complex Capsules", "cat": "liver-digestive", "form": "Capsules", "health": ["liver-digestive"]}, {"code": "BL-LD-04", "name": "Prebiotic + Probiotic + Postbiotic Sachets", "cat": "liver-digestive", "form": "Powder", "health": ["liver-digestive"]}, {"code": "BL-LD-05", "name": "Milk Thistle 80% Silymarin Capsules", "cat": "liver-digestive", "form": "Capsules", "health": ["liver-digestive"]}, {"code": "BL-LD-06", "name": "Triphala + Senna Laxative Tablets", "cat": "liver-digestive", "form": "Tablets", "health": ["liver-digestive"]}, {"code": "BL-LD-07", "name": "Glutamine + Zinc + Probiotics Gut Health Sachets", "cat": "liver-digestive", "form": "Powder", "health": ["liver-digestive", "sports-fitness"]}, {"code": "BL-LD-08", "name": "Apple Cider Vinegar 500 mg Capsules", "cat": "liver-digestive", "form": "Capsules", "health": ["liver-digestive", "metabolic"]}, {"code": "BL-NB-01", "name": "Brahmi + Lion's Mane + Bacopa Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-NB-02", "name": "Omega-3 DHA 1000 mg Softgels", "cat": "nerve-brain", "form": "Softgels", "health": ["nerve-brain", "heart-metabolic"]}, {"code": "BL-NB-03", "name": "Melatonin 5 mg Sleep Tablets", "cat": "nerve-brain", "form": "Tablets", "health": ["nerve-brain"]}, {"code": "BL-NB-04", "name": "L-Theanine + Ashwagandha + GABA Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-NB-05", "name": "Ginkgo Biloba + Phosphatidylserine Tablets", "cat": "nerve-brain", "form": "Tablets", "health": ["nerve-brain"]}, {"code": "BL-NB-06", "name": "5-HTP + Saffron + B6 Mood Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-NB-07", "name": "Alpha GPC + Huperzine A Nootropic Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-NB-08", "name": "Magnesium L-Threonate Sleep + Cognitive Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-HM-01", "name": "Omega-3 Concentrate 60% EPA/DHA Softgels", "cat": "heart-metabolic", "form": "Softgels", "health": ["heart-metabolic"]}, {"code": "BL-HM-02", "name": "Red Yeast Rice + CoQ10 Capsules", "cat": "heart-metabolic", "form": "Capsules", "health": ["heart-metabolic"]}, {"code": "BL-HM-03", "name": "Berberine 500 mg Capsules", "cat": "heart-metabolic", "form": "Capsules", "health": ["heart-metabolic", "metabolic"]}, {"code": "BL-HM-04", "name": "Chromium Picolinate + Gymnema + Bitter Melon Tablets", "cat": "heart-metabolic", "form": "Tablets", "health": ["heart-metabolic", "metabolic"]}, {"code": "BL-HM-05", "name": "Garlic 1000 mg Odourless Softgels", "cat": "heart-metabolic", "form": "Softgels", "health": ["heart-metabolic", "immunity"]}, {"code": "BL-HM-06", "name": "Nattokinase + Serrapeptase Capsules", "cat": "heart-metabolic", "form": "Capsules", "health": ["heart-metabolic"]}, {"code": "BL-HM-07", "name": "Plant Sterols + Policosanol Tablets", "cat": "heart-metabolic", "form": "Tablets", "health": ["heart-metabolic"]}, {"code": "BL-HM-08", "name": "Resveratrol + Pterostilbene Capsules", "cat": "heart-metabolic", "form": "Capsules", "health": ["heart-metabolic", "general-wellness"]}, {"code": "BL-SI-01", "name": "Whey Protein Isolate + Digestive Enzyme Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness"]}, {"code": "BL-SI-02", "name": "Creatine Monohydrate 3g Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness"]}, {"code": "BL-SI-03", "name": "BCAA 2:1:1 + Electrolyte Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness"]}, {"code": "BL-SI-04", "name": "Pre-workout Complex — Citrulline + Beta-Alanine + Caffeine Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness"]}, {"code": "BL-SI-05", "name": "Vitamin C + Zinc + Elderberry Immunity Tablets", "cat": "sports-immunity", "form": "Tablets", "health": ["immunity"]}, {"code": "BL-SI-06", "name": "Ashwagandha KSM-66 600 mg Capsules", "cat": "sports-immunity", "form": "Capsules", "health": ["sports-fitness", "nerve-brain", "immunity"]}, {"code": "BL-SI-07", "name": "Glutamine 5g Powder Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness", "liver-digestive"]}, {"code": "BL-SI-08", "name": "Turkesterone + Fadogia Agrestis Capsules", "cat": "sports-immunity", "form": "Capsules", "health": ["sports-fitness"]}, {"code": "BL-SI-09", "name": "Multivitamin for Athletes Tablets", "cat": "sports-immunity", "form": "Tablets", "health": ["sports-fitness", "general-wellness"]}, {"code": "BL-SI-10", "name": "Beta-Glucan 1,3/1,6 Immunity Capsules", "cat": "sports-immunity", "form": "Capsules", "health": ["immunity"]}, {"code": "BL-SL-01", "name": "Iron + Folic Acid + B12 Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["womens-health", "general-wellness"]}, {"code": "BL-SL-02", "name": "Calcium + Magnesium + Zinc + D3 Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["bone-joint", "general-wellness"]}, {"code": "BL-SL-03", "name": "Multivitamin Kids Syrup (Sugar-Free)", "cat": "syrups-liquids", "form": "Syrup", "health": ["general-wellness", "immunity"]}, {"code": "BL-SL-04", "name": "Amla + Aloe Vera + Wheatgrass Juice", "cat": "syrups-liquids", "form": "Juice", "health": ["liver-digestive", "immunity"]}, {"code": "BL-SL-05", "name": "Ashwagandha + Shilajit Tonic Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["sports-fitness", "nerve-brain"]}, {"code": "BL-SL-06", "name": "Giloy + Tulsi + Neem Immunity Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["immunity"]}, {"code": "BL-SL-07", "name": "Haemoglobin + Iron + Protein Liquid Tonic", "cat": "syrups-liquids", "form": "Syrup", "health": ["womens-health", "general-wellness"]}, {"code": "BL-SL-08", "name": "Cough + Cold Herbal Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["immunity"]}, {"code": "BL-SL-09", "name": "Appetite Stimulant + Digestive Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["liver-digestive"]}, {"code": "BL-AY-01", "name": "Ashwagandha Churna (KSM-66 Standardised)", "cat": "ayurvedic", "form": "Powder", "health": ["nerve-brain", "sports-fitness", "immunity"]}, {"code": "BL-AY-02", "name": "Triphala Churna — Digestive & Detox", "cat": "ayurvedic", "form": "Powder", "health": ["liver-digestive"]}, {"code": "BL-AY-03", "name": "Chyawanprash — Classical Immunity Formula", "cat": "ayurvedic", "form": "Semi-Solid", "health": ["immunity", "general-wellness"]}, {"code": "BL-AY-04", "name": "Mahasudarshan Ghanvati Tablets", "cat": "ayurvedic", "form": "Tablets", "health": ["immunity"]}, {"code": "BL-AY-05", "name": "Chandraprabha Vati Tablets", "cat": "ayurvedic", "form": "Tablets", "health": ["metabolic", "liver-digestive"]}, {"code": "BL-AY-06", "name": "Arjunarishta — Cardiac Tonic", "cat": "ayurvedic", "form": "Syrup", "health": ["heart-metabolic"]}, {"code": "BL-AY-07", "name": "Drakshasava — General Tonic", "cat": "ayurvedic", "form": "Syrup", "health": ["general-wellness"]}, {"code": "BL-AY-08", "name": "Brahmi + Shankhpushpi Syrup — Brain Tonic", "cat": "ayurvedic", "form": "Syrup", "health": ["nerve-brain"]}, {"code": "BL-AY-09", "name": "Shatavari Granules — Women's Wellness", "cat": "ayurvedic", "form": "Powder", "health": ["womens-health"]}, {"code": "BL-LP-01", "name": "Liposomal Iron — Ferric Pyrophosphate + Folic Acid + B12 + Vit C", "cat": "liposomal", "form": "Tablets", "health": ["womens-health", "general-wellness"]}, {"code": "BL-LP-02", "name": "Liposomal Calcium — Tribasic Calcium Phosphate + L-Lysine + Zinc + D3 + Selenium", "cat": "liposomal", "form": "Tablets", "health": ["bone-joint", "general-wellness"]}, {"code": "BL-LP-03", "name": "Liposomal Silymarin — Milk Thistle 80% + Dandelion + Eriocitrin + Extramel + Schisandra + Maxshield", "cat": "liposomal", "form": "Tablets", "health": ["liver-digestive"]}, {"code": "BL-LP-04", "name": "Liposomal CoQ10 — CoQ10 100mg + Levo-Carnitine + Zinc + Lycopene + Astaxanthin", "cat": "liposomal", "form": "Tablets", "health": ["heart-metabolic", "general-wellness"]}, {"code": "BL-LP-05", "name": "Liposomal Glutathione — Reduced Glutathione (High Bioavailability)", "cat": "liposomal", "form": "Capsules", "health": ["skin-beauty", "immunity", "liver-digestive"]}, {"code": "BL-LP-06", "name": "Liposomal Magnesium — Magnesium Citrate 200mg + L-Carnitine L-Tartrate + Vit E", "cat": "liposomal", "form": "Tablets", "health": ["nerve-brain", "sports-fitness", "bone-joint"]}, {"code": "BL-LP-07", "name": "Liposomal Curcumin — Curcuma Longa Extract (Advanced Delivery System)", "cat": "liposomal", "form": "Capsules", "health": ["bone-joint", "immunity", "liver-digestive"]}];
 
 // ─── State ───────────────────────────────────────────────────────────────────
 let activeCat = 'all';
