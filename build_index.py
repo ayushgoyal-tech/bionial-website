@@ -283,11 +283,10 @@ CSS = """
         display: flex; align-items: center; justify-content: space-between;
     }
     .logo-pill {
-        background: white; border-radius: 8px; padding: 5px 10px;
+        border-radius: 8px; padding: 5px 10px;
         display: inline-flex; align-items: center;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.18);
     }
-    .logo-pill img { height: 38px; width: auto; display: block; }
+    .logo-pill img { height: 54px; width: auto; display: block; }
     .nav-links {
         display: flex; align-items: center; gap: 32px;
     }
@@ -670,7 +669,7 @@ CSS = """
     .footer-logo-pill {
         display: inline-flex; align-items: center; margin-bottom: 16px;
     }
-    .footer-logo-pill img { height: 38px; filter: brightness(0) invert(1); }
+    .footer-logo-pill img { height: 54px; filter: brightness(0) invert(1); }
     .footer-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
     .footer-col h4 { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 18px; }
     .footer-links li + li { margin-top: 10px; }
