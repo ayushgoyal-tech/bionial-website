@@ -1,17 +1,17 @@
 
         /* ===== CSS VARIABLES ===== */
         :root {
-            --navy: #0B1D3A;
-            --navy-light: #132B52;
-            --navy-dark: #06111F;
-            --teal: #0D9488;
-            --teal-light: #14B8A6;
-            --teal-dark: #0A7A70;
-            --gold: #C9A84C;
-            --gold-light: #E0C76A;
+            --navy: #003D7A;
+            --navy-light: #1A5FAB;
+            --navy-dark: #002A5C;
+            --teal: #00A99D;
+            --teal-light: #17BDB3;
+            --teal-dark: #007A73;
+            --gold: #F7A800;
+            --gold-light: #FFC107;
             --green: #9CCC4B;
             --green-dark: #82AA38;
-            --cream: #FAF8F2;
+            --cream: #F8F9FA;
             --white: #FFFFFF;
             --gray-50: #F8FAFC;
             --gray-100: #F1F5F9;
@@ -1237,3 +1237,70 @@
         @media (max-width: 480px) {
             .catalogue-nav-grid { grid-template-columns: 1fr; }
         }
+
+        /* ===== CERTIFICATION AUTO-SCROLL BAR ===== */
+        .cert-bar {
+            background: var(--navy-dark);
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .cert-bar-track {
+            display: inline-flex;
+            gap: 40px;
+            animation: certScroll 35s linear infinite;
+        }
+        .cert-bar-track:hover { animation-play-state: paused; }
+        .cert-badge {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 4px 16px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        @keyframes certScroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        /* ===== FLOATING MOBILE CTA BAR ===== */
+        .floating-cta-bar {
+            display: none;
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            z-index: 998;
+            border-top: 1px solid rgba(0,0,0,0.15);
+        }
+        @media (max-width: 768px) {
+            .floating-cta-bar { display: flex; }
+            body { padding-bottom: 56px; }
+        }
+        .fcb-phone, .fcb-whatsapp {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 10px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            text-decoration: none;
+            color: white;
+            font-family: var(--font-body);
+        }
+        .fcb-phone { background: var(--navy); }
+        .fcb-whatsapp { background: #25D366; }
+        .fcb-phone:hover { background: var(--navy-light); }
+        .fcb-whatsapp:hover { background: #1DA851; }
+
+        /* ===== ICON SIZING FOR LUCIDE IN SPECIAL SECTIONS ===== */
+        .sustainability-icon svg,
+        .sustainability-icon i { width: 18px; height: 18px; display: inline-block; vertical-align: middle; }
+        .ayurveda-pillar-icon svg,
+        .ayurveda-pillar-icon i { width: 28px; height: 28px; display: block; }
