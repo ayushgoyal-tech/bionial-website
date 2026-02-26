@@ -283,9 +283,9 @@ CSS = """
         display: flex; align-items: center; justify-content: space-between;
     }
     .logo-pill {
-        background: var(--dark); border-radius: 8px; padding: 5px 10px;
+        background: white; border-radius: 8px; padding: 5px 10px;
         display: inline-flex; align-items: center;
-        transition: background 0.3s;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.18);
     }
     .logo-pill img { height: 38px; width: auto; display: block; }
     .nav-links {
@@ -668,10 +668,9 @@ CSS = """
     .footer { background: var(--dark); padding: 64px 0 0; }
     .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; }
     .footer-logo-pill {
-        background: var(--dark-lighter); border-radius: 8px; padding: 5px 10px;
         display: inline-flex; align-items: center; margin-bottom: 16px;
     }
-    .footer-logo-pill img { height: 38px; }
+    .footer-logo-pill img { height: 38px; filter: brightness(0) invert(1); }
     .footer-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
     .footer-col h4 { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 18px; }
     .footer-links li + li { margin-top: 10px; }
@@ -1063,7 +1062,7 @@ HTML = f"""<!DOCTYPE html>
     <div class="container">
         <div class="nav-inner">
             <a href="#" class="logo-pill">
-                <img src="Bionial Logo.png" alt="Bionial Lifesciences — Formulated Right">
+                <img src="LogoAsset 1.png" alt="Bionial Lifesciences — Formulated Right">
             </a>
             <div class="nav-links">
                 <a href="#about">About</a>
@@ -1550,7 +1549,7 @@ HTML = f"""<!DOCTYPE html>
         <div class="footer-grid">
             <div>
                 <div class="footer-logo-pill">
-                    <img src="Bionial Logo.png" alt="Bionial Lifesciences">
+                    <img src="LogoAsset 1.png" alt="Bionial Lifesciences">
                 </div>
                 <p class="footer-desc">Precision nutraceutical contract manufacturing in Mohali, Punjab. WHO-GMP certified. Built for brands that scale — capsules, tablets, syrups, powders, sachets, gummies &amp; Ayurvedic products.</p>
                 <div class="footer-social">
