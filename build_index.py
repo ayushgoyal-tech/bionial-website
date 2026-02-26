@@ -1,23 +1,202 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bionial Lifesciences | Nutraceutical Contract Manufacturing in Mohali, India</title>
-    <meta name="description" content="WHO-GMP certified nutraceutical & Ayurvedic contract manufacturer in Mohali, Punjab. 250+ ready formulations. Capsules, tablets, syrups, powders, sachets. 30-day delivery.">
-    <meta name="keywords" content="nutraceutical manufacturer India, contract manufacturing Mohali, third party manufacturing Punjab, capsule manufacturer, tablet manufacturer, private labeling nutraceuticals, FSSAI certified manufacturer, AYUSH GMP">
-    <link rel="canonical" href="https://bioniallifesciences.com">
-    <meta property="og:title" content="Bionial Lifesciences | Precision Nutraceutical Manufacturing">
-    <meta property="og:description" content="WHO-GMP certified nutraceutical & Ayurvedic contract manufacturer in Mohali. 250+ formulations. 30-day delivery.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://bioniallifesciences.com">
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <style>
+#!/usr/bin/env python3
+"""
+build_index.py — Generates the complete Bionial Lifesciences index.html
+Ground-up rebuild: single self-contained file with inline CSS + JS.
+"""
+import json
+
+FORMULATIONS = [
+    # ─── TABLETS (20) ───────────────────────────────────────────────────────
+    {"name":"Multivitamin & Multimineral Tablets","category":"tablets","health":["general-wellness"],"composition":"Vitamins A, B-Complex, C, D3, E + Zinc, Iron, Calcium"},
+    {"name":"Calcium Citrate + Vitamin D3 + Zinc Tablets","category":"tablets","health":["bone-joint","womens-health"],"composition":"Calcium Citrate 500mg, D3 400IU, Zinc 8mg"},
+    {"name":"Iron + Folic Acid + Vitamin C Tablets","category":"tablets","health":["womens-health"],"composition":"Ferrous Ascorbate 100mg, Folic Acid 1.5mg, Vit C 50mg"},
+    {"name":"Vitamin C + Zinc Chewable Tablets","category":"tablets","health":["immunity"],"composition":"Ascorbic Acid 500mg, Zinc Sulphate 10mg"},
+    {"name":"Biotin 10,000 mcg Tablets","category":"tablets","health":["skin-hair"],"composition":"D-Biotin 10,000mcg in tablet base"},
+    {"name":"Methylcobalamin + ALA + Folic Acid Tablets","category":"tablets","health":["brain-cognitive"],"composition":"Methyl B12 1500mcg, Alpha Lipoic Acid 100mg, Folic Acid 1.5mg"},
+    {"name":"Omega-3 (Flaxseed Extract) + Vitamin E Tablets","category":"tablets","health":["heart-cardio"],"composition":"Flaxseed Oil Ext 500mg, Vit E 25mg"},
+    {"name":"L-Arginine + Proanthocyanidin Tablets","category":"tablets","health":["heart-cardio","mens-health"],"composition":"L-Arginine HCl 500mg, Grape Seed Proanthocyanidin 75mg"},
+    {"name":"Ashwagandha 500mg Tablets","category":"tablets","health":["general-wellness","mens-health"],"composition":"Ashwagandha Root Extract 500mg (2.5% Withanolides)"},
+    {"name":"Garcinia Cambogia + Green Coffee Extract Tablets","category":"tablets","health":["weight-management"],"composition":"Garcinia 60% HCA 500mg, Green Coffee 45% CGA 200mg"},
+    {"name":"Glucosamine + Chondroitin + MSM Tablets","category":"tablets","health":["bone-joint"],"composition":"Glucosamine Sulphate 500mg, Chondroitin 400mg, MSM 250mg"},
+    {"name":"Coenzyme Q10 100mg + Omega-3 Tablets","category":"tablets","health":["heart-cardio"],"composition":"CoQ10 100mg, Omega-3 (EPA+DHA) 300mg"},
+    {"name":"Curcumin 95% + Piperine Tablets","category":"tablets","health":["immunity","bone-joint"],"composition":"Curcumin Extract 500mg (95%), Piperine 5mg"},
+    {"name":"Melatonin 5mg Sublingual Tablets","category":"tablets","health":["brain-cognitive"],"composition":"Melatonin 5mg in fast-dissolve sublingual base"},
+    {"name":"Vitamin D3 60,000 IU Chewable Tablets","category":"tablets","health":["immunity","bone-joint"],"composition":"Cholecalciferol 60,000 IU (weekly/monthly dose)"},
+    {"name":"Probiotics 50 Billion CFU + Prebiotics Tablets","category":"tablets","health":["digestion-gut"],"composition":"8-Strain Probiotic Blend 50B CFU, FOS 200mg"},
+    {"name":"Liver Detox (Milk Thistle + NAC + Dandelion) Tablets","category":"tablets","health":["liver-health"],"composition":"Milk Thistle 80% 200mg, NAC 300mg, Dandelion 150mg"},
+    {"name":"Collagen Peptides + Vitamin C + Hyaluronic Acid Tablets","category":"tablets","health":["skin-hair"],"composition":"Marine Collagen Peptides 500mg, Vit C 40mg, HA 25mg"},
+    {"name":"Berberine 500mg + Chromium Tablets","category":"tablets","health":["diabetes-management","weight-management"],"composition":"Berberine HCl 500mg, Chromium Picolinate 200mcg"},
+    {"name":"Shilajit 500mg + Safed Musli Tablets","category":"tablets","health":["mens-health","general-wellness"],"composition":"Purified Shilajit 500mg, Safed Musli Ext 250mg"},
+    # ─── CAPSULES (20) ──────────────────────────────────────────────────────
+    {"name":"Omega-3 Fish Oil 1000mg (EPA 360 + DHA 240) Softgels","category":"capsules","health":["heart-cardio"],"composition":"Fish Oil 1000mg (EPA 360mg + DHA 240mg)"},
+    {"name":"Evening Primrose Oil 1000mg Softgels","category":"capsules","health":["womens-health","skin-hair"],"composition":"Evening Primrose Oil 1000mg (GLA 90mg)"},
+    {"name":"Flaxseed Oil 1000mg Veg Softgels","category":"capsules","health":["heart-cardio"],"composition":"Cold-Pressed Flaxseed Oil 1000mg (ALA 530mg)"},
+    {"name":"Vitamin E 400 IU Softgels","category":"capsules","health":["skin-hair","general-wellness"],"composition":"Natural Mixed Tocopherols 400 IU"},
+    {"name":"CoQ10 100mg + Omega-3 Softgels","category":"capsules","health":["heart-cardio"],"composition":"Ubiquinone CoQ10 100mg, Omega-3 300mg"},
+    {"name":"CLA 1000mg Softgels","category":"capsules","health":["weight-management","sports-nutrition"],"composition":"Conjugated Linoleic Acid 1000mg (80% CLA content)"},
+    {"name":"Cod Liver Oil Softgels","category":"capsules","health":["bone-joint","general-wellness"],"composition":"Cod Liver Oil 1000mg (Vit A 850IU, Vit D 85IU, EPA+DHA 160mg)"},
+    {"name":"Multivitamin + Multimineral Softgels","category":"capsules","health":["general-wellness"],"composition":"Complete Vitamin & Mineral blend in softgel base"},
+    {"name":"Ashwagandha Extract 500mg Veg Capsules","category":"capsules","health":["general-wellness","mens-health"],"composition":"KSM-66 Ashwagandha 500mg (5% Withanolides)"},
+    {"name":"Probiotics 30 Billion CFU (8-Strain) Veg Capsules","category":"capsules","health":["digestion-gut"],"composition":"L. acidophilus, B. longum + 6 strains, 30B CFU, FOS 100mg"},
+    {"name":"Moringa Oleifera 500mg Veg Capsules","category":"capsules","health":["general-wellness"],"composition":"Moringa Leaf Powder 500mg (standardised extract)"},
+    {"name":"Turmeric Curcumin + Piperine Veg Capsules","category":"capsules","health":["immunity","bone-joint"],"composition":"Turmeric Extract 500mg (95% Curcumin), Piperine 5mg"},
+    {"name":"Green Tea Extract + Garcinia Veg Capsules","category":"capsules","health":["weight-management"],"composition":"EGCG Green Tea 400mg, Garcinia 60% HCA 200mg"},
+    {"name":"Fenugreek Seed Extract 500mg Veg Capsules","category":"capsules","health":["womens-health","diabetes-management"],"composition":"Fenugreek 500mg (50% Saponins)"},
+    {"name":"Saw Palmetto + Lycopene Veg Capsules","category":"capsules","health":["mens-health"],"composition":"Saw Palmetto Berry Ext 320mg, Lycopene 6mg"},
+    {"name":"Grape Seed Extract 250mg Veg Capsules","category":"capsules","health":["skin-hair","heart-cardio"],"composition":"Grape Seed OPC Extract 250mg (95% Proanthocyanidins)"},
+    {"name":"Tribulus Terrestris 1000mg Veg Capsules","category":"capsules","health":["mens-health","sports-nutrition"],"composition":"Tribulus Ext 1000mg (40% Saponins)"},
+    {"name":"Cranberry Extract 400mg Veg Capsules","category":"capsules","health":["general-wellness"],"composition":"Cranberry Concentrate 400mg (36mg PACs)"},
+    {"name":"Neem + Tulsi + Karela Veg Capsules","category":"capsules","health":["immunity","diabetes-management"],"composition":"Neem 200mg, Tulsi 200mg, Bitter Melon 100mg"},
+    {"name":"Sea Buckthorn Oil Softgels","category":"capsules","health":["skin-hair","womens-health"],"composition":"Sea Buckthorn Seed + Berry Oil 500mg (Omega-7 rich)"},
+    # ─── SYRUPS (15) ────────────────────────────────────────────────────────
+    {"name":"Multivitamin + Multimineral Syrup","category":"syrups","health":["general-wellness","kids-pediatric"],"composition":"Complete vitamin & mineral liquid suspension"},
+    {"name":"Iron + Folic Acid Syrup (Ferrous Ascorbate)","category":"syrups","health":["womens-health"],"composition":"Ferrous Ascorbate 30mg, Folic Acid 500mcg per 5ml"},
+    {"name":"Calcium + Vitamin D3 Suspension","category":"syrups","health":["bone-joint","kids-pediatric"],"composition":"Calcium Carbonate 500mg, Cholecalciferol 200IU per 5ml"},
+    {"name":"Appetizer Syrup (Ayurvedic)","category":"syrups","health":["digestion-gut","kids-pediatric"],"composition":"Ajwain, Saunf, Pudina, Jeera extracts"},
+    {"name":"Liver Tonic Syrup","category":"syrups","health":["liver-health"],"composition":"Kutki, Bhumi Amla, Chicory, Arjuna in syrup base"},
+    {"name":"Cough Syrup (Honey-based Ayurvedic)","category":"syrups","health":["immunity"],"composition":"Tulsi, Ginger, Honey, Mulethi, Pippali blend"},
+    {"name":"Digestive Enzyme Syrup","category":"syrups","health":["digestion-gut"],"composition":"Pepsin, Fungal Diastase, Papain in flavoured base"},
+    {"name":"Protein Liquid (Collagen + B-Complex)","category":"syrups","health":["skin-hair","general-wellness"],"composition":"Marine Collagen 5g, B-Complex per 30ml serving"},
+    {"name":"Vitamin C + Zinc Oral Solution","category":"syrups","health":["immunity"],"composition":"Ascorbic Acid 500mg, Zinc Sulphate 20mg per 15ml"},
+    {"name":"Immunity Booster Syrup (Giloy + Tulsi + Amla)","category":"syrups","health":["immunity"],"composition":"Giloy Extract, Tulsi Extract, Amla Extract in honey base"},
+    {"name":"Brain Tonic Syrup (Brahmi + Shankhpushpi)","category":"syrups","health":["brain-cognitive","kids-pediatric"],"composition":"Brahmi Extract, Shankhpushpi, Ashwagandha blend"},
+    {"name":"Noni Juice 500ml","category":"syrups","health":["general-wellness","immunity"],"composition":"Morinda citrifolia (Noni) 500ml, no added sugar"},
+    {"name":"Aloe Vera Juice (with Pulp) 500ml","category":"syrups","health":["digestion-gut","skin-hair"],"composition":"Aloe barbadensis leaf gel + pulp, 500ml"},
+    {"name":"Amla Juice 500ml","category":"syrups","health":["immunity","skin-hair"],"composition":"Indian Gooseberry fresh juice, 500mg Vit C per 30ml"},
+    {"name":"Karela Jamun Juice 500ml","category":"syrups","health":["diabetes-management"],"composition":"Bitter Melon + Jamun Seed blend, 500ml"},
+    # ─── POWDERS (10) ────────────────────────────────────────────────────────
+    {"name":"Whey Protein Concentrate 80%","category":"powders","health":["sports-nutrition"],"composition":"Whey Protein 24g, BCAA 5.4g per 30g serving"},
+    {"name":"Pea Protein Isolate","category":"powders","health":["sports-nutrition","general-wellness"],"composition":"Pea Protein Isolate 25g per 30g serving"},
+    {"name":"Mass Gainer Powder","category":"powders","health":["sports-nutrition"],"composition":"Carbs 60g, Protein 15g, Fats 2g per 100g serving"},
+    {"name":"BCAA 2:1:1 Powder","category":"powders","health":["sports-nutrition"],"composition":"Leucine 2.5g, Isoleucine 1.25g, Valine 1.25g per serving"},
+    {"name":"Pre-Workout Blend (Caffeine + Beta-Alanine + Citrulline)","category":"powders","health":["sports-nutrition"],"composition":"Caffeine 200mg, Beta-Alanine 3.2g, Citrulline 6g"},
+    {"name":"Women's Health Protein Blend","category":"powders","health":["womens-health","sports-nutrition"],"composition":"Whey 15g, Soy 5g, Iron, Folic Acid, Biotin per serving"},
+    {"name":"Joint Support Powder (Collagen + Glucosamine)","category":"powders","health":["bone-joint"],"composition":"Collagen Peptides 10g, Glucosamine 1.5g, Vit C 40mg"},
+    {"name":"Immunity Blend (Elderberry + Vitamin C + Zinc)","category":"powders","health":["immunity"],"composition":"Elderberry 500mg, Vit C 500mg, Zinc 10mg, Echinacea 200mg"},
+    {"name":"Plant-Based Superfood Powder","category":"powders","health":["general-wellness"],"composition":"Spirulina, Chlorella, Wheatgrass, Amla, 20+ superfoods"},
+    {"name":"Weight Management Meal Replacement Powder","category":"powders","health":["weight-management"],"composition":"Protein 20g, Fibre 5g, MCT Oil 3g, Low-Glycaemic Carbs"},
+    # ─── SACHETS (10) ────────────────────────────────────────────────────────
+    {"name":"ORS (Oral Rehydration Salts) Sachets","category":"sachets","health":["general-wellness"],"composition":"NaCl, KCl, Sodium Citrate, Glucose per WHO formula"},
+    {"name":"Vitamin C 1000mg Effervescent Sachets","category":"sachets","health":["immunity"],"composition":"Ascorbic Acid 1000mg, Zinc 10mg, effervescent base"},
+    {"name":"Electrolyte Replenishment Sachets","category":"sachets","health":["sports-nutrition"],"composition":"Na, K, Mg, Cl with Vitamin B complex"},
+    {"name":"Collagen Peptides Sachets (10g)","category":"sachets","health":["skin-hair","bone-joint"],"composition":"Hydrolysed Marine Collagen Peptides 10g, Hyaluronic Acid"},
+    {"name":"Probiotic Stick-Pack Sachets","category":"sachets","health":["digestion-gut"],"composition":"Bacillus coagulans 2B CFU + Prebiotic FOS per sachet"},
+    {"name":"Multivitamin Effervescent Sachets","category":"sachets","health":["general-wellness"],"composition":"12 Vitamins + 6 Minerals in effervescent fruit-flavour base"},
+    {"name":"Turmeric Latte Blend Sachets","category":"sachets","health":["immunity","bone-joint"],"composition":"Turmeric 500mg, Black Pepper, Ginger, Coconut Milk Powder"},
+    {"name":"Joint Support Sachet (Glucosamine + Collagen + Boswellia)","category":"sachets","health":["bone-joint"],"composition":"Glucosamine 1.5g, Collagen 5g, Boswellia 200mg"},
+    {"name":"L-Glutamine + Electrolyte Recovery Sachet","category":"sachets","health":["sports-nutrition"],"composition":"L-Glutamine 5g, Electrolyte blend, Coconut Water Powder"},
+    {"name":"Ashwagandha + Saffron Stress Relief Sachet","category":"sachets","health":["brain-cognitive","general-wellness"],"composition":"KSM-66 Ashwagandha 300mg, Saffron Extract 14mg"},
+    # ─── GUMMIES (10) ────────────────────────────────────────────────────────
+    {"name":"Multivitamin Gummies (Adults)","category":"gummies","health":["general-wellness"],"composition":"13 Vitamins + 6 Minerals, natural fruit flavour"},
+    {"name":"Vitamin C + Zinc Immunity Gummies","category":"gummies","health":["immunity"],"composition":"Ascorbic Acid 250mg, Zinc 5mg per 2 gummies"},
+    {"name":"Biotin 5000mcg Gummies","category":"gummies","health":["skin-hair"],"composition":"D-Biotin 5000mcg, Amla Extract 50mg per 2 gummies"},
+    {"name":"Vitamin D3 + K2 Gummies","category":"gummies","health":["bone-joint","immunity"],"composition":"D3 1000IU + K2 (MK-7) 45mcg per 2 gummies"},
+    {"name":"Melatonin 5mg Sleep Gummies","category":"gummies","health":["brain-cognitive"],"composition":"Melatonin 5mg, L-Theanine 100mg, Chamomile 50mg"},
+    {"name":"Probiotic + Prebiotic Gummies","category":"gummies","health":["digestion-gut","kids-pediatric"],"composition":"Bacillus coagulans 1B CFU, Inulin 500mg per 2 gummies"},
+    {"name":"Apple Cider Vinegar Gummies","category":"gummies","health":["weight-management","digestion-gut"],"composition":"ACV 500mg (5% Acetic Acid), Beet Root, Pomegranate"},
+    {"name":"Kids' Multivitamin Gummies","category":"gummies","health":["kids-pediatric","general-wellness"],"composition":"Age-appropriate vitamins A, C, D, B-complex + Zinc, Iron"},
+    {"name":"Omega-3 DHA Gummies for Kids","category":"gummies","health":["kids-pediatric","brain-cognitive"],"composition":"Algal DHA 100mg, Vit D 200IU per 2 gummies"},
+    {"name":"Collagen + Vitamin C Beauty Gummies","category":"gummies","health":["skin-hair"],"composition":"Collagen Peptides 2.5g, Vit C 60mg, Biotin 1000mcg"},
+    # ─── AYURVEDIC (20) ──────────────────────────────────────────────────────
+    {"name":"Ashwagandha Churna 100g","category":"ayurvedic","health":["general-wellness","mens-health"],"composition":"Withania somnifera root powder 100g"},
+    {"name":"Triphala Churna 100g","category":"ayurvedic","health":["digestion-gut","general-wellness"],"composition":"Amalaki, Bibhitaki, Haritaki — equal parts"},
+    {"name":"Trikatu Churna 100g","category":"ayurvedic","health":["digestion-gut","weight-management"],"composition":"Shunti, Maricha, Pippali — equal parts"},
+    {"name":"Shatavari Capsules 500mg","category":"ayurvedic","health":["womens-health"],"composition":"Asparagus racemosus root extract 500mg"},
+    {"name":"Brahmi Capsules 500mg","category":"ayurvedic","health":["brain-cognitive"],"composition":"Bacopa monnieri Ext 500mg (20% Bacosides)"},
+    {"name":"Guduchi (Giloy) Tablets 500mg","category":"ayurvedic","health":["immunity"],"composition":"Tinospora cordifolia stem extract 500mg"},
+    {"name":"Arjuna Tablets 500mg","category":"ayurvedic","health":["heart-cardio"],"composition":"Terminalia arjuna bark extract 500mg"},
+    {"name":"Chandraprabha Vati","category":"ayurvedic","health":["mens-health","general-wellness"],"composition":"37-herb classical formulation per API"},
+    {"name":"Arogyavardhini Vati","category":"ayurvedic","health":["liver-health","digestion-gut"],"composition":"Classical liver & metabolic tonic per API"},
+    {"name":"Kanchanar Guggulu","category":"ayurvedic","health":["general-wellness"],"composition":"Kanchanar, Guggulu, Triphala, Trikatu, Varuna"},
+    {"name":"Yograj Guggulu","category":"ayurvedic","health":["bone-joint"],"composition":"Guggulu + 28 herbs per classical formulation"},
+    {"name":"Dashmool Kwath (Decoction)","category":"ayurvedic","health":["general-wellness","womens-health"],"composition":"10 classical root herbs decoction concentrate"},
+    {"name":"Chyawanprash 500g","category":"ayurvedic","health":["immunity","general-wellness"],"composition":"Amla + 40 herbs in honey-ghee base, per API"},
+    {"name":"Kumaryasava 450ml","category":"ayurvedic","health":["womens-health","digestion-gut"],"composition":"Fermented Aloe vera preparation, 5–7% self-generated alcohol"},
+    {"name":"Draksharishta 450ml","category":"ayurvedic","health":["general-wellness","heart-cardio"],"composition":"Fermented grape-based tonic with 40 herbs"},
+    {"name":"Abhayarishta 450ml","category":"ayurvedic","health":["digestion-gut"],"composition":"Fermented Haritaki-based digestive preparation"},
+    {"name":"Mahasudarshan Churna","category":"ayurvedic","health":["immunity"],"composition":"50-herb classical formulation for fever & immunity"},
+    {"name":"Punarnava Mandoor","category":"ayurvedic","health":["liver-health","general-wellness"],"composition":"Iron-herb preparation with Punarnava & Trikatu"},
+    {"name":"Sitopaladi Churna","category":"ayurvedic","health":["immunity"],"composition":"Sitopala, Vanshlochan, Pippali, Ela, Twak"},
+    {"name":"Lavanbhaskar Churna","category":"ayurvedic","health":["digestion-gut"],"composition":"11-salt mineral herbal digestive blend per API"},
+]
+
+HEALTH_SEGMENTS = [
+    {"id":"general-wellness","label":"General Wellness","color":"#00A99D"},
+    {"id":"immunity","label":"Immunity","color":"#00A651"},
+    {"id":"womens-health","label":"Women's Health","color":"#E91E8C"},
+    {"id":"mens-health","label":"Men's Health","color":"#003D7A"},
+    {"id":"bone-joint","label":"Bone & Joint","color":"#795548"},
+    {"id":"heart-cardio","label":"Heart & Cardio","color":"#E53935"},
+    {"id":"digestion-gut","label":"Digestion & Gut","color":"#F7A800"},
+    {"id":"brain-cognitive","label":"Brain & Cognitive","color":"#7B1FA2"},
+    {"id":"weight-management","label":"Weight Management","color":"#FF6D00"},
+    {"id":"sports-nutrition","label":"Sports Nutrition","color":"#1565C0"},
+    {"id":"skin-hair","label":"Skin, Hair & Nails","color":"#AD1457"},
+    {"id":"diabetes-management","label":"Diabetes Management","color":"#2E7D32"},
+    {"id":"liver-health","label":"Liver Health","color":"#6D4C41"},
+    {"id":"kids-pediatric","label":"Kids & Pediatric","color":"#00ACC1"},
+]
+
+PRODUCT_TABS = [
+    {
+        "id":"capsules","label":"Capsules",
+        "icon":"pill",
+        "img":"images/product-capsules.jpg",
+        "desc":"HPMC, gelatin and softgel capsules for supplements, herbals and pharmaceuticals. From 1,000 units MOQ.",
+        "tags":["Hard Gel (HPMC)","Gelatin Softgel","Veg Softgel","Enteric Coated","SR/ER Capsules","Size 0 to 4"],
+        "link":"capsules.html"
+    },
+    {
+        "id":"tablets","label":"Tablets",
+        "icon":"circle",
+        "img":"images/product-tablets.jpg",
+        "desc":"Plain, film-coated, chewable, effervescent and sublingual tablets. Bi-layer and sustained-release options available.",
+        "tags":["Film-Coated","Chewable","Effervescent","Sublingual","Bi-Layer","Extended Release"],
+        "link":"tablets.html"
+    },
+    {
+        "id":"syrups","label":"Syrups & Liquids",
+        "icon":"flask-conical",
+        "img":"images/product-syrups.jpg",
+        "desc":"Syrups, suspensions, tonics, juices and oral solutions. Sugar-free and honey-based variants available.",
+        "tags":["Syrups","Suspensions","Oral Solutions","Tonics","Fruit Juices","Sugar-Free"],
+        "link":"syrups.html"
+    },
+    {
+        "id":"powders","label":"Powders",
+        "icon":"zap",
+        "img":"images/product-powders.jpg",
+        "desc":"Sports nutrition, protein blends, meal replacements and health powders in bulk and sachet packs.",
+        "tags":["Protein Powders","Mass Gainers","Pre/Post Workout","Meal Replacements","Herbal Blends","Superfood Mixes"],
+        "link":"powders.html"
+    },
+    {
+        "id":"sachets","label":"Sachets",
+        "icon":"package",
+        "img":"images/product-sachets.jpg",
+        "desc":"Stick-packs and sachets for on-the-go nutrition — effervescent, powder, and single-serve liquid formats.",
+        "tags":["Effervescent Sachets","Stick Packs","ORS Sachets","Powder Sachets","Unit Dose Liquids"],
+        "link":"sachets.html"
+    },
+    {
+        "id":"gummies","label":"Gummies",
+        "icon":"candy",
+        "img":"images/product-gummies.jpg",
+        "desc":"Gelatin and pectin-based gummy vitamins for adults and children. Custom flavours and shapes available.",
+        "tags":["Pectin (Veg)","Gelatin","Bear / Cylinder Shape","Custom Flavours","Sugar-Free Option","Kids & Adult SKUs"],
+        "link":"gummies.html"
+    },
+    {
+        "id":"ayurvedic","label":"Ayurvedic",
+        "icon":"leaf",
+        "img":"images/product-ayurveda.jpg",
+        "desc":"Classical and proprietary Ayurvedic formulations — churna, vati, asava, arishta and herbal extracts under AYUSH GMP.",
+        "tags":["Churna","Vati / Tablets","Asava & Arishta","Kwath / Kadha","Avaleha","Herbal Capsules"],
+        "link":"ayurveda.html"
+    },
+]
+
+CSS = """
     /* ============================================================
        BIONIAL LIFESCIENCES — STYLES
        Capsoft-inspired pharmaceutical blue palette
@@ -588,37 +767,291 @@
         .process-steps { grid-template-columns: 1fr; }
         .hero-stats { grid-template-columns: 1fr 1fr; }
     }
-</style>
+"""
+
+def build_product_tab_html(tabs):
+    btns = ""
+    panels = ""
+    for i, tab in enumerate(tabs):
+        active = "active" if i == 0 else ""
+        btns += f'<button class="product-tab-btn {active}" data-tab="{tab["id"]}"><i data-lucide="{tab["icon"]}"></i>{tab["label"]}</button>\n'
+        tags_html = "".join(f'<span class="product-tag">{t}</span>' for t in tab["tags"])
+        panels += f"""
+        <div class="product-panel {active}" id="panel-{tab["id"]}">
+            <div class="product-panel-img">
+                <img src="{tab["img"]}" alt="{tab["label"]}" loading="lazy">
+            </div>
+            <div class="product-panel-content">
+                <h3>{tab["label"]}</h3>
+                <p>{tab["desc"]}</p>
+                <div class="product-tags">{tags_html}</div>
+                <a href="{tab["link"]}" class="product-panel-link">View Formulations <i data-lucide="arrow-right"></i></a>
+            </div>
+        </div>"""
+    return btns, panels
+
+def build_health_pills_html(segments):
+    html = ""
+    for seg in segments:
+        html += f'''<div class="health-pill" data-health="{seg["id"]}" style="--hc:{seg["color"]}">
+            <span class="health-pill-dot" style="background:{seg["color"]}"></span>{seg["label"]}
+        </div>\n'''
+    return html
+
+def build_filter_tabs_html(cats):
+    html = f'<button class="form-filter-btn active" data-cat="all">All Formulations <span class="form-count">({len(FORMULATIONS)})</span></button>\n'
+    for cat in cats:
+        count = sum(1 for f in FORMULATIONS if f["category"] == cat["id"])
+        html += f'<button class="form-filter-btn" data-cat="{cat["id"]}">{cat["label"]} <span class="form-count">({count})</span></button>\n'
+    return html
+
+CATS = [
+    {"id":"tablets",   "label":"Tablets"},
+    {"id":"capsules",  "label":"Capsules"},
+    {"id":"syrups",    "label":"Syrups"},
+    {"id":"powders",   "label":"Powders"},
+    {"id":"sachets",   "label":"Sachets"},
+    {"id":"gummies",   "label":"Gummies"},
+    {"id":"ayurvedic", "label":"Ayurvedic"},
+]
+
+tab_btns, tab_panels = build_product_tab_html(PRODUCT_TABS)
+health_pills = build_health_pills_html(HEALTH_SEGMENTS)
+form_filter_tabs = build_filter_tabs_html(CATS)
+formulations_json = json.dumps(FORMULATIONS, ensure_ascii=False, indent=2)
+health_segments_json = json.dumps(HEALTH_SEGMENTS, ensure_ascii=False, indent=2)
+
+JS = f"""
+    const FORMULATIONS = {formulations_json};
+    const HEALTH_SEGMENTS = {health_segments_json};
+
+    // ── Nav scroll ──────────────────────────────────────────────
+    const nav = document.querySelector('.nav');
+    function updateNav() {{
+        nav.classList.toggle('scrolled', window.scrollY > 60);
+    }}
+    window.addEventListener('scroll', updateNav, {{passive:true}});
+    updateNav();
+
+    // ── Mobile menu ─────────────────────────────────────────────
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+
+    // ── Smooth scroll ────────────────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {{
+        a.addEventListener('click', e => {{
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) {{
+                e.preventDefault();
+                const offset = 80;
+                window.scrollTo({{ top: target.offsetTop - offset, behavior:'smooth' }});
+                if (mobileMenu.classList.contains('open')) mobileMenu.classList.remove('open');
+            }}
+        }});
+    }});
+
+    // ── Scroll animations ────────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {{
+        entries.forEach(e => {{ if(e.isIntersecting) e.target.classList.add('visible'); }});
+    }}, {{threshold: 0.1}});
+    document.querySelectorAll('.aos').forEach(el => observer.observe(el));
+
+    // ── Animated counters ────────────────────────────────────────
+    function animateCounter(el, target, suffix) {{
+        const duration = 1800;
+        const start = performance.now();
+        function update(now) {{
+            const progress = Math.min((now - start) / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+            const val = Math.round(ease * target);
+            el.textContent = val + suffix;
+            if (progress < 1) requestAnimationFrame(update);
+        }}
+        requestAnimationFrame(update);
+    }}
+    const statsObserver = new IntersectionObserver((entries) => {{
+        entries.forEach(e => {{
+            if (e.isIntersecting && !e.target.dataset.counted) {{
+                e.target.dataset.counted = '1';
+                animateCounter(e.target, parseInt(e.target.dataset.target), e.target.dataset.suffix || '');
+            }}
+        }});
+    }}, {{threshold: 0.5}});
+    document.querySelectorAll('[data-target]').forEach(el => statsObserver.observe(el));
+
+    // ── Product tabs ─────────────────────────────────────────────
+    document.querySelectorAll('.product-tab-btn').forEach(btn => {{
+        btn.addEventListener('click', () => {{
+            const tab = btn.dataset.tab;
+            document.querySelectorAll('.product-tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('panel-' + tab)?.classList.add('active');
+            lucide.createIcons();
+        }});
+    }});
+
+    // ── Formulation filter ────────────────────────────────────────
+    let activeCat = 'all', activeHealth = null, showAll = false;
+    const PREVIEW_COUNT = 9;
+
+    function getCatColor(cat) {{
+        return {{tablets:'tablets',capsules:'capsules',syrups:'syrups',powders:'powders',
+                 sachets:'sachets',gummies:'gummies',ayurvedic:'ayurvedic'}}[cat] || 'tablets';
+    }}
+
+    function renderFormulations() {{
+        const grid = document.getElementById('formulations-grid');
+        const viewAllWrap = document.getElementById('viewall-wrap');
+        let filtered = FORMULATIONS;
+        if (activeCat !== 'all') filtered = filtered.filter(f => f.category === activeCat);
+        if (activeHealth) filtered = filtered.filter(f => f.health.includes(activeHealth));
+
+        const display = showAll ? filtered : filtered.slice(0, PREVIEW_COUNT);
+        const remaining = filtered.length - display.length;
+
+        grid.innerHTML = display.map(f => `
+            <div class="form-card">
+                <div class="form-card-body">
+                    <div class="form-card-name">${{f.name}}</div>
+                    <div class="form-card-comp">${{f.composition}}</div>
+                </div>
+                <span class="form-tag ${{getCatColor(f.category)}}">${{f.category}}</span>
+            </div>`).join('');
+
+        if (remaining > 0) {{
+            viewAllWrap.innerHTML = `<button class="form-viewall-btn" id="view-all-btn">
+                <i data-lucide="chevrons-down"></i> Show ${{remaining}} more formulations
+            </button>`;
+            document.getElementById('view-all-btn').addEventListener('click', () => {{
+                showAll = true; renderFormulations();
+            }});
+        }} else if (filtered.length > PREVIEW_COUNT) {{
+            viewAllWrap.innerHTML = `<button class="form-viewall-btn" id="view-less-btn">
+                <i data-lucide="chevrons-up"></i> Show less
+            </button>`;
+            document.getElementById('view-less-btn').addEventListener('click', () => {{
+                showAll = false; renderFormulations();
+            }});
+        }} else {{
+            viewAllWrap.innerHTML = '';
+        }}
+        lucide.createIcons();
+    }}
+
+    document.querySelectorAll('.form-filter-btn').forEach(btn => {{
+        btn.addEventListener('click', () => {{
+            document.querySelectorAll('.form-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeCat = btn.dataset.cat;
+            showAll = false;
+            renderFormulations();
+        }});
+    }});
+
+    // ── Health segment pills ──────────────────────────────────────
+    document.querySelectorAll('.health-pill').forEach(pill => {{
+        pill.addEventListener('click', () => {{
+            const h = pill.dataset.health;
+            if (activeHealth === h) {{
+                activeHealth = null;
+                pill.classList.remove('active');
+            }} else {{
+                document.querySelectorAll('.health-pill').forEach(p => p.classList.remove('active'));
+                activeHealth = h;
+                pill.classList.add('active');
+                const hs = HEALTH_SEGMENTS.find(s => s.id === h);
+                if (hs) pill.style.background = hs.color;
+            }}
+            showAll = false;
+            // Scroll to formulations
+            document.getElementById('formulations').scrollIntoView({{behavior:'smooth', block:'start'}});
+            setTimeout(renderFormulations, 400);
+        }});
+    }});
+
+    // Style active health pill properly
+    document.querySelectorAll('.health-pill').forEach(pill => {{
+        pill.addEventListener('mouseenter', () => {{
+            if (!pill.classList.contains('active')) {{
+                const hs = HEALTH_SEGMENTS.find(s => s.id === pill.dataset.health);
+                if (hs) pill.style.background = hs.color;
+            }}
+        }});
+        pill.addEventListener('mouseleave', () => {{
+            if (!pill.classList.contains('active')) pill.style.background = '';
+        }});
+    }});
+
+    // ── FAQ accordion ─────────────────────────────────────────────
+    document.querySelectorAll('.faq-question').forEach(q => {{
+        q.addEventListener('click', () => {{
+            const isOpen = q.classList.contains('open');
+            document.querySelectorAll('.faq-question').forEach(qq => qq.classList.remove('open'));
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+            if (!isOpen) {{
+                q.classList.add('open');
+                q.nextElementSibling.classList.add('open');
+            }}
+        }});
+    }});
+
+    // ── Initial render ────────────────────────────────────────────
+    renderFormulations();
+    lucide.createIcons();
+"""
+
+HTML = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bionial Lifesciences | Nutraceutical Contract Manufacturing in Mohali, India</title>
+    <meta name="description" content="WHO-GMP certified nutraceutical & Ayurvedic contract manufacturer in Mohali, Punjab. 250+ ready formulations. Capsules, tablets, syrups, powders, sachets. 30-day delivery.">
+    <meta name="keywords" content="nutraceutical manufacturer India, contract manufacturing Mohali, third party manufacturing Punjab, capsule manufacturer, tablet manufacturer, private labeling nutraceuticals, FSSAI certified manufacturer, AYUSH GMP">
+    <link rel="canonical" href="https://bioniallifesciences.com">
+    <meta property="og:title" content="Bionial Lifesciences | Precision Nutraceutical Manufacturing">
+    <meta property="og:description" content="WHO-GMP certified nutraceutical & Ayurvedic contract manufacturer in Mohali. 250+ formulations. 30-day delivery.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bioniallifesciences.com">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>{CSS}</style>
     <!-- Schema -->
     <script type="application/ld+json">
-    {
+    {{
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Bionial Lifesciences",
         "description": "WHO-GMP certified nutraceutical and Ayurvedic contract manufacturer in Mohali, Punjab.",
-        "address": {
+        "address": {{
             "@type": "PostalAddress",
             "streetAddress": "Plot No. 459, Sector-82, JLPL Industrial Area",
             "addressLocality": "Mohali", "addressRegion": "Punjab",
             "postalCode": "140308", "addressCountry": "IN"
-        },
+        }},
         "telephone": "+919996610619",
         "email": "bioniallifesciences@gmail.com",
         "url": "https://bioniallifesciences.com",
         "openingHours": "Mo-Sa 09:00-18:00",
         "hasMap": "https://maps.google.com/?q=JLPL+Sector+82+Mohali"
-    }
+    }}
     </script>
     <script type="application/ld+json">
-    {
+    {{
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
-            {"@type":"Question","name":"What is the minimum order quantity (MOQ)?","acceptedAnswer":{"@type":"Answer","text":"Capsules: 10,000–20,000 units. Tablets: 10,000+. Syrups: 1,000–2,000 bottles. Powders: 50–100 kg. We offer flexible MOQs for startup brands."}},
-            {"@type":"Question","name":"How long does manufacturing take?","acceptedAnswer":{"@type":"Answer","text":"30 days from order confirmation to dispatch — including formulation, production, quality control, and packaging."}},
-            {"@type":"Question","name":"What certifications does the facility hold?","acceptedAnswer":{"@type":"Answer","text":"WHO-GMP, FSSAI Central License, ISO 9001:2015, GMP Schedule M, HALAL, and AYUSH GMP."}}
+            {{"@type":"Question","name":"What is the minimum order quantity (MOQ)?","acceptedAnswer":{{"@type":"Answer","text":"Capsules: 10,000–20,000 units. Tablets: 10,000+. Syrups: 1,000–2,000 bottles. Powders: 50–100 kg. We offer flexible MOQs for startup brands."}}}},
+            {{"@type":"Question","name":"How long does manufacturing take?","acceptedAnswer":{{"@type":"Answer","text":"30 days from order confirmation to dispatch — including formulation, production, quality control, and packaging."}}}},
+            {{"@type":"Question","name":"What certifications does the facility hold?","acceptedAnswer":{{"@type":"Answer","text":"WHO-GMP, FSSAI Central License, ISO 9001:2015, GMP Schedule M, HALAL, and AYUSH GMP."}}}}
         ]
-    }
+    }}
     </script>
 </head>
 <body>
@@ -799,92 +1232,8 @@
             <p class="section-subtitle">Seven dosage forms, one manufacturing partner. Click a category to explore formats and specifications.</p>
         </div>
         <div class="product-tab-nav">
-<button class="product-tab-btn active" data-tab="capsules"><i data-lucide="pill"></i>Capsules</button>
-<button class="product-tab-btn " data-tab="tablets"><i data-lucide="circle"></i>Tablets</button>
-<button class="product-tab-btn " data-tab="syrups"><i data-lucide="flask-conical"></i>Syrups & Liquids</button>
-<button class="product-tab-btn " data-tab="powders"><i data-lucide="zap"></i>Powders</button>
-<button class="product-tab-btn " data-tab="sachets"><i data-lucide="package"></i>Sachets</button>
-<button class="product-tab-btn " data-tab="gummies"><i data-lucide="candy"></i>Gummies</button>
-<button class="product-tab-btn " data-tab="ayurvedic"><i data-lucide="leaf"></i>Ayurvedic</button>
-        </div>
-
-        <div class="product-panel active" id="panel-capsules">
-            <div class="product-panel-img">
-                <img src="images/product-capsules.jpg" alt="Capsules" loading="lazy">
-            </div>
-            <div class="product-panel-content">
-                <h3>Capsules</h3>
-                <p>HPMC, gelatin and softgel capsules for supplements, herbals and pharmaceuticals. From 1,000 units MOQ.</p>
-                <div class="product-tags"><span class="product-tag">Hard Gel (HPMC)</span><span class="product-tag">Gelatin Softgel</span><span class="product-tag">Veg Softgel</span><span class="product-tag">Enteric Coated</span><span class="product-tag">SR/ER Capsules</span><span class="product-tag">Size 0 to 4</span></div>
-                <a href="capsules.html" class="product-panel-link">View Formulations <i data-lucide="arrow-right"></i></a>
-            </div>
-        </div>
-        <div class="product-panel " id="panel-tablets">
-            <div class="product-panel-img">
-                <img src="images/product-tablets.jpg" alt="Tablets" loading="lazy">
-            </div>
-            <div class="product-panel-content">
-                <h3>Tablets</h3>
-                <p>Plain, film-coated, chewable, effervescent and sublingual tablets. Bi-layer and sustained-release options available.</p>
-                <div class="product-tags"><span class="product-tag">Film-Coated</span><span class="product-tag">Chewable</span><span class="product-tag">Effervescent</span><span class="product-tag">Sublingual</span><span class="product-tag">Bi-Layer</span><span class="product-tag">Extended Release</span></div>
-                <a href="tablets.html" class="product-panel-link">View Formulations <i data-lucide="arrow-right"></i></a>
-            </div>
-        </div>
-        <div class="product-panel " id="panel-syrups">
-            <div class="product-panel-img">
-                <img src="images/product-syrups.jpg" alt="Syrups & Liquids" loading="lazy">
-            </div>
-            <div class="product-panel-content">
-                <h3>Syrups & Liquids</h3>
-                <p>Syrups, suspensions, tonics, juices and oral solutions. Sugar-free and honey-based variants available.</p>
-                <div class="product-tags"><span class="product-tag">Syrups</span><span class="product-tag">Suspensions</span><span class="product-tag">Oral Solutions</span><span class="product-tag">Tonics</span><span class="product-tag">Fruit Juices</span><span class="product-tag">Sugar-Free</span></div>
-                <a href="syrups.html" class="product-panel-link">View Formulations <i data-lucide="arrow-right"></i></a>
-            </div>
-        </div>
-        <div class="product-panel " id="panel-powders">
-            <div class="product-panel-img">
-                <img src="images/product-powders.jpg" alt="Powders" loading="lazy">
-            </div>
-            <div class="product-panel-content">
-                <h3>Powders</h3>
-                <p>Sports nutrition, protein blends, meal replacements and health powders in bulk and sachet packs.</p>
-                <div class="product-tags"><span class="product-tag">Protein Powders</span><span class="product-tag">Mass Gainers</span><span class="product-tag">Pre/Post Workout</span><span class="product-tag">Meal Replacements</span><span class="product-tag">Herbal Blends</span><span class="product-tag">Superfood Mixes</span></div>
-                <a href="powders.html" class="product-panel-link">View Formulations <i data-lucide="arrow-right"></i></a>
-            </div>
-        </div>
-        <div class="product-panel " id="panel-sachets">
-            <div class="product-panel-img">
-                <img src="images/product-sachets.jpg" alt="Sachets" loading="lazy">
-            </div>
-            <div class="product-panel-content">
-                <h3>Sachets</h3>
-                <p>Stick-packs and sachets for on-the-go nutrition — effervescent, powder, and single-serve liquid formats.</p>
-                <div class="product-tags"><span class="product-tag">Effervescent Sachets</span><span class="product-tag">Stick Packs</span><span class="product-tag">ORS Sachets</span><span class="product-tag">Powder Sachets</span><span class="product-tag">Unit Dose Liquids</span></div>
-                <a href="sachets.html" class="product-panel-link">View Formulations <i data-lucide="arrow-right"></i></a>
-            </div>
-        </div>
-        <div class="product-panel " id="panel-gummies">
-            <div class="product-panel-img">
-                <img src="images/product-gummies.jpg" alt="Gummies" loading="lazy">
-            </div>
-            <div class="product-panel-content">
-                <h3>Gummies</h3>
-                <p>Gelatin and pectin-based gummy vitamins for adults and children. Custom flavours and shapes available.</p>
-                <div class="product-tags"><span class="product-tag">Pectin (Veg)</span><span class="product-tag">Gelatin</span><span class="product-tag">Bear / Cylinder Shape</span><span class="product-tag">Custom Flavours</span><span class="product-tag">Sugar-Free Option</span><span class="product-tag">Kids & Adult SKUs</span></div>
-                <a href="gummies.html" class="product-panel-link">View Formulations <i data-lucide="arrow-right"></i></a>
-            </div>
-        </div>
-        <div class="product-panel " id="panel-ayurvedic">
-            <div class="product-panel-img">
-                <img src="images/product-ayurveda.jpg" alt="Ayurvedic" loading="lazy">
-            </div>
-            <div class="product-panel-content">
-                <h3>Ayurvedic</h3>
-                <p>Classical and proprietary Ayurvedic formulations — churna, vati, asava, arishta and herbal extracts under AYUSH GMP.</p>
-                <div class="product-tags"><span class="product-tag">Churna</span><span class="product-tag">Vati / Tablets</span><span class="product-tag">Asava & Arishta</span><span class="product-tag">Kwath / Kadha</span><span class="product-tag">Avaleha</span><span class="product-tag">Herbal Capsules</span></div>
-                <a href="ayurveda.html" class="product-panel-link">View Formulations <i data-lucide="arrow-right"></i></a>
-            </div>
-        </div>    </div>
+{tab_btns}        </div>
+{tab_panels}    </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
@@ -898,15 +1247,7 @@
             <p class="section-subtitle">Browse our complete formulation library across all dosage forms. Filter by category or therapeutic area.</p>
         </div>
         <div class="form-filter-nav">
-<button class="form-filter-btn active" data-cat="all">All Formulations <span class="form-count">(105)</span></button>
-<button class="form-filter-btn" data-cat="tablets">Tablets <span class="form-count">(20)</span></button>
-<button class="form-filter-btn" data-cat="capsules">Capsules <span class="form-count">(20)</span></button>
-<button class="form-filter-btn" data-cat="syrups">Syrups <span class="form-count">(15)</span></button>
-<button class="form-filter-btn" data-cat="powders">Powders <span class="form-count">(10)</span></button>
-<button class="form-filter-btn" data-cat="sachets">Sachets <span class="form-count">(10)</span></button>
-<button class="form-filter-btn" data-cat="gummies">Gummies <span class="form-count">(10)</span></button>
-<button class="form-filter-btn" data-cat="ayurvedic">Ayurvedic <span class="form-count">(20)</span></button>
-        </div>
+{form_filter_tabs}        </div>
         <div class="formulations-grid" id="formulations-grid">
             <!-- JS rendered -->
         </div>
@@ -925,49 +1266,7 @@
             <p class="section-subtitle">Click a health segment to filter formulations by therapeutic area.</p>
         </div>
         <div class="health-grid">
-<div class="health-pill" data-health="general-wellness" style="--hc:#00A99D">
-            <span class="health-pill-dot" style="background:#00A99D"></span>General Wellness
-        </div>
-<div class="health-pill" data-health="immunity" style="--hc:#00A651">
-            <span class="health-pill-dot" style="background:#00A651"></span>Immunity
-        </div>
-<div class="health-pill" data-health="womens-health" style="--hc:#E91E8C">
-            <span class="health-pill-dot" style="background:#E91E8C"></span>Women's Health
-        </div>
-<div class="health-pill" data-health="mens-health" style="--hc:#003D7A">
-            <span class="health-pill-dot" style="background:#003D7A"></span>Men's Health
-        </div>
-<div class="health-pill" data-health="bone-joint" style="--hc:#795548">
-            <span class="health-pill-dot" style="background:#795548"></span>Bone & Joint
-        </div>
-<div class="health-pill" data-health="heart-cardio" style="--hc:#E53935">
-            <span class="health-pill-dot" style="background:#E53935"></span>Heart & Cardio
-        </div>
-<div class="health-pill" data-health="digestion-gut" style="--hc:#F7A800">
-            <span class="health-pill-dot" style="background:#F7A800"></span>Digestion & Gut
-        </div>
-<div class="health-pill" data-health="brain-cognitive" style="--hc:#7B1FA2">
-            <span class="health-pill-dot" style="background:#7B1FA2"></span>Brain & Cognitive
-        </div>
-<div class="health-pill" data-health="weight-management" style="--hc:#FF6D00">
-            <span class="health-pill-dot" style="background:#FF6D00"></span>Weight Management
-        </div>
-<div class="health-pill" data-health="sports-nutrition" style="--hc:#1565C0">
-            <span class="health-pill-dot" style="background:#1565C0"></span>Sports Nutrition
-        </div>
-<div class="health-pill" data-health="skin-hair" style="--hc:#AD1457">
-            <span class="health-pill-dot" style="background:#AD1457"></span>Skin, Hair & Nails
-        </div>
-<div class="health-pill" data-health="diabetes-management" style="--hc:#2E7D32">
-            <span class="health-pill-dot" style="background:#2E7D32"></span>Diabetes Management
-        </div>
-<div class="health-pill" data-health="liver-health" style="--hc:#6D4C41">
-            <span class="health-pill-dot" style="background:#6D4C41"></span>Liver Health
-        </div>
-<div class="health-pill" data-health="kids-pediatric" style="--hc:#00ACC1">
-            <span class="health-pill-dot" style="background:#00ACC1"></span>Kids & Pediatric
-        </div>
-        </div>
+{health_pills}        </div>
     </div>
 </section>
 
@@ -1318,1144 +1617,12 @@
 </div>
 
 <script>
-
-    const FORMULATIONS = [
-  {
-    "name": "Multivitamin & Multimineral Tablets",
-    "category": "tablets",
-    "health": [
-      "general-wellness"
-    ],
-    "composition": "Vitamins A, B-Complex, C, D3, E + Zinc, Iron, Calcium"
-  },
-  {
-    "name": "Calcium Citrate + Vitamin D3 + Zinc Tablets",
-    "category": "tablets",
-    "health": [
-      "bone-joint",
-      "womens-health"
-    ],
-    "composition": "Calcium Citrate 500mg, D3 400IU, Zinc 8mg"
-  },
-  {
-    "name": "Iron + Folic Acid + Vitamin C Tablets",
-    "category": "tablets",
-    "health": [
-      "womens-health"
-    ],
-    "composition": "Ferrous Ascorbate 100mg, Folic Acid 1.5mg, Vit C 50mg"
-  },
-  {
-    "name": "Vitamin C + Zinc Chewable Tablets",
-    "category": "tablets",
-    "health": [
-      "immunity"
-    ],
-    "composition": "Ascorbic Acid 500mg, Zinc Sulphate 10mg"
-  },
-  {
-    "name": "Biotin 10,000 mcg Tablets",
-    "category": "tablets",
-    "health": [
-      "skin-hair"
-    ],
-    "composition": "D-Biotin 10,000mcg in tablet base"
-  },
-  {
-    "name": "Methylcobalamin + ALA + Folic Acid Tablets",
-    "category": "tablets",
-    "health": [
-      "brain-cognitive"
-    ],
-    "composition": "Methyl B12 1500mcg, Alpha Lipoic Acid 100mg, Folic Acid 1.5mg"
-  },
-  {
-    "name": "Omega-3 (Flaxseed Extract) + Vitamin E Tablets",
-    "category": "tablets",
-    "health": [
-      "heart-cardio"
-    ],
-    "composition": "Flaxseed Oil Ext 500mg, Vit E 25mg"
-  },
-  {
-    "name": "L-Arginine + Proanthocyanidin Tablets",
-    "category": "tablets",
-    "health": [
-      "heart-cardio",
-      "mens-health"
-    ],
-    "composition": "L-Arginine HCl 500mg, Grape Seed Proanthocyanidin 75mg"
-  },
-  {
-    "name": "Ashwagandha 500mg Tablets",
-    "category": "tablets",
-    "health": [
-      "general-wellness",
-      "mens-health"
-    ],
-    "composition": "Ashwagandha Root Extract 500mg (2.5% Withanolides)"
-  },
-  {
-    "name": "Garcinia Cambogia + Green Coffee Extract Tablets",
-    "category": "tablets",
-    "health": [
-      "weight-management"
-    ],
-    "composition": "Garcinia 60% HCA 500mg, Green Coffee 45% CGA 200mg"
-  },
-  {
-    "name": "Glucosamine + Chondroitin + MSM Tablets",
-    "category": "tablets",
-    "health": [
-      "bone-joint"
-    ],
-    "composition": "Glucosamine Sulphate 500mg, Chondroitin 400mg, MSM 250mg"
-  },
-  {
-    "name": "Coenzyme Q10 100mg + Omega-3 Tablets",
-    "category": "tablets",
-    "health": [
-      "heart-cardio"
-    ],
-    "composition": "CoQ10 100mg, Omega-3 (EPA+DHA) 300mg"
-  },
-  {
-    "name": "Curcumin 95% + Piperine Tablets",
-    "category": "tablets",
-    "health": [
-      "immunity",
-      "bone-joint"
-    ],
-    "composition": "Curcumin Extract 500mg (95%), Piperine 5mg"
-  },
-  {
-    "name": "Melatonin 5mg Sublingual Tablets",
-    "category": "tablets",
-    "health": [
-      "brain-cognitive"
-    ],
-    "composition": "Melatonin 5mg in fast-dissolve sublingual base"
-  },
-  {
-    "name": "Vitamin D3 60,000 IU Chewable Tablets",
-    "category": "tablets",
-    "health": [
-      "immunity",
-      "bone-joint"
-    ],
-    "composition": "Cholecalciferol 60,000 IU (weekly/monthly dose)"
-  },
-  {
-    "name": "Probiotics 50 Billion CFU + Prebiotics Tablets",
-    "category": "tablets",
-    "health": [
-      "digestion-gut"
-    ],
-    "composition": "8-Strain Probiotic Blend 50B CFU, FOS 200mg"
-  },
-  {
-    "name": "Liver Detox (Milk Thistle + NAC + Dandelion) Tablets",
-    "category": "tablets",
-    "health": [
-      "liver-health"
-    ],
-    "composition": "Milk Thistle 80% 200mg, NAC 300mg, Dandelion 150mg"
-  },
-  {
-    "name": "Collagen Peptides + Vitamin C + Hyaluronic Acid Tablets",
-    "category": "tablets",
-    "health": [
-      "skin-hair"
-    ],
-    "composition": "Marine Collagen Peptides 500mg, Vit C 40mg, HA 25mg"
-  },
-  {
-    "name": "Berberine 500mg + Chromium Tablets",
-    "category": "tablets",
-    "health": [
-      "diabetes-management",
-      "weight-management"
-    ],
-    "composition": "Berberine HCl 500mg, Chromium Picolinate 200mcg"
-  },
-  {
-    "name": "Shilajit 500mg + Safed Musli Tablets",
-    "category": "tablets",
-    "health": [
-      "mens-health",
-      "general-wellness"
-    ],
-    "composition": "Purified Shilajit 500mg, Safed Musli Ext 250mg"
-  },
-  {
-    "name": "Omega-3 Fish Oil 1000mg (EPA 360 + DHA 240) Softgels",
-    "category": "capsules",
-    "health": [
-      "heart-cardio"
-    ],
-    "composition": "Fish Oil 1000mg (EPA 360mg + DHA 240mg)"
-  },
-  {
-    "name": "Evening Primrose Oil 1000mg Softgels",
-    "category": "capsules",
-    "health": [
-      "womens-health",
-      "skin-hair"
-    ],
-    "composition": "Evening Primrose Oil 1000mg (GLA 90mg)"
-  },
-  {
-    "name": "Flaxseed Oil 1000mg Veg Softgels",
-    "category": "capsules",
-    "health": [
-      "heart-cardio"
-    ],
-    "composition": "Cold-Pressed Flaxseed Oil 1000mg (ALA 530mg)"
-  },
-  {
-    "name": "Vitamin E 400 IU Softgels",
-    "category": "capsules",
-    "health": [
-      "skin-hair",
-      "general-wellness"
-    ],
-    "composition": "Natural Mixed Tocopherols 400 IU"
-  },
-  {
-    "name": "CoQ10 100mg + Omega-3 Softgels",
-    "category": "capsules",
-    "health": [
-      "heart-cardio"
-    ],
-    "composition": "Ubiquinone CoQ10 100mg, Omega-3 300mg"
-  },
-  {
-    "name": "CLA 1000mg Softgels",
-    "category": "capsules",
-    "health": [
-      "weight-management",
-      "sports-nutrition"
-    ],
-    "composition": "Conjugated Linoleic Acid 1000mg (80% CLA content)"
-  },
-  {
-    "name": "Cod Liver Oil Softgels",
-    "category": "capsules",
-    "health": [
-      "bone-joint",
-      "general-wellness"
-    ],
-    "composition": "Cod Liver Oil 1000mg (Vit A 850IU, Vit D 85IU, EPA+DHA 160mg)"
-  },
-  {
-    "name": "Multivitamin + Multimineral Softgels",
-    "category": "capsules",
-    "health": [
-      "general-wellness"
-    ],
-    "composition": "Complete Vitamin & Mineral blend in softgel base"
-  },
-  {
-    "name": "Ashwagandha Extract 500mg Veg Capsules",
-    "category": "capsules",
-    "health": [
-      "general-wellness",
-      "mens-health"
-    ],
-    "composition": "KSM-66 Ashwagandha 500mg (5% Withanolides)"
-  },
-  {
-    "name": "Probiotics 30 Billion CFU (8-Strain) Veg Capsules",
-    "category": "capsules",
-    "health": [
-      "digestion-gut"
-    ],
-    "composition": "L. acidophilus, B. longum + 6 strains, 30B CFU, FOS 100mg"
-  },
-  {
-    "name": "Moringa Oleifera 500mg Veg Capsules",
-    "category": "capsules",
-    "health": [
-      "general-wellness"
-    ],
-    "composition": "Moringa Leaf Powder 500mg (standardised extract)"
-  },
-  {
-    "name": "Turmeric Curcumin + Piperine Veg Capsules",
-    "category": "capsules",
-    "health": [
-      "immunity",
-      "bone-joint"
-    ],
-    "composition": "Turmeric Extract 500mg (95% Curcumin), Piperine 5mg"
-  },
-  {
-    "name": "Green Tea Extract + Garcinia Veg Capsules",
-    "category": "capsules",
-    "health": [
-      "weight-management"
-    ],
-    "composition": "EGCG Green Tea 400mg, Garcinia 60% HCA 200mg"
-  },
-  {
-    "name": "Fenugreek Seed Extract 500mg Veg Capsules",
-    "category": "capsules",
-    "health": [
-      "womens-health",
-      "diabetes-management"
-    ],
-    "composition": "Fenugreek 500mg (50% Saponins)"
-  },
-  {
-    "name": "Saw Palmetto + Lycopene Veg Capsules",
-    "category": "capsules",
-    "health": [
-      "mens-health"
-    ],
-    "composition": "Saw Palmetto Berry Ext 320mg, Lycopene 6mg"
-  },
-  {
-    "name": "Grape Seed Extract 250mg Veg Capsules",
-    "category": "capsules",
-    "health": [
-      "skin-hair",
-      "heart-cardio"
-    ],
-    "composition": "Grape Seed OPC Extract 250mg (95% Proanthocyanidins)"
-  },
-  {
-    "name": "Tribulus Terrestris 1000mg Veg Capsules",
-    "category": "capsules",
-    "health": [
-      "mens-health",
-      "sports-nutrition"
-    ],
-    "composition": "Tribulus Ext 1000mg (40% Saponins)"
-  },
-  {
-    "name": "Cranberry Extract 400mg Veg Capsules",
-    "category": "capsules",
-    "health": [
-      "general-wellness"
-    ],
-    "composition": "Cranberry Concentrate 400mg (36mg PACs)"
-  },
-  {
-    "name": "Neem + Tulsi + Karela Veg Capsules",
-    "category": "capsules",
-    "health": [
-      "immunity",
-      "diabetes-management"
-    ],
-    "composition": "Neem 200mg, Tulsi 200mg, Bitter Melon 100mg"
-  },
-  {
-    "name": "Sea Buckthorn Oil Softgels",
-    "category": "capsules",
-    "health": [
-      "skin-hair",
-      "womens-health"
-    ],
-    "composition": "Sea Buckthorn Seed + Berry Oil 500mg (Omega-7 rich)"
-  },
-  {
-    "name": "Multivitamin + Multimineral Syrup",
-    "category": "syrups",
-    "health": [
-      "general-wellness",
-      "kids-pediatric"
-    ],
-    "composition": "Complete vitamin & mineral liquid suspension"
-  },
-  {
-    "name": "Iron + Folic Acid Syrup (Ferrous Ascorbate)",
-    "category": "syrups",
-    "health": [
-      "womens-health"
-    ],
-    "composition": "Ferrous Ascorbate 30mg, Folic Acid 500mcg per 5ml"
-  },
-  {
-    "name": "Calcium + Vitamin D3 Suspension",
-    "category": "syrups",
-    "health": [
-      "bone-joint",
-      "kids-pediatric"
-    ],
-    "composition": "Calcium Carbonate 500mg, Cholecalciferol 200IU per 5ml"
-  },
-  {
-    "name": "Appetizer Syrup (Ayurvedic)",
-    "category": "syrups",
-    "health": [
-      "digestion-gut",
-      "kids-pediatric"
-    ],
-    "composition": "Ajwain, Saunf, Pudina, Jeera extracts"
-  },
-  {
-    "name": "Liver Tonic Syrup",
-    "category": "syrups",
-    "health": [
-      "liver-health"
-    ],
-    "composition": "Kutki, Bhumi Amla, Chicory, Arjuna in syrup base"
-  },
-  {
-    "name": "Cough Syrup (Honey-based Ayurvedic)",
-    "category": "syrups",
-    "health": [
-      "immunity"
-    ],
-    "composition": "Tulsi, Ginger, Honey, Mulethi, Pippali blend"
-  },
-  {
-    "name": "Digestive Enzyme Syrup",
-    "category": "syrups",
-    "health": [
-      "digestion-gut"
-    ],
-    "composition": "Pepsin, Fungal Diastase, Papain in flavoured base"
-  },
-  {
-    "name": "Protein Liquid (Collagen + B-Complex)",
-    "category": "syrups",
-    "health": [
-      "skin-hair",
-      "general-wellness"
-    ],
-    "composition": "Marine Collagen 5g, B-Complex per 30ml serving"
-  },
-  {
-    "name": "Vitamin C + Zinc Oral Solution",
-    "category": "syrups",
-    "health": [
-      "immunity"
-    ],
-    "composition": "Ascorbic Acid 500mg, Zinc Sulphate 20mg per 15ml"
-  },
-  {
-    "name": "Immunity Booster Syrup (Giloy + Tulsi + Amla)",
-    "category": "syrups",
-    "health": [
-      "immunity"
-    ],
-    "composition": "Giloy Extract, Tulsi Extract, Amla Extract in honey base"
-  },
-  {
-    "name": "Brain Tonic Syrup (Brahmi + Shankhpushpi)",
-    "category": "syrups",
-    "health": [
-      "brain-cognitive",
-      "kids-pediatric"
-    ],
-    "composition": "Brahmi Extract, Shankhpushpi, Ashwagandha blend"
-  },
-  {
-    "name": "Noni Juice 500ml",
-    "category": "syrups",
-    "health": [
-      "general-wellness",
-      "immunity"
-    ],
-    "composition": "Morinda citrifolia (Noni) 500ml, no added sugar"
-  },
-  {
-    "name": "Aloe Vera Juice (with Pulp) 500ml",
-    "category": "syrups",
-    "health": [
-      "digestion-gut",
-      "skin-hair"
-    ],
-    "composition": "Aloe barbadensis leaf gel + pulp, 500ml"
-  },
-  {
-    "name": "Amla Juice 500ml",
-    "category": "syrups",
-    "health": [
-      "immunity",
-      "skin-hair"
-    ],
-    "composition": "Indian Gooseberry fresh juice, 500mg Vit C per 30ml"
-  },
-  {
-    "name": "Karela Jamun Juice 500ml",
-    "category": "syrups",
-    "health": [
-      "diabetes-management"
-    ],
-    "composition": "Bitter Melon + Jamun Seed blend, 500ml"
-  },
-  {
-    "name": "Whey Protein Concentrate 80%",
-    "category": "powders",
-    "health": [
-      "sports-nutrition"
-    ],
-    "composition": "Whey Protein 24g, BCAA 5.4g per 30g serving"
-  },
-  {
-    "name": "Pea Protein Isolate",
-    "category": "powders",
-    "health": [
-      "sports-nutrition",
-      "general-wellness"
-    ],
-    "composition": "Pea Protein Isolate 25g per 30g serving"
-  },
-  {
-    "name": "Mass Gainer Powder",
-    "category": "powders",
-    "health": [
-      "sports-nutrition"
-    ],
-    "composition": "Carbs 60g, Protein 15g, Fats 2g per 100g serving"
-  },
-  {
-    "name": "BCAA 2:1:1 Powder",
-    "category": "powders",
-    "health": [
-      "sports-nutrition"
-    ],
-    "composition": "Leucine 2.5g, Isoleucine 1.25g, Valine 1.25g per serving"
-  },
-  {
-    "name": "Pre-Workout Blend (Caffeine + Beta-Alanine + Citrulline)",
-    "category": "powders",
-    "health": [
-      "sports-nutrition"
-    ],
-    "composition": "Caffeine 200mg, Beta-Alanine 3.2g, Citrulline 6g"
-  },
-  {
-    "name": "Women's Health Protein Blend",
-    "category": "powders",
-    "health": [
-      "womens-health",
-      "sports-nutrition"
-    ],
-    "composition": "Whey 15g, Soy 5g, Iron, Folic Acid, Biotin per serving"
-  },
-  {
-    "name": "Joint Support Powder (Collagen + Glucosamine)",
-    "category": "powders",
-    "health": [
-      "bone-joint"
-    ],
-    "composition": "Collagen Peptides 10g, Glucosamine 1.5g, Vit C 40mg"
-  },
-  {
-    "name": "Immunity Blend (Elderberry + Vitamin C + Zinc)",
-    "category": "powders",
-    "health": [
-      "immunity"
-    ],
-    "composition": "Elderberry 500mg, Vit C 500mg, Zinc 10mg, Echinacea 200mg"
-  },
-  {
-    "name": "Plant-Based Superfood Powder",
-    "category": "powders",
-    "health": [
-      "general-wellness"
-    ],
-    "composition": "Spirulina, Chlorella, Wheatgrass, Amla, 20+ superfoods"
-  },
-  {
-    "name": "Weight Management Meal Replacement Powder",
-    "category": "powders",
-    "health": [
-      "weight-management"
-    ],
-    "composition": "Protein 20g, Fibre 5g, MCT Oil 3g, Low-Glycaemic Carbs"
-  },
-  {
-    "name": "ORS (Oral Rehydration Salts) Sachets",
-    "category": "sachets",
-    "health": [
-      "general-wellness"
-    ],
-    "composition": "NaCl, KCl, Sodium Citrate, Glucose per WHO formula"
-  },
-  {
-    "name": "Vitamin C 1000mg Effervescent Sachets",
-    "category": "sachets",
-    "health": [
-      "immunity"
-    ],
-    "composition": "Ascorbic Acid 1000mg, Zinc 10mg, effervescent base"
-  },
-  {
-    "name": "Electrolyte Replenishment Sachets",
-    "category": "sachets",
-    "health": [
-      "sports-nutrition"
-    ],
-    "composition": "Na, K, Mg, Cl with Vitamin B complex"
-  },
-  {
-    "name": "Collagen Peptides Sachets (10g)",
-    "category": "sachets",
-    "health": [
-      "skin-hair",
-      "bone-joint"
-    ],
-    "composition": "Hydrolysed Marine Collagen Peptides 10g, Hyaluronic Acid"
-  },
-  {
-    "name": "Probiotic Stick-Pack Sachets",
-    "category": "sachets",
-    "health": [
-      "digestion-gut"
-    ],
-    "composition": "Bacillus coagulans 2B CFU + Prebiotic FOS per sachet"
-  },
-  {
-    "name": "Multivitamin Effervescent Sachets",
-    "category": "sachets",
-    "health": [
-      "general-wellness"
-    ],
-    "composition": "12 Vitamins + 6 Minerals in effervescent fruit-flavour base"
-  },
-  {
-    "name": "Turmeric Latte Blend Sachets",
-    "category": "sachets",
-    "health": [
-      "immunity",
-      "bone-joint"
-    ],
-    "composition": "Turmeric 500mg, Black Pepper, Ginger, Coconut Milk Powder"
-  },
-  {
-    "name": "Joint Support Sachet (Glucosamine + Collagen + Boswellia)",
-    "category": "sachets",
-    "health": [
-      "bone-joint"
-    ],
-    "composition": "Glucosamine 1.5g, Collagen 5g, Boswellia 200mg"
-  },
-  {
-    "name": "L-Glutamine + Electrolyte Recovery Sachet",
-    "category": "sachets",
-    "health": [
-      "sports-nutrition"
-    ],
-    "composition": "L-Glutamine 5g, Electrolyte blend, Coconut Water Powder"
-  },
-  {
-    "name": "Ashwagandha + Saffron Stress Relief Sachet",
-    "category": "sachets",
-    "health": [
-      "brain-cognitive",
-      "general-wellness"
-    ],
-    "composition": "KSM-66 Ashwagandha 300mg, Saffron Extract 14mg"
-  },
-  {
-    "name": "Multivitamin Gummies (Adults)",
-    "category": "gummies",
-    "health": [
-      "general-wellness"
-    ],
-    "composition": "13 Vitamins + 6 Minerals, natural fruit flavour"
-  },
-  {
-    "name": "Vitamin C + Zinc Immunity Gummies",
-    "category": "gummies",
-    "health": [
-      "immunity"
-    ],
-    "composition": "Ascorbic Acid 250mg, Zinc 5mg per 2 gummies"
-  },
-  {
-    "name": "Biotin 5000mcg Gummies",
-    "category": "gummies",
-    "health": [
-      "skin-hair"
-    ],
-    "composition": "D-Biotin 5000mcg, Amla Extract 50mg per 2 gummies"
-  },
-  {
-    "name": "Vitamin D3 + K2 Gummies",
-    "category": "gummies",
-    "health": [
-      "bone-joint",
-      "immunity"
-    ],
-    "composition": "D3 1000IU + K2 (MK-7) 45mcg per 2 gummies"
-  },
-  {
-    "name": "Melatonin 5mg Sleep Gummies",
-    "category": "gummies",
-    "health": [
-      "brain-cognitive"
-    ],
-    "composition": "Melatonin 5mg, L-Theanine 100mg, Chamomile 50mg"
-  },
-  {
-    "name": "Probiotic + Prebiotic Gummies",
-    "category": "gummies",
-    "health": [
-      "digestion-gut",
-      "kids-pediatric"
-    ],
-    "composition": "Bacillus coagulans 1B CFU, Inulin 500mg per 2 gummies"
-  },
-  {
-    "name": "Apple Cider Vinegar Gummies",
-    "category": "gummies",
-    "health": [
-      "weight-management",
-      "digestion-gut"
-    ],
-    "composition": "ACV 500mg (5% Acetic Acid), Beet Root, Pomegranate"
-  },
-  {
-    "name": "Kids' Multivitamin Gummies",
-    "category": "gummies",
-    "health": [
-      "kids-pediatric",
-      "general-wellness"
-    ],
-    "composition": "Age-appropriate vitamins A, C, D, B-complex + Zinc, Iron"
-  },
-  {
-    "name": "Omega-3 DHA Gummies for Kids",
-    "category": "gummies",
-    "health": [
-      "kids-pediatric",
-      "brain-cognitive"
-    ],
-    "composition": "Algal DHA 100mg, Vit D 200IU per 2 gummies"
-  },
-  {
-    "name": "Collagen + Vitamin C Beauty Gummies",
-    "category": "gummies",
-    "health": [
-      "skin-hair"
-    ],
-    "composition": "Collagen Peptides 2.5g, Vit C 60mg, Biotin 1000mcg"
-  },
-  {
-    "name": "Ashwagandha Churna 100g",
-    "category": "ayurvedic",
-    "health": [
-      "general-wellness",
-      "mens-health"
-    ],
-    "composition": "Withania somnifera root powder 100g"
-  },
-  {
-    "name": "Triphala Churna 100g",
-    "category": "ayurvedic",
-    "health": [
-      "digestion-gut",
-      "general-wellness"
-    ],
-    "composition": "Amalaki, Bibhitaki, Haritaki — equal parts"
-  },
-  {
-    "name": "Trikatu Churna 100g",
-    "category": "ayurvedic",
-    "health": [
-      "digestion-gut",
-      "weight-management"
-    ],
-    "composition": "Shunti, Maricha, Pippali — equal parts"
-  },
-  {
-    "name": "Shatavari Capsules 500mg",
-    "category": "ayurvedic",
-    "health": [
-      "womens-health"
-    ],
-    "composition": "Asparagus racemosus root extract 500mg"
-  },
-  {
-    "name": "Brahmi Capsules 500mg",
-    "category": "ayurvedic",
-    "health": [
-      "brain-cognitive"
-    ],
-    "composition": "Bacopa monnieri Ext 500mg (20% Bacosides)"
-  },
-  {
-    "name": "Guduchi (Giloy) Tablets 500mg",
-    "category": "ayurvedic",
-    "health": [
-      "immunity"
-    ],
-    "composition": "Tinospora cordifolia stem extract 500mg"
-  },
-  {
-    "name": "Arjuna Tablets 500mg",
-    "category": "ayurvedic",
-    "health": [
-      "heart-cardio"
-    ],
-    "composition": "Terminalia arjuna bark extract 500mg"
-  },
-  {
-    "name": "Chandraprabha Vati",
-    "category": "ayurvedic",
-    "health": [
-      "mens-health",
-      "general-wellness"
-    ],
-    "composition": "37-herb classical formulation per API"
-  },
-  {
-    "name": "Arogyavardhini Vati",
-    "category": "ayurvedic",
-    "health": [
-      "liver-health",
-      "digestion-gut"
-    ],
-    "composition": "Classical liver & metabolic tonic per API"
-  },
-  {
-    "name": "Kanchanar Guggulu",
-    "category": "ayurvedic",
-    "health": [
-      "general-wellness"
-    ],
-    "composition": "Kanchanar, Guggulu, Triphala, Trikatu, Varuna"
-  },
-  {
-    "name": "Yograj Guggulu",
-    "category": "ayurvedic",
-    "health": [
-      "bone-joint"
-    ],
-    "composition": "Guggulu + 28 herbs per classical formulation"
-  },
-  {
-    "name": "Dashmool Kwath (Decoction)",
-    "category": "ayurvedic",
-    "health": [
-      "general-wellness",
-      "womens-health"
-    ],
-    "composition": "10 classical root herbs decoction concentrate"
-  },
-  {
-    "name": "Chyawanprash 500g",
-    "category": "ayurvedic",
-    "health": [
-      "immunity",
-      "general-wellness"
-    ],
-    "composition": "Amla + 40 herbs in honey-ghee base, per API"
-  },
-  {
-    "name": "Kumaryasava 450ml",
-    "category": "ayurvedic",
-    "health": [
-      "womens-health",
-      "digestion-gut"
-    ],
-    "composition": "Fermented Aloe vera preparation, 5–7% self-generated alcohol"
-  },
-  {
-    "name": "Draksharishta 450ml",
-    "category": "ayurvedic",
-    "health": [
-      "general-wellness",
-      "heart-cardio"
-    ],
-    "composition": "Fermented grape-based tonic with 40 herbs"
-  },
-  {
-    "name": "Abhayarishta 450ml",
-    "category": "ayurvedic",
-    "health": [
-      "digestion-gut"
-    ],
-    "composition": "Fermented Haritaki-based digestive preparation"
-  },
-  {
-    "name": "Mahasudarshan Churna",
-    "category": "ayurvedic",
-    "health": [
-      "immunity"
-    ],
-    "composition": "50-herb classical formulation for fever & immunity"
-  },
-  {
-    "name": "Punarnava Mandoor",
-    "category": "ayurvedic",
-    "health": [
-      "liver-health",
-      "general-wellness"
-    ],
-    "composition": "Iron-herb preparation with Punarnava & Trikatu"
-  },
-  {
-    "name": "Sitopaladi Churna",
-    "category": "ayurvedic",
-    "health": [
-      "immunity"
-    ],
-    "composition": "Sitopala, Vanshlochan, Pippali, Ela, Twak"
-  },
-  {
-    "name": "Lavanbhaskar Churna",
-    "category": "ayurvedic",
-    "health": [
-      "digestion-gut"
-    ],
-    "composition": "11-salt mineral herbal digestive blend per API"
-  }
-];
-    const HEALTH_SEGMENTS = [
-  {
-    "id": "general-wellness",
-    "label": "General Wellness",
-    "color": "#00A99D"
-  },
-  {
-    "id": "immunity",
-    "label": "Immunity",
-    "color": "#00A651"
-  },
-  {
-    "id": "womens-health",
-    "label": "Women's Health",
-    "color": "#E91E8C"
-  },
-  {
-    "id": "mens-health",
-    "label": "Men's Health",
-    "color": "#003D7A"
-  },
-  {
-    "id": "bone-joint",
-    "label": "Bone & Joint",
-    "color": "#795548"
-  },
-  {
-    "id": "heart-cardio",
-    "label": "Heart & Cardio",
-    "color": "#E53935"
-  },
-  {
-    "id": "digestion-gut",
-    "label": "Digestion & Gut",
-    "color": "#F7A800"
-  },
-  {
-    "id": "brain-cognitive",
-    "label": "Brain & Cognitive",
-    "color": "#7B1FA2"
-  },
-  {
-    "id": "weight-management",
-    "label": "Weight Management",
-    "color": "#FF6D00"
-  },
-  {
-    "id": "sports-nutrition",
-    "label": "Sports Nutrition",
-    "color": "#1565C0"
-  },
-  {
-    "id": "skin-hair",
-    "label": "Skin, Hair & Nails",
-    "color": "#AD1457"
-  },
-  {
-    "id": "diabetes-management",
-    "label": "Diabetes Management",
-    "color": "#2E7D32"
-  },
-  {
-    "id": "liver-health",
-    "label": "Liver Health",
-    "color": "#6D4C41"
-  },
-  {
-    "id": "kids-pediatric",
-    "label": "Kids & Pediatric",
-    "color": "#00ACC1"
-  }
-];
-
-    // ── Nav scroll ──────────────────────────────────────────────
-    const nav = document.querySelector('.nav');
-    function updateNav() {
-        nav.classList.toggle('scrolled', window.scrollY > 60);
-    }
-    window.addEventListener('scroll', updateNav, {passive:true});
-    updateNav();
-
-    // ── Mobile menu ─────────────────────────────────────────────
-    const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-
-    // ── Smooth scroll ────────────────────────────────────────────
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e => {
-            const target = document.querySelector(a.getAttribute('href'));
-            if (target) {
-                e.preventDefault();
-                const offset = 80;
-                window.scrollTo({ top: target.offsetTop - offset, behavior:'smooth' });
-                if (mobileMenu.classList.contains('open')) mobileMenu.classList.remove('open');
-            }
-        });
-    });
-
-    // ── Scroll animations ────────────────────────────────────────
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-    }, {threshold: 0.1});
-    document.querySelectorAll('.aos').forEach(el => observer.observe(el));
-
-    // ── Animated counters ────────────────────────────────────────
-    function animateCounter(el, target, suffix) {
-        const duration = 1800;
-        const start = performance.now();
-        function update(now) {
-            const progress = Math.min((now - start) / duration, 1);
-            const ease = 1 - Math.pow(1 - progress, 3);
-            const val = Math.round(ease * target);
-            el.textContent = val + suffix;
-            if (progress < 1) requestAnimationFrame(update);
-        }
-        requestAnimationFrame(update);
-    }
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting && !e.target.dataset.counted) {
-                e.target.dataset.counted = '1';
-                animateCounter(e.target, parseInt(e.target.dataset.target), e.target.dataset.suffix || '');
-            }
-        });
-    }, {threshold: 0.5});
-    document.querySelectorAll('[data-target]').forEach(el => statsObserver.observe(el));
-
-    // ── Product tabs ─────────────────────────────────────────────
-    document.querySelectorAll('.product-tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const tab = btn.dataset.tab;
-            document.querySelectorAll('.product-tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
-            btn.classList.add('active');
-            document.getElementById('panel-' + tab)?.classList.add('active');
-            lucide.createIcons();
-        });
-    });
-
-    // ── Formulation filter ────────────────────────────────────────
-    let activeCat = 'all', activeHealth = null, showAll = false;
-    const PREVIEW_COUNT = 9;
-
-    function getCatColor(cat) {
-        return {tablets:'tablets',capsules:'capsules',syrups:'syrups',powders:'powders',
-                 sachets:'sachets',gummies:'gummies',ayurvedic:'ayurvedic'}[cat] || 'tablets';
-    }
-
-    function renderFormulations() {
-        const grid = document.getElementById('formulations-grid');
-        const viewAllWrap = document.getElementById('viewall-wrap');
-        let filtered = FORMULATIONS;
-        if (activeCat !== 'all') filtered = filtered.filter(f => f.category === activeCat);
-        if (activeHealth) filtered = filtered.filter(f => f.health.includes(activeHealth));
-
-        const display = showAll ? filtered : filtered.slice(0, PREVIEW_COUNT);
-        const remaining = filtered.length - display.length;
-
-        grid.innerHTML = display.map(f => `
-            <div class="form-card">
-                <div class="form-card-body">
-                    <div class="form-card-name">${f.name}</div>
-                    <div class="form-card-comp">${f.composition}</div>
-                </div>
-                <span class="form-tag ${getCatColor(f.category)}">${f.category}</span>
-            </div>`).join('');
-
-        if (remaining > 0) {
-            viewAllWrap.innerHTML = `<button class="form-viewall-btn" id="view-all-btn">
-                <i data-lucide="chevrons-down"></i> Show ${remaining} more formulations
-            </button>`;
-            document.getElementById('view-all-btn').addEventListener('click', () => {
-                showAll = true; renderFormulations();
-            });
-        } else if (filtered.length > PREVIEW_COUNT) {
-            viewAllWrap.innerHTML = `<button class="form-viewall-btn" id="view-less-btn">
-                <i data-lucide="chevrons-up"></i> Show less
-            </button>`;
-            document.getElementById('view-less-btn').addEventListener('click', () => {
-                showAll = false; renderFormulations();
-            });
-        } else {
-            viewAllWrap.innerHTML = '';
-        }
-        lucide.createIcons();
-    }
-
-    document.querySelectorAll('.form-filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.form-filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            activeCat = btn.dataset.cat;
-            showAll = false;
-            renderFormulations();
-        });
-    });
-
-    // ── Health segment pills ──────────────────────────────────────
-    document.querySelectorAll('.health-pill').forEach(pill => {
-        pill.addEventListener('click', () => {
-            const h = pill.dataset.health;
-            if (activeHealth === h) {
-                activeHealth = null;
-                pill.classList.remove('active');
-            } else {
-                document.querySelectorAll('.health-pill').forEach(p => p.classList.remove('active'));
-                activeHealth = h;
-                pill.classList.add('active');
-                const hs = HEALTH_SEGMENTS.find(s => s.id === h);
-                if (hs) pill.style.background = hs.color;
-            }
-            showAll = false;
-            // Scroll to formulations
-            document.getElementById('formulations').scrollIntoView({behavior:'smooth', block:'start'});
-            setTimeout(renderFormulations, 400);
-        });
-    });
-
-    // Style active health pill properly
-    document.querySelectorAll('.health-pill').forEach(pill => {
-        pill.addEventListener('mouseenter', () => {
-            if (!pill.classList.contains('active')) {
-                const hs = HEALTH_SEGMENTS.find(s => s.id === pill.dataset.health);
-                if (hs) pill.style.background = hs.color;
-            }
-        });
-        pill.addEventListener('mouseleave', () => {
-            if (!pill.classList.contains('active')) pill.style.background = '';
-        });
-    });
-
-    // ── FAQ accordion ─────────────────────────────────────────────
-    document.querySelectorAll('.faq-question').forEach(q => {
-        q.addEventListener('click', () => {
-            const isOpen = q.classList.contains('open');
-            document.querySelectorAll('.faq-question').forEach(qq => qq.classList.remove('open'));
-            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
-            if (!isOpen) {
-                q.classList.add('open');
-                q.nextElementSibling.classList.add('open');
-            }
-        });
-    });
-
-    // ── Initial render ────────────────────────────────────────────
-    renderFormulations();
-    lucide.createIcons();
-
+{JS}
 </script>
 </body>
-</html>
+</html>"""
+
+with open("index.html", "w", encoding="utf-8", newline="\n") as f:
+    f.write(HTML)
+
+print(f"Generated index.html ({len(HTML):,} chars, ~{len(HTML.splitlines()):,} lines)")
