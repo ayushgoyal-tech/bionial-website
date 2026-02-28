@@ -8,7 +8,7 @@
 <link rel="apple-touch-icon" href="images/logo.png">
 <meta name="description" content="WHO-GMP certified nutraceutical and Ayurvedic contract manufacturer in Mohali, Punjab. 200+ ready formulations. 30-day delivery. Startup-friendly MOQs from 1,000 units.">
 <meta property="og:title" content="Bionial Lifesciences — Nutraceutical Contract Manufacturing, Mohali">
-<meta property="og:description" content="WHO-GMP certified nutraceutical & Ayurvedic contract manufacturer. Capsules, tablets, syrups, powders, sachets. 200+ formulations. 30-day delivery. Low MOQ from 1,000 units.">
+<meta property="og:description" content="WHO-GMP certified nutraceutical & Ayurvedic contract manufacturer. 200+ formulations. Capsules, tablets, syrups, powders, sachets. Low MOQ from 1,000 units. 30-day delivery.">
 <meta property="og:image" content="https://bioniallife.com/images/hero-bg.jpg">
 <meta property="og:url" content="https://bioniallife.com">
 <meta property="og:type" content="website">
@@ -26,7 +26,7 @@
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Bionial Lifesciences Pvt. Ltd.",
-  "description": "WHO-GMP certified nutraceutical and Ayurvedic contract manufacturer. Capsules, tablets, syrups, powders, sachets. 200+ ready formulations. MOQ from 1,000 units.",
+  "description": "WHO-GMP certified nutraceutical and Ayurvedic contract manufacturer in Mohali, Punjab, India. Capsules, tablets, syrups, powders, sachets. 200+ ready formulations.",
   "url": "https://bioniallife.com",
   "telephone": "+919996610619",
   "email": "bioniallifesciences@gmail.com",
@@ -112,16 +112,19 @@ section { padding: 80px 0; }
     box-shadow: 0 2px 20px rgba(0,0,0,0.08);
     padding: 8px 0;
 }
+.nav.scrolled .nav-links a { color: var(--primary); }
+.nav.scrolled .nav-links a:hover { color: var(--accent); }
+.nav.scrolled .mobile-toggle span { background: var(--primary); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .nav-logo { display: flex; align-items: center; }
 .nav-logo-img { height: 80px; width: auto; display: block; }
 .nav-links { display: flex; align-items: center; gap: 8px; }
-.nav-links a { font-size: 0.88rem; font-weight: 600; color: var(--primary); padding: 8px 14px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
+.nav-links a { font-size: 0.88rem; font-weight: 600; color: #fff; padding: 8px 14px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
 .nav-links a:hover { color: var(--accent); background: rgba(0,169,157,0.06); }
 .nav-cta { background: var(--accent) !important; color: #fff !important; border-radius: 8px !important; padding: 10px 20px !important; }
 .nav-cta:hover { background: var(--accent-dark) !important; }
 .mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-.mobile-toggle span { display: block; width: 24px; height: 2px; background: var(--primary); border-radius: 2px; transition: all 0.3s; }
+.mobile-toggle span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s; }
 .mobile-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
 .mobile-toggle.open span:nth-child(2) { opacity: 0; }
 .mobile-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
@@ -129,78 +132,98 @@ section { padding: 80px 0; }
 /* ===== HERO ===== */
 .hero {
     min-height: 100vh;
-    padding-top: 80px;
-    background: linear-gradient(135deg, #EFF8FF 0%, #FFFFFF 45%, #EFFDF9 100%);
+    background-image: linear-gradient(rgba(13,27,42,0.72), rgba(13,27,42,0.72)),
+                      url('images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
     position: relative;
-    overflow: hidden;
     display: flex;
     align-items: center;
 }
-.hero::before {
-    content: '';
-    position: absolute; width: 700px; height: 700px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,169,157,0.10) 0%, transparent 65%);
-    top: -150px; right: -120px; pointer-events: none; z-index: 0;
-}
-.hero::after {
-    content: '';
-    position: absolute; width: 500px; height: 500px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,61,122,0.07) 0%, transparent 65%);
-    bottom: -100px; left: -80px; pointer-events: none; z-index: 0;
-}
 .hero-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-    align-items: center; position: relative; z-index: 1; padding: 60px 0 100px;
+    position: relative; z-index: 1; padding: 80px 0; max-width: 720px;
 }
 .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255,255,255,0.9); border: 1.5px solid var(--accent);
+    background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.35);
     border-radius: 50px; padding: 6px 16px; margin-bottom: 24px;
-    font-size: 0.78rem; font-weight: 700; color: var(--primary); letter-spacing: 0.05em;
+    font-size: 0.78rem; font-weight: 700; color: #fff; letter-spacing: 0.05em;
 }
 .hero-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-.hero-title { font-size: clamp(2rem,4vw,3rem); font-weight: 900; color: var(--primary); line-height: 1.15; margin-bottom: 16px; }
+.hero-title { font-size: clamp(2rem,4vw,3rem); font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 16px; }
 .hero-title span { color: var(--accent); }
 .hero-sub { font-size: 1.1rem; font-weight: 600; color: var(--accent); margin-bottom: 16px; }
-.hero-desc { font-size: 1rem; color: var(--text-sec); max-width: 480px; line-height: 1.7; margin-bottom: 32px; }
+.hero-desc { font-size: 1rem; color: rgba(255,255,255,0.8); max-width: 480px; line-height: 1.7; margin-bottom: 32px; }
 .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; border: none; }
 .btn-primary { background: var(--primary); color: #fff; }
 .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,61,122,0.25); }
-.btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
-.btn-outline:hover { background: var(--primary); color: #fff; }
+.btn-outline { background: transparent; color: #fff; border: 2px solid #fff; }
+.btn-outline:hover { background: #fff; color: var(--primary); }
 .btn-accent { background: var(--accent); color: #fff; }
 .btn-accent:hover { background: var(--accent-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,169,157,0.3); }
-.hero-img-wrap { position: relative; border-radius: 20px; overflow: hidden; }
-.hero-img-wrap img { width: 100%; height: 460px; object-fit: cover; border-radius: 20px; display: block; }
-.hero-float-badge {
-    position: absolute; bottom: 24px; left: 24px; right: 24px;
-    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
-    border-radius: 12px; padding: 14px 18px;
-    display: flex; gap: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-}
-.hero-float-item { display: flex; flex-direction: column; align-items: center; }
-.hero-float-val { font-size: 1.1rem; font-weight: 800; color: var(--primary); }
-.hero-float-lbl { font-size: 0.68rem; color: var(--text-muted); text-align: center; }
 
-/* Hero stats row */
-.hero-stats {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: rgba(255,255,255,0.95); border-top: 1px solid var(--border);
-    backdrop-filter: blur(10px);
+/* Stats bar */
+.stats-bar {
+    background: #ffffff;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
-.hero-stats-inner { display: flex; }
-.hero-stat { flex: 1; padding: 20px 0; text-align: center; border-right: 1px solid var(--border); }
-.hero-stat:last-child { border-right: none; }
-.stat-val { font-size: 1.6rem; font-weight: 900; color: var(--primary); display: block; }
-.stat-lbl { font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 2px; }
+.stats-bar__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    gap: 0;
+}
+.stats-bar__item {
+    padding: 0 24px;
+    border-right: 1px solid rgba(0,0,0,0.1);
+}
+.stats-bar__item:last-child { border-right: none; }
+.stats-bar__number {
+    font-size: 36px;
+    font-weight: 700;
+    color: #F7A800;
+    display: block;
+    line-height: 1.1;
+}
+.stats-bar__label {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 4px;
+    display: block;
+}
 
-/* ===== CERT STRIP ===== */
-.cert-strip { background: var(--primary-dark); padding: 10px 0; overflow: hidden; }
-.cert-track { display: inline-flex; gap: 40px; animation: certScroll 25s linear infinite; white-space: nowrap; }
-.cert-track:hover { animation-play-state: paused; }
-.cert-badge { color: rgba(255,255,255,0.82); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 4px 14px; white-space: nowrap; }
-@keyframes certScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* ===== CERT MARQUEE ===== */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.marquee-container { overflow: hidden; background: var(--bg-alt); border-bottom: 1px solid var(--border); }
+.marquee-track {
+    display: flex;
+    gap: 32px;
+    animation: marquee 22s linear infinite;
+    width: max-content;
+    align-items: center;
+    padding: 16px 0;
+}
+.marquee-track:hover { animation-play-state: paused; }
+.cert-badge {
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 600;
+    color: #003D7A;
+    background: rgba(0,61,122,0.07);
+    border: 1px solid rgba(0,61,122,0.15);
+    padding: 6px 16px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+}
 
 /* ===== ABOUT ===== */
 .about { background: var(--bg); }
@@ -247,18 +270,17 @@ section { padding: 80px 0; }
 .cat-btn { background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-sec); cursor: pointer; transition: all 0.2s; }
 .cat-btn:hover { border-color: var(--accent); color: var(--accent); }
 .cat-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
-#form-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 24px; }
-.form-card { background: var(--bg); border-radius: 12px; padding: 18px; border: 1.5px solid var(--border); transition: all 0.2s; }
-.form-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px var(--shadow); }
-.form-card__hdr { background: linear-gradient(135deg,#003D7A 0%,#00A99D 100%); padding:10px 14px; display:flex; justify-content:space-between; align-items:center; }
-.form-card__hdr .form-code { color:#F7A800; margin-bottom:0; }
-.form-card__hdr .form-tag { color:#fff; background:rgba(255,255,255,0.18); }
-.form-card__body { padding:12px 14px 8px; }
-.form-card__body .form-name { margin-bottom:0; }
-.form-card__cta { display:block; text-align:right; padding:6px 14px 10px; font-size:11px; color:var(--accent); font-weight:700; text-decoration:none; border-top:1px solid rgba(0,0,0,0.06); }
-.form-card__cta:hover { color:var(--primary); }
-.form-code { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.08em; margin-bottom: 6px; }
-.form-name { font-size: 0.88rem; font-weight: 700; color: var(--primary); line-height: 1.4; margin-bottom: 10px; }
+.formulations-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 28px 0; min-height: 200px; }
+.formulation-card { background: #fff; border: 1px solid rgba(0,61,122,0.1); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.3s ease, transform 0.3s ease; }
+.formulation-card:hover { box-shadow: 0 8px 24px rgba(0,61,122,0.12); transform: translateY(-2px); }
+.formulation-card__header { background: linear-gradient(135deg,#003D7A 0%,#00A99D 100%); padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+.formulation-card__code { color: #F7A800; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; }
+.formulation-card__badge { color: #fff; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; }
+.formulation-card__body { padding: 12px 14px; flex: 1; }
+.formulation-card__name { font-size: 13px; font-weight: 600; color: #1A1A2E; margin: 0 0 6px; line-height: 1.4; }
+.formulation-card__composition { font-size: 11.5px; color: #6B7280; margin: 0; line-height: 1.5; }
+.formulation-card__cta { display: block; text-align: right; padding: 8px 14px; font-size: 12px; color: #00A99D; font-weight: 600; text-decoration: none; border-top: 1px solid rgba(0,0,0,0.06); }
+.formulation-card__cta:hover { color: #003D7A; }
 .form-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 3px 9px; border-radius: 4px; }
 .form-tag.Tablets { background: #EBF5FF; color: #1a56db; }
 .form-tag.Capsules { background: #EFFDF9; color: #007A73; }
@@ -269,16 +291,10 @@ section { padding: 80px 0; }
 .form-tag.Semi-Solid { background: #E8FFF3; color: #166534; }
 .form-tag.Suspension { background: #F1F5F9; color: #475569; }
 .form-tag.Liposomal { background: #FFF0FB; color: #9d174d; }
-.form-view-all { text-align: center; }
+.form-view-all { text-align: center; margin-top: 8px; }
 
 /* ===== TRUST STRIP ===== */
-.trust-strip { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 28px 0; }
-.trust-strip-inner { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-.trust-strip-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
-.trust-strip-logos { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
-.trust-logo-card { display: flex; align-items: center; gap: 10px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 10px 20px; }
-.trust-logo-dot { width: 10px; height: 10px; border-radius: 50%; }
-.trust-logo-text { font-size: 0.8rem; font-weight: 700; color: var(--text-sec); }
+.trust-strip { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 
 /* ===== LIPOSOMAL SECTION ===== */
 .liposomal { background: linear-gradient(135deg, #001e3c 0%, var(--primary-dark) 60%, #003a2e 100%); position: relative; overflow: hidden; }
@@ -341,11 +357,11 @@ section { padding: 80px 0; }
 .infra-check { display: flex; align-items: flex-start; gap: 12px; font-size: 0.9rem; color: var(--text-sec); }
 .infra-check-icon { color: var(--accent); flex-shrink: 0; margin-top: 2px; }
 .infra-img { width: 100%; height: 400px; object-fit: cover; border-radius: 20px; display: block; }
-.infra-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.infra-gallery__item { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3; }
+.infra-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 40px; border-radius: 16px; overflow: hidden; }
+.infra-gallery__item { position: relative; overflow: hidden; aspect-ratio: 4/3; }
 .infra-gallery__item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
 .infra-gallery__item:hover img { transform: scale(1.04); }
-.infra-label { position: absolute; bottom: 10px; left: 12px; background: rgba(0,0,0,0.6); color: #fff; font-size: 11px; padding: 4px 10px; border-radius: 20px; letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Inter', sans-serif; }
+.infra-label { position: absolute; bottom: 10px; left: 12px; background: rgba(0,0,0,0.6); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; letter-spacing: 0.08em; text-transform: uppercase; }
 
 /* ===== WHY BIONIAL ===== */
 .why { background: var(--bg-alt); }
@@ -384,8 +400,6 @@ section { padding: 80px 0; }
 .contact-item-icon svg { width: 20px; height: 20px; }
 .contact-item-title { font-weight: 700; font-size: 0.88rem; color: var(--primary); }
 .contact-item-val { font-size: 0.88rem; color: var(--text-sec); margin-top: 2px; }
-.map-wrap { margin-top: 28px; border-radius: 16px; overflow: hidden; }
-.map-wrap iframe { width: 100%; height: 200px; border: none; display: block; }
 
 /* ===== FOOTER ===== */
 .footer { background: var(--primary-dark); color: rgba(255,255,255,0.75); padding: 60px 0 0; }
@@ -415,6 +429,8 @@ section { padding: 80px 0; }
 /* ===== ANIMATIONS ===== */
 .animate-on-scroll { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
 .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
@@ -426,23 +442,24 @@ section { padding: 80px 0; }
     .nav-links.open { display: flex; }
     .nav-links a { font-size: 1.1rem; }
     .mobile-toggle { display: flex; z-index: 1000; }
-    .hero-grid { grid-template-columns: 1fr; padding: 40px 0 80px; }
-    .hero-img-wrap { display: none; }
-    .hero-stats-inner { flex-wrap: wrap; }
-    .hero-stat { min-width: 50%; border-bottom: 1px solid var(--border); }
+    .hero-grid { padding: 40px 0 60px; }
     .about-grid, .infra-grid, .contact-grid, .product-panel.active { grid-template-columns: 1fr; }
     .services-grid { grid-template-columns: 1fr; }
     .process-steps { grid-template-columns: 1fr; }
     .why-grid { grid-template-columns: 1fr 1fr; }
-    #form-grid { grid-template-columns: 1fr 1fr; }
+    .formulations-grid { grid-template-columns: repeat(2,1fr); }
     .footer-grid { grid-template-columns: 1fr; }
     .whatsapp-fab { display: none; }
     .mobile-cta-bar { display: block; }
     body { padding-bottom: 64px; }
 }
+@media (max-width: 640px) {
+    .stats-bar__grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-bar__item { padding: 12px; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.08); }
+}
 @media (max-width: 480px) {
     .why-grid { grid-template-columns: 1fr; }
-    #form-grid { grid-template-columns: 1fr; }
+    .formulations-grid { grid-template-columns: 1fr; }
     .hero-ctas { flex-direction: column; }
     .hero-ctas .btn { width: 100%; justify-content: center; }
 }
@@ -469,24 +486,24 @@ section { padding: 80px 0; }
     </div>
   </div>
 </nav>
-<div class="cert-strip">
-  <div class="cert-track">
-    <span class="cert-badge">✓ WHO-GMP Certified</span>
-    <span class="cert-badge">✓ FSSAI Licensed</span>
-    <span class="cert-badge">✓ ISO 9001:2015</span>
-    <span class="cert-badge">✓ AYUSH GMP</span>
-    <span class="cert-badge">✓ HALAL Certified</span>
-    <span class="cert-badge">✓ 200+ Formulations</span>
-    <span class="cert-badge">✓ Low MOQ 1,000 Units</span>
-    <span class="cert-badge">✓ 30-Day Delivery</span>
-    <span class="cert-badge">✓ WHO-GMP Certified</span>
-    <span class="cert-badge">✓ FSSAI Licensed</span>
-    <span class="cert-badge">✓ ISO 9001:2015</span>
-    <span class="cert-badge">✓ AYUSH GMP</span>
-    <span class="cert-badge">✓ HALAL Certified</span>
-    <span class="cert-badge">✓ 200+ Formulations</span>
-    <span class="cert-badge">✓ Low MOQ 1,000 Units</span>
-    <span class="cert-badge">✓ 30-Day Delivery</span>
+<div class="marquee-container">
+  <div class="marquee-track">
+    <span class="cert-badge">WHO-GMP</span>
+    <span class="cert-badge">FSSAI</span>
+    <span class="cert-badge">ISO 9001:2015</span>
+    <span class="cert-badge">GMP Schedule M</span>
+    <span class="cert-badge">HALAL</span>
+    <span class="cert-badge">AYUSH GMP</span>
+    <span class="cert-badge">MSME Registered</span>
+    <span class="cert-badge">Make in India</span>
+    <span class="cert-badge">WHO-GMP</span>
+    <span class="cert-badge">FSSAI</span>
+    <span class="cert-badge">ISO 9001:2015</span>
+    <span class="cert-badge">GMP Schedule M</span>
+    <span class="cert-badge">HALAL</span>
+    <span class="cert-badge">AYUSH GMP</span>
+    <span class="cert-badge">MSME Registered</span>
+    <span class="cert-badge">Make in India</span>
   </div>
 </div>
 <section class="hero" id="home">
@@ -502,39 +519,31 @@ section { padding: 80px 0; }
           <a href="#catalogue" class="btn btn-outline">Browse Formulations</a>
         </div>
       </div>
-      <div class="hero-img-wrap">
-        <img src="images/hero-bg.jpg" alt="Pharmaceutical Manufacturing">
-        <div class="hero-float-badge">
-          <div class="hero-float-item"><span class="hero-float-val">5+</span><span class="hero-float-lbl">Dosage Forms</span></div>
-          <div class="hero-float-item"><span class="hero-float-val">200+</span><span class="hero-float-lbl">Formulations</span></div>
-          <div class="hero-float-item"><span class="hero-float-val">30</span><span class="hero-float-lbl">Day Delivery</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-stats">
-    <div class="container">
-      <div class="hero-stats-inner">
-        <div class="hero-stat"><span class="stat-val" data-count="5">5+</span><span class="stat-lbl">Dosage Forms</span></div>
-        <div class="hero-stat"><span class="stat-val" data-count="200">200+</span><span class="stat-lbl">Ready Formulations</span></div>
-        <div class="hero-stat"><span class="stat-val">30-Day</span><span class="stat-lbl">Lead Time</span></div>
-        <div class="hero-stat"><span class="stat-val">100%</span><span class="stat-lbl">GMP Compliant</span></div>
-      </div>
     </div>
   </div>
 </section>
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-bar__grid">
+      <div class="stats-bar__item"><span class="stats-bar__number">5+</span><span class="stats-bar__label">Dosage Forms</span></div>
+      <div class="stats-bar__item"><span class="stats-bar__number">200+</span><span class="stats-bar__label">Ready Formulations</span></div>
+      <div class="stats-bar__item"><span class="stats-bar__number">30-Day</span><span class="stats-bar__label">Lead Time</span></div>
+      <div class="stats-bar__item"><span class="stats-bar__number">100%</span><span class="stats-bar__label">GMP Compliant</span></div>
+    </div>
+  </div>
+</div>
 <div class="trust-strip">
   <div class="container">
-    <div class="trust-strip-inner">
-      <span class="trust-strip-label">Trusted by D2C brands, pharmacies, wellness companies &amp; exporters</span>
-    </div>
+    <p class="trust-tagline" style="text-align:center; color:#6B7280; font-size:14px; padding:12px 0;">
+      Trusted by D2C brands, pharmacies, wellness companies &amp; exporters across India and GCC
+    </p>
   </div>
 </div>
 <section class="about" id="about">
   <div class="container">
     <div class="about-grid">
       <div class="about-img-wrap animate-on-scroll">
-        <img src="images/about-consultation.jpg" alt="Bionial Lifesciences Facility" loading="lazy">
+        <img src="images/about-consultation.jpg" alt="Bionial Lifesciences — Manufacturing Consultation" loading="lazy">
         <div class="about-loc-card">
           <strong style="color:var(--primary);font-size:0.9rem;">Mohali, Punjab, India</strong>
           <p>Plot 459, Sector-82, JLPL Industrial Area</p>
@@ -726,7 +735,7 @@ section { padding: 80px 0; }
         </div>
       </div>
       <div class="product-panel " data-panel="softgels">
-        <img src="images/alflucio-gel-capsules-5834022.jpg" alt="Softgels" loading="lazy">
+        <img src="images/product-capsules.jpg" alt="Softgels — Nutraceutical Capsule Manufacturing" loading="lazy">
         <div>
           <h3>Softgels</h3>
           <p>Seamless soft-gelatin capsules for oil-based actives, omega-3, vitamins and herbal extracts. Excellent bioavailability and patient compliance.</p>
@@ -762,7 +771,7 @@ section { padding: 80px 0; }
         </div>
       </div>
       <div class="product-panel " data-panel="sachets">
-        <img src="images/product-sachets.jpg" alt="Sachets" loading="lazy">
+        <img src="images/product-blister.jpg" alt="Sachets — Single-dose pharmaceutical packaging" loading="lazy">
         <div>
           <h3>Sachets</h3>
           <p>Single-dose sachets for convenience and compliance — effervescent granules, powders, and pre-mixed beverages. Child-resistant and tamper-evident options.</p>
@@ -788,8 +797,8 @@ section { padding: 80px 0; }
       <h2 class="section-title">200+ Ready-to-Manufacture Formulations</h2>
       <p class="section-sub">Filter by category or health segment. All formulations are market-tested with available CoA and spec sheets.</p>
     </div>
-    <div class="cat-tabs"><button class="cat-btn active" data-cat="all">All Formulations</button><button class="cat-btn " data-cat="bone-joint">Bone & Joint</button><button class="cat-btn " data-cat="vitamins">Vitamins & Minerals</button><button class="cat-btn " data-cat="ophthalmic">Eye Health</button><button class="cat-btn " data-cat="womens-health">Women's Health</button><button class="cat-btn " data-cat="liver-digestive">Liver & Digestive</button><button class="cat-btn " data-cat="nerve-brain">Nerve & Brain</button><button class="cat-btn " data-cat="heart-metabolic">Heart & Metabolic</button><button class="cat-btn " data-cat="sports-immunity">Sports & Immunity</button><button class="cat-btn " data-cat="syrups-liquids">Syrups & Liquids</button><button class="cat-btn " data-cat="ayurvedic">Ayurvedic</button><button class="cat-btn " data-cat="liposomal">Liposomal Technology</button></div>
-    <div id="form-grid"></div>
+    <div class="cat-tabs"><button class="cat-btn active" data-filter="all">All Formulations</button><button class="cat-btn" data-filter="bone-joint">Bone &amp; Joint</button><button class="cat-btn" data-filter="vitamins-minerals">Vitamins &amp; Minerals</button><button class="cat-btn" data-filter="eye-health">Eye Health</button><button class="cat-btn" data-filter="womens-health">Women's Health</button><button class="cat-btn" data-filter="liver-digestive">Liver &amp; Digestive</button><button class="cat-btn" data-filter="nerve-brain">Nerve &amp; Brain</button><button class="cat-btn" data-filter="heart-metabolic">Heart &amp; Metabolic</button><button class="cat-btn" data-filter="sports-immunity">Sports &amp; Immunity</button><button class="cat-btn" data-filter="syrups-liquids">Syrups &amp; Liquids</button><button class="cat-btn" data-filter="ayurvedic">Ayurvedic</button><button class="cat-btn" data-filter="liposomal">Liposomal Technology</button></div>
+    <div id="formulations-grid" class="formulations-grid"></div>
     <div class="form-view-all"><button id="view-all-btn">View All Formulations</button></div>
   </div>
 </section>
@@ -864,7 +873,7 @@ section { padding: 80px 0; }
       <div>
         <div class="infra-gallery">
           <div class="infra-gallery__item animate-on-scroll">
-            <img src="images/infrastructure-main.jpg" alt="Bionial Manufacturing Floor" loading="lazy">
+            <img src="images/infrastructure-main.jpg" alt="Bionial Manufacturing Floor — Blister Packaging Machine" loading="lazy">
             <span class="infra-label">Manufacturing</span>
           </div>
           <div class="infra-gallery__item animate-on-scroll">
@@ -876,7 +885,7 @@ section { padding: 80px 0; }
             <span class="infra-label">Warehouse</span>
           </div>
           <div class="infra-gallery__item animate-on-scroll">
-            <img src="images/infrastructure-manufacturing.jpg" alt="Tablet Sorting — Production Floor" loading="lazy">
+            <img src="images/infrastructure-manufacturing.jpg" alt="Tablet Production — Manufacturing Floor" loading="lazy">
             <span class="infra-label">Production</span>
           </div>
         </div>
@@ -991,8 +1000,12 @@ section { padding: 80px 0; }
           <div class="contact-item-icon"><i data-lucide="map-pin"></i></div>
           <div><div class="contact-item-title">Address</div><div class="contact-item-val">Plot 459, Sector-82, JLPL Industrial Area, Mohali, Punjab 140308</div></div>
         </div>
-        <div class="map-wrap">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.5!2d76.73!3d30.71!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sBionial+Lifesciences!5e0!3m2!1sen!2sin!4v1" allowfullscreen loading="lazy"></iframe>
+        <div style="margin-top:20px; border-radius:12px; overflow:hidden;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.5!2d76.72!3d30.68!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fe8c2e59c31a5%3A0x1!2sSector+82+JLPL+Industrial+Area+Mohali!5e0!3m2!1sen!2sin!4v1"
+            width="100%" height="240" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
         </div>
       </div>
     </div>
@@ -1002,7 +1015,7 @@ section { padding: 80px 0; }
   <div class="container">
     <div class="footer-grid">
       <div>
-        <img src="images/logo.png" alt="Bionial Lifesciences" style="height:52px;filter:brightness(0) invert(1);margin-bottom:8px;">
+        <img src="images/logo.png" alt="Bionial Lifesciences" loading="lazy" style="height:52px;filter:brightness(0) invert(1);margin-bottom:8px;">
         <p class="footer-brand-desc">From concept to capsule — precision nutraceutical contract manufacturing in Mohali, Punjab. Capsules, tablets, syrups, powders, sachets and Liposomal formulations with startup-friendly MOQs.</p>
       </div>
       <div>
@@ -1037,11 +1050,9 @@ section { padding: 80px 0; }
         </ul>
       </div>
     </div>
-    <div class="footer__disclaimer">
-      <p style="font-size:11px;color:#999;max-width:800px;margin:20px auto 0;text-align:center;line-height:1.7;padding:0 16px;">
-        <strong>Disclaimer:</strong> Products manufactured by Bionial Lifesciences Pvt. Ltd. are made under GMP-certified conditions.
-        Information on this website is for trade and business purposes only and is not intended as medical advice.
-        FSSAI License: [INSERT LICENSE NUMBER]. Manufactured at: Plot 459, Sector-82, JLPL Industrial Area, Mohali, Punjab 140308.
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 32px; padding-top: 20px;">
+      <p style="font-size: 11px; color: rgba(255,255,255,0.4); max-width: 780px; margin: 0 auto; text-align: center; line-height: 1.8;">
+        <strong>Disclaimer:</strong> Products manufactured by Bionial Lifesciences Pvt. Ltd. are produced under WHO-GMP certified conditions. Information on this website is for trade and B2B purposes only and does not constitute medical advice. FSSAI License: [INSERT LICENSE NUMBER]. Manufactured at: Plot 459, Sector-82, JLPL Industrial Area, Mohali, Punjab 140308.
       </p>
     </div>
     <div class="footer-bottom">
@@ -1069,86 +1080,160 @@ section { padding: 80px 0; }
 </div>
 <script>
 
-// Formulations data
-const FORMULATIONS = [{"code": "BL-BJ-01", "name": "Calcium Citrate + D3 + K2 Tablets", "cat": "bone-joint", "form": "Tablets", "health": ["bone-joint", "general-wellness"]}, {"code": "BL-BJ-02", "name": "Glucosamine + Chondroitin + MSM Capsules", "cat": "bone-joint", "form": "Capsules", "health": ["bone-joint", "sports-fitness"]}, {"code": "BL-BJ-03", "name": "Collagen Peptides + Hyaluronic Acid Tablets", "cat": "bone-joint", "form": "Tablets", "health": ["bone-joint", "skin-beauty"]}, {"code": "BL-BJ-04", "name": "Calcium Carbonate + Magnesium + Zinc Tablets", "cat": "bone-joint", "form": "Tablets", "health": ["bone-joint"]}, {"code": "BL-BJ-05", "name": "Omega-3 + Calcium + D3 Softgels", "cat": "bone-joint", "form": "Softgels", "health": ["bone-joint", "heart-metabolic"]}, {"code": "BL-BJ-06", "name": "Boron + Silica + Strontium Capsules", "cat": "bone-joint", "form": "Capsules", "health": ["bone-joint"]}, {"code": "BL-BJ-07", "name": "Curcumin + Boswellia + Ginger Extract Capsules", "cat": "bone-joint", "form": "Capsules", "health": ["bone-joint", "immunity"]}, {"code": "BL-BJ-08", "name": "Vitamin D3 5000 IU Softgels", "cat": "bone-joint", "form": "Softgels", "health": ["bone-joint", "immunity", "general-wellness"]}, {"code": "BL-VM-01", "name": "Multivitamin + Multimineral Tablets", "cat": "vitamins", "form": "Tablets", "health": ["general-wellness", "immunity"]}, {"code": "BL-VM-02", "name": "Vitamin C 1000 mg Effervescent Tablets", "cat": "vitamins", "form": "Tablets", "health": ["immunity", "general-wellness"]}, {"code": "BL-VM-03", "name": "B-Complex + Folic Acid Capsules", "cat": "vitamins", "form": "Capsules", "health": ["nerve-brain", "general-wellness"]}, {"code": "BL-VM-04", "name": "Zinc + Selenium + Copper Tablets", "cat": "vitamins", "form": "Tablets", "health": ["immunity", "general-wellness"]}, {"code": "BL-VM-05", "name": "Iron + Folic Acid + B12 Tablets", "cat": "vitamins", "form": "Tablets", "health": ["womens-health", "general-wellness"]}, {"code": "BL-VM-06", "name": "Magnesium Glycinate Capsules", "cat": "vitamins", "form": "Capsules", "health": ["nerve-brain", "sports-fitness"]}, {"code": "BL-VM-07", "name": "Vitamin E 400 IU Softgels", "cat": "vitamins", "form": "Softgels", "health": ["skin-beauty", "general-wellness"]}, {"code": "BL-VM-08", "name": "Biotin 10000 mcg Tablets", "cat": "vitamins", "form": "Tablets", "health": ["skin-beauty", "general-wellness"]}, {"code": "BL-VM-09", "name": "Coenzyme Q10 100 mg Softgels", "cat": "vitamins", "form": "Softgels", "health": ["heart-metabolic", "general-wellness"]}, {"code": "BL-VM-10", "name": "Lycopene + Astaxanthin Softgels", "cat": "vitamins", "form": "Softgels", "health": ["skin-beauty", "immunity"]}, {"code": "BL-EH-01", "name": "Lutein 20mg + Zeaxanthin + Bilberry Softgels", "cat": "ophthalmic", "form": "Softgels", "health": ["eye-health"]}, {"code": "BL-EH-02", "name": "Vitamin A + Beta-Carotene Eye Capsules", "cat": "ophthalmic", "form": "Capsules", "health": ["eye-health"]}, {"code": "BL-EH-03", "name": "Omega-3 DHA + Lutein Eye Softgels", "cat": "ophthalmic", "form": "Softgels", "health": ["eye-health", "heart-metabolic"]}, {"code": "BL-EH-04", "name": "AREDS2 Formula Tablets", "cat": "ophthalmic", "form": "Tablets", "health": ["eye-health"]}, {"code": "BL-EH-05", "name": "Astaxanthin 4mg Softgels", "cat": "ophthalmic", "form": "Softgels", "health": ["eye-health", "skin-beauty"]}, {"code": "BL-EH-06", "name": "Eyebright + Bilberry Extract Capsules", "cat": "ophthalmic", "form": "Capsules", "health": ["eye-health"]}, {"code": "BL-WH-01", "name": "Prenatal Multivitamin + DHA Softgels", "cat": "womens-health", "form": "Softgels", "health": ["womens-health"]}, {"code": "BL-WH-02", "name": "Shatavari + Lodhra + Ashoka Capsules", "cat": "womens-health", "form": "Capsules", "health": ["womens-health"]}, {"code": "BL-WH-03", "name": "Evening Primrose Oil 1000 mg Softgels", "cat": "womens-health", "form": "Softgels", "health": ["womens-health", "skin-beauty"]}, {"code": "BL-WH-04", "name": "PCOS Support — Myo-Inositol + D-Chiro Sachets", "cat": "womens-health", "form": "Powder", "health": ["womens-health", "metabolic"]}, {"code": "BL-WH-05", "name": "Menopause Relief — Black Cohosh + Dong Quai Capsules", "cat": "womens-health", "form": "Capsules", "health": ["womens-health"]}, {"code": "BL-WH-06", "name": "Iron + Folic Acid + B12 + C Tablets", "cat": "womens-health", "form": "Tablets", "health": ["womens-health", "general-wellness"]}, {"code": "BL-WH-07", "name": "Calcium + D3 + Magnesium Tablets (Women's)", "cat": "womens-health", "form": "Tablets", "health": ["womens-health", "bone-joint"]}, {"code": "BL-WH-08", "name": "Biotin + Keratin + Silica Hair Capsules", "cat": "womens-health", "form": "Capsules", "health": ["womens-health", "skin-beauty"]}, {"code": "BL-LD-01", "name": "Liv-52 Type — Silymarin + Artichoke Tablets", "cat": "liver-digestive", "form": "Tablets", "health": ["liver-digestive"]}, {"code": "BL-LD-02", "name": "Probiotics 30 Billion CFU Multi-strain Capsules", "cat": "liver-digestive", "form": "Capsules", "health": ["liver-digestive", "immunity"]}, {"code": "BL-LD-03", "name": "Digestive Enzyme Complex Capsules", "cat": "liver-digestive", "form": "Capsules", "health": ["liver-digestive"]}, {"code": "BL-LD-04", "name": "Prebiotic + Probiotic + Postbiotic Sachets", "cat": "liver-digestive", "form": "Powder", "health": ["liver-digestive"]}, {"code": "BL-LD-05", "name": "Milk Thistle 80% Silymarin Capsules", "cat": "liver-digestive", "form": "Capsules", "health": ["liver-digestive"]}, {"code": "BL-LD-06", "name": "Triphala + Senna Laxative Tablets", "cat": "liver-digestive", "form": "Tablets", "health": ["liver-digestive"]}, {"code": "BL-LD-07", "name": "Glutamine + Zinc + Probiotics Gut Health Sachets", "cat": "liver-digestive", "form": "Powder", "health": ["liver-digestive", "sports-fitness"]}, {"code": "BL-LD-08", "name": "Apple Cider Vinegar 500 mg Capsules", "cat": "liver-digestive", "form": "Capsules", "health": ["liver-digestive", "metabolic"]}, {"code": "BL-NB-01", "name": "Brahmi + Lion's Mane + Bacopa Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-NB-02", "name": "Omega-3 DHA 1000 mg Softgels", "cat": "nerve-brain", "form": "Softgels", "health": ["nerve-brain", "heart-metabolic"]}, {"code": "BL-NB-03", "name": "Melatonin 5 mg Sleep Tablets", "cat": "nerve-brain", "form": "Tablets", "health": ["nerve-brain"]}, {"code": "BL-NB-04", "name": "L-Theanine + Ashwagandha + GABA Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-NB-05", "name": "Ginkgo Biloba + Phosphatidylserine Tablets", "cat": "nerve-brain", "form": "Tablets", "health": ["nerve-brain"]}, {"code": "BL-NB-06", "name": "5-HTP + Saffron + B6 Mood Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-NB-07", "name": "Alpha GPC + Huperzine A Nootropic Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-NB-08", "name": "Magnesium L-Threonate Sleep + Cognitive Capsules", "cat": "nerve-brain", "form": "Capsules", "health": ["nerve-brain"]}, {"code": "BL-HM-01", "name": "Omega-3 Concentrate 60% EPA/DHA Softgels", "cat": "heart-metabolic", "form": "Softgels", "health": ["heart-metabolic"]}, {"code": "BL-HM-02", "name": "Red Yeast Rice + CoQ10 Capsules", "cat": "heart-metabolic", "form": "Capsules", "health": ["heart-metabolic"]}, {"code": "BL-HM-03", "name": "Berberine 500 mg Capsules", "cat": "heart-metabolic", "form": "Capsules", "health": ["heart-metabolic", "metabolic"]}, {"code": "BL-HM-04", "name": "Chromium Picolinate + Gymnema + Bitter Melon Tablets", "cat": "heart-metabolic", "form": "Tablets", "health": ["heart-metabolic", "metabolic"]}, {"code": "BL-HM-05", "name": "Garlic 1000 mg Odourless Softgels", "cat": "heart-metabolic", "form": "Softgels", "health": ["heart-metabolic", "immunity"]}, {"code": "BL-HM-06", "name": "Nattokinase + Serrapeptase Capsules", "cat": "heart-metabolic", "form": "Capsules", "health": ["heart-metabolic"]}, {"code": "BL-HM-07", "name": "Plant Sterols + Policosanol Tablets", "cat": "heart-metabolic", "form": "Tablets", "health": ["heart-metabolic"]}, {"code": "BL-HM-08", "name": "Resveratrol + Pterostilbene Capsules", "cat": "heart-metabolic", "form": "Capsules", "health": ["heart-metabolic", "general-wellness"]}, {"code": "BL-SI-01", "name": "Whey Protein Isolate + Digestive Enzyme Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness"]}, {"code": "BL-SI-02", "name": "Creatine Monohydrate 3g Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness"]}, {"code": "BL-SI-03", "name": "BCAA 2:1:1 + Electrolyte Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness"]}, {"code": "BL-SI-04", "name": "Pre-workout Complex — Citrulline + Beta-Alanine + Caffeine Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness"]}, {"code": "BL-SI-05", "name": "Vitamin C + Zinc + Elderberry Immunity Tablets", "cat": "sports-immunity", "form": "Tablets", "health": ["immunity"]}, {"code": "BL-SI-06", "name": "Ashwagandha KSM-66 600 mg Capsules", "cat": "sports-immunity", "form": "Capsules", "health": ["sports-fitness", "nerve-brain", "immunity"]}, {"code": "BL-SI-07", "name": "Glutamine 5g Powder Sachets", "cat": "sports-immunity", "form": "Powder", "health": ["sports-fitness", "liver-digestive"]}, {"code": "BL-SI-08", "name": "Turkesterone + Fadogia Agrestis Capsules", "cat": "sports-immunity", "form": "Capsules", "health": ["sports-fitness"]}, {"code": "BL-SI-09", "name": "Multivitamin for Athletes Tablets", "cat": "sports-immunity", "form": "Tablets", "health": ["sports-fitness", "general-wellness"]}, {"code": "BL-SI-10", "name": "Beta-Glucan 1,3/1,6 Immunity Capsules", "cat": "sports-immunity", "form": "Capsules", "health": ["immunity"]}, {"code": "BL-SL-01", "name": "Iron + Folic Acid + B12 Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["womens-health", "general-wellness"]}, {"code": "BL-SL-02", "name": "Calcium + Magnesium + Zinc + D3 Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["bone-joint", "general-wellness"]}, {"code": "BL-SL-03", "name": "Multivitamin Kids Syrup (Sugar-Free)", "cat": "syrups-liquids", "form": "Syrup", "health": ["general-wellness", "immunity"]}, {"code": "BL-SL-04", "name": "Amla + Aloe Vera + Wheatgrass Juice", "cat": "syrups-liquids", "form": "Juice", "health": ["liver-digestive", "immunity"]}, {"code": "BL-SL-05", "name": "Ashwagandha + Shilajit Tonic Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["sports-fitness", "nerve-brain"]}, {"code": "BL-SL-06", "name": "Giloy + Tulsi + Neem Immunity Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["immunity"]}, {"code": "BL-SL-07", "name": "Haemoglobin + Iron + Protein Liquid Tonic", "cat": "syrups-liquids", "form": "Syrup", "health": ["womens-health", "general-wellness"]}, {"code": "BL-SL-08", "name": "Cough + Cold Herbal Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["immunity"]}, {"code": "BL-SL-09", "name": "Appetite Stimulant + Digestive Syrup", "cat": "syrups-liquids", "form": "Syrup", "health": ["liver-digestive"]}, {"code": "BL-AY-01", "name": "Ashwagandha Churna (KSM-66 Standardised)", "cat": "ayurvedic", "form": "Powder", "health": ["nerve-brain", "sports-fitness", "immunity"]}, {"code": "BL-AY-02", "name": "Triphala Churna — Digestive & Detox", "cat": "ayurvedic", "form": "Powder", "health": ["liver-digestive"]}, {"code": "BL-AY-03", "name": "Chyawanprash — Classical Immunity Formula", "cat": "ayurvedic", "form": "Semi-Solid", "health": ["immunity", "general-wellness"]}, {"code": "BL-AY-04", "name": "Mahasudarshan Ghanvati Tablets", "cat": "ayurvedic", "form": "Tablets", "health": ["immunity"]}, {"code": "BL-AY-05", "name": "Chandraprabha Vati Tablets", "cat": "ayurvedic", "form": "Tablets", "health": ["metabolic", "liver-digestive"]}, {"code": "BL-AY-06", "name": "Arjunarishta — Cardiac Tonic", "cat": "ayurvedic", "form": "Syrup", "health": ["heart-metabolic"]}, {"code": "BL-AY-07", "name": "Drakshasava — General Tonic", "cat": "ayurvedic", "form": "Syrup", "health": ["general-wellness"]}, {"code": "BL-AY-08", "name": "Brahmi + Shankhpushpi Syrup — Brain Tonic", "cat": "ayurvedic", "form": "Syrup", "health": ["nerve-brain"]}, {"code": "BL-AY-09", "name": "Shatavari Granules — Women's Wellness", "cat": "ayurvedic", "form": "Powder", "health": ["womens-health"]}, {"code": "BL-LP-01", "name": "Liposomal Iron — Ferric Pyrophosphate + Folic Acid + B12 + Vit C", "cat": "liposomal", "form": "Tablets", "health": ["womens-health", "general-wellness"]}, {"code": "BL-LP-02", "name": "Liposomal Calcium — Tribasic Calcium Phosphate + L-Lysine + Zinc + D3 + Selenium", "cat": "liposomal", "form": "Tablets", "health": ["bone-joint", "general-wellness"]}, {"code": "BL-LP-03", "name": "Liposomal Silymarin — Milk Thistle 80% + Dandelion + Eriocitrin + Extramel + Schisandra + Maxshield", "cat": "liposomal", "form": "Tablets", "health": ["liver-digestive"]}, {"code": "BL-LP-04", "name": "Liposomal CoQ10 — CoQ10 100mg + Levo-Carnitine + Zinc + Lycopene + Astaxanthin", "cat": "liposomal", "form": "Tablets", "health": ["heart-metabolic", "general-wellness"]}, {"code": "BL-LP-05", "name": "Liposomal Glutathione — Reduced Glutathione (High Bioavailability)", "cat": "liposomal", "form": "Capsules", "health": ["skin-beauty", "immunity", "liver-digestive"]}, {"code": "BL-LP-06", "name": "Liposomal Magnesium — Magnesium Citrate 200mg + L-Carnitine L-Tartrate + Vit E", "cat": "liposomal", "form": "Tablets", "health": ["nerve-brain", "sports-fitness", "bone-joint"]}, {"code": "BL-LP-07", "name": "Liposomal Curcumin — Curcuma Longa Extract (Advanced Delivery System)", "cat": "liposomal", "form": "Capsules", "health": ["bone-joint", "immunity", "liver-digestive"]}];
+// ─── FORMULATIONS DATA ─────────────────────────────────────
+const formulations = [
+  // BONE & JOINT
+  { code:'BL-BJ-001', name:'Calcium + D3 + Zinc', composition:'Calcium Citrate 500mg + Vitamin D3 400IU + Zinc 7.5mg', form:'Tablets', category:'bone-joint' },
+  { code:'BL-BJ-002', name:'Glucosamine + Chondroitin + MSM', composition:'Glucosamine 750mg + Chondroitin 250mg + MSM 250mg', form:'Tablets', category:'bone-joint' },
+  { code:'BL-BJ-003', name:'Collagen Peptides + Vitamin C + HA', composition:'Collagen Peptides 5g + Vitamin C 40mg + Hyaluronic Acid 30mg', form:'Powder', category:'bone-joint' },
+  // VITAMINS & MINERALS
+  { code:'BL-VM-001', name:'Multivitamin Multimineral (26 nutrients)', composition:'Complete 26-nutrient formula — vitamins A, B-complex, C, D3, E, K2 plus minerals', form:'Tablets', category:'vitamins-minerals' },
+  { code:'BL-VM-002', name:'Vitamin C + Zinc + D3 Immunity', composition:'Vitamin C 1000mg + Zinc 10mg + D3 400IU', form:'Tablets', category:'vitamins-minerals' },
+  { code:'BL-VM-003', name:'Iron Bisglycinate + Folate + B12', composition:'Iron Bisglycinate 60mg + Folic Acid 1.5mg + B12 15mcg + Vitamin C 75mg', form:'Tablets', category:'vitamins-minerals' },
+  // EYE HEALTH
+  { code:'BL-EH-001', name:'Lutein + Zeaxanthin + Bilberry', composition:'Lutein 10mg + Zeaxanthin 2mg + Bilberry Extract 40mg + Vitamin A 600mcg', form:'Softgels', category:'eye-health' },
+  { code:'BL-EH-002', name:'Astaxanthin + Omega-3 + Vitamin E', composition:'Astaxanthin 4mg + Omega-3 300mg + Vitamin E 10mg', form:'Softgels', category:'eye-health' },
+  // WOMEN'S HEALTH
+  { code:'BL-WH-001', name:'Evening Primrose Oil + Vitamin E', composition:'Evening Primrose Oil 500mg + Vitamin E 10mg', form:'Softgels', category:'womens-health' },
+  { code:'BL-WH-002', name:'Prenatal Complex (Iron + Folate + DHA)', composition:'Iron + Folic Acid 1.5mg + DHA 200mg + B12 15mcg', form:'Capsules', category:'womens-health' },
+  { code:'BL-WH-003', name:'Cranberry + D-Mannose + Probiotics', composition:'Cranberry Extract 400mg + D-Mannose 500mg + Probiotics 5B CFU', form:'Capsules', category:'womens-health' },
+  // LIVER & DIGESTIVE
+  { code:'BL-LD-001', name:'Silymarin + NAC + Dandelion', composition:'Silymarin 140mg + NAC 150mg + Dandelion Root 100mg', form:'Capsules', category:'liver-digestive' },
+  { code:'BL-LD-002', name:'Pre+Probiotic 20B CFU', composition:'Lactobacillus acidophilus + 6 strains 20B CFU + FOS 100mg', form:'Capsules', category:'liver-digestive' },
+  // NERVE & BRAIN
+  { code:'BL-NB-001', name:'Mecobalamin + ALA + B6 + Folate', composition:'Mecobalamin 1500mcg + Alpha Lipoic Acid 100mg + Pyridoxine 3mg + Folic Acid 1.5mg', form:'Tablets', category:'nerve-brain' },
+  { code:'BL-NB-002', name:'Brahmi + Ashwagandha + Ginkgo Nootropic', composition:'Brahmi 300mg + Ashwagandha 300mg + Ginkgo Biloba 60mg', form:'Capsules', category:'nerve-brain' },
+  // HEART & METABOLIC
+  { code:'BL-HM-001', name:'Omega-3 + CoQ10', composition:'EPA 360mg + DHA 240mg + CoQ10 30mg', form:'Softgels', category:'heart-metabolic' },
+  { code:'BL-HM-002', name:'Berberine + Chromium + Bitter Melon', composition:'Berberine 500mg + Chromium 200mcg + Bitter Melon Extract 150mg', form:'Capsules', category:'heart-metabolic' },
+  // SPORTS & IMMUNITY
+  { code:'BL-SI-001', name:'Whey Protein + BCAA + Glutamine', composition:'Whey Protein 24g + BCAA 5.5g + L-Glutamine 4g per 30g serving', form:'Powder', category:'sports-immunity' },
+  { code:'BL-SI-002', name:'Curcumin C3 + Piperine + D3', composition:'Curcumin C3 Complex 500mg + Piperine 5mg + Vitamin D3 1000IU', form:'Capsules', category:'sports-immunity' },
+  // SYRUPS & LIQUIDS
+  { code:'BL-SL-001', name:'Multivitamin Multimineral Syrup', composition:'Vitamins A, B-complex, C, D3, E + Zinc + Iron — 5ml dose', form:'Syrup', category:'syrups-liquids' },
+  { code:'BL-SL-002', name:'Iron Hydroxide Polymaltose Syrup', composition:'Iron Hydroxide Polymaltose Complex 50mg elemental iron per 5ml', form:'Syrup', category:'syrups-liquids' },
+  { code:'BL-SL-003', name:'Calcium + D3 Suspension', composition:'Calcium 250mg + Vitamin D3 200IU per 5ml', form:'Suspension', category:'syrups-liquids' },
+  // AYURVEDIC
+  { code:'BL-AY-001', name:'Ashwagandha KSM-66 + Black Pepper', composition:'Ashwagandha KSM-66 600mg + Black Pepper Extract 5mg', form:'Capsules', category:'ayurvedic' },
+  { code:'BL-AY-002', name:'Triphala Churna (Classical)', composition:'Amalaki + Bibhitaki + Haritaki 500mg each', form:'Tablets', category:'ayurvedic' },
+  { code:'BL-AY-003', name:'Giloy + Tulsi + Amla Immunity Kwath', composition:'Tinospora cordifolia + Ocimum sanctum + Emblica officinalis', form:'Syrup', category:'ayurvedic' },
+  // LIPOSOMAL
+  { code:'BL-LP-01', name:'Liposomal Iron Complex', composition:'Ferric Pyrophosphate 29mg + Folic Acid 200mcg + B12 1.2mcg + Vit C 50mg', form:'Tablets', category:'liposomal' },
+  { code:'BL-LP-02', name:'Liposomal Calcium Complex', composition:'Calcium 500mg + L-Lysine 25mg + Zinc 10mg + D3 400IU + Selenium 40mcg', form:'Tablets', category:'liposomal' },
+  { code:'BL-LP-03', name:'Liposomal Silymarin', composition:'Milk Thistle 80mg + Dandelion 50mg + Eriocitrin 25mg + Schisandra 250mg', form:'Tablets', category:'liposomal' },
+  { code:'BL-LP-04', name:'Liposomal CoQ10 + Carnitine', composition:'CoQ10 100mg + Levo-Carnitine 340mg + Zinc 12mg + Astaxanthin 4mg', form:'Tablets', category:'liposomal' },
+  { code:'BL-LP-05', name:'Liposomal Glutathione', composition:'Reduced L-Glutathione in phospholipid bilayer — high intracellular delivery', form:'Capsules', category:'liposomal' },
+  { code:'BL-LP-06', name:'Liposomal Magnesium + Carnitine', composition:'Magnesium Citrate 200mg + L-Carnitine L-Tartrate 500mg + Vit E 10mg', form:'Tablets', category:'liposomal' },
+  { code:'BL-LP-07', name:'Liposomal Curcumin (29× Absorption)', composition:'Curcuma Longa Extract in liposomal carrier — 29× greater bioavailability', form:'Capsules', category:'liposomal' }
+];
 
-// ─── State ───────────────────────────────────────────────────────────────────
-let activeCat = 'all';
-let activeHealth = null;
-let showAll = false;
+// ─── RENDER ENGINE ───────────────────────────────────────────
+const formBadgeColors = {
+  'Tablets':'#003D7A','Capsules':'#00A99D','Softgels':'#F7A800',
+  'Powder':'#6B7280','Syrup':'#7C3AED','Suspension':'#7C3AED'
+};
 
-// ─── Render formulations ─────────────────────────────────────────────────────
-function renderFormulations() {
-  const grid = document.getElementById('form-grid');
-  const btn = document.getElementById('view-all-btn');
+function createFormulationCard(item) {
+  const color = formBadgeColors[item.form] || '#003D7A';
+  return `
+    <div class="formulation-card" data-category="${item.category}">
+      <div class="formulation-card__header">
+        <span class="formulation-card__code">${item.code}</span>
+        <span class="formulation-card__badge" style="background:${color}">${item.form}</span>
+      </div>
+      <div class="formulation-card__body">
+        <h4 class="formulation-card__name">${item.name}</h4>
+        <p class="formulation-card__composition">${item.composition}</p>
+      </div>
+      <a href="#contact" class="formulation-card__cta">Enquire →</a>
+    </div>
+  `;
+}
+
+let currentCategory = 'all';
+
+function renderCatalogue(category) {
+  currentCategory = category;
+  const grid = document.getElementById('formulations-grid');
   if (!grid) return;
-
-  let filtered = FORMULATIONS;
-  if (activeCat !== 'all') filtered = filtered.filter(f => f.cat === activeCat);
-  if (activeHealth) filtered = filtered.filter(f => f.health && f.health.includes(activeHealth));
-
-  const visible = showAll ? filtered : filtered.slice(0, 8);
-  grid.innerHTML = visible.map(f => {
-    const tagCls = f.form ? f.form.replace(/[^a-zA-Z]/g,'') : '';
-    return '<div class="form-card">' +
-      '<div class="form-card__hdr">' +
-        '<span class="form-code">' + (f.code || '') + '</span>' +
-        '<span class="form-tag ' + tagCls + '">' + (f.form || '') + '</span>' +
-      '</div>' +
-      '<div class="form-card__body">' +
-        '<div class="form-name">' + f.name + '</div>' +
-      '</div>' +
-      '<a href="#contact" class="form-card__cta">Enquire \u2192</a>' +
-      '</div>';
-  }).join('');
-
+  const filtered = category === 'all' ? formulations : formulations.filter(f => f.category === category);
+  const visible = filtered.slice(0, 12);
+  grid.innerHTML = visible.map(createFormulationCard).join('');
+  const btn = document.getElementById('view-all-btn');
   if (btn) {
-    if (filtered.length <= 8) {
-      btn.style.display = 'none';
-    } else {
-      btn.style.display = 'inline-block';
-      btn.textContent = showAll ? 'Show Less' : ('View All ' + filtered.length + ' Formulations');
-    }
+    btn.style.display = filtered.length > 12 ? 'inline-block' : 'none';
+    btn.textContent = `View All ${filtered.length} Formulations`;
   }
 }
 
-// ─── Category filter ─────────────────────────────────────────────────────────
-document.querySelectorAll('.cat-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-    activeCat = this.dataset.cat;
-    showAll = false;
-    renderFormulations();
-  });
-});
+// ─── INIT ON DOM READY ────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
 
-// ─── View All button ─────────────────────────────────────────────────────────
-const viewAllBtn = document.getElementById('view-all-btn');
-if (viewAllBtn) {
-  viewAllBtn.addEventListener('click', function() {
-    showAll = !showAll;
-    renderFormulations();
-  });
-}
+  // Render catalogue immediately
+  renderCatalogue('all');
 
-// ─── Health segment pills ────────────────────────────────────────────────────
-document.querySelectorAll('.health-pill').forEach(pill => {
-  pill.addEventListener('click', function() {
-    const h = this.dataset.health;
-    if (activeHealth === h) {
-      activeHealth = null;
-      document.querySelectorAll('.health-pill').forEach(p => p.classList.remove('active'));
-    } else {
-      activeHealth = h;
-      document.querySelectorAll('.health-pill').forEach(p => p.classList.remove('active'));
-      this.classList.add('active');
-    }
-    showAll = false;
-    const cat = document.getElementById('catalogue');
-    if (cat) cat.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    renderFormulations();
+  // Filter tabs
+  document.querySelectorAll('[data-filter]').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('[data-filter]').forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      renderCatalogue(tab.dataset.filter);
+    });
   });
+
+  // View All button
+  const viewAllBtn = document.getElementById('view-all-btn');
+  if (viewAllBtn) {
+    viewAllBtn.addEventListener('click', function() {
+      const grid = document.getElementById('formulations-grid');
+      const filtered = currentCategory === 'all' ? formulations : formulations.filter(f => f.category === currentCategory);
+      grid.innerHTML = filtered.map(createFormulationCard).join('');
+      viewAllBtn.style.display = 'none';
+    });
+  }
+
+  // Health segment pills
+  const segmentMap = {
+    'General Wellness':'all', 'Immunity':'sports-immunity', 'Bone & Joint':'bone-joint',
+    'Brain & Nerve':'nerve-brain', 'Heart & Metabolic':'heart-metabolic',
+    'Sports & Fitness':'sports-immunity', "Women's Health":'womens-health',
+    'Liver & Digestive':'liver-digestive', 'Eye Health':'eye-health',
+    'Skin & Beauty':'vitamins-minerals', 'Metabolic & Weight':'heart-metabolic',
+    "Men's Health":'vitamins-minerals', 'Senior Wellness':'bone-joint',
+    'Child Nutrition':'vitamins-minerals'
+  };
+
+  document.querySelectorAll('.segment-pill, .health-segment-pill, [data-segment], .health-pill').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      const label = pill.textContent.trim();
+      const cat = segmentMap[label] || 'all';
+      renderCatalogue(cat);
+      document.querySelectorAll('[data-filter]').forEach(function(t) {
+        t.classList.toggle('active', t.dataset.filter === cat);
+      });
+      const catalogue = document.getElementById('catalogue');
+      if (catalogue) {
+        const top = catalogue.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Fade-up scroll animations for section containers
+  const fadeObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('section > .container, .card, .service-card').forEach(function(el) {
+    el.classList.add('fade-up');
+    fadeObserver.observe(el);
+  });
+
 });
 
 // ─── Nav scroll ──────────────────────────────────────────────────────────────
@@ -1217,7 +1302,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 
 // ─── Init ────────────────────────────────────────────────────────────────────
-renderFormulations();
 if (typeof lucide !== 'undefined') lucide.createIcons();
 document.getElementById('copyright-year').textContent = new Date().getFullYear();
 
