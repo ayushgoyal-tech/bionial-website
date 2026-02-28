@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bionial Lifesciences | Nutraceutical Contract Manufacturing in Mohali, India</title>
-<link rel="icon" type="image/png" href="images/logo.png">
-<link rel="apple-touch-icon" href="images/logo.png">
+<link rel="icon" type="image/png" href="images/logo-icon.png">
+<link rel="apple-touch-icon" href="images/logo-icon.png">
 <meta name="description" content="WHO-GMP certified nutraceutical and Ayurvedic contract manufacturer in Mohali, Punjab. 200+ ready formulations. 30-day delivery. Startup-friendly MOQs from 1,000 units.">
 <meta property="og:title" content="Bionial Lifesciences — Nutraceutical Contract Manufacturing, Mohali">
 <meta property="og:description" content="WHO-GMP certified nutraceutical & Ayurvedic contract manufacturer. 200+ formulations. Capsules, tablets, syrups, powders, sachets. Low MOQ from 1,000 units. 30-day delivery.">
@@ -117,7 +117,8 @@ section { padding: 80px 0; }
 .nav.scrolled .mobile-toggle span { background: var(--primary); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .nav-logo { display: flex; align-items: center; }
-.nav-logo-img { height: 80px; width: auto; display: block; }
+.nav-logo-img { height: 48px; width: auto; display: block; }
+.footer-logo-img { height: 52px; width: auto; margin-bottom: 16px; }
 .nav-links { display: flex; align-items: center; gap: 8px; }
 .nav-links a { font-size: 0.88rem; font-weight: 600; color: #fff; padding: 8px 14px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
 .nav-links a:hover { color: var(--accent); background: rgba(0,169,157,0.06); }
@@ -131,9 +132,9 @@ section { padding: 80px 0; }
 
 /* ===== HERO ===== */
 .hero {
-    min-height: 100vh;
-    background-image: linear-gradient(rgba(13,27,42,0.72), rgba(13,27,42,0.72)),
-                      url('images/hero-bg.jpg');
+    min-height: 90vh;
+    background-image: linear-gradient(135deg, rgba(0,61,122,0.82) 0%, rgba(0,169,157,0.65) 100%),
+                      url('images/company2.jpg');
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
@@ -155,6 +156,7 @@ section { padding: 80px 0; }
 .hero-title span { color: var(--accent); }
 .hero-sub { font-size: 1.1rem; font-weight: 600; color: var(--accent); margin-bottom: 16px; }
 .hero-desc { font-size: 1rem; color: rgba(255,255,255,0.8); max-width: 480px; line-height: 1.7; margin-bottom: 32px; }
+.hero-title, .hero-sub, .hero-desc { text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
 .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; border: none; }
 .btn-primary { background: var(--primary); color: #fff; }
@@ -203,7 +205,7 @@ section { padding: 80px 0; }
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
-.marquee-container { overflow: hidden; background: var(--bg-alt); border-bottom: 1px solid var(--border); }
+.marquee-container { overflow: hidden; background: #003D7A; color: #ffffff; padding: 10px 0; border-bottom: 3px solid #00A99D; }
 .marquee-track {
     display: flex;
     gap: 32px;
@@ -294,7 +296,10 @@ section { padding: 80px 0; }
 .form-view-all { text-align: center; margin-top: 8px; }
 
 /* ===== TRUST STRIP ===== */
-.trust-strip { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.trust-strip { background: #003D7A; padding: 20px 40px; text-align: center; }
+.trust-label { color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase; }
+.trust-badges { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.trust-badge { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: #ffffff; padding: 6px 16px; border-radius: 20px; font-size: 0.875rem; font-weight: 500; }
 
 /* ===== LIPOSOMAL SECTION ===== */
 .liposomal { background: linear-gradient(135deg, #001e3c 0%, var(--primary-dark) 60%, #003a2e 100%); position: relative; overflow: hidden; }
@@ -345,10 +350,11 @@ section { padding: 80px 0; }
 .process-step-day { font-size: 0.7rem; font-weight: 700; color: var(--accent-light); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
 .process-step h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
 .process-step p { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+.process-step img { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; margin-top: 16px; display: block; }
 
 /* ===== INFRASTRUCTURE ===== */
 .infra { background: var(--bg); }
-.infra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.infra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border-radius: 12px; overflow: hidden; }
 .infra-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
 .infra-stat { background: var(--bg-alt); border-radius: 14px; padding: 24px; text-align: center; border: 1.5px solid var(--border); }
 .infra-stat-val { font-size: 2rem; font-weight: 900; color: var(--primary); display: block; }
@@ -361,7 +367,10 @@ section { padding: 80px 0; }
 .infra-gallery__item { position: relative; overflow: hidden; aspect-ratio: 4/3; }
 .infra-gallery__item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
 .infra-gallery__item:hover img { transform: scale(1.04); }
-.infra-label { position: absolute; bottom: 10px; left: 12px; background: rgba(0,0,0,0.6); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; letter-spacing: 0.08em; text-transform: uppercase; }
+.infra-cell { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+.infra-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+.infra-cell:hover img { transform: scale(1.04); }
+.infra-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,61,122,0.85)); color: #ffffff; font-size: 0.8rem; font-weight: 600; padding: 20px 12px 10px; letter-spacing: 0.04em; text-transform: uppercase; }
 
 /* ===== WHY BIONIAL ===== */
 .why { background: var(--bg-alt); }
@@ -470,7 +479,7 @@ section { padding: 80px 0; }
 <nav class="nav" id="nav">
   <div class="container">
     <div class="nav-inner">
-      <a href="#" class="nav-logo"><img src="images/logo.png" alt="Bionial Lifesciences" class="nav-logo-img"></a>
+      <a href="#" class="nav-logo"><img src="images/logo-color.png" alt="Bionial Lifesciences" class="nav-logo-img"></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
         <li><a href="#platform">Dosage Forms</a></li>
@@ -486,26 +495,6 @@ section { padding: 80px 0; }
     </div>
   </div>
 </nav>
-<div class="marquee-container">
-  <div class="marquee-track">
-    <span class="cert-badge">WHO-GMP</span>
-    <span class="cert-badge">FSSAI</span>
-    <span class="cert-badge">ISO 9001:2015</span>
-    <span class="cert-badge">GMP Schedule M</span>
-    <span class="cert-badge">HALAL</span>
-    <span class="cert-badge">AYUSH GMP</span>
-    <span class="cert-badge">MSME Registered</span>
-    <span class="cert-badge">Make in India</span>
-    <span class="cert-badge">WHO-GMP</span>
-    <span class="cert-badge">FSSAI</span>
-    <span class="cert-badge">ISO 9001:2015</span>
-    <span class="cert-badge">GMP Schedule M</span>
-    <span class="cert-badge">HALAL</span>
-    <span class="cert-badge">AYUSH GMP</span>
-    <span class="cert-badge">MSME Registered</span>
-    <span class="cert-badge">Make in India</span>
-  </div>
-</div>
 <section class="hero" id="home">
   <div class="container">
     <div class="hero-grid">
@@ -532,11 +521,36 @@ section { padding: 80px 0; }
     </div>
   </div>
 </div>
+<div class="marquee-container">
+  <div class="marquee-track">
+    <span class="cert-badge">WHO-GMP</span>
+    <span class="cert-badge">FSSAI</span>
+    <span class="cert-badge">ISO 9001:2015</span>
+    <span class="cert-badge">GMP Schedule M</span>
+    <span class="cert-badge">HALAL</span>
+    <span class="cert-badge">AYUSH GMP</span>
+    <span class="cert-badge">MSME Registered</span>
+    <span class="cert-badge">Make in India</span>
+    <span class="cert-badge">WHO-GMP</span>
+    <span class="cert-badge">FSSAI</span>
+    <span class="cert-badge">ISO 9001:2015</span>
+    <span class="cert-badge">GMP Schedule M</span>
+    <span class="cert-badge">HALAL</span>
+    <span class="cert-badge">AYUSH GMP</span>
+    <span class="cert-badge">MSME Registered</span>
+    <span class="cert-badge">Make in India</span>
+  </div>
+</div>
 <div class="trust-strip">
   <div class="container">
-    <p class="trust-tagline" style="text-align:center; color:#6B7280; font-size:14px; padding:12px 0;">
-      Trusted by D2C brands, pharmacies, wellness companies &amp; exporters across India and GCC
-    </p>
+    <p class="trust-label">Trusted by brands across India, GCC &amp; UK</p>
+    <div class="trust-badges">
+      <span class="trust-badge">🏥 D2C Nutraceuticals</span>
+      <span class="trust-badge">💊 Pharmacy Chains</span>
+      <span class="trust-badge">🌿 Ayurvedic Brands</span>
+      <span class="trust-badge">🚀 Wellness Startups</span>
+      <span class="trust-badge">🌍 Export Houses</span>
+    </div>
   </div>
 </div>
 <section class="about" id="about">
@@ -735,7 +749,7 @@ section { padding: 80px 0; }
         </div>
       </div>
       <div class="product-panel " data-panel="softgels">
-        <img src="images/product-capsules.jpg" alt="Softgels — Nutraceutical Capsule Manufacturing" loading="lazy">
+        <img src="images/product-softgels.jpg" alt="Softgels — Golden amber softgel capsules" loading="lazy">
         <div>
           <h3>Softgels</h3>
           <p>Seamless soft-gelatin capsules for oil-based actives, omega-3, vitamins and herbal extracts. Excellent bioavailability and patient compliance.</p>
@@ -771,7 +785,7 @@ section { padding: 80px 0; }
         </div>
       </div>
       <div class="product-panel " data-panel="sachets">
-        <img src="images/product-blister.jpg" alt="Sachets — Single-dose pharmaceutical packaging" loading="lazy">
+        <img src="images/pexels-n-voitkevich-7615572.jpg" alt="Nutraceutical supplement sachets — single-dose convenience packaging" loading="lazy">
         <div>
           <h3>Sachets</h3>
           <p>Single-dose sachets for convenience and compliance — effervescent granules, powders, and pre-mixed beverages. Child-resistant and tamper-evident options.</p>
@@ -797,8 +811,8 @@ section { padding: 80px 0; }
       <h2 class="section-title">200+ Ready-to-Manufacture Formulations</h2>
       <p class="section-sub">Filter by category or health segment. All formulations are market-tested with available CoA and spec sheets.</p>
     </div>
-    <div class="cat-tabs"><button class="cat-btn active" data-filter="all">All Formulations</button><button class="cat-btn" data-filter="bone-joint">Bone &amp; Joint</button><button class="cat-btn" data-filter="vitamins-minerals">Vitamins &amp; Minerals</button><button class="cat-btn" data-filter="eye-health">Eye Health</button><button class="cat-btn" data-filter="womens-health">Women's Health</button><button class="cat-btn" data-filter="liver-digestive">Liver &amp; Digestive</button><button class="cat-btn" data-filter="nerve-brain">Nerve &amp; Brain</button><button class="cat-btn" data-filter="heart-metabolic">Heart &amp; Metabolic</button><button class="cat-btn" data-filter="sports-immunity">Sports &amp; Immunity</button><button class="cat-btn" data-filter="syrups-liquids">Syrups &amp; Liquids</button><button class="cat-btn" data-filter="ayurvedic">Ayurvedic</button><button class="cat-btn" data-filter="liposomal">Liposomal Technology</button></div>
-    <div id="formulations-grid" class="formulations-grid"></div>
+    <div class="cat-tabs"><button class="cat-btn active" data-cat="all">All Formulations</button><button class="cat-btn" data-cat="bone-joint">Bone &amp; Joint</button><button class="cat-btn" data-cat="vitamins-minerals">Vitamins &amp; Minerals</button><button class="cat-btn" data-cat="eye-health">Eye Health</button><button class="cat-btn" data-cat="womens-health">Women's Health</button><button class="cat-btn" data-cat="liver-digestive">Liver &amp; Digestive</button><button class="cat-btn" data-cat="nerve-brain">Nerve &amp; Brain</button><button class="cat-btn" data-cat="heart-metabolic">Heart &amp; Metabolic</button><button class="cat-btn" data-cat="sports-immunity">Sports &amp; Immunity</button><button class="cat-btn" data-cat="syrups-liquids">Syrups &amp; Liquids</button><button class="cat-btn" data-cat="ayurvedic">Ayurvedic</button><button class="cat-btn" data-cat="liposomal">Liposomal Technology</button></div>
+    <div id="form-grid" class="formulations-grid"></div>
     <div class="form-view-all"><button id="view-all-btn">View All Formulations</button></div>
   </div>
 </section>
@@ -831,18 +845,21 @@ section { padding: 80px 0; }
         <div class="process-step-day">Day 2-3</div>
         <h3>Formulation Proposal</h3>
         <p>Our R&D team proposes ready-stock or custom formula with costing and regulatory notes.</p>
+        <img src="images/process-step2.jpg" alt="Formulation development — analytical weighing" loading="lazy">
       </div>
       <div class="process-step animate-on-scroll">
         <div class="process-step-num">03</div>
         <div class="process-step-day">Day 4-7</div>
         <h3>Sample Development</h3>
         <p>Lab prepares bench sample. You receive courier sample with CoA and spec sheet.</p>
+        <img src="images/process-step3.jpg" alt="Sample development — capsule manufacturing" loading="lazy">
       </div>
       <div class="process-step animate-on-scroll">
         <div class="process-step-num">04</div>
         <div class="process-step-day">Day 8-12</div>
         <h3>Sample Approval</h3>
         <p>Client tests sample, requests tweaks. Repeat until approved. Typically 1–2 rounds.</p>
+        <img src="images/process-step4.jpg" alt="Quality control — HPLC analysis" loading="lazy">
       </div>
       <div class="process-step animate-on-scroll">
         <div class="process-step-num">05</div>
@@ -855,6 +872,7 @@ section { padding: 80px 0; }
         <div class="process-step-day">Day 21-30</div>
         <h3>Full Production & Dispatch</h3>
         <p>Full batch manufactured, QC released, packaged and dispatched with batch documents.</p>
+        <img src="images/process-step6.jpg" alt="Full production — liquid filling line" loading="lazy">
       </div></div>
   </div>
 </section>
@@ -865,30 +883,21 @@ section { padding: 80px 0; }
       <h2 class="section-title">10,000 sq ft GMP Facility</h2>
     </div>
     <div class="infra-grid">
-      <div>
-        <div class="infra-stats-grid"><div class="infra-stat animate-on-scroll"><span class="infra-stat-val">10,000</span><span class="infra-stat-lbl">sq ft Facility</span></div><div class="infra-stat animate-on-scroll"><span class="infra-stat-val">200+</span><span class="infra-stat-lbl">Ready Formulations</span></div><div class="infra-stat animate-on-scroll"><span class="infra-stat-val">5+</span><span class="infra-stat-lbl">Dosage Forms</span></div><div class="infra-stat animate-on-scroll"><span class="infra-stat-val">30</span><span class="infra-stat-lbl">Day Avg Lead Time</span></div></div>
-        <div class="infra-checklist"><div class="infra-check"><span class="infra-check-icon"><i data-lucide="check-circle-2"></i></span>Dedicated encapsulation and tablet compression suites</div><div class="infra-check"><span class="infra-check-icon"><i data-lucide="check-circle-2"></i></span>In-house analytical and microbiological QC lab</div><div class="infra-check"><span class="infra-check-icon"><i data-lucide="check-circle-2"></i></span>Walk-in stability chambers for long-term studies</div><div class="infra-check"><span class="infra-check-icon"><i data-lucide="check-circle-2"></i></span>Temperature-controlled warehouse and dispatch bay</div></div>
-        <a href="#contact" class="btn btn-primary" style="margin-top:28px;display:inline-flex;">Request Site Tour</a>
+      <div class="infra-cell">
+        <img src="images/infrastructure-main.jpg" alt="Analytical QC Laboratory — HPLC system" loading="lazy">
+        <span class="infra-label">Analytical Laboratory</span>
       </div>
-      <div>
-        <div class="infra-gallery">
-          <div class="infra-gallery__item animate-on-scroll">
-            <img src="images/infrastructure-main.jpg" alt="Bionial Manufacturing Floor — Blister Packaging Machine" loading="lazy">
-            <span class="infra-label">Manufacturing</span>
-          </div>
-          <div class="infra-gallery__item animate-on-scroll">
-            <img src="images/infrastructure-lab.jpg" alt="Bionial QC Laboratory" loading="lazy">
-            <span class="infra-label">QC Laboratory</span>
-          </div>
-          <div class="infra-gallery__item animate-on-scroll">
-            <img src="images/infrastructure-warehouse.jpg" alt="Temperature-Controlled Warehouse" loading="lazy">
-            <span class="infra-label">Warehouse</span>
-          </div>
-          <div class="infra-gallery__item animate-on-scroll">
-            <img src="images/infrastructure-manufacturing.jpg" alt="Tablet Production — Manufacturing Floor" loading="lazy">
-            <span class="infra-label">Production</span>
-          </div>
-        </div>
+      <div class="infra-cell">
+        <img src="images/infrastructure-lab.jpg" alt="Quality Control Lab" loading="lazy">
+        <span class="infra-label">Quality Control Lab</span>
+      </div>
+      <div class="infra-cell">
+        <img src="images/infrastructure-warehouse.jpg" alt="Liquid Filling — Cleanroom" loading="lazy">
+        <span class="infra-label">Liquid Manufacturing</span>
+      </div>
+      <div class="infra-cell">
+        <img src="images/infrastructure-manufacturing.jpg" alt="Tablet Sorting — GMP Facility" loading="lazy">
+        <span class="infra-label">Tablet Production</span>
       </div>
     </div>
   </div>
@@ -969,7 +978,7 @@ section { padding: 80px 0; }
     <div class="contact-grid">
       <div class="contact-form animate-on-scroll">
         <h3>Start Your Project</h3>
-        <form action="mailto:bioniallifesciences@gmail.com" method="POST" enctype="text/plain">
+        <form onsubmit="handleFormSubmit(event)">
           <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="Full name" required></div>
           <div class="form-group"><label>Company / Brand</label><input type="text" name="company" placeholder="Brand or company name"></div>
           <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required></div>
@@ -1015,7 +1024,7 @@ section { padding: 80px 0; }
   <div class="container">
     <div class="footer-grid">
       <div>
-        <img src="images/logo.png" alt="Bionial Lifesciences" loading="lazy" style="height:52px;filter:brightness(0) invert(1);margin-bottom:8px;">
+        <img src="images/logo-white.png" alt="Bionial Lifesciences" class="footer-logo-img" loading="lazy">
         <p class="footer-brand-desc">From concept to capsule — precision nutraceutical contract manufacturing in Mohali, Punjab. Capsules, tablets, syrups, powders, sachets and Liposomal formulations with startup-friendly MOQs.</p>
       </div>
       <div>
@@ -1152,9 +1161,9 @@ function createFormulationCard(item) {
 
 let currentCategory = 'all';
 
-function renderCatalogue(category) {
+function renderFormulations(category) {
   currentCategory = category;
-  const grid = document.getElementById('formulations-grid');
+  const grid = document.getElementById('form-grid');
   if (!grid) return;
   const filtered = category === 'all' ? formulations : formulations.filter(f => f.category === category);
   const visible = filtered.slice(0, 12);
@@ -1170,14 +1179,14 @@ function renderCatalogue(category) {
 document.addEventListener('DOMContentLoaded', function() {
 
   // Render catalogue immediately
-  renderCatalogue('all');
+  renderFormulations('all');
 
   // Filter tabs
-  document.querySelectorAll('[data-filter]').forEach(function(tab) {
+  document.querySelectorAll('[data-cat]').forEach(function(tab) {
     tab.addEventListener('click', function() {
-      document.querySelectorAll('[data-filter]').forEach(function(t) { t.classList.remove('active'); });
+      document.querySelectorAll('[data-cat]').forEach(function(t) { t.classList.remove('active'); });
       tab.classList.add('active');
-      renderCatalogue(tab.dataset.filter);
+      renderFormulations(tab.dataset.cat);
     });
   });
 
@@ -1185,7 +1194,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const viewAllBtn = document.getElementById('view-all-btn');
   if (viewAllBtn) {
     viewAllBtn.addEventListener('click', function() {
-      const grid = document.getElementById('formulations-grid');
+      const grid = document.getElementById('form-grid');
       const filtered = currentCategory === 'all' ? formulations : formulations.filter(f => f.category === currentCategory);
       grid.innerHTML = filtered.map(createFormulationCard).join('');
       viewAllBtn.style.display = 'none';
@@ -1207,9 +1216,9 @@ document.addEventListener('DOMContentLoaded', function() {
     pill.addEventListener('click', function() {
       const label = pill.textContent.trim();
       const cat = segmentMap[label] || 'all';
-      renderCatalogue(cat);
-      document.querySelectorAll('[data-filter]').forEach(function(t) {
-        t.classList.toggle('active', t.dataset.filter === cat);
+      renderFormulations(cat);
+      document.querySelectorAll('[data-cat]').forEach(function(t) {
+        t.classList.toggle('active', t.dataset.cat === cat);
       });
       const catalogue = document.getElementById('catalogue');
       if (catalogue) {
@@ -1304,6 +1313,19 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // ─── Init ────────────────────────────────────────────────────────────────────
 if (typeof lucide !== 'undefined') lucide.createIcons();
 document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+// ─── Contact Form ─────────────────────────────────────────────────────────────
+function handleFormSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const name     = form.querySelector('[name="name"]')?.value || '';
+  const company  = form.querySelector('[name="company"]')?.value || '';
+  const phone    = form.querySelector('[name="phone"]')?.value || '';
+  const category = form.querySelector('[name="category"]')?.value || '';
+  const message  = form.querySelector('[name="message"]')?.value || '';
+  const body = `Name: ${name}\nCompany: ${company}\nPhone: ${phone}\nCategory: ${category}\n\nMessage:\n${message}`;
+  window.location.href = `mailto:bioniallifesciences@gmail.com?subject=${encodeURIComponent('New Enquiry from ' + name)}&body=${encodeURIComponent(body)}`;
+}
 
 </script>
 </body>
