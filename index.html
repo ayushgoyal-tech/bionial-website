@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bionial Lifesciences | Nutraceutical Contract Manufacturing in Mohali, India</title>
+<link rel="icon" type="image/png" href="images/logo.png">
+<link rel="apple-touch-icon" href="images/logo.png">
 <meta name="description" content="WHO-GMP certified nutraceutical and Ayurvedic contract manufacturer in Mohali, Punjab. 200+ ready formulations. 30-day delivery. Startup-friendly MOQs from 1,000 units.">
 <link rel="canonical" href="https://bioniallifesciences.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -391,7 +393,7 @@ section { padding: 80px 0; }
 <nav class="nav" id="nav">
   <div class="container">
     <div class="nav-inner">
-      <a href="#" class="nav-logo"><img src="LogoAsset 1.png" alt="Bionial Lifesciences" class="nav-logo-img"></a>
+      <a href="#" class="nav-logo"><img src="images/logo.png" alt="Bionial Lifesciences" class="nav-logo-img"></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
         <li><a href="#platform">Dosage Forms</a></li>
@@ -445,7 +447,6 @@ section { padding: 80px 0; }
   <div class="container">
     <div class="trust-strip-inner">
       <span class="trust-strip-label">Trusted by D2C brands, pharmacies, wellness companies &amp; exporters</span>
-      <div class="trust-strip-logos"><div class="trust-logo-card"><span class="trust-logo-dot" style="background:#3B82F6;"></span><span class="trust-logo-text">D2C Wellness Brand</span></div><div class="trust-logo-card"><span class="trust-logo-dot" style="background:#10B981;"></span><span class="trust-logo-text">Health Supplement Co.</span></div><div class="trust-logo-card"><span class="trust-logo-dot" style="background:#F59E0B;"></span><span class="trust-logo-text">Pharmacy Chain</span></div><div class="trust-logo-card"><span class="trust-logo-dot" style="background:#8B5CF6;"></span><span class="trust-logo-text">Nutraceutical Export</span></div><div class="trust-logo-card"><span class="trust-logo-dot" style="background:#EF4444;"></span><span class="trust-logo-text">Ayurvedic Brand</span></div></div>
     </div>
   </div>
 </div>
@@ -453,7 +454,7 @@ section { padding: 80px 0; }
   <div class="container">
     <div class="about-grid">
       <div class="about-img-wrap animate-on-scroll">
-        <img src="images/about.jpg" alt="Bionial Lifesciences Facility">
+        <img src="images/about-consultation.jpg" alt="Bionial Lifesciences Facility" loading="lazy">
         <div class="about-loc-card">
           <strong style="color:var(--primary);font-size:0.9rem;">Mohali, Punjab, India</strong>
           <p>Plot 459, Sector-82, JLPL Industrial Area</p>
@@ -610,7 +611,7 @@ section { padding: 80px 0; }
         </div>
       </div>
       <div class="product-panel " data-panel="softgels">
-        <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&auto=format" alt="Softgels">
+        <img src="images/product-capsules.jpg" alt="Softgels">
         <div>
           <h3>Softgels</h3>
           <p>Seamless soft-gelatin capsules for oil-based actives, omega-3, vitamins and herbal extracts. Excellent bioavailability and patient compliance.</p>
@@ -646,7 +647,7 @@ section { padding: 80px 0; }
         </div>
       </div>
       <div class="product-panel " data-panel="sachets">
-        <img src="images/product-sachets.jpg" alt="Sachets">
+        <img src="images/product-blister.jpg" alt="Sachets" loading="lazy">
         <div>
           <h3>Sachets</h3>
           <p>Single-dose sachets for convenience and compliance — effervescent granules, powders, and pre-mixed beverages. Child-resistant and tamper-evident options.</p>
@@ -691,7 +692,7 @@ section { padding: 80px 0; }
   <div class="container">
     <div class="section-header animate-on-scroll">
       <div class="section-label">Our Process</div>
-      <h2 class="section-title">From Idea to Shelf in 30 Days</h2>
+      <h2 class="section-title">From Concept to Capsule in 30 Days</h2>
       <p class="section-sub">A transparent, milestone-driven process so you always know where your order stands.</p>
     </div>
     <div class="process-steps">
@@ -867,7 +868,7 @@ section { padding: 80px 0; }
   <div class="container">
     <div class="footer-grid">
       <div>
-        <img src="LogoAsset 1.png" alt="Bionial Lifesciences" style="height:52px;filter:brightness(0) invert(1);margin-bottom:8px;">
+        <img src="images/logo.png" alt="Bionial Lifesciences" style="height:52px;filter:brightness(0) invert(1);margin-bottom:8px;">
         <p class="footer-brand-desc">From concept to capsule — precision nutraceutical contract manufacturing in Mohali, Punjab. Capsules, tablets, syrups, powders, sachets and Liposomal formulations with startup-friendly MOQs.</p>
       </div>
       <div>
@@ -903,7 +904,7 @@ section { padding: 80px 0; }
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2025 Bionial Lifesciences Pvt. Ltd. All rights reserved.</span>
+      <span>&copy; <span id="copyright-year"></span> Bionial Lifesciences Pvt. Ltd. All rights reserved.</span>
       <div class="footer-certs">
         <span class="footer-cert">WHO-GMP</span>
         <span class="footer-cert">FSSAI</span>
@@ -1072,6 +1073,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // ─── Init ────────────────────────────────────────────────────────────────────
 renderFormulations();
 if (typeof lucide !== 'undefined') lucide.createIcons();
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
 
 </script>
 </body>

@@ -1,15 +1,32 @@
 {
+  "hooks": {
+    "post-edit": [
+      "grep -n 'unsplash.com\\|cdn.jsdelivr\\|fonts.googleapis' index.html | head -20"
+    ],
+    "pre-commit": [
+      "grep -c '<script\\|<link' index.html"
+    ]
+  },
   "permissions": {
     "allow": [
-      "WebFetch(domain:www.tridentlifeline.com)",
+      "Bash(git *)",
+      "Bash(ls *)",
+      "Bash(ls:*)",
       "Bash(dir:*)",
+      "Bash(grep *)",
+      "WebFetch(domain:www.tridentlifeline.com)",
       "WebFetch(domain:www.hnlabs.in)",
       "WebFetch(domain:www.nutrakreations.com)",
-      "Bash(ls:*)",
       "WebFetch(domain:capsoft.in)",
       "WebFetch(domain:criuslife.com)",
       "WebFetch(domain:www.nutriavancegroup.com)",
       "WebFetch(domain:images.unsplash.com)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\Ayush\\Downloads\\Bionial Website\\bionial-website\\.claude"
     ]
   }
 }
