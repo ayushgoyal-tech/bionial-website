@@ -35,42 +35,53 @@ Hosted on GitHub Pages. Single index.html file — no framework, no bundler.
 - Website: bioniallife.com
 
 ## Image Rename Map (FINAL — all files must use these names)
-- hero-bg.jpg            ← from 10.png (GMP floor with clipboard)
-- about-consultation.jpg ← from 16.png (two scientists at table)
-- about-quality.jpg      ← from 11.png (purple gloves, teal beaker)
-- herbs-ingredients.jpg  ← from 2.png (Ayurvedic herbs flat-lay)
-- product-capsules.jpg   ← from 1.png (amber + teal capsule pattern)
-- product-tablets.jpg    ← from 13.png (multi-color tablets on marble)
-- product-syrups.jpg     ← from 14.png (syrup bottle lineup)
-- product-powders.jpg    ← from 12.png (three powder scoops)
-- product-ayurveda.jpg   ← from 15.png (brass mortar & pestle)
-- product-blister.jpg    ← from pexels-pixabay-51929.jpg (pink blister pack)
-- process-filling.jpg    ← from pexels-pilanfilms-11589213.jpg (capsule filling)
-- process-step2.jpg      ← from 3.png (R&D lab, analytical balance)
-- process-step3.jpg      ← from 5.png (QC blister pack inspection)
-- process-step4.jpg      ← from 9.png (blister packaging machine)
-- process-step5.jpg      ← from 4.png (HPLC quality testing)
-- process-step6.jpg      ← from 7.png (packaging & dispatch)
-- infrastructure-main.jpg         ← from 9.png (same as process-step4)
-- infrastructure-lab.jpg          ← from 6.png (QC laboratory interior)
-- infrastructure-warehouse.jpg    ← from 8.png (temperature-controlled warehouse)
+- logo.png                   ← images/logo.png (canonical logo path)
+- hero-bg.jpg                ← from 10.png (GMP floor with clipboard)
+- about-consultation.jpg     ← from 16.png (two scientists at table)
+- about-quality.jpg          ← from 11.png (purple gloves, teal beaker)
+- herbs-ingredients.jpg      ← from 2.png (Ayurvedic herbs flat-lay)
+- product-capsules.jpg       ← from 1.png (amber + teal capsule pattern)
+- product-tablets.jpg        ← from 13.png (multi-color tablets on marble)
+- product-syrups.jpg         ← from 14.png (syrup bottle lineup)
+- product-powders.jpg        ← from 12.png (three powder scoops)
+- product-ayurveda.jpg       ← from 15.png (brass mortar & pestle)
+- product-sachets.jpg        ← present in images/ (sachets tab — real image)
+- product-blister.jpg        ← from pexels-pixabay-51929.jpg (no longer used in sachets tab)
+- process-filling.jpg        ← from pexels-pilanfilms-11589213.jpg (capsule filling)
+- process-step2.jpg          ← from 3.png (R&D lab, analytical balance)
+- process-step3.jpg          ← from 5.png (QC blister pack inspection)
+- process-step4.jpg          ← from 9.png (blister packaging machine)
+- process-step5.jpg          ← from 4.png (HPLC quality testing)
+- process-step6.jpg          ← from 7.png (packaging & dispatch)
+- infrastructure-main.jpg        ← from 9.png (manufacturing floor)
+- infrastructure-lab.jpg         ← from 6.png (QC laboratory interior)
+- infrastructure-warehouse.jpg   ← from 8.png (temperature-controlled warehouse)
 - infrastructure-manufacturing.jpg ← from sulyok-img*.jpg (tablet sorting bowl)
-- hero-products.jpg      ← from Skya_Announces*.webp (premium supplement bottles)
+- hero-products.jpg          ← from Skya_Announces*.webp (premium supplement bottles)
 
 ## Known Bugs — DO NOT Reintroduce
 1. NEVER use external URLs for images (no unsplash, no CDN)
-2. NEVER reference 'LogoAsset 1.png' with space — logo is at root as 'LogoAsset1.png'
-3. NEVER duplicate the stats bar
-4. NEVER change the email — always bioniallifesciences@gmail.com
-5. Copyright is static © 2026 — TODO: replace with ${new Date().getFullYear()}
-6. NEVER write "From Idea to Shelf" — correct heading is "From Concept to Capsule in 30 Days"
+2. NEVER reference 'LogoAsset 1.png' with space — logo is at `images/logo.png`
+3. NEVER duplicate the stats bar — only ONE `.hero-stats` div
+4. NEVER change the email — always `bioniallifesciences@gmail.com`
+5. NEVER hardcode copyright year — always use `${new Date().getFullYear()}` via JS
+6. NEVER write "From Idea to Shelf" — correct tagline is "From Concept to Capsule"
 7. NEVER use more than 2× repetition in the certification marquee
+8. NEVER show fake client logos — no "D2C Wellness Brand" etc.
+9. NEVER leave `#form-grid` empty on load — `renderFormulations()` must be called at init
+10. NEVER add external JS libraries — keep it vanilla (lucide icons already loaded)
+
+## Catalogue Identifiers (do not rename)
+- Grid container: `id="form-grid"` (NOT formulations-grid)
+- Render function: `renderFormulations()` (NOT renderCatalogue)
+- Filter buttons: `data-cat` attribute (NOT data-filter)
+- Health pills: `data-health` attribute
 
 ## Current Status (as of Feb 28, 2026)
-- Track A: Bug fixes in progress
-- Track B: Missing sections in progress
-- Track C: Catalogue JS in progress
-- PENDING: Formspree account setup (form action currently has invalid gmail endpoint)
+- Track A: ✅ Complete (logo, images, trust strip, copyright, tagline, favicon)
+- Track B: ✅ Complete (OG tags, JSON-LD, canonical, infra gallery, FSSAI disclaimer, lipo headers)
+- Track C: ✅ Complete (certification marquee, card polish, lazy loading)
+- PENDING: Formspree account setup — form uses `mailto:` fallback until form ID provided
+- PENDING: Softgels image — `product-sachets.jpg` upgraded; softgels still uses capsules fallback
+- PENDING: FSSAI license number — placeholder `[INSERT LICENSE NUMBER]` in footer disclaimer
 - PENDING: Actual facility photos from Bionial
-- PENDING: Softgels image (using product-capsules.jpg as temporary)
-- PENDING: Sachets image (using product-blister.jpg as temporary)
