@@ -200,7 +200,7 @@ section { padding: 80px 0; }
 .cert-track { display: inline-flex; gap: 40px; animation: certScroll 25s linear infinite; white-space: nowrap; }
 .cert-track:hover { animation-play-state: paused; }
 .cert-badge { color: rgba(255,255,255,0.82); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 4px 14px; white-space: nowrap; }
-@keyframes certScroll { from { transform: translateX(0); } to { transform: translateX(-33.333%); } }
+@keyframes certScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ===== ABOUT ===== */
 .about { background: var(--bg); }
@@ -250,6 +250,13 @@ section { padding: 80px 0; }
 #form-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 24px; }
 .form-card { background: var(--bg); border-radius: 12px; padding: 18px; border: 1.5px solid var(--border); transition: all 0.2s; }
 .form-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px var(--shadow); }
+.form-card__hdr { background: linear-gradient(135deg,#003D7A 0%,#00A99D 100%); padding:10px 14px; display:flex; justify-content:space-between; align-items:center; }
+.form-card__hdr .form-code { color:#F7A800; margin-bottom:0; }
+.form-card__hdr .form-tag { color:#fff; background:rgba(255,255,255,0.18); }
+.form-card__body { padding:12px 14px 8px; }
+.form-card__body .form-name { margin-bottom:0; }
+.form-card__cta { display:block; text-align:right; padding:6px 14px 10px; font-size:11px; color:var(--accent); font-weight:700; text-decoration:none; border-top:1px solid rgba(0,0,0,0.06); }
+.form-card__cta:hover { color:var(--primary); }
 .form-code { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.08em; margin-bottom: 6px; }
 .form-name { font-size: 0.88rem; font-weight: 700; color: var(--primary); line-height: 1.4; margin-bottom: 10px; }
 .form-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 3px 9px; border-radius: 4px; }
@@ -462,6 +469,26 @@ section { padding: 80px 0; }
     </div>
   </div>
 </nav>
+<div class="cert-strip">
+  <div class="cert-track">
+    <span class="cert-badge">✓ WHO-GMP Certified</span>
+    <span class="cert-badge">✓ FSSAI Licensed</span>
+    <span class="cert-badge">✓ ISO 9001:2015</span>
+    <span class="cert-badge">✓ AYUSH GMP</span>
+    <span class="cert-badge">✓ HALAL Certified</span>
+    <span class="cert-badge">✓ 200+ Formulations</span>
+    <span class="cert-badge">✓ Low MOQ 1,000 Units</span>
+    <span class="cert-badge">✓ 30-Day Delivery</span>
+    <span class="cert-badge">✓ WHO-GMP Certified</span>
+    <span class="cert-badge">✓ FSSAI Licensed</span>
+    <span class="cert-badge">✓ ISO 9001:2015</span>
+    <span class="cert-badge">✓ AYUSH GMP</span>
+    <span class="cert-badge">✓ HALAL Certified</span>
+    <span class="cert-badge">✓ 200+ Formulations</span>
+    <span class="cert-badge">✓ Low MOQ 1,000 Units</span>
+    <span class="cert-badge">✓ 30-Day Delivery</span>
+  </div>
+</div>
 <section class="hero" id="home">
   <div class="container">
     <div class="hero-grid">
@@ -1064,9 +1091,14 @@ function renderFormulations() {
   grid.innerHTML = visible.map(f => {
     const tagCls = f.form ? f.form.replace(/[^a-zA-Z]/g,'') : '';
     return '<div class="form-card">' +
-      '<div class="form-code">' + (f.code || '') + '</div>' +
-      '<div class="form-name">' + f.name + '</div>' +
-      '<span class="form-tag ' + tagCls + '">' + (f.form || '') + '</span>' +
+      '<div class="form-card__hdr">' +
+        '<span class="form-code">' + (f.code || '') + '</span>' +
+        '<span class="form-tag ' + tagCls + '">' + (f.form || '') + '</span>' +
+      '</div>' +
+      '<div class="form-card__body">' +
+        '<div class="form-name">' + f.name + '</div>' +
+      '</div>' +
+      '<a href="#contact" class="form-card__cta">Enquire \u2192</a>' +
       '</div>';
   }).join('');
 
