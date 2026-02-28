@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell -File -:*)",
+      "Bash(powershell -NonInteractive -Command:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "WebFetch(domain:www.unitedlabs.in)",
+      "WebFetch(domain:www.nutraceutix.in)",
+      "WebFetch(domain:www.avignalifesciences.com)",
+      "WebFetch(domain:bioniallife.com)",
+      "WebFetch(domain:cyizen.com)",
+      "Bash(curl:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:www.capsoft.in)",
+      "WebFetch(domain:www.captavis.com)",
+      "WebFetch(domain:veraherbals.com)",
+      "Bash(cmd /c \"dir /b \"\"c:\\\\Users\\\\Ayush\\\\Downloads\\\\Bionial Website\\\\bionial-website\"\"\")",
+      "Bash(cmd /c \"dir /b \"\"c:\\\\Users\\\\Ayush\\\\Downloads\\\\Bionial Website\"\"\")",
+      "Bash(cmd /c dir:*)",
+      "Bash(powershell -Command \"Get-ChildItem ''c:\\\\Users\\\\Ayush\\\\Downloads\\\\Bionial Website'' -Force\")",
+      "Bash(powershell -Command \"Get-ChildItem ''c:\\\\Users\\\\Ayush\\\\Downloads\\\\Bionial Website\\\\bionial-website'' -Force | Select-Object Name, Length\")",
+      "Bash(powershell -Command:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(python:*)"
+    ]
+  }
+}

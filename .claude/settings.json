@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.tridentlifeline.com)",
+      "Bash(dir:*)",
+      "WebFetch(domain:www.hnlabs.in)",
+      "WebFetch(domain:www.nutrakreations.com)",
+      "Bash(ls:*)",
+      "WebFetch(domain:capsoft.in)",
+      "WebFetch(domain:criuslife.com)",
+      "WebFetch(domain:www.nutriavancegroup.com)",
+      "WebFetch(domain:images.unsplash.com)"
+    ]
+  }
+}
