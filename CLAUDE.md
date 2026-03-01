@@ -34,30 +34,52 @@ Hosted on GitHub Pages. Single index.html file — no framework, no bundler.
 - Email: bioniallifesciences@gmail.com
 - Website: bioniallife.com
 
-## Image Rename Map (FINAL — all files must use these names)
-- logo.png                   ← images/logo.png (canonical logo path)
-- hero-bg.jpg                ← from 10.png (GMP floor with clipboard)
-- about-consultation.jpg     ← from 16.png (two scientists at table)
-- about-quality.jpg          ← from 11.png (purple gloves, teal beaker)
-- herbs-ingredients.jpg      ← from 2.png (Ayurvedic herbs flat-lay)
-- product-capsules.jpg       ← from 1.png (amber + teal capsule pattern)
-- product-tablets.jpg        ← from 13.png (multi-color tablets on marble)
-- product-syrups.jpg         ← from 14.png (syrup bottle lineup)
-- product-powders.jpg        ← from 12.png (three powder scoops)
-- product-ayurveda.jpg       ← from 15.png (brass mortar & pestle)
-- product-sachets.jpg        ← present in images/ (sachets tab — real image)
-- product-blister.jpg        ← from pexels-pixabay-51929.jpg (no longer used in sachets tab)
+## Image Map (v3 — current state)
+### Logos (3 files)
+- logo-color.png             ← navbar img (48px height)
+- logo-white.png             ← footer img (52px height)
+- logo-icon.png              ← favicon + apple-touch-icon
+
+### Hero & About
+- company2.jpg               ← hero CSS background (replaces hero-bg.jpg in CSS)
+- hero-bg.jpg                ← OG/Twitter meta tags only (absolute URL)
+- about-consultation.jpg     ← About section img (two scientists at table)
+- about-quality.jpg          ← from 11.png (purple gloves, teal beaker — not in active use)
+
+### Products
+- product-capsules.jpg       ← Capsules tab
+- product-softgels.jpg       ← Softgels tab ✅ (wired up in v3)
+- product-tablets.jpg        ← Tablets tab
+- product-syrups.jpg         ← Syrups tab
+- product-powders.jpg        ← Powders tab
+- herbs-ingredients.jpg      ← Ayurveda tab (turmeric, ashwagandha, dried botanicals flat-lay)
+- pexels-n-voitkevich-7615572.jpg ← Sachets tab (⚠️ temp — product-sachets.jpg has wrong content)
+- product-sachets.jpg        ← ⚠️ DO NOT USE — contains brain anatomy photo, not sachets
+
+### Process Steps
+- process-step2.jpg          ← Step 2 card (Formulation Proposal)
+- process-step3.jpg          ← Step 3 card (Sample Development)
+- process-step4.jpg          ← Step 4 card (Sample Approval)
+- process-step6.jpg          ← Step 6 card (Full Production & Dispatch)
+
+### Infrastructure (2×2 grid)
+- infrastructure-main.jpg        ← cell 1 (Analytical Laboratory)
+- infrastructure-lab.jpg         ← cell 2 (QC Lab)
+- infrastructure-warehouse.jpg   ← cell 3 (Liquid Manufacturing)
+- infrastructure-manufacturing.jpg ← cell 4 (Tablet Production)
+
+### Misc
 - process-filling.jpg        ← from pexels-pilanfilms-11589213.jpg (capsule filling)
-- process-step2.jpg          ← from 3.png (R&D lab, analytical balance)
-- process-step3.jpg          ← from 5.png (QC blister pack inspection)
-- process-step4.jpg          ← from 9.png (blister packaging machine)
-- process-step5.jpg          ← from 4.png (HPLC quality testing)
-- process-step6.jpg          ← from 7.png (packaging & dispatch)
-- infrastructure-main.jpg        ← from 9.png (manufacturing floor)
-- infrastructure-lab.jpg         ← from 6.png (QC laboratory interior)
-- infrastructure-warehouse.jpg   ← from 8.png (temperature-controlled warehouse)
-- infrastructure-manufacturing.jpg ← from sulyok-img*.jpg (tablet sorting bowl)
 - hero-products.jpg          ← from Skya_Announces*.webp (premium supplement bottles)
+
+### Blacklisted — DO NOT reference in index.html
+- product-ayurveda.jpg       ← shows "Mender" branded CBD products — wrong brand/category
+- product-sachets.jpg        ← brain anatomy photo — wrong content
+- hero-bg.jpg                ← cell biology image — wrong for nutraceutical site (OG meta now uses company2.jpg)
+- about.jpg                  ← fluorescent cell microscopy — wrong
+- infrastructure.jpg         ← single lab goggles close-up — too generic
+- product-blister.jpg        ← ibuprofen blister with drug name visible — brand risk
+- LogoAsset 1.png / LogoAsset1.png ← space in filename / black background — broken
 
 ## Known Bugs — DO NOT Reintroduce
 1. NEVER use external URLs for images (no unsplash, no CDN)
@@ -70,6 +92,7 @@ Hosted on GitHub Pages. Single index.html file — no framework, no bundler.
 8. NEVER show fake client logos — no "D2C Wellness Brand" etc.
 9. NEVER leave `#form-grid` empty on load — `renderFormulations()` must be called at init
 10. NEVER add external JS libraries — keep it vanilla (lucide icons already loaded)
+11. NEVER use native `action="mailto:..."` form — form must use `onsubmit="handleFormSubmit(event)"` JS handler
 
 ## Catalogue Identifiers (do not rename)
 - Grid container: `id="form-grid"` (NOT formulations-grid)
@@ -77,11 +100,11 @@ Hosted on GitHub Pages. Single index.html file — no framework, no bundler.
 - Filter buttons: `data-cat` attribute (NOT data-filter)
 - Health pills: `data-health` attribute
 
-## Current Status (as of Feb 28, 2026)
-- Track A: ✅ Complete (logo, images, trust strip, copyright, tagline, favicon)
-- Track B: ✅ Complete (OG tags, JSON-LD, canonical, infra gallery, FSSAI disclaimer, lipo headers)
-- Track C: ✅ Complete (certification marquee, card polish, lazy loading)
-- PENDING: Formspree account setup — form uses `mailto:` fallback until form ID provided
-- PENDING: Softgels image — `product-sachets.jpg` upgraded; softgels still uses capsules fallback
+## Current Status (as of Feb 28, 2026 — v3 deployed, commit 08f5bde)
+- Track A: ✅ Complete (logo 3-file split, images, trust strip pills, copyright, tagline, favicon)
+- Track B: ✅ Complete (OG tags, JSON-LD, canonical, infra 2×2 grid, FSSAI disclaimer)
+- Track C: ✅ Complete (certification marquee, process step images, JS form handler)
+- PENDING: Formspree account — form uses `handleFormSubmit` mailto fallback; swap fetch() when form ID available
+- PENDING: Sachets image — `product-sachets.jpg` has wrong content; using pexels temp image
 - PENDING: FSSAI license number — placeholder `[INSERT LICENSE NUMBER]` in footer disclaimer
 - PENDING: Actual facility photos from Bionial

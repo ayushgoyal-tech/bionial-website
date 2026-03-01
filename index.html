@@ -7,15 +7,15 @@
 <link rel="icon" type="image/png" href="images/logo-icon.png">
 <link rel="apple-touch-icon" href="images/logo-icon.png">
 <meta name="description" content="WHO-GMP certified nutraceutical and Ayurvedic contract manufacturer in Mohali, Punjab. 200+ ready formulations. 30-day delivery. Startup-friendly MOQs from 1,000 units.">
-<meta property="og:title" content="Bionial Lifesciences — Nutraceutical Contract Manufacturing, Mohali">
-<meta property="og:description" content="WHO-GMP certified nutraceutical & Ayurvedic contract manufacturer. 200+ formulations. Capsules, tablets, syrups, powders, sachets. Low MOQ from 1,000 units. 30-day delivery.">
-<meta property="og:image" content="https://bioniallife.com/images/hero-bg.jpg">
-<meta property="og:url" content="https://bioniallife.com">
+<meta property="og:title" content="Bionial Lifesciences — WHO-GMP Nutraceutical Contract Manufacturer, Mohali">
+<meta property="og:description" content="WHO-GMP certified nutraceutical contract manufacturer in Mohali, Punjab. 62+ formulations, 1,000 unit MOQ, 30-day delivery. Capsules, tablets, syrups, liposomal.">
+<meta property="og:image" content="https://bioniallife.com/images/company2.jpg">
+<meta property="og:url" content="https://bioniallife.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Bionial Lifesciences">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Bionial Lifesciences — Nutraceutical Contract Manufacturing">
-<meta name="twitter:image" content="https://bioniallife.com/images/hero-bg.jpg">
+<meta name="twitter:image" content="https://bioniallife.com/images/company2.jpg">
 <link rel="canonical" href="https://bioniallife.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,16 +132,18 @@ section { padding: 80px 0; }
 
 /* ===== HERO ===== */
 .hero {
-    min-height: 90vh;
-    background-image: linear-gradient(135deg, rgba(0,61,122,0.82) 0%, rgba(0,169,157,0.65) 100%),
+    min-height: 92vh;
+    background-image: linear-gradient(135deg, rgba(0,61,122,0.80) 0%, rgba(0,169,157,0.60) 100%),
                       url('images/company2.jpg');
     background-size: cover;
-    background-position: center top;
+    background-position: center center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     position: relative;
     display: flex;
     align-items: center;
 }
+@media (max-width: 768px) { .hero { background-attachment: scroll; } }
 .hero-grid {
     position: relative; z-index: 1; padding: 80px 0; max-width: 720px;
 }
@@ -156,7 +158,7 @@ section { padding: 80px 0; }
 .hero-title span { color: var(--accent); }
 .hero-sub { font-size: 1.1rem; font-weight: 600; color: var(--accent); margin-bottom: 16px; }
 .hero-desc { font-size: 1rem; color: rgba(255,255,255,0.8); max-width: 480px; line-height: 1.7; margin-bottom: 32px; }
-.hero-title, .hero-sub, .hero-desc { text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+.hero-title, .hero-sub, .hero-desc { text-shadow: 0 2px 12px rgba(0,0,0,0.35); }
 .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; border: none; }
 .btn-primary { background: var(--primary); color: #fff; }
@@ -205,7 +207,7 @@ section { padding: 80px 0; }
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
-.marquee-container { overflow: hidden; background: #003D7A; color: #ffffff; padding: 10px 0; border-bottom: 3px solid #00A99D; }
+.marquee-container { overflow: hidden; background: #003D7A; color: rgba(255,255,255,0.9); padding: 12px 0; border-top: 2px solid #00A99D; border-bottom: 2px solid #00A99D; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.12em; }
 .marquee-track {
     display: flex;
     gap: 32px;
@@ -379,6 +381,16 @@ section { padding: 80px 0; }
 .why-card::before { content: attr(data-num); position: absolute; top: -10px; right: 16px; font-size: 4rem; font-weight: 900; color: rgba(0,61,122,0.04); line-height: 1; }
 .why-card h3 { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
 .why-card p { font-size: 0.88rem; color: var(--text-sec); line-height: 1.6; }
+.trust-section { padding: 80px 0; background: #fff; }
+.trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 48px; }
+.trust-card { background: #f8faff; border: 1px solid rgba(0,61,122,0.08); border-radius: 16px; padding: 32px 24px; text-align: center; }
+.trust-card--highlight { background: #003D7A; color: #fff; }
+.trust-card--highlight p { color: rgba(255,255,255,0.8); }
+.trust-card__number { font-size: 2.8rem; font-weight: 900; color: #003D7A; line-height: 1; margin-bottom: 8px; }
+.trust-card--highlight .trust-card__number { color: #F7A800; }
+.trust-card__label { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #003D7A; margin-bottom: 12px; }
+.trust-card--highlight .trust-card__label { color: rgba(255,255,255,0.7); }
+.trust-card p { font-size: 0.88rem; color: #555; line-height: 1.6; margin: 0; }
 
 /* ===== FAQ ===== */
 .faq { background: var(--bg); }
@@ -557,7 +569,7 @@ section { padding: 80px 0; }
   <div class="container">
     <div class="about-grid">
       <div class="about-img-wrap animate-on-scroll">
-        <img src="images/about-consultation.jpg" alt="Bionial Lifesciences — Manufacturing Consultation" loading="lazy">
+        <img src="images/about-consultation.jpg" alt="Bionial Lifesciences — WHO-GMP Certified Manufacturing Facility, Mohali" loading="lazy">
         <div class="about-loc-card">
           <strong style="color:var(--primary);font-size:0.9rem;">Mohali, Punjab, India</strong>
           <p>Plot 459, Sector-82, JLPL Industrial Area</p>
@@ -794,7 +806,7 @@ section { padding: 80px 0; }
         </div>
       </div>
       <div class="product-panel " data-panel="ayurvedic">
-        <img src="images/product-ayurveda.jpg" alt="Ayurvedic" loading="lazy">
+        <img src="images/herbs-ingredients.jpg" alt="Ayurvedic herbs and ingredients — turmeric, ashwagandha, dried botanicals" loading="lazy">
         <div>
           <h3>Ayurvedic</h3>
           <p>AYUSH GMP compliant classical and patent Ayurvedic formulations — Churna, Kwath, Asava-Arishta, Avaleha and Ghanvati. Schedule E(1) herbs handled.</p>
@@ -811,7 +823,7 @@ section { padding: 80px 0; }
       <h2 class="section-title">200+ Ready-to-Manufacture Formulations</h2>
       <p class="section-sub">Filter by category or health segment. All formulations are market-tested with available CoA and spec sheets.</p>
     </div>
-    <div class="cat-tabs"><button class="cat-btn active" data-cat="all">All Formulations</button><button class="cat-btn" data-cat="bone-joint">Bone &amp; Joint</button><button class="cat-btn" data-cat="vitamins-minerals">Vitamins &amp; Minerals</button><button class="cat-btn" data-cat="eye-health">Eye Health</button><button class="cat-btn" data-cat="womens-health">Women's Health</button><button class="cat-btn" data-cat="liver-digestive">Liver &amp; Digestive</button><button class="cat-btn" data-cat="nerve-brain">Nerve &amp; Brain</button><button class="cat-btn" data-cat="heart-metabolic">Heart &amp; Metabolic</button><button class="cat-btn" data-cat="sports-immunity">Sports &amp; Immunity</button><button class="cat-btn" data-cat="syrups-liquids">Syrups &amp; Liquids</button><button class="cat-btn" data-cat="ayurvedic">Ayurvedic</button><button class="cat-btn" data-cat="liposomal">Liposomal Technology</button></div>
+    <div class="cat-tabs"><button class="cat-btn active" data-cat="all">All Formulations</button><button class="cat-btn" data-cat="bone">Bone &amp; Joint</button><button class="cat-btn" data-cat="vitamins">Vitamins &amp; Minerals</button><button class="cat-btn" data-cat="nerve">Nerve &amp; Brain</button><button class="cat-btn" data-cat="womens">Women's Health</button><button class="cat-btn" data-cat="mens">Men's Health</button><button class="cat-btn" data-cat="uti">UTI &amp; Urinary</button><button class="cat-btn" data-cat="eye">Eye Health</button><button class="cat-btn" data-cat="liver">Liver &amp; Digestive</button><button class="cat-btn" data-cat="heart">Heart &amp; Metabolic</button><button class="cat-btn" data-cat="sports">Sports &amp; Immunity</button><button class="cat-btn" data-cat="syrups">Syrups &amp; Liquids</button><button class="cat-btn" data-cat="ayurvedic">Ayurvedic</button><button class="cat-btn" data-cat="liposomal">Liposomal Technology</button></div>
     <div id="form-grid" class="formulations-grid"></div>
     <div class="form-view-all"><button id="view-all-btn">View All Formulations</button></div>
   </div>
@@ -823,7 +835,7 @@ section { padding: 80px 0; }
       <h2 class="section-title">14 Health & Wellness Segments</h2>
       <p class="section-sub">Click any segment to filter the formulations catalogue by your target health focus.</p>
     </div>
-    <div class="health-grid"><button class="health-pill" data-health="general-wellness"><i data-lucide="activity"></i>General Wellness</button><button class="health-pill" data-health="immunity"><i data-lucide="shield"></i>Immunity</button><button class="health-pill" data-health="bone-joint"><i data-lucide="bone"></i>Bone & Joint</button><button class="health-pill" data-health="nerve-brain"><i data-lucide="brain"></i>Brain & Nerve</button><button class="health-pill" data-health="heart-metabolic"><i data-lucide="heart-pulse"></i>Heart & Metabolic</button><button class="health-pill" data-health="sports-fitness"><i data-lucide="dumbbell"></i>Sports & Fitness</button><button class="health-pill" data-health="womens-health"><i data-lucide="flower-2"></i>Women's Health</button><button class="health-pill" data-health="liver-digestive"><i data-lucide="droplets"></i>Liver & Digestive</button><button class="health-pill" data-health="eye-health"><i data-lucide="eye"></i>Eye Health</button><button class="health-pill" data-health="skin-beauty"><i data-lucide="sparkles"></i>Skin & Beauty</button><button class="health-pill" data-health="metabolic"><i data-lucide="scale"></i>Metabolic & Weight</button><button class="health-pill" data-health="mens-health"><i data-lucide="user"></i>Men's Health</button><button class="health-pill" data-health="seniors"><i data-lucide="users"></i>Senior Wellness</button><button class="health-pill" data-health="kids"><i data-lucide="baby"></i>Child Nutrition</button></div>
+    <div class="health-grid"><button class="health-pill" data-health="general-wellness"><i data-lucide="activity"></i>General Wellness</button><button class="health-pill" data-health="immunity"><i data-lucide="shield"></i>Immunity</button><button class="health-pill" data-health="bone"><i data-lucide="bone"></i>Bone & Joint</button><button class="health-pill" data-health="nerve"><i data-lucide="brain"></i>Brain & Nerve</button><button class="health-pill" data-health="heart"><i data-lucide="heart-pulse"></i>Heart & Metabolic</button><button class="health-pill" data-health="sports"><i data-lucide="dumbbell"></i>Sports & Fitness</button><button class="health-pill" data-health="womens"><i data-lucide="flower-2"></i>Women's Health</button><button class="health-pill" data-health="liver"><i data-lucide="droplets"></i>Liver & Digestive</button><button class="health-pill" data-health="eye"><i data-lucide="eye"></i>Eye Health</button><button class="health-pill" data-health="skin-beauty"><i data-lucide="sparkles"></i>Skin & Beauty</button><button class="health-pill" data-health="metabolic"><i data-lucide="scale"></i>Metabolic & Weight</button><button class="health-pill" data-health="mens"><i data-lucide="user"></i>Men's Health</button><button class="health-pill" data-health="seniors"><i data-lucide="users"></i>Senior Wellness</button><button class="health-pill" data-health="kids"><i data-lucide="baby"></i>Child Nutrition</button></div>
   </div>
 </section>
 <section class="process" id="process">
@@ -902,37 +914,35 @@ section { padding: 80px 0; }
     </div>
   </div>
 </section>
-<section class="why">
+<section class="trust-section" id="why-bionial">
   <div class="container">
     <div class="section-header animate-on-scroll">
-      <div class="section-label">Why Bionial</div>
+      <div class="section-label">Why Brands Choose Us</div>
       <h2 class="section-title">Built for Brands That Scale</h2>
+      <p class="section-subtitle">From your first 1,000 units to 10 lakh+ — we grow with you.</p>
     </div>
-    <div class="why-grid">
-      <div class="why-card animate-on-scroll" data-num="01">
-        <h3>Startup-Friendly MOQs</h3>
-        <p>1,000 units minimum — no warehouse risk for new launches.</p>
+    <div class="trust-grid">
+      <div class="trust-card trust-card--highlight animate-on-scroll">
+        <div class="trust-card__number">1,000</div>
+        <div class="trust-card__label">Units Minimum MOQ</div>
+        <p>No warehouse risk for new launches. Test your market before scaling.</p>
       </div>
-      <div class="why-card animate-on-scroll" data-num="02">
-        <h3>30-Day Delivery</h3>
-        <p>From confirmed PO to dispatch in 30 business days for ready formulations.</p>
+      <div class="trust-card animate-on-scroll">
+        <div class="trust-card__number">30</div>
+        <div class="trust-card__label">Day Delivery</div>
+        <p>From confirmed PO to dispatch for ready formulations. Fastest in Mohali.</p>
       </div>
-      <div class="why-card animate-on-scroll" data-num="03">
-        <h3>In-House R&D</h3>
-        <p>Dedicated formulation scientists and stability chamber for fast iteration.</p>
+      <div class="trust-card animate-on-scroll">
+        <div class="trust-card__number">62+</div>
+        <div class="trust-card__label">Ready Formulations</div>
+        <p>Proven, market-tested formulas across 13 health categories. CoA available.</p>
       </div>
-      <div class="why-card animate-on-scroll" data-num="04">
-        <h3>Full Traceability</h3>
-        <p>Every batch has CoA, MSDS, and GMP batch records. Audit-ready.</p>
+      <div class="trust-card animate-on-scroll">
+        <div class="trust-card__number">6+</div>
+        <div class="trust-card__label">Certifications</div>
+        <p>WHO-GMP · FSSAI · ISO 9001 · GMP Schedule M · HALAL · AYUSH GMP</p>
       </div>
-      <div class="why-card animate-on-scroll" data-num="05">
-        <h3>200+ Ready Formulations</h3>
-        <p>Proven, market-tested formulas across 10 product categories.</p>
-      </div>
-      <div class="why-card animate-on-scroll" data-num="06">
-        <h3>End-to-End Service</h3>
-        <p>From concept and formulation through manufacturing, labelling and dispatch.</p>
-      </div></div>
+    </div>
   </div>
 </section>
 <section class="faq" id="faq">
@@ -1091,49 +1101,81 @@ section { padding: 80px 0; }
 
 // ─── FORMULATIONS DATA ─────────────────────────────────────
 const formulations = [
-  // BONE & JOINT
-  { code:'BL-BJ-001', name:'Calcium + D3 + Zinc', composition:'Calcium Citrate 500mg + Vitamin D3 400IU + Zinc 7.5mg', form:'Tablets', category:'bone-joint' },
-  { code:'BL-BJ-002', name:'Glucosamine + Chondroitin + MSM', composition:'Glucosamine 750mg + Chondroitin 250mg + MSM 250mg', form:'Tablets', category:'bone-joint' },
-  { code:'BL-BJ-003', name:'Collagen Peptides + Vitamin C + HA', composition:'Collagen Peptides 5g + Vitamin C 40mg + Hyaluronic Acid 30mg', form:'Powder', category:'bone-joint' },
-  // VITAMINS & MINERALS
-  { code:'BL-VM-001', name:'Multivitamin Multimineral (26 nutrients)', composition:'Complete 26-nutrient formula — vitamins A, B-complex, C, D3, E, K2 plus minerals', form:'Tablets', category:'vitamins-minerals' },
-  { code:'BL-VM-002', name:'Vitamin C + Zinc + D3 Immunity', composition:'Vitamin C 1000mg + Zinc 10mg + D3 400IU', form:'Tablets', category:'vitamins-minerals' },
-  { code:'BL-VM-003', name:'Iron Bisglycinate + Folate + B12', composition:'Iron Bisglycinate 60mg + Folic Acid 1.5mg + B12 15mcg + Vitamin C 75mg', form:'Tablets', category:'vitamins-minerals' },
-  // EYE HEALTH
-  { code:'BL-EH-001', name:'Lutein + Zeaxanthin + Bilberry', composition:'Lutein 10mg + Zeaxanthin 2mg + Bilberry Extract 40mg + Vitamin A 600mcg', form:'Softgels', category:'eye-health' },
-  { code:'BL-EH-002', name:'Astaxanthin + Omega-3 + Vitamin E', composition:'Astaxanthin 4mg + Omega-3 300mg + Vitamin E 10mg', form:'Softgels', category:'eye-health' },
-  // WOMEN'S HEALTH
-  { code:'BL-WH-001', name:'Evening Primrose Oil + Vitamin E', composition:'Evening Primrose Oil 500mg + Vitamin E 10mg', form:'Softgels', category:'womens-health' },
-  { code:'BL-WH-002', name:'Prenatal Complex (Iron + Folate + DHA)', composition:'Iron + Folic Acid 1.5mg + DHA 200mg + B12 15mcg', form:'Capsules', category:'womens-health' },
-  { code:'BL-WH-003', name:'Cranberry + D-Mannose + Probiotics', composition:'Cranberry Extract 400mg + D-Mannose 500mg + Probiotics 5B CFU', form:'Capsules', category:'womens-health' },
-  // LIVER & DIGESTIVE
-  { code:'BL-LD-001', name:'Silymarin + NAC + Dandelion', composition:'Silymarin 140mg + NAC 150mg + Dandelion Root 100mg', form:'Capsules', category:'liver-digestive' },
-  { code:'BL-LD-002', name:'Pre+Probiotic 20B CFU', composition:'Lactobacillus acidophilus + 6 strains 20B CFU + FOS 100mg', form:'Capsules', category:'liver-digestive' },
-  // NERVE & BRAIN
-  { code:'BL-NB-001', name:'Mecobalamin + ALA + B6 + Folate', composition:'Mecobalamin 1500mcg + Alpha Lipoic Acid 100mg + Pyridoxine 3mg + Folic Acid 1.5mg', form:'Tablets', category:'nerve-brain' },
-  { code:'BL-NB-002', name:'Brahmi + Ashwagandha + Ginkgo Nootropic', composition:'Brahmi 300mg + Ashwagandha 300mg + Ginkgo Biloba 60mg', form:'Capsules', category:'nerve-brain' },
-  // HEART & METABOLIC
-  { code:'BL-HM-001', name:'Omega-3 + CoQ10', composition:'EPA 360mg + DHA 240mg + CoQ10 30mg', form:'Softgels', category:'heart-metabolic' },
-  { code:'BL-HM-002', name:'Berberine + Chromium + Bitter Melon', composition:'Berberine 500mg + Chromium 200mcg + Bitter Melon Extract 150mg', form:'Capsules', category:'heart-metabolic' },
-  // SPORTS & IMMUNITY
-  { code:'BL-SI-001', name:'Whey Protein + BCAA + Glutamine', composition:'Whey Protein 24g + BCAA 5.5g + L-Glutamine 4g per 30g serving', form:'Powder', category:'sports-immunity' },
-  { code:'BL-SI-002', name:'Curcumin C3 + Piperine + D3', composition:'Curcumin C3 Complex 500mg + Piperine 5mg + Vitamin D3 1000IU', form:'Capsules', category:'sports-immunity' },
-  // SYRUPS & LIQUIDS
-  { code:'BL-SL-001', name:'Multivitamin Multimineral Syrup', composition:'Vitamins A, B-complex, C, D3, E + Zinc + Iron — 5ml dose', form:'Syrup', category:'syrups-liquids' },
-  { code:'BL-SL-002', name:'Iron Hydroxide Polymaltose Syrup', composition:'Iron Hydroxide Polymaltose Complex 50mg elemental iron per 5ml', form:'Syrup', category:'syrups-liquids' },
-  { code:'BL-SL-003', name:'Calcium + D3 Suspension', composition:'Calcium 250mg + Vitamin D3 200IU per 5ml', form:'Suspension', category:'syrups-liquids' },
-  // AYURVEDIC
+  // BONE & JOINT (5)
+  { code:'BL-BJ-001', name:'Calcium + D3 + Zinc', composition:'Calcium Citrate 500mg + Vitamin D3 400IU + Zinc 7.5mg', form:'Tablets', category:'bone' },
+  { code:'BL-BJ-002', name:'Glucosamine + Chondroitin + MSM', composition:'Glucosamine 750mg + Chondroitin 250mg + MSM 250mg', form:'Tablets', category:'bone' },
+  { code:'BL-BJ-003', name:'Collagen Peptides + Vitamin C + HA', composition:'Collagen Peptides 5g + Vitamin C 40mg + Hyaluronic Acid 30mg', form:'Powder', category:'bone' },
+  { code:'BL-BJ-004', name:'Calcium + K2 + D3 + Magnesium', composition:'Calcium Citrate 500mg + Vitamin K2-7 45mcg + D3 1000IU + Magnesium 100mg', form:'Tablets', category:'bone' },
+  { code:'BL-BJ-005', name:'Type II Collagen + Boswellia + Turmeric', composition:'UC-II Collagen 40mg + Boswellia Serrata 100mg + Curcumin 150mg', form:'Capsules', category:'bone' },
+  // VITAMINS & MINERALS (5)
+  { code:'BL-VM-001', name:'Multivitamin Multimineral (26 nutrients)', composition:'Complete 26-nutrient formula — vitamins A, B-complex, C, D3, E, K2 plus minerals', form:'Tablets', category:'vitamins' },
+  { code:'BL-VM-002', name:'Vitamin C + Zinc + D3 Immunity', composition:'Vitamin C 1000mg + Zinc 10mg + D3 400IU', form:'Tablets', category:'vitamins' },
+  { code:'BL-VM-003', name:'Iron Bisglycinate + Folate + B12', composition:'Iron Bisglycinate 60mg + Folic Acid 1.5mg + B12 15mcg + Vitamin C 75mg', form:'Tablets', category:'vitamins' },
+  { code:'BL-VM-004', name:'Vitamin D3 60,000 IU Weekly', composition:'Cholecalciferol 60,000 IU in olive oil base', form:'Softgels', category:'vitamins' },
+  { code:'BL-VM-005', name:'B-Complex + Biotin Energy Formula', composition:'B1 + B2 + B3 + B5 + B6 + B7 + B9 + B12 + Biotin 10mg', form:'Tablets', category:'vitamins' },
+  // NERVE & BRAIN (4)
+  { code:'BL-NB-001', name:'Mecobalamin + ALA + B6 + Folate', composition:'Mecobalamin 1500mcg + Alpha Lipoic Acid 100mg + Pyridoxine 3mg + Folic Acid 1.5mg', form:'Tablets', category:'nerve' },
+  { code:'BL-NB-002', name:'Brahmi + Ashwagandha + Ginkgo Nootropic', composition:'Brahmi 300mg + Ashwagandha 300mg + Ginkgo Biloba 60mg', form:'Capsules', category:'nerve' },
+  { code:'BL-NB-003', name:'L-Theanine + GABA + Magnesium Calm', composition:'L-Theanine 200mg + GABA 100mg + Magnesium Bisglycinate 150mg', form:'Capsules', category:'nerve' },
+  { code:'BL-NB-004', name:"Bacopa + Lion's Mane + Phosphatidylserine", composition:"Bacopa Monnieri 300mg + Lion's Mane 500mg + Phosphatidylserine 100mg", form:'Capsules', category:'nerve' },
+  // WOMEN'S HEALTH (4)
+  { code:'BL-WH-001', name:'Evening Primrose Oil + Vitamin E', composition:'Evening Primrose Oil 500mg + Vitamin E 10mg', form:'Softgels', category:'womens' },
+  { code:'BL-WH-002', name:'Prenatal Complex (Iron + Folate + DHA)', composition:'Iron 60mg + Folic Acid 1.5mg + DHA 200mg + B12 15mcg', form:'Capsules', category:'womens' },
+  { code:'BL-WH-003', name:'PCOS Support — Inositol + Chromium', composition:'Myo-Inositol 2000mg + D-Chiro-Inositol 50mg + Chromium 200mcg + Folate 400mcg', form:'Tablets', category:'womens' },
+  { code:'BL-WH-004', name:'Menopause Support — Isoflavones + B6', composition:'Soy Isoflavones 80mg + Vitamin B6 10mg + Magnesium 200mg + Black Cohosh 40mg', form:'Capsules', category:'womens' },
+  // MEN'S HEALTH (5)
+  { code:'BL-MH-001', name:'Ashwagandha KSM-66 + Shilajit + Zinc', composition:'Ashwagandha KSM-66 600mg + Shilajit 250mg + Zinc 15mg', form:'Capsules', category:'mens' },
+  { code:'BL-MH-002', name:'Tribulus + Fenugreek + Boron', composition:'Tribulus Terrestris 500mg + Fenugreek Seed Extract 300mg + Boron 3mg', form:'Tablets', category:'mens' },
+  { code:'BL-MH-003', name:'Prostate Care — Saw Palmetto + Lycopene', composition:'Saw Palmetto Extract 320mg + Lycopene 10mg + Zinc 15mg + Beta-Sitosterol 100mg', form:'Softgels', category:'mens' },
+  { code:'BL-MH-004', name:'Male Fertility — Selenium + Zinc + CoQ10', composition:'Selenium 100mcg + Zinc 30mg + CoQ10 60mg + Lycopene 6mg + Vitamin C 250mg', form:'Tablets', category:'mens' },
+  { code:'BL-MH-005', name:'L-Arginine + L-Citrulline + CoQ10', composition:'L-Arginine 1500mg + L-Citrulline 500mg + CoQ10 50mg', form:'Capsules', category:'mens' },
+  // UTI & URINARY (4)
+  { code:'BL-UT-001', name:'Cranberry + D-Mannose + Probiotics', composition:'Cranberry Extract 400mg + D-Mannose 500mg + Probiotics 5B CFU', form:'Capsules', category:'uti' },
+  { code:'BL-UT-002', name:'D-Mannose 2000mg + Hibiscus Extract', composition:'D-Mannose 2000mg + Hibiscus sabdariffa Extract 200mg + Vitamin C 100mg', form:'Tablets', category:'uti' },
+  { code:'BL-UT-003', name:'Uva Ursi + Cranberry + Vitamin C', composition:'Bearberry (Uva Ursi) Extract 150mg + Cranberry 400mg + Vitamin C 200mg', form:'Capsules', category:'uti' },
+  { code:'BL-UT-004', name:'Cranberry + Pumpkin Seed + Nettle', composition:'Cranberry Extract 400mg + Pumpkin Seed 500mg + Nettle Leaf 300mg', form:'Softgels', category:'uti' },
+  // EYE HEALTH (4)
+  { code:'BL-EH-001', name:'Lutein + Zeaxanthin + Bilberry', composition:'Lutein 10mg + Zeaxanthin 2mg + Bilberry Extract 40mg + Vitamin A 600mcg', form:'Softgels', category:'eye' },
+  { code:'BL-EH-002', name:'Astaxanthin + Omega-3 + Vitamin E', composition:'Astaxanthin 4mg + Omega-3 300mg + Vitamin E 10mg', form:'Softgels', category:'eye' },
+  { code:'BL-EH-003', name:'AREDS2 Formula — Vitamins + Zinc + Copper', composition:'Vitamin C 500mg + Vitamin E 400IU + Zinc 80mg + Copper 2mg + Lutein 10mg', form:'Tablets', category:'eye' },
+  { code:'BL-EH-004', name:'Saffron + Lutein + Omega-3 Macular Care', composition:'Saffron 20mg + Lutein 10mg + Zeaxanthin 2mg + Omega-3 500mg + D3 1000IU', form:'Softgels', category:'eye' },
+  // LIVER & DIGESTIVE (5)
+  { code:'BL-LD-001', name:'Silymarin + NAC + Dandelion', composition:'Silymarin 140mg + NAC 150mg + Dandelion Root 100mg', form:'Capsules', category:'liver' },
+  { code:'BL-LD-002', name:'Pre+Probiotic 20B CFU', composition:'Lactobacillus acidophilus + 6 strains 20B CFU + FOS 100mg', form:'Capsules', category:'liver' },
+  { code:'BL-LD-003', name:'Digestive Enzyme Complex 8-in-1', composition:'Amylase + Protease + Lipase + Bromelain + Papain + Lactase + Cellulase + Maltase', form:'Capsules', category:'liver' },
+  { code:'BL-LD-004', name:'Artichoke + Chicory + Dandelion Liver Detox', composition:'Artichoke Leaf 300mg + Chicory Root 200mg + Dandelion 150mg + Milk Thistle 100mg', form:'Tablets', category:'liver' },
+  { code:'BL-LD-005', name:'Glutathione + NAC + ALA Liver Shield', composition:'Reduced Glutathione 250mg + N-Acetyl Cysteine 400mg + Alpha Lipoic Acid 200mg', form:'Tablets', category:'liver' },
+  // HEART & METABOLIC (5)
+  { code:'BL-HM-001', name:'Omega-3 + CoQ10', composition:'EPA 360mg + DHA 240mg + CoQ10 30mg', form:'Softgels', category:'heart' },
+  { code:'BL-HM-002', name:'Berberine + Chromium + Bitter Melon', composition:'Berberine 500mg + Chromium 200mcg + Bitter Melon Extract 150mg', form:'Capsules', category:'heart' },
+  { code:'BL-HM-003', name:'Red Yeast Rice + CoQ10 + Niacin', composition:'Red Yeast Rice 600mg + CoQ10 30mg + Niacin 15mg', form:'Tablets', category:'heart' },
+  { code:'BL-HM-004', name:'Magnesium Glycinate + Potassium + B6', composition:'Magnesium Bisglycinate 300mg + Potassium 99mg + Vitamin B6 5mg', form:'Tablets', category:'heart' },
+  { code:'BL-HM-005', name:'Garlic Extract + Ginger + Hawthorn', composition:'Aged Garlic Extract 600mg + Ginger Root 100mg + Hawthorn Berry 200mg', form:'Capsules', category:'heart' },
+  // SPORTS & IMMUNITY (4)
+  { code:'BL-SI-001', name:'Whey Protein + BCAA + Glutamine', composition:'Whey Protein 24g + BCAA 5.5g + L-Glutamine 4g per 30g serving', form:'Powder', category:'sports' },
+  { code:'BL-SI-002', name:'Curcumin C3 + Piperine + D3', composition:'Curcumin C3 Complex 500mg + Piperine 5mg + Vitamin D3 1000IU', form:'Capsules', category:'sports' },
+  { code:'BL-SI-003', name:'Creatine Monohydrate 3g Daily', composition:'Creatine Monohydrate 3000mg + Taurine 500mg per serving', form:'Powder', category:'sports' },
+  { code:'BL-SI-004', name:'Beta-Alanine + L-Carnosine + Taurine', composition:'Beta-Alanine 3200mg + L-Carnosine 500mg + Taurine 1000mg', form:'Capsules', category:'sports' },
+  // SYRUPS & LIQUIDS (4)
+  { code:'BL-SL-001', name:'Multivitamin Multimineral Syrup', composition:'Vitamins A, B-complex, C, D3, E + Zinc + Iron — 5ml dose', form:'Syrup', category:'syrups' },
+  { code:'BL-SL-002', name:'Iron Hydroxide Polymaltose Syrup', composition:'Iron Hydroxide Polymaltose Complex 50mg elemental iron per 5ml', form:'Syrup', category:'syrups' },
+  { code:'BL-SL-003', name:'Calcium + D3 Suspension', composition:'Calcium 250mg + Vitamin D3 200IU per 5ml', form:'Suspension', category:'syrups' },
+  { code:'BL-SL-004', name:'Protein + DHA Malt Supplement', composition:'Protein 10g + DHA 100mg + Iron 10mg + Zinc 5mg + B12 2.5mcg per serving', form:'Powder', category:'syrups' },
+  // AYURVEDIC (5)
   { code:'BL-AY-001', name:'Ashwagandha KSM-66 + Black Pepper', composition:'Ashwagandha KSM-66 600mg + Black Pepper Extract 5mg', form:'Capsules', category:'ayurvedic' },
   { code:'BL-AY-002', name:'Triphala Churna (Classical)', composition:'Amalaki + Bibhitaki + Haritaki 500mg each', form:'Tablets', category:'ayurvedic' },
   { code:'BL-AY-003', name:'Giloy + Tulsi + Amla Immunity Kwath', composition:'Tinospora cordifolia + Ocimum sanctum + Emblica officinalis', form:'Syrup', category:'ayurvedic' },
-  // LIPOSOMAL
+  { code:'BL-AY-004', name:"Shatavari + Lodhra + Ashoka Women's Formula", composition:'Shatavari 500mg + Lodhra 200mg + Ashoka Bark 300mg + Aloe Vera 100mg', form:'Capsules', category:'ayurvedic' },
+  { code:'BL-AY-005', name:'Shilajit PrimaVie + Mumio Extract', composition:'Shilajit PrimaVie 500mg standardised to 50% fulvic acid + Mumio 100mg', form:'Capsules', category:'ayurvedic' },
+  // LIPOSOMAL TECHNOLOGY (8)
   { code:'BL-LP-01', name:'Liposomal Iron Complex', composition:'Ferric Pyrophosphate 29mg + Folic Acid 200mcg + B12 1.2mcg + Vit C 50mg', form:'Tablets', category:'liposomal' },
   { code:'BL-LP-02', name:'Liposomal Calcium Complex', composition:'Calcium 500mg + L-Lysine 25mg + Zinc 10mg + D3 400IU + Selenium 40mcg', form:'Tablets', category:'liposomal' },
   { code:'BL-LP-03', name:'Liposomal Silymarin', composition:'Milk Thistle 80mg + Dandelion 50mg + Eriocitrin 25mg + Schisandra 250mg', form:'Tablets', category:'liposomal' },
   { code:'BL-LP-04', name:'Liposomal CoQ10 + Carnitine', composition:'CoQ10 100mg + Levo-Carnitine 340mg + Zinc 12mg + Astaxanthin 4mg', form:'Tablets', category:'liposomal' },
   { code:'BL-LP-05', name:'Liposomal Glutathione', composition:'Reduced L-Glutathione in phospholipid bilayer — high intracellular delivery', form:'Capsules', category:'liposomal' },
   { code:'BL-LP-06', name:'Liposomal Magnesium + Carnitine', composition:'Magnesium Citrate 200mg + L-Carnitine L-Tartrate 500mg + Vit E 10mg', form:'Tablets', category:'liposomal' },
-  { code:'BL-LP-07', name:'Liposomal Curcumin (29× Absorption)', composition:'Curcuma Longa Extract in liposomal carrier — 29× greater bioavailability', form:'Capsules', category:'liposomal' }
+  { code:'BL-LP-07', name:'Liposomal Curcumin (29× Absorption)', composition:'Curcuma Longa Extract in liposomal carrier — 29× greater bioavailability', form:'Capsules', category:'liposomal' },
+  { code:'BL-LP-08', name:'Liposomal Vitamin C 1000mg', composition:'Ascorbic Acid 1000mg in phospholipid liposomal delivery system', form:'Capsules', category:'liposomal' }
 ];
 
 // ─── RENDER ENGINE ───────────────────────────────────────────
@@ -1203,13 +1245,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Health segment pills
   const segmentMap = {
-    'General Wellness':'all', 'Immunity':'sports-immunity', 'Bone & Joint':'bone-joint',
-    'Brain & Nerve':'nerve-brain', 'Heart & Metabolic':'heart-metabolic',
-    'Sports & Fitness':'sports-immunity', "Women's Health":'womens-health',
-    'Liver & Digestive':'liver-digestive', 'Eye Health':'eye-health',
-    'Skin & Beauty':'vitamins-minerals', 'Metabolic & Weight':'heart-metabolic',
-    "Men's Health":'vitamins-minerals', 'Senior Wellness':'bone-joint',
-    'Child Nutrition':'vitamins-minerals'
+    'General Wellness':'all', 'Immunity':'sports', 'Bone & Joint':'bone',
+    'Brain & Nerve':'nerve', 'Heart & Metabolic':'heart',
+    'Sports & Fitness':'sports', "Women's Health":'womens',
+    'Liver & Digestive':'liver', 'Eye Health':'eye',
+    'Skin & Beauty':'vitamins', 'Metabolic & Weight':'heart',
+    "Men's Health":'mens', 'Senior Wellness':'bone',
+    'Child Nutrition':'vitamins'
   };
 
   document.querySelectorAll('.segment-pill, .health-segment-pill, [data-segment], .health-pill').forEach(function(pill) {
