@@ -1,110 +1,215 @@
-# Bionial Lifesciences Website — CLAUDE.md
+# CLAUDE.md — Bionial Lifesciences Website
+## ⚠️ READ THIS ENTIRE FILE BEFORE WRITING A SINGLE LINE OF CODE ⚠️
 
-## Project Overview
-Static single-page website for Bionial Lifesciences Pvt. Ltd.
-Nutraceutical and Ayurvedic contract manufacturer in Mohali, Punjab.
-Hosted on GitHub Pages. Single index.html file — no framework, no bundler.
+This file is the **single source of truth** for all development decisions.
+It lives in the repository root. Update it whenever you fix something new.
+**Every bug fixed here must be logged in the RESOLVED BUGS section.**
 
-## Key Commands
-- `git add . && git commit -m "..." && git push origin main` — Deploy live
-- `grep -n 'unsplash\|cdn\.' index.html` — Check for external CDN URLs (must be zero)
-- `grep -n 'LogoAsset 1' index.html` — Check for spaced filename (must be zero)
-- `python -m http.server 8080` — Local preview (or use VS Code Live Server)
+---
 
-## File Structure
-- `index.html` — Entire website (HTML + CSS + JS all inline or in same file)
-- `images/` — All image assets (see rename map below)
-- `CNAME` — Contains: bioniallife.com
-- `CLAUDE.md` — This file
-- `.claude/` — Hooks, commands, settings
+## PROJECT FACTS
 
-## Brand Design System
-- Primary: #003D7A (Deep Blue)
-- Accent: #00A99D (Teal)
-- Gold: #F7A800 (Stats, badges)
-- White: #FFFFFF (Backgrounds)
-- Dark Navy: #0D1B2A (Footer)
-- Fonts: Inter (Google Fonts) — 700 headings, 400 body
-- Tagline: "From Concept to Capsule" (EVERYWHERE — never "From Idea to Shelf")
+| Key | Value |
+|---|---|
+| Type | Static HTML — single `index.html` |
+| Deploy | GitHub Pages → https://bioniallife.com |
+| Push command | `git push origin main` (live in ~2 min) |
+| Local test | `python3 -m http.server 8080` |
+| Company | Bionial Lifesciences Pvt. Ltd. |
+| Email | bioniallifesciences@gmail.com |
+| Phone | +91 99966 10619 |
+| Address | Plot 459, Sector-82, JLPL Industrial Area, Mohali, Punjab 140308 |
+| Formulations | 200+ ready-to-manufacture, JS array in index.html |
 
-## Company Info
-- Name: Bionial Lifesciences Pvt. Ltd.
-- Address: Plot 459, Sector-82, JLPL Industrial Area, Mohali, Punjab 140308
-- Phone/WhatsApp: +91 99966 10619 → wa.me/919996610619
-- Email: bioniallifesciences@gmail.com
-- Website: bioniallife.com
+---
 
-## Image Map (v3 — current state)
-### Logos (3 files)
-- logo-color.png             ← navbar img (48px height)
-- logo-white.png             ← footer img (52px height)
-- logo-icon.png              ← favicon + apple-touch-icon
+## NON-NEGOTIABLE RULES
 
-### Hero & About
-- company2.jpg               ← hero CSS background (replaces hero-bg.jpg in CSS)
-- hero-bg.jpg                ← OG/Twitter meta tags only (absolute URL)
-- about-consultation.jpg     ← About section img (two scientists at table)
-- about-quality.jpg          ← from 11.png (purple gloves, teal beaker — not in active use)
+```
+1. NO external image URLs — only images/filename.ext
+2. NO spaces in any filename referenced in HTML
+3. NO hardcoded year — use: new Date().getFullYear()
+4. NEVER append duplicate HTML — grep first, find-replace only
+5. VERIFY with grep after EVERY single change before moving on
+6. NEVER use blacklisted images (full list below)
+7. git commit message must name each phase completed
+8. loading="lazy" on every img that is not hero/above-fold
+9. All <img> tags need meaningful alt text
+```
 
-### Products
-- product-capsules.jpg       ← Capsules tab
-- product-softgels.jpg       ← Softgels tab ✅ (wired up in v3)
-- product-tablets.jpg        ← Tablets tab
-- product-syrups.jpg         ← Syrups tab
-- product-powders.jpg        ← Powders tab
-- herbs-ingredients.jpg      ← Ayurveda tab (turmeric, ashwagandha, dried botanicals flat-lay)
-- pexels-n-voitkevich-7615572.jpg ← Sachets tab (⚠️ temp — product-sachets.jpg has wrong content)
-- product-sachets.jpg        ← ⚠️ DO NOT USE — contains brain anatomy photo, not sachets
+---
 
-### Process Steps
-- process-step2.jpg          ← Step 2 card (Formulation Proposal)
-- process-step3.jpg          ← Step 3 card (Sample Development)
-- process-step4.jpg          ← Step 4 card (Sample Approval)
-- process-step6.jpg          ← Step 6 card (Full Production & Dispatch)
+## BRAND & DESIGN SYSTEM
 
-### Infrastructure (2×2 grid)
-- infrastructure-main.jpg        ← cell 1 (Analytical Laboratory)
-- infrastructure-lab.jpg         ← cell 2 (QC Lab)
-- infrastructure-warehouse.jpg   ← cell 3 (Liquid Manufacturing)
-- infrastructure-manufacturing.jpg ← cell 4 (Tablet Production)
+```
+Primary Navy:    #003D7A
+Teal Accent:     #00A99D  
+Gold Accent:     #F7A800
+Light Gray:      #F8FAFB
+Card White:      #FFFFFF
+Dark Text:       #1A2332
+Font:            Inter (Google Fonts)
+```
 
-### Misc
-- process-filling.jpg        ← from pexels-pilanfilms-11589213.jpg (capsule filling)
-- hero-products.jpg          ← from Skya_Announces*.webp (premium supplement bottles)
+---
 
-### Blacklisted — DO NOT reference in index.html
-- product-ayurveda.jpg       ← shows "Mender" branded CBD products — wrong brand/category
-- product-sachets.jpg        ← brain anatomy photo — wrong content
-- hero-bg.jpg                ← cell biology image — wrong for nutraceutical site (OG meta now uses company2.jpg)
-- about.jpg                  ← fluorescent cell microscopy — wrong
-- infrastructure.jpg         ← single lab goggles close-up — too generic
-- product-blister.jpg        ← ibuprofen blister with drug name visible — brand risk
-- LogoAsset 1.png / LogoAsset1.png ← space in filename / black background — broken
+## ✅ APPROVED IMAGE MAP — USE ONLY THESE
 
-## Known Bugs — DO NOT Reintroduce
-1. NEVER use external URLs for images (no unsplash, no CDN)
-2. NEVER reference 'LogoAsset 1.png' with space — logo is at `images/logo.png`
-3. NEVER duplicate the stats bar — only ONE `.hero-stats` div
-4. NEVER change the email — always `bioniallifesciences@gmail.com`
-5. NEVER hardcode copyright year — always use `${new Date().getFullYear()}` via JS
-6. NEVER write "From Idea to Shelf" — correct tagline is "From Concept to Capsule"
-7. NEVER use more than 2× repetition in the certification marquee
-8. NEVER show fake client logos — no "D2C Wellness Brand" etc.
-9. NEVER leave `#form-grid` empty on load — `renderFormulations()` must be called at init
-10. NEVER add external JS libraries — keep it vanilla (lucide icons already loaded)
-11. NEVER use native `action="mailto:..."` form — form must use `onsubmit="handleFormSubmit(event)"` JS handler
+| Variable Name | File Path | Section |
+|---|---|---|
+| LOGO_NAV | `images/logo-color.png` | Navbar img tag |
+| LOGO_FOOTER | `images/logo-white.png` | Footer img tag |
+| LOGO_ICON | `images/logo-icon.png` | `<link rel="icon">` |
+| HERO_BG | CSS `url('images/company2.jpg')` | Hero section CSS background |
+| ABOUT_MAIN | `images/about-consultation.jpg` | About section img |
+| ABOUT_CALLOUT | `images/about-quality.jpg` | About quality card |
+| INFRA_TL | `images/infrastructure-main.jpg` | Grid top-left |
+| INFRA_TR | `images/infrastructure-lab.jpg` | Grid top-right |
+| INFRA_BL | `images/infrastructure-warehouse.jpg` | Grid bottom-left |
+| INFRA_BR | `images/infrastructure-manufacturing.jpg` | Grid bottom-right |
+| TAB_CAPSULES | `images/product-capsules.jpg` | Capsules tab |
+| TAB_SOFTGELS | `images/product-softgels.jpg` | Softgels tab |
+| TAB_TABLETS | `images/product-tablets.jpg` | Tablets tab |
+| TAB_SYRUPS | `images/product-syrups.jpg` | Syrups tab |
+| TAB_POWDERS | `images/product-powders.jpg` | Powders tab |
+| TAB_SACHETS | `images/pexels-n-voitkevich-7615572.jpg` | Sachets tab |
+| TAB_AYURVEDA | `images/herbs-ingredients.jpg` | Ayurvedic tab |
+| PROCESS_2 | `images/process-step2.jpg` | Process step 2 |
+| PROCESS_3 | `images/process-step3.jpg` | Process step 3 |
+| PROCESS_4 | `images/process-step4.jpg` | Process step 4 |
+| PROCESS_6 | `images/process-step6.jpg` | Process step 6 |
 
-## Catalogue Identifiers (do not rename)
-- Grid container: `id="form-grid"` (NOT formulations-grid)
-- Render function: `renderFormulations()` (NOT renderCatalogue)
-- Filter buttons: `data-cat` attribute (NOT data-filter)
-- Health pills: `data-health` attribute
+### 🔴 BLACKLISTED FILES — NEVER REFERENCE IN HTML
 
-## Current Status (as of Feb 28, 2026 — v3 deployed, commit 08f5bde)
-- Track A: ✅ Complete (logo 3-file split, images, trust strip pills, copyright, tagline, favicon)
-- Track B: ✅ Complete (OG tags, JSON-LD, canonical, infra 2×2 grid, FSSAI disclaimer)
-- Track C: ✅ Complete (certification marquee, process step images, JS form handler)
-- PENDING: Formspree account — form uses `handleFormSubmit` mailto fallback; swap fetch() when form ID available
-- PENDING: Sachets image — `product-sachets.jpg` has wrong content; using pexels temp image
-- PENDING: FSSAI license number — placeholder `[INSERT LICENSE NUMBER]` in footer disclaimer
-- PENDING: Actual facility photos from Bionial
+| File | Why Banned |
+|---|---|
+| `images/about.jpg` | Fluorescent cell microscopy — completely wrong |
+| `images/hero-bg.jpg` | Cell biology image — wrong for hero |
+| `images/product-ayurveda.jpg` | Shows "Mender" CBD brand products — wrong |
+| `images/product-sachets.jpg` | Brain anatomy model — wrong |
+| `images/product-blister.jpg` | Ibuprofen pack with drug brand name |
+| `images/infrastructure.jpg` | Single lab goggles close-up — too generic |
+| `LogoAsset 1.png` | Space in filename = 404 |
+| `LogoAsset1.png` | Black background — breaks on white navbar |
+| `images/logo.png` | Black background — broken |
+| `images/Untitled-design-10.jpg` | Broccoli photo |
+| `images/nutraceutical-manufacturing-new-1536x1272.jpg` | Generic stock |
+| `images/Top-10-Nutraceutical-Companies-in-India.jpg` | Competitor content |
+
+---
+
+## RESOLVED BUGS — DO NOT REINTRODUCE
+
+| Bug ID | Pattern | Wrong | Right | Status |
+|---|---|---|---|---|
+| BUG-01 | Logo filename | `LogoAsset 1.png` (space) | `images/logo-color.png` | FIXED |
+| BUG-02 | Hero image method | Inline `<img>` in hero | CSS `background-image` | FIXED |
+| BUG-03 | Hero image file | `hero-bg.jpg` (cells) | `company2.jpg` (cleanroom) | FIXED |
+| BUG-04 | Marquee position | Above hero (clashes navbar) | After `</section>` hero | FIXED |
+| BUG-05 | About section img | `product-ayurveda.jpg` (CBD) | `about-consultation.jpg` | FIXED |
+| BUG-06 | Softgels img src | Unsplash external URL | `images/product-softgels.jpg` | FIXED |
+| BUG-07 | Sachets tab img | `product-sachets.jpg` (brain) | `pexels-n-voitkevich...jpg` | FIXED |
+| BUG-08 | Ayurvedic tab img | `product-ayurveda.jpg` (Mender) | `herbs-ingredients.jpg` | FIXED |
+| BUG-09 | Infrastructure | Single `infrastructure.jpg` | 2×2 `.infra-grid` 4 photos | FIXED |
+| BUG-10 | Copyright year | `© 2025` hardcoded | `getFullYear()` dynamic JS | FIXED |
+| BUG-11 | Contact form | `{FORM_ID}` placeholder | mailto fallback | FIXED |
+| BUG-12 | Process heading | "From Idea to Shelf" | "From Concept to Capsule" | FIXED |
+| BUG-13 | Fake client logos | Company name placeholders | Trust-badge strip | FIXED |
+| BUG-14 | Footer logo | `LogoAsset 1.png` | `images/logo-white.png` | FIXED |
+
+---
+
+## STARTUP CHECKLIST — RUN EVERY SESSION
+
+```bash
+echo "=== BIONIAL BUG SCAN ==="
+echo ""
+echo "1. Blacklisted logos:"
+grep -n 'LogoAsset\|logo\.png"' index.html
+
+echo "2. External image URLs:"
+grep -n 'unsplash\|imgur\|cdn\.' index.html
+
+echo "3. Hardcoded year:"
+grep -n '© 2025\|copyright.*2025' index.html
+
+echo "4. Fake client names:"
+grep -n 'D2C Wellness\|Health Supplement Co\|Pharmacy Chain\|Nutraceutical Export' index.html
+
+echo "5. Blacklisted images:"
+grep -n 'product-ayurveda\.jpg\|about\.jpg"\|hero-bg\.jpg\|product-sachets\.jpg\|infrastructure\.jpg"' index.html
+
+echo "6. Form ID placeholder:"
+grep -n 'FORM_ID' index.html
+
+echo "7. Process heading:"
+grep -n 'From Idea' index.html
+
+echo "=== ALL ABOVE SHOULD RETURN 0 RESULTS ==="
+```
+
+---
+
+## SECTION STRUCTURE (DO NOT REORDER)
+
+```
+<head> ... meta, CSS ...
+<nav> navbar with logo-color.png
+<section.hero> CSS bg: company2.jpg — NO inline img tag
+<div.cert-marquee> WHO-GMP FSSAI... (AFTER hero, not before)
+<section#about> about-consultation.jpg
+<section> Services cards
+<section#liposomal> Liposomal cards  
+<section#platform> Dosage tabs (7 tabs)
+<section#catalogue> Formulations JS filter grid
+<section#process> Process steps
+<section#infrastructure> 2×2 infra grid
+<section> Why Bionial trust cards
+<section#contact> Form (mailto fallback)
+<footer> logo-white.png
+```
+
+---
+
+## FORMULATIONS JS ARRAY — CURRENT COUNT: 200+
+
+Array name: `formulations`  
+Location: Inside `<script>` tag in index.html  
+Replace entire array — do not merge/append partial updates.  
+After replacing: verify `grep -c '{ id:' index.html` returns 200+
+
+### Filter Categories Used
+```
+bone | vitamins | nerve | womens | mens | uti | eye | liver
+heart | sports | syrups | ayurvedic | liposomal | skin | pediatric | senior
+```
+
+---
+
+## POWERSHELL PRE-FLIGHT (run before each Claude Code session)
+
+```powershell
+cd "PATH_TO_REPO\images"
+
+# Critical rename (safe - won't error if already done)
+Rename-Item "alflucio-gel-capsules-5834022.jpg" "product-softgels.jpg" -EA SilentlyContinue
+
+# Verify all 21 required images exist
+$required = @(
+  "logo-color.png","logo-white.png","logo-icon.png",
+  "company2.jpg","about-consultation.jpg","about-quality.jpg",
+  "infrastructure-main.jpg","infrastructure-lab.jpg",
+  "infrastructure-warehouse.jpg","infrastructure-manufacturing.jpg",
+  "product-capsules.jpg","product-softgels.jpg","product-tablets.jpg",
+  "product-syrups.jpg","product-powders.jpg","herbs-ingredients.jpg",
+  "pexels-n-voitkevich-7615572.jpg",
+  "process-step2.jpg","process-step3.jpg","process-step4.jpg","process-step6.jpg"
+)
+$missing = 0
+foreach ($f in $required) {
+  if (Test-Path $f) { Write-Host "✅ $f" -FG Green }
+  else { Write-Host "❌ MISSING: $f" -FG Red; $missing++ }
+}
+if ($missing -gt 0) { Write-Host "`n⛔ Fix $missing missing files before running Claude Code" -FG Red }
+else { Write-Host "`n✅ All images ready — safe to run Claude Code" -FG Green }
+```
