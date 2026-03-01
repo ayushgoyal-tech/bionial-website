@@ -253,6 +253,24 @@ section { padding: 80px 0; }
 .service-card h3 { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
 .service-card p { font-size: 0.88rem; color: var(--text-sec); line-height: 1.6; }
 
+/* ===== PATENTED INGREDIENTS ===== */
+.patented-section { background: linear-gradient(135deg, #003D7A 0%, #005a9e 100%); padding: 80px 0; color: #ffffff; }
+.patented-section .section-label { color: #F7A800; }
+.patented-section .section-title { color: #ffffff; }
+.patented-section .section-subtitle { color: rgba(255,255,255,0.75); max-width: 700px; margin: 0 auto; }
+.patented-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 40px 0; }
+.patented-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(247,168,0,0.3); border-radius: 12px; padding: 20px; transition: transform 0.3s, border-color 0.3s; }
+.patented-card:hover { transform: translateY(-4px); border-color: #F7A800; }
+.patented-card__brand { font-size: 1rem; font-weight: 800; color: #F7A800; margin-bottom: 2px; }
+.patented-card__category { font-size: 0.72rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+.patented-card p { font-size: 0.82rem; color: rgba(255,255,255,0.82); line-height: 1.6; margin-bottom: 12px; }
+.patented-card__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.patented-card__tags span { background: rgba(247,168,0,0.15); border: 1px solid rgba(247,168,0,0.3); color: #F7A800; font-size: 0.65rem; padding: 2px 9px; border-radius: 10px; font-weight: 600; }
+.patented-cta { text-align: center; margin-top: 40px; }
+.patented-cta p { color: rgba(255,255,255,0.7); margin-bottom: 16px; font-size: 0.9rem; }
+@media (max-width: 768px) { .patented-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .patented-grid { grid-template-columns: 1fr; } }
+
 /* ===== PRODUCT TABS ===== */
 .product-range { background: var(--bg); }
 .tab-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; border-bottom: 2px solid var(--border); padding-bottom: 0; }
@@ -733,6 +751,93 @@ section { padding: 80px 0; }
       </div></div>
     <div class="lipo-cta">
       <a href="#contact" class="btn btn-accent">Enquire About Liposomal Formulations</a>
+    </div>
+  </div>
+</section>
+<section class="patented-section" id="patented">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <div class="section-label">Scientific Credibility</div>
+      <h2 class="section-title">Formulate with the World's Best Patented Ingredients</h2>
+      <p class="section-subtitle">We source and formulate with globally certified, clinically studied branded ingredients — the same ones trusted by top health brands worldwide.</p>
+    </div>
+    <div class="patented-grid">
+      <div class="patented-card animate-on-scroll">
+        <div class="patented-card__brand">KSM-66®</div>
+        <div class="patented-card__category">Ashwagandha</div>
+        <p>World's most clinically studied full-spectrum ashwagandha root extract. 48 RCTs. 5% withanolides.</p>
+        <div class="patented-card__tags"><span>Stress</span><span>Testosterone</span><span>Sleep</span></div>
+      </div>
+      <div class="patented-card animate-on-scroll">
+        <div class="patented-card__brand">Sensoril®</div>
+        <div class="patented-card__category">Ashwagandha</div>
+        <p>Root + leaf dual extract. 8% withanolides. Clinically proven anti-stress and cognitive support.</p>
+        <div class="patented-card__tags"><span>Stress</span><span>Cortisol</span><span>Focus</span></div>
+      </div>
+      <div class="patented-card animate-on-scroll">
+        <div class="patented-card__brand">Shoden®</div>
+        <div class="patented-card__category">Ashwagandha</div>
+        <p>Highest withanolide concentration (35%) on market. Premium sleep and recovery support.</p>
+        <div class="patented-card__tags"><span>Sleep</span><span>Recovery</span><span>Premium</span></div>
+      </div>
+      <div class="patented-card animate-on-scroll">
+        <div class="patented-card__brand">Kaneka Ubiquinol®</div>
+        <div class="patented-card__category">CoQ10</div>
+        <p>World's first patented ubiquinol — active form of CoQ10. 85+ human clinical trials. Superior absorption.</p>
+        <div class="patented-card__tags"><span>Heart</span><span>Energy</span><span>Fertility</span></div>
+      </div>
+      <div class="patented-card animate-on-scroll">
+        <div class="patented-card__brand">Curcumin C3 Complex®</div>
+        <div class="patented-card__category">Turmeric</div>
+        <p>Most clinically studied curcumin. 95% curcuminoids. 100+ studies. Always paired with BioPerine®.</p>
+        <div class="patented-card__tags"><span>Inflammation</span><span>Joint</span><span>Liver</span></div>
+      </div>
+      <div class="patented-card animate-on-scroll">
+        <div class="patented-card__brand">BioPerine®</div>
+        <div class="patented-card__category">Black Pepper</div>
+        <p>The world's most studied bioavailability enhancer. Increases nutrient absorption by up to 30×.</p>
+        <div class="patented-card__tags"><span>Bioavailability</span><span>Universal</span></div>
+      </div>
+      <div class="patented-card animate-on-scroll">
+        <div class="patented-card__brand">LactoSpore®</div>
+        <div class="patented-card__category">Probiotic</div>
+        <p>Clinically validated Bacillus coagulans MTCC 5856. Shelf-stable. GRAS approved. Heat resistant.</p>
+        <div class="patented-card__tags"><span>Gut Health</span><span>IBS</span><span>Immunity</span></div>
+      </div>
+      <div class="patented-card animate-on-scroll">
+        <div class="patented-card__brand">BacoMind®</div>
+        <div class="patented-card__category">Bacopa</div>
+        <p>Gold-standard bacopa extract standardised to 9 bioactives. Memory, cognition and anxiety support.</p>
+        <div class="patented-card__tags"><span>Memory</span><span>Anxiety</span><span>Cognition</span></div>
+      </div>
+      <div class="patented-card animate-on-scroll">
+        <div class="patented-card__brand">Cognizin®</div>
+        <div class="patented-card__category">Citicoline</div>
+        <p>Kyowa Hakko's patented citicoline — brain energy, focus and memory. Used in FDA-cleared devices.</p>
+        <div class="patented-card__tags"><span>Brain Energy</span><span>Focus</span><span>ADHD</span></div>
+      </div>
+      <div class="patented-card animate-on-scroll">
+        <div class="patented-card__brand">FloraGLO® Lutein</div>
+        <div class="patented-card__category">Eye Health</div>
+        <p>Kemin's free-form lutein — #1 clinically studied lutein brand worldwide. Macular pigment support.</p>
+        <div class="patented-card__tags"><span>Macular</span><span>Eye</span><span>AMD</span></div>
+      </div>
+      <div class="patented-card animate-on-scroll">
+        <div class="patented-card__brand">Carnipure®</div>
+        <div class="patented-card__category">L-Carnitine</div>
+        <p>Lonza's pharmaceutical-grade L-Carnitine L-Tartrate. Superior purity for fertility and fat metabolism.</p>
+        <div class="patented-card__tags"><span>Fertility</span><span>Fat Burn</span><span>Energy</span></div>
+      </div>
+      <div class="patented-card animate-on-scroll">
+        <div class="patented-card__brand">PrimaVie® Shilajit</div>
+        <div class="patented-card__category">Shilajit</div>
+        <p>Natreon's purified shilajit with 50%+ fulvic acid. Mitochondrial energy and testosterone support.</p>
+        <div class="patented-card__tags"><span>Energy</span><span>Mitochondria</span><span>Men</span></div>
+      </div>
+    </div>
+    <div class="patented-cta">
+      <p>Looking to formulate with these or other patented ingredients?</p>
+      <a href="#contact" class="btn btn-primary">Discuss Your Formula →</a>
     </div>
   </div>
 </section>
