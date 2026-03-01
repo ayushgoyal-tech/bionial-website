@@ -288,10 +288,14 @@ section { padding: 80px 0; }
 
 /* ===== FORMULATIONS ===== */
 .formulations { background: var(--bg-alt); }
-.cat-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
-.cat-btn { background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-sec); cursor: pointer; transition: all 0.2s; }
-.cat-btn:hover { border-color: var(--accent); color: var(--accent); }
-.cat-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.filter-btn { background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 16px; font-size: 0.82rem; font-weight: 600; color: var(--text-sec); cursor: pointer; transition: all 0.2s; }
+.filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+.filter-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+.filter-secondary { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; padding: 12px 16px; background: #f8faff; border-radius: 10px; }
+.patented-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.82rem; font-weight: 600; color: var(--primary); user-select: none; }
+.patented-toggle input { accent-color: #F7A800; width: 16px; height: 16px; cursor: pointer; }
+.formula-count { font-size: 0.78rem; color: var(--text-muted); font-weight: 500; }
 .formulations-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 28px 0; min-height: 200px; }
 .form-card { background: #fff; border: 1px solid rgba(0,61,122,0.1); border-radius: 12px; padding: 16px; overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.3s ease, transform 0.3s ease; }
 .form-card:hover { box-shadow: 0 8px 24px rgba(0,61,122,0.12); transform: translateY(-2px); }
@@ -923,7 +927,14 @@ section { padding: 80px 0; }
       <h2 class="section-title">218 Ready-to-Manufacture Formulations</h2>
       <p class="section-sub">Filter by category or health segment. All formulations are market-tested with available CoA and spec sheets.</p>
     </div>
-    <div class="cat-tabs"><button class="cat-btn active" data-cat="all">All Formulations</button><button class="cat-btn" data-cat="bone">Bone &amp; Joint</button><button class="cat-btn" data-cat="vitamins">Vitamins &amp; Minerals</button><button class="cat-btn" data-cat="nerve">Nerve &amp; Brain</button><button class="cat-btn" data-cat="womens">Women's Health</button><button class="cat-btn" data-cat="mens">Men's Health</button><button class="cat-btn" data-cat="uti">UTI &amp; Urinary</button><button class="cat-btn" data-cat="eye">Eye Health</button><button class="cat-btn" data-cat="liver">Liver &amp; Digestive</button><button class="cat-btn" data-cat="heart">Heart &amp; Metabolic</button><button class="cat-btn" data-cat="sports">Sports &amp; Immunity</button><button class="cat-btn" data-cat="syrups">Syrups &amp; Liquids</button><button class="cat-btn" data-cat="ayurvedic">Ayurvedic</button><button class="cat-btn" data-cat="liposomal">Liposomal Technology</button><button class="cat-btn" data-cat="skin">Skin &amp; Hair</button><button class="cat-btn" data-cat="pediatric">Pediatric</button><button class="cat-btn" data-cat="senior">Senior Wellness</button></div>
+    <div class="filter-bar"><button class="filter-btn active" data-cat="all">All Formulations</button><button class="filter-btn" data-cat="bone">Bone &amp; Joint</button><button class="filter-btn" data-cat="nerve">Brain &amp; Neuro</button><button class="filter-btn" data-cat="womens">Women's Health</button><button class="filter-btn" data-cat="mens">Men's Health</button><button class="filter-btn" data-cat="heart">Heart &amp; Metabolic</button><button class="filter-btn" data-cat="liver">Liver &amp; Gut</button><button class="filter-btn" data-cat="eye">Eye Health</button><button class="filter-btn" data-cat="sports">Sports &amp; Immunity</button><button class="filter-btn" data-cat="vitamins">Vitamins &amp; Minerals</button><button class="filter-btn" data-cat="ayurvedic">Ayurvedic</button><button class="filter-btn" data-cat="liposomal">Liposomal Tech</button><button class="filter-btn" data-cat="skin">Skin &amp; Hair</button><button class="filter-btn" data-cat="syrups">Syrups &amp; Liquids</button><button class="filter-btn" data-cat="pediatric">Pediatric</button><button class="filter-btn" data-cat="senior">Senior Wellness</button></div>
+    <div class="filter-secondary">
+      <label class="patented-toggle">
+        <input type="checkbox" id="patentedOnly">
+        <span>⭐ Show Patented Ingredients Only</span>
+      </label>
+      <span class="formula-count" id="formulaCount">Showing 218 formulations</span>
+    </div>
     <div id="form-grid" class="formulations-grid"></div>
     <div class="form-view-all"><button id="view-all-btn">View All Formulations</button></div>
   </div>
@@ -1498,13 +1509,11 @@ function createFormulationCard(f) {
   `;
 }
 
-let currentCategory = 'all';
+let showPatentedOnly = false;
 
-function renderFormulations(category) {
-  currentCategory = category;
+function renderFormulations(filtered) {
   const grid = document.getElementById('form-grid');
   if (!grid) return;
-  const filtered = category === 'all' ? formulations : formulations.filter(f => f.category === category);
   if (filtered.length === 0) {
     grid.innerHTML = '<div class="no-results">No formulations found. <a href="#contact">Request custom formulation →</a></div>';
     const btn = document.getElementById('view-all-btn');
@@ -1517,21 +1526,32 @@ function renderFormulations(category) {
   if (btn) {
     btn.style.display = filtered.length > 12 ? 'inline-block' : 'none';
     btn.textContent = `View All ${filtered.length} Formulations`;
+    btn._filtered = filtered;
   }
+}
+
+function filterFormulations() {
+  const activeBtn = document.querySelector('.filter-btn.active');
+  const cat = activeBtn ? activeBtn.getAttribute('data-cat') : 'all';
+  let filtered = cat === 'all' ? formulations : formulations.filter(f => f.category === cat);
+  if (showPatentedOnly) filtered = filtered.filter(f => f.patented === true);
+  const countEl = document.getElementById('formulaCount');
+  if (countEl) countEl.textContent = `Showing ${filtered.length} formulations`;
+  renderFormulations(filtered);
 }
 
 // ─── INIT ON DOM READY ────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function() {
 
   // Render catalogue immediately
-  renderFormulations('all');
+  filterFormulations();
 
   // Filter tabs
   document.querySelectorAll('[data-cat]').forEach(function(tab) {
     tab.addEventListener('click', function() {
       document.querySelectorAll('[data-cat]').forEach(function(t) { t.classList.remove('active'); });
       tab.classList.add('active');
-      renderFormulations(tab.dataset.cat);
+      filterFormulations();
     });
   });
 
@@ -1540,9 +1560,18 @@ document.addEventListener('DOMContentLoaded', function() {
   if (viewAllBtn) {
     viewAllBtn.addEventListener('click', function() {
       const grid = document.getElementById('form-grid');
-      const filtered = currentCategory === 'all' ? formulations : formulations.filter(f => f.category === currentCategory);
+      const filtered = viewAllBtn._filtered || formulations;
       grid.innerHTML = filtered.map(createFormulationCard).join('');
       viewAllBtn.style.display = 'none';
+    });
+  }
+
+  // Patented only toggle
+  const patentedToggle = document.getElementById('patentedOnly');
+  if (patentedToggle) {
+    patentedToggle.addEventListener('change', function() {
+      showPatentedOnly = this.checked;
+      filterFormulations();
     });
   }
 
@@ -1561,10 +1590,10 @@ document.addEventListener('DOMContentLoaded', function() {
     pill.addEventListener('click', function() {
       const label = pill.textContent.trim();
       const cat = segmentMap[label] || 'all';
-      renderFormulations(cat);
       document.querySelectorAll('[data-cat]').forEach(function(t) {
         t.classList.toggle('active', t.dataset.cat === cat);
       });
+      filterFormulations();
       const catalogue = document.getElementById('catalogue');
       if (catalogue) {
         const top = catalogue.getBoundingClientRect().top + window.scrollY - 90;
