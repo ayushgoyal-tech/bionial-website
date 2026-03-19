@@ -185,3 +185,44 @@
 | About image | Already `about-consultation.jpg` — no change needed |
 
 All 13 post-fix verification checks pass.
+
+---
+
+## v5 Build Log — commits 67ff68e → 5934fa4, 2026-03-01
+
+### Phases Completed
+
+| Phase | Commit | Change |
+|-------|--------|--------|
+| 2 — Array splice | 67ff68e | 218-item formulations array (was 62); "200+" → "218+"; "13 categories" → "17 categories" |
+| 3 — Card redesign | 6874f70 | `.form-card*` CSS; `createFormulationCard()` rewrite; gold ⭐ patent badge; CTA "Request CoA & Pricing →" |
+| 4 — Patented section | 090cb36 | `<section#patented>` dark blue 12-card showcase (KSM-66®, Cognizin®, FloraGLO®, etc.) |
+| 5 — Nav + Stats + SEO | 00ea465 | "Patented APIs" nav link; stats 218+/50+/30-Day/6+; meta + JSON-LD update |
+| 6 — Filter bar | 98e2c7e | `filter-btn` class; patented toggle + live count; `filterFormulations()` entry point |
+
+---
+
+## v5 Verification — 13-Check Grep Run, 2026-03-01
+
+**Commit:** 5934fa4 (CLAUDE.md) / 98e2c7e (index.html)
+**Run by:** Claude Code session
+
+| # | Check | Pattern | Result | Status |
+|---|-------|---------|--------|--------|
+| 1 | Zero LogoAsset refs | `LogoAsset` | **0** | ✅ PASS |
+| 2 | Zero external URLs | `unsplash\|cdn\.\|imgur` | **0** | ✅ PASS |
+| 3 | Zero hardcoded © 2025 | `© 2025` | **0** | ✅ PASS |
+| 4 | Zero fake client logos | `D2C Wellness\|Pharmacy Chain` | **1 (false positive)** | ✅ PASS |
+| 5 | Zero blacklisted images | `product-sachets\.jpg\|about\.jpg"\|hero-bg\.jpg` | **0** | ✅ PASS |
+| 6 | 218+ formulation entries | `{ id:` | **218** | ✅ PASS |
+| 7 | 50+ patented: true entries | `patented: true` | **79** | ✅ PASS |
+| 8 | 4 infra grid refs | `infrastructure-{main,lab,warehouse,manufacturing}` | **4** | ✅ PASS |
+| 9 | Tagline present | `From Concept to Capsule` | **2** | ✅ PASS |
+| 10 | Dynamic copyright | `getFullYear` | **1** | ✅ PASS |
+| 11 | About image present | `about-consultation` | **1** | ✅ PASS |
+| 12 | Patented section exists | `patented-section` | **5** | ✅ PASS |
+| 13 | KSM-66 present | `KSM-66` | **10** | ✅ PASS |
+
+**Check 4 note:** Pattern `Pharmacy Chain` matched `💊 Pharmacy Chains` (line 577) — a legitimate customer-type trust badge, not a fake client logo. No action needed.
+
+**Result: 13/13 PASS — site is clean, all v5 features confirmed.**

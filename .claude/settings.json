@@ -20,7 +20,10 @@
       "WebFetch(domain:capsoft.in)",
       "WebFetch(domain:criuslife.com)",
       "WebFetch(domain:www.nutriavancegroup.com)",
-      "WebFetch(domain:images.unsplash.com)"
+      "WebFetch(domain:images.unsplash.com)",
+      "Bash(sed \"s/''.*$//\")",
+      "Bash(sed 's/.*data-cat=\"\"//')",
+      "Bash(sed 's/\"\".*//')"
     ],
     "deny": [
       "Bash(rm -rf *)"
